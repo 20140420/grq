@@ -1,8 +1,9 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -15,12 +16,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
+	<META HTTP-EQUIV="refresh" CONTENT="2;URL=indexweb.html">
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
   </head>
   
   <body>
-    This is my JSP page. <br>
+	<center>
+		<img src="<%=request.getContextPath()%>/imgsystem/load.gif"><br>
+		<p>页面加载中......</p>
+		<s:a action="indexweb" namespace="/">WEB-INF里面主页</s:a><br>
+	</center>
   </body>
 </html>

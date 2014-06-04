@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<!-- OGNL可以使用静态方法 -->
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true"/>	
+	<package name="grq-default" abstract="true" extends="struts-default">
+		<global-results>
+			<!-- 错误页面 -->
+            <result name="error">#</result>
+            <!-- 程序主页面 -->
+            <result name="index" type="redirectAction">#</result>
+            <!-- 后台管理主页面 -->
+            <result name="manager">#</result>
+            <!--会员注册 -->
+            <result name="reg">#</result>
+            <!--会员登录-->
+			<result name="customerLogin">#</result>
+            <!--管理员登录-->
+            <result name="userLogin">#</result>
+        </global-results>
+		<global-exception-mappings>
+			<exception-mapping result="error" exception="#"></exception-mapping>
+		</global-exception-mappings>
+	</package>
+</struts>

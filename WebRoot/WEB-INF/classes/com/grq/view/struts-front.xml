@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC 
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" 
+	"http://struts.apache.org/dtds/struts-2.1.dtd" >
+<struts>
+	<!-- 前台 -->
+	<package name="grq-front" extends="grq-default">
+
+		<!-- WEB-INF里面主页 -->
+		<action name="indexweb" class="baseAction">
+            <result name="success">/WEB-INF/pages/index.jsp</result>
+        </action>
+	</package>
+	
+	<!-- shrak页面 -->
+	<package name="grq-shark" namespace="/shark" extends="grq-front">
+		<action name="shark_*" class="sharkAction" method="{1}">
+			<result name="main">/WEB-INF/pages/shark/shark.jsp</result>
+
+		</action>
+	</package>
+</struts>
