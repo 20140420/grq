@@ -10,13 +10,57 @@
 		<action name="indexweb" class="baseAction">
             <result name="success">/WEB-INF/pages/index.jsp</result>
         </action>
+        <action name="index-pic" class="baseAction">
+            <result name="success">/WEB-INF/pages/index-pic.html</result>
+        </action>
+        
 	</package>
 	
-	<!-- shrak页面 -->
+	<!-- shark项目 -->
 	<package name="grq-shark" namespace="/shark" extends="grq-front">
 		<action name="shark_*" class="sharkAction" method="{1}">
+			<!-- shark页面主页 -->
 			<result name="main">/WEB-INF/pages/shark/shark.jsp</result>
-
+			<!-- shark组成部分 -->
+			<result name="gdial">/WEB-INF/pages/shark/gdial.jsp</result>
+			<result name="gpanel">/WEB-INF/pages/shark/gpanel.jsp</result>
+			<!-- shark其它部分 -->
+			<result name="grule">/WEB-INF/pages/shark/grule.jsp</result>
 		</action>
 	</package>
+	
+	<!-- snake项目 -->
+	<package name="grq-snake" namespace="/snake" extends="grq-front">
+		<action name="snake_*" class="snakeAction" method="{1}">
+			<!-- snake页面主页 -->
+			<result name="main">/WEB-INF/pages/snake/snake.jsp</result>
+		</action>
+	</package>
+	
+	<!-- invest项目 -->
+	<package name="grq-invest" namespace="/invest" extends="grq-front">
+		<action name="invest_*" class="investAction" method="{1}">
+			<!-- invest页面主页 -->
+			<result name="main">/WEB-INF/pages/invest/investments.jsp</result>
+			<result name="ranking">/WEB-INF/pages/invest/ranking.jsp</result>
+			<result name="sales">/WEB-INF/pages/invest/sales.jsp</result>
+		</action>
+	</package>
+	
+	<!-- price项目 -->
+	<package name="grq-price" namespace="/price" extends="grq-front">
+		<action name="price_*" class="priceAction" method="{1}">
+			<!-- price页面主页 -->
+			<result name="main">/WEB-INF/pages/price/charts.jsp</result>
+		</action>
+	</package>
+	
+	<!-- prepare项目 -->
+	<package name="grq-prepare" namespace="/prepare" extends="grq-front">
+		<action name="prepare_*" class="prepareAction" method="{1}">
+			<!-- prepare页面主页 -->
+			<result name="main">/WEB-INF/pages/prepare/prepare.jsp</result>
+		</action>
+	</package>
+	
 </struts>

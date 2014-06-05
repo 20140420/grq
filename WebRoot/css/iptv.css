@@ -1,0 +1,46 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+	background-color: #333333;
+	margin: 0;
+	padding: 0;
+	color: #FFF;
+	width: 100%;
+	height: 100%;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 100%;
+	line-height: 1.4;
+}
+/* ~~ 元素/标签选择器 ~~ */
+ul, ol, dl {
+	padding: 0;
+	margin: 0;
+}
+.iptv-menu{/* 头部设计覆盖原CSS */
+	list-style-type: none;
+	float: right;
+	background-color: #333;
+	height: auto;
+	width:1oo%;
+}
+.iptv-menu ul{
+	list-style-type: none;
+	width: 100%;
+}
+.iptv-menu ul li {
+	width: 100px;
+	border: 0px solid #000;
+	float: right;
+	text-align: center;
+}
+.iptv-menu ul li a {
+	text-decoration: none;
+	display: block;
+	color: #FFF;
+}
+.iptv-menu ul li a:hover, 
+.iptv-menu ul li a:active, 
+.iptv-menu ul li a:focus {
+	background-color: #333;
+	color: #FF6600;
+}

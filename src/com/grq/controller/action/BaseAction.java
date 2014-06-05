@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import com.opensymphony.xwork2.ActionSupport;
 /**
  * 基本Action对象，其它Action的父类
- * @author Li Yongqiang
+ * @author JiangQuan
  */
 @Scope("prototype")
 @Controller("baseAction")

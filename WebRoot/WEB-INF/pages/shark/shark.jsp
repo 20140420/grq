@@ -17,25 +17,22 @@
 	<ul class="header-title">
         <li>【金鲨银鲨-第一桌】</li>
 	</ul>
-	<s:action name="shark_gheader" namespace="/pages" executeResult="true"></s:action>
+	<%@include file="/WEB-INF/pages/shark/gheader.jsp"%>
   <!-- end .header --></div>
   <!-- left-chat -->
   <div class="sidebar1">
-  	<s:action name="shark_chattool" namespace="/pages" executeResult="true"></s:action>
+  	<%@include file="/WEB-INF/pages/chat/chattool.jsp"%>
     <!-- end .sidebar1 --></div>
     
   <div class="content">
   	<div class="content-gdial">
-  	<s:action name="shark_gdial" namespace="/pages" executeResult="true"></s:action>
+  	<s:action name="shark_gdial" namespace="/shark" executeResult="true"></s:action>
     </div>  
       
     <div class="content-gpanel">
-    <s:action name="shark_gpanel" namespace="/pages" executeResult="true"></s:action>
+    <s:action name="shark_gpanel" namespace="/shark" executeResult="true"></s:action>
     </div>
   <!-- end .content --></div>
-  <!--<div class="footer">
-    <p>此 .footer 包含声明 position:relative，以便为 .footer 指定 Internet Explorer 6 hasLayout，并使其以正确方式清除。如果您不需要支持 IE6，则可以将其删除。</p>
-  <!-- end .footer </div>-->
 <!-- end .container --></div>
 <script src="${context_path}/js/shark.js"></script>
 </body>

@@ -21,20 +21,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
       <div class="index">
       		 
-            <div class="content-welcome">
+            <!-- <div class="content-welcome">
             	欢迎 Welcome!
-            </div><!-- -->
-			<!--<div class="content-welcome">
+            </div>-->
+			<div class="content-welcome">
 				<iframe border="0" id="content" src="index-pic.html" frameborder="0" height="100%" width="100%"></iframe>
-			</div>-->
+			</div><!-- -->
 			<div class="menu-control">
                 <ul>
                 <li><s:a action="shark_main" namespace="/shark" target="_blank">金鲨银鲨</s:a></li>
-                <li><a href="#" target="_blank">小蛇快逃</a></li>
-                <li><a href="investments.jsp" target="_blank">投资理财</a></li>
-                <li><a href="charts.html" target="_blank">实时价格</a></li>
-                <li><a href="plans.jsp" target="_blank">网络电视</a></li>                
-                <li><a href="plans.jsp" target="_blank">汽车强国</a></li>
+                <li><s:a action="snake_main" namespace="/snake" target="_blank">小蛇快逃</s:a></li>
+                <li><s:a action="invest_main" namespace="/invest" target="_blank">投资理财</s:a></li>
+                <li><s:a action="price_main" namespace="/price" target="_blank">实时价格</s:a></li>              
+                <li><s:a action="prepare_main" namespace="/prepare" target="_blank">汽车强国</s:a></li>
               </ul>
             </div>       
       </div> <!-- index END -->
