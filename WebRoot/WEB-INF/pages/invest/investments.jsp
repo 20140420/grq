@@ -4,9 +4,6 @@
 <head>
 <meta charset="utf-8" />
 <title>投资理财</title>
-<link href="css/web.css" rel="stylesheet" type="text/css" />
-<!--<link rel="stylesheet" href="css_example_url" />
-<script src="js_example_url"></script>-->
 </head>
 <body>
 <div class="container">
@@ -148,7 +145,7 @@
 <div class="investment-nav">
 	<ul>
     	<li><a href="manage/uinvest.jsp">存款</a></li>
-    	<li><a href="joinbc.jsp">索取申请表</a></li>
+    	<li><s:a action="bocai_joinbc" namespace="/bocai">索取申请表</s:a></li>
     </ul>    
 </div>
  

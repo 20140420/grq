@@ -27,19 +27,5 @@
       </ul>
   <!--<a href="#"><img src="" alt="在此处插入徽标" name="Insert_logo" width="180" height="90" id="Insert_logo" style="background-color: #C6D580; display:block;" /></a 
     <!-- end .header --></div>
-  <div class="sidebar1">  
-<%
-   if(2>1)//注意权限为游客时
-   {
-%>
-       <s:action name="sidebar_usidebar" namespace="/pages" executeResult="true"></s:action>
-<%
-   }else{
-%>
-       <s:action name="sidebar_msidebar" namespace="/pages" executeResult="true"></s:action>
-<%
-   }
-%> 
-    <!-- end .sidebar1 --></div>
     
   

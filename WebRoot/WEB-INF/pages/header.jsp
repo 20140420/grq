@@ -15,8 +15,8 @@
         </div>
         </li> 
         <li><s:a action="invest_sales" namespace="/invest" target="_blank">活动</s:a></li>
-        <li><s:a action="invest_ranking" namespace="/invest" target="_blank">排名</s:a></li>
+        <li><s:a action="invest_ranking" namespace="/invest">排名</s:a></li>
         <li><s:a action="invest_main" namespace="/invest" target="_blank">投资</s:a></li>
-        <li><s:a action="indexweb" namespace="/" target="_blank">主页</s:a></li>           
+        <li><s:a action="indexweb" namespace="/">主页</s:a></li>           
 	</ul>
 </div>

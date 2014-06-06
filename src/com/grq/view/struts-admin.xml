@@ -4,5 +4,29 @@
 	"http://struts.apache.org/dtds/struts-2.1.dtd" >
 <struts>
 	<!-- ADMIN后台管理 -->
+	<package name="grq-admin" namespace="/admin" extends="grq-default">
+		<action name="admin_*" class="adminAction" method="{1}">
+        </action>        
+	</package>
+	
+	<!-- 后台ADMIN目录管理 -->
+	<package name="grq-msidebar" namespace="/admin" extends="grq-admin">
+		<action name="msidebar_*" class="adminAction" method="{1}">
+            <result name="webserver" >/WEB-INF/pages/manage/admin/webserver.jsp</result>
+            <result name="webdatabase" >/WEB-INF/pages/manage/admin/webdatabase.jsp</result>
+            <result name="webotherinformation" >/WEB-INF/pages/manage/admin/webotherinformation.jsp</result>
+            <result name="adminuser" >/WEB-INF/pages/manage/admin/adminuser.jsp</result>
+            <result name="playeruser" >/WEB-INF/pages/manage/admin/playeruser.jsp</result>
+            <result name="assetgiro" >/WEB-INF/pages/manage/admin/assetgiro.jsp</result>
+            <result name="assetsilver" >/WEB-INF/pages/manage/admin/assetsilver.jsp</result>
+            <result name="assetinvest" >/WEB-INF/pages/manage/admin/assetinvest.jsp</result>
+            <result name="operatesales" >/WEB-INF/pages/manage/admin/operatesales.jsp</result>
+            <result name="operateoption" >/WEB-INF/pages/manage/admin/operateoption.jsp</result>
+            <result name="category_add" >/WEB-INF/pages/manage/admin/assetsilver.jsp</result>
+            <result name="category_list" >/WEB-INF/pages/manage/admin/assetinvest.jsp</result>
+            <result name="product_add" >/WEB-INF/pages/manage/admin/operatesales.jsp</result>
+            <result name="msidebar_product_list" >/WEB-INF/pages/manage/admin/operateoption.jsp</result>
+		</action>
+	</package>
 
 </struts>

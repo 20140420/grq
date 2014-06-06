@@ -15,6 +15,7 @@ public class BaseAction extends ActionSupport{
 	
 	public static final String INDEX = "index";
 	public static final String MAIN = "main";
+	public static final String MANAGE = "manage";
 
 	
 	// 处理方法
@@ -26,6 +27,9 @@ public class BaseAction extends ActionSupport{
 	}
 	public String main() throws Exception {
 		return MAIN;
+	}
+	public String manage() throws Exception {
+		return MANAGE;
 	}
 
 	// getter和settter方法

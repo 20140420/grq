@@ -4,5 +4,48 @@
 	"http://struts.apache.org/dtds/struts-2.1.dtd" >
 <struts>
 	<!-- USER后台管理 -->
+	<package name="grq-user" namespace="/user" extends="grq-default">
+		<action name="user_*" class="userAction" method="{1}">
+        </action>        
+	</package>
+	
+	<!-- 后台USER目录管理 -->
+	<package name="grq-usidebar" namespace="/user" extends="grq-user">
+		<action name="usidebar_*" class="userAction" method="{1}">
+            <result name="usilverbuy">/WEB-INF/pages/manage/user/usilverbuy.jsp</result>
+            <result name="usilversell">/WEB-INF/pages/manage/user/usilversell.jsp</result>
+            <result name="uinquiryaccount">/WEB-INF/pages/manage/user/uinquiryaccount.jsp</result>
+            <result name="uinquirysilverrecord">/WEB-INF/pages/manage/user/uinquirysilverrecord.jsp</result>
+            <result name="uinquirygame">/WEB-INF/pages/manage/user/uinquirygame.jsp</result>
+            <result name="uinvest">/WEB-INF/pages/manage/user/uinvest.jsp</result>
+            <result name="uinvestrecord">/WEB-INF/pages/manage/user/uinvestrecord.jsp</result>
+            <result name="ugiro">/WEB-INF/pages/manage/user/ugiro.jsp</result>
+            <result name="ugirorecord">/WEB-INF/pages/manage/user/ugirorecord.jsp</result>
+            <result name="uprofile">/WEB-INF/pages/manage/user/uprofile.jsp</result>
+            <result name="upassquestion">/WEB-INF/pages/manage/user/upassquestion.jsp</result>
+            <result name="ubankcard">/WEB-INF/pages/manage/user/ubankcard.jsp</result>
+            <result name="umaster">/WEB-INF/pages/manage/user/umaster.jsp</result>
+            <result name="uapprentice">/WEB-INF/pages/manage/user/uapprentice.jsp</result>
+            <result name="cart">/WEB-INF/pages/manage/user/umaster.jsp</result>
+            <result name="order">/WEB-INF/pages/manage/user/uapprentice.jsp</result>
+		</action>
+	</package>
+	<!-- 购物车Action
+	<package name="grq-cart" extends="grq-user" namespace="/product">
+		<action name="cart_*" class="cartAction" method="{1}">
+			<result name="list">/WEB-INF/pages/cart/cart_list.jsp</result>
+			
+		</action>
+	</package> -->
+	<!-- 订单Action 
+	<package name="grq-order" extends="grq-user" namespace="/product">
+		<action name="order_*" class="orderAction" method="{1}">
+			<result name="add">/WEB-INF/pages/order/order_add.jsp</result>
+			<result name="confirm">/WEB-INF/pages/order/order_confirm.jsp</result>
+			<result name="list">/WEB-INF/pages/order/order_list.jsp</result>
+			<result name="error">/WEB-INF/pages/order/order_error.jsp</result>
+			
+		</action>
+	</package>-->
 
 </struts>

@@ -9,10 +9,10 @@
 		<global-results>
 			<!-- 错误页面 -->
             <result name="error">#</result>
-            <!-- 程序主页面 -->
+            <!-- 程序返回主页面 -->
             <result name="index" type="redirectAction">#</result>
             <!-- 后台管理主页面 -->
-            <result name="manager">#</result>
+            <result name="manage">/WEB-INF/pages/manage/manage.jsp</result>
             <!--会员注册 -->
             <result name="reg">#</result>
             <!--会员登录-->
