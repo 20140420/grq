@@ -1,5 +1,5 @@
 /*!
- * shop
+ * product
  */
 function openWindow(url,w,h){
 	l = (screen.width - w)/2;

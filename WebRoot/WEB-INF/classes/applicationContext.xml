@@ -13,7 +13,7 @@
 	
 	<!-- 注解配置同时配置<beans xmlns:context="">-->
 	<context:annotation-config/>
-	<!-- 扫描包路径选项配置 -->
+	<!-- 扫描包路径选项配置 启动 Spring 的自动扫描功能-->
 	<context:component-scan base-package="com.grq"/>
 		
 	<!-- 配置sessionFactory -->

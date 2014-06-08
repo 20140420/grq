@@ -28,5 +28,22 @@
             <result name="msidebar_product_list" >/WEB-INF/pages/manage/admin/operateoption.jsp</result>
 		</action>
 	</package>
-
+    <!-- 类别管理 -->
+    <package name="shop.admin.category" namespace="/admin/product" extends="grq-admin">
+		<action name="category_*" method="{1}" class="productCategoryAction">
+			<result name="list">/WEB-INF/pages/admin/product/category_list.jsp</result>
+			<result name="input">/WEB-INF/pages/admin/product/category_add.jsp</result>
+			<result name="edit">/WEB-INF/pages/admin/product/category_edit.jsp</result>
+			
+		</action>	
+    </package>
+    <!-- 商品管理 -->
+    <package name="shop.admin.product" namespace="/admin/product" extends="grq-admin">
+		<action name="product_*" method="{1}" class="productAction">
+			<result name="list">/WEB-INF/pages/admin/product/product_list.jsp</result>
+			<result name="input">/WEB-INF/pages/admin/product/product_add.jsp</result>
+			<result name="edit">/WEB-INF/pages/admin/product/product_edit.jsp</result>
+			
+		</action>	
+    </package>
 </struts>
