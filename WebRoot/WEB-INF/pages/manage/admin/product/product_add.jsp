@@ -13,7 +13,7 @@ td{font-size: 12px;}
 	enctype="multipart/form-data" method="post">
 	<div id="right">
 	<div id="right_top"><img
-		src="${context_path}/css/images/blue.gif" width="16" height="16" /> <span
+		src="${context_path}/imgsystem/blue.gif" width="16" height="16" /> <span
 		class="word01">添加商品</span></div>
 	<div id="right_mid">
 	<div id="tiao">
@@ -50,7 +50,7 @@ td{font-size: 12px;}
 		<tr>
 			<td width="105" height="22" bgcolor="#c6e8ff" align="right">所属性别：</td>
 			<td><s:select name="sexrequest"
-				list="@com.lyq.model.Sex@getValues()"></s:select></td>
+				list="@com.grq.model.customizeenum.Sex@getValues()"></s:select></td>
 		</tr>
 		<tr>
 			<td width="105" height="22" bgcolor="#c6e8ff" align="right">上传图片：</td>
@@ -65,6 +65,6 @@ td{font-size: 12px;}
 	</div>
 	</div>
 	<div id="right_foot"><s:submit type="image"
-		src="%{context_path}/css/images/ht_02_18.gif"></s:submit></div>
+		src="%{context_path}/imgsystem/ht_02_18.gif"></s:submit></div>
 	</div>
 </s:form>

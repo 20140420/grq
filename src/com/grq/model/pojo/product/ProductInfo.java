@@ -3,7 +3,7 @@ package com.grq.model.pojo.product;
 import java.io.Serializable;
 import java.util.Date;
 
-//import com.grq.model.customizeenum.Sex;
+import com.grq.model.customizeenum.Sex;
 /**
  * 商品信息
  * @author JiangQuan
@@ -17,12 +17,12 @@ public class ProductInfo implements Serializable {
 	private Float baseprice;// 商品采购价格
 	private Float marketprice;// 现在市场价格
 	private Float sellprice;// 商城销售价格
-	//private Sex sexrequest;// 所属性别
+	private Sex sexrequest;// 所属性别
 	private Boolean commend = false;// 是否是推荐商品（默认值为false）
 	private Integer clickcount = 1;// 访问量（统计受欢迎的程度）
 	private Integer sellCount = 0;// 销售数量（统计热销商品）
 	private ProductCategory category;// 所属类别
-	//private UploadFile uploadFile;// 上传文件
+	private UploadFile uploadFile;// 上传文件
 	public Integer getId() {
 		return id;
 	}
@@ -65,16 +65,12 @@ public class ProductInfo implements Serializable {
 	public void setSellprice(Float sellprice) {
 		this.sellprice = sellprice;
 	}
-	/**
-	 * 
-	
 	public Sex getSexrequest() {
 		return sexrequest;
 	}
 	public void setSexrequest(Sex sexrequest) {
 		this.sexrequest = sexrequest;
 	}
-	 */
 	public Boolean getCommend() {
 		return commend;
 	}
@@ -99,15 +95,11 @@ public class ProductInfo implements Serializable {
 	public void setCategory(ProductCategory category) {
 		this.category = category;
 	}
-	/**
-	 * 
-	 * @return
-	 
 	public UploadFile getUploadFile() {
 		return uploadFile;
 	}
 	public void setUploadFile(UploadFile uploadFile) {
 		this.uploadFile = uploadFile;
 	}
-	*/
+	
 }

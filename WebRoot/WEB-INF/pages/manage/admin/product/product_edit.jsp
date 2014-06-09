@@ -8,7 +8,7 @@
 	<s:hidden name="clickcount"></s:hidden>
 	<s:hidden name="sellCount"></s:hidden>
 <div id="right">
-<div id="right_top"><img src="${context_path}/css/images/blue.gif" width="16"
+<div id="right_top"><img src="${context_path}/imgsystem/blue.gif" width="16"
 	height="16" /> <span class="word01">编辑商品</span></div>
 <div id="right_mid">
 <div id="tiao">
@@ -55,7 +55,7 @@
 		<tr>
 			<td width="105" height="22" bgcolor="#c6e8ff" align="right">所属性别：</td>
 			<td colspan="2">
-				<s:select name="sexrequest" list="@com.lyq.model.Sex@getValues()" value="sexrequest.getName()"></s:select>
+				<s:select name="sexrequest" list="@com.grq.model.customizeenum.Sex@getValues()" value="sexrequest.getName()"></s:select>
 			</td>
 		</tr>
 		<tr>
@@ -74,7 +74,7 @@
 </div>
 </div>
 <div id="right_foot">
-	<s:submit type="image" src="%{context_path}/css/images/ht_02_18.gif"></s:submit>
+	<s:submit type="image" src="%{context_path}/imgsystem/ht_02_18.gif"></s:submit>
 </div>
 </div>
 </s:form>

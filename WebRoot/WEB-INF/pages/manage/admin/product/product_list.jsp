@@ -41,18 +41,17 @@ td{font-size: 12px;}
 			<td width="79" align="center"><s:property value="baseprice" /></td>
 			<td width="79" align="center"><s:property value="sellprice" /></td>
 			<td width="79" align="center"><s:property value="commend" /></td>
-			<td width="79" align="center"><s:property
-				value="sexrequest.name" /></td>
-			<td width="52" align="center"><s:a action="product_edit"
-				namespace="/admin/product">
-				<s:param name="id" value="id"></s:param>
-				<img src="${context_path}/css/images/rz_15.gif" width="21"
-					height="16" />
-			</s:a></td>
+			<td width="79" align="center"><s:property value="sexrequest.name" /></td>
+			<td width="52" align="center">
+				<s:a action="product_edit" namespace="/admin/product">
+					<s:param name="id" value="id"></s:param>
+					<img src="${context_path}/imgsystem/rz_15.gif" width="21" height="16" />
+				</s:a>
+			</td>
 			<td width="52" align="center"><s:a action="product_del"
 				namespace="/admin/product">
 				<s:param name="id" value="id"></s:param>
-				<img src="${context_path}/css/images/rz_17.gif" width="15"
+				<img src="${context_path}/imgsystem/rz_17.gif" width="15"
 					height="16" />
 			</s:a></td>
 		</tr>

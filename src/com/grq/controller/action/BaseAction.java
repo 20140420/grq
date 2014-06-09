@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 
 
 import com.grq.model.dao.product.ProductCategoryDao;
+import com.grq.model.dao.product.ProductDao;
+import com.grq.model.dao.product.UploadFileDao;
 import com.opensymphony.xwork2.ActionSupport;
 /**
  * 基本Action对象，其它Action的父类
@@ -22,6 +24,10 @@ public class BaseAction extends ActionSupport{
 	// 注入Dao
 	@Autowired
 	protected ProductCategoryDao categoryDao;
+	@Autowired
+	protected ProductDao productDao;
+	@Autowired
+	protected UploadFileDao uploadFileDao;
 	
 	public static final String INDEX = "index";
 	public static final String MAIN = "main";
@@ -29,6 +35,7 @@ public class BaseAction extends ActionSupport{
 	public static final String ADD = "add";
 	public static final String LIST = "list";
 	public static final String EDIT = "edit";
+	public static final String SELECT = "select";
 
 
 	
@@ -54,7 +61,9 @@ public class BaseAction extends ActionSupport{
 	public String edit() throws Exception {
 		return EDIT;
 	}
-
+	public String select() throws Exception {
+		return SELECT;
+	}
 	// getter和settter方法
 	public int getPageNo() {
 		return pageNo;
