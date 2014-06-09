@@ -22,28 +22,32 @@
             <result name="assetinvest" >/WEB-INF/pages/manage/admin/assetinvest.jsp</result>
             <result name="operatesales" >/WEB-INF/pages/manage/admin/operatesales.jsp</result>
             <result name="operateoption" >/WEB-INF/pages/manage/admin/operateoption.jsp</result>
-            <result name="category_add" >/WEB-INF/pages/manage/admin/assetsilver.jsp</result>
-            <result name="category_list" >/WEB-INF/pages/manage/admin/assetinvest.jsp</result>
-            <result name="product_add" >/WEB-INF/pages/manage/admin/operatesales.jsp</result>
-            <result name="msidebar_product_list" >/WEB-INF/pages/manage/admin/operateoption.jsp</result>
+
 		</action>
 	</package>
-    <!-- 类别管理 -->
-    <package name="shop.admin.category" namespace="/admin/product" extends="grq-admin">
-		<action name="category_*" method="{1}" class="productCategoryAction">
-			<result name="list">/WEB-INF/pages/admin/product/category_list.jsp</result>
-			<result name="input">/WEB-INF/pages/admin/product/category_add.jsp</result>
-			<result name="edit">/WEB-INF/pages/admin/product/category_edit.jsp</result>
-			
-		</action>	
-    </package>
     <!-- 商品管理 -->
-    <package name="shop.admin.product" namespace="/admin/product" extends="grq-admin">
-		<action name="product_*" method="{1}" class="productAction">
-			<result name="list">/WEB-INF/pages/admin/product/product_list.jsp</result>
-			<result name="input">/WEB-INF/pages/admin/product/product_add.jsp</result>
-			<result name="edit">/WEB-INF/pages/admin/product/product_edit.jsp</result>
+    <package name="grq-product" namespace="/admin/product" extends="grq-admin">
+		<!-- 类别 -->
+		<action name="category_*" method="{1}" class="productCategoryAction">
+			<result name="list">/WEB-INF/pages/manage/admin/product/category_list.jsp</result>
+			<result name="input">/WEB-INF/pages/manage/admin/product/category_add.jsp</result>
+			<result name="edit">/WEB-INF/pages/manage/admin/product/category_edit.jsp</result>
 			
 		</action>	
+		<!-- 商品 -->
+		<action name="product_*" method="{1}" class="productAction">
+			<result name="list">/WEB-INF/pages/manage/admin/product/product_list.jsp</result>
+			<result name="input">/WEB-INF/pages/manage/admin/product/product_add.jsp</result>
+			<result name="edit">/WEB-INF/pages/manage/admin/product/product_edit.jsp</result>
+			
+		</action>
+		<!-- 订单 -->
+		<action name="order_*" method="{1}" class="orderAction">
+			<result name="list">/WEB-INF/pages/manage/admin/product/order_list.jsp</result>
+			<result name="select">/WEB-INF/pages/manage/admin/product/order_select.jsp</result>
+			<result name="query">/WEB-INF/pages/manage/admin/product/order_query.jsp</result>
+			<result name="update">/WEB-INF/pages/manage/admin/product/order_update_success.jsp</result>
+			
+		</action>
     </package>
 </struts>

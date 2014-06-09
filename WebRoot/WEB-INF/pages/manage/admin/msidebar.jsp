@@ -43,9 +43,11 @@
 		</ul>
 		<h3>商品管理</h3>
 		<ul class="hide">
-			<li><s:a action="msidebar_category_add" namespace="/admin" target="mdetail">添加类别</s:a></li>
-			<li><s:a action="msidebar_category_list" namespace="/admin" target="mdetail">查看类别</s:a></li>
-			<li><s:a action="msidebar_product_add" namespace="/admin" target="mdetail">添加商品</s:a></li>
-			<li><s:a action="msidebar_product_list" namespace="/admin" target="mdetail">查看商品</s:a></li>
+			<li><s:a action="category_add" namespace="/admin/product" target="mdetail">添加类别</s:a></li>
+			<li><s:a action="category_list" namespace="/admin/product" target="mdetail">所有类别</s:a></li>
+			<li><s:a action="product_add" namespace="/admin/product" target="mdetail">添加商品</s:a></li>
+			<li><s:a action="product_list" namespace="/admin/product" target="mdetail">所有商品</s:a></li>
+			<li><s:a action="order_query" namespace="/admin/product" target="mdetail">订单查询</s:a></li>
+			<li><s:a action="order_list" namespace="/admin/product" target="mdetail">所有订单</s:a></li>
 		</ul>
 <!--</div>-->
