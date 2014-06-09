@@ -9,7 +9,7 @@ import java.sql.Types;
 import org.hibernate.HibernateException;
 import org.hibernate.usertype.UserType;
 /**
- * 自定义Hibernate映射类型
+ * 自定义Hibernate映射枚举类型
  * @author JiangQuan
  * @param <T>
  */
@@ -35,6 +35,9 @@ public class EnumType<T extends Enum<T>> implements UserType {
 	public Serializable disassemble(Object arg0) throws HibernateException {
 		return (Serializable) arg0;
 	}
+	/**
+	 * 相等
+	 */
 	@Override
 	public boolean equals(Object arg0, Object arg1) throws HibernateException {
 		if (arg0 == arg1)
@@ -69,7 +72,7 @@ public class EnumType<T extends Enum<T>> implements UserType {
 		}
 		return null;
 	}
-	@SuppressWarnings("unchecked")
+	//@SuppressWarnings("unchecked")
 	@Override
 	public void nullSafeSet(PreparedStatement arg0, Object arg1, int arg2)
 			throws HibernateException, SQLException {
@@ -89,6 +92,9 @@ public class EnumType<T extends Enum<T>> implements UserType {
 	public Class<T> returnedClass() {
 		return clazz;
 	}
+	/**
+	 * @return SQL_TYPES
+	 */
 	@Override
 	public int[] sqlTypes() {
 		return SQL_TYPES;
