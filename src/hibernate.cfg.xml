@@ -23,6 +23,7 @@
 		<!-- 映射文件 -->
 		<mapping resource="com/grq/model/pojo/product/ProductInfo.hbm.xml"/>
 		<mapping resource="com/grq/model/pojo/product/ProductCategory.hbm.xml"/>
+		<mapping resource="com/grq/model/pojo/product/UploadFile.hbm.xml"/>
 
     </session-factory>
 

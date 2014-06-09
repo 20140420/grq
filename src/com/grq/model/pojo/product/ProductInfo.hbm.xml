@@ -13,13 +13,13 @@
 		<property name="baseprice"/>
 		<property name="marketprice"/>
 		<property name="sellprice"/>
-		<!-- <property name="sexrequest" type="com.lyq.util.hibernate.SexType" length="5"/> -->
+		<property name="sexrequest" type="com.grq.model.util.hibernate.SexType" length="5"/>
 		<property name="commend"/>
 		<property name="clickcount"/>
 		<property name="sellCount"/>
 		<!-- 多对一映射类别 -->
 		<many-to-one name="category" column="categoryId"/>
-		<!-- 多对一映射上传文件
-		<many-to-one name="uploadFile" unique="true" cascade="all" lazy="false"/> -->
+		<!-- 多对一映射上传文件 -->
+		<many-to-one name="uploadFile" unique="true" cascade="all" lazy="false"/>
 	</class>
 </hibernate-mapping>
