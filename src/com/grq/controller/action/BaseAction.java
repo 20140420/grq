@@ -17,7 +17,7 @@ public class BaseAction extends ActionSupport{
 	private static final long serialVersionUID = 1L;
 	
 	protected int pageNo = 1;//当前页
-	protected int pageSize = 5;//每页显示多少条
+	protected int pageSize = 6;//每页显示多少条
 	
 	// 注入Dao
 	@Autowired
@@ -48,7 +48,26 @@ public class BaseAction extends ActionSupport{
 	public String add() throws Exception {
 		return ADD;
 	}
+	public String list() throws Exception {
+		return LIST;
+	}
+	public String edit() throws Exception {
+		return EDIT;
+	}
 
 	// getter和settter方法
+	public int getPageNo() {
+		return pageNo;
+	}
+	public void setPageNo(int pageNo) {
+		this.pageNo = pageNo;
+	}
+	public int getPageSize() {
+		return pageSize;
+	}
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
 
 }

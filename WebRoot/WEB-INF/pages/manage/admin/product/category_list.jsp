@@ -23,10 +23,15 @@
 	<tr>
 		<td width="50" height="27" align="center"><s:property value="id"/></td>
 		<td width="150" align="center">
-			<s:a action="category_add" namespace="/admin/product">
-				<s:param name="pid" value="id"></s:param>
+			<s:if test="children == null || children.isEmpty">
 				<s:property value="name"/>
-			</s:a>
+			</s:if>
+			<s:else>
+				<s:a action="category_list" namespace="/admin/product">
+					<s:param name="pid" value="id"></s:param>
+					<s:property value="name"/>
+				</s:a>
+			</s:else>
 		</td>
 		<td width="150" align="center">
 			<s:if test="children == null || children.isEmpty">
@@ -46,22 +51,25 @@
 		</td>
 		<td width="100" align="center">
 			<s:if test="parent.name != null">
-				<s:property value="parent.name"/>
+				<s:a action="category_list" namespace="/admin/product">
+					<s:param name="parent.level" value="parent.level"></s:param>
+					<s:property value="parent.name"/>
+				</s:a>
 			</s:if>
 			<s:else>
-			无
+			无父类
 			</s:else>
 		</td>
 		<td width="70" align="center">
 			<s:a action="category_edit" namespace="/admin/product">
 				<s:param name="id" value="id"></s:param>
-				<img src="${context_path}/css/images/rz_15.gif" width="21" height="16" />
+				<img src="${context_path}/imgsystem/rz_15.gif" width="21" height="16" />
 			</s:a>
 		</td>
 		<td width="70" align="center">
 			<s:a action="category_del" namespace="/admin/product">
 				<s:param name="id" value="id"></s:param>
-				<img src="${context_path}/css/images/rz_17.gif" width="15" height="16" />
+				<img src="${context_path}/imgsystem/rz_17.gif" width="15" height="16" />
 			</s:a>
 		</td>
 	</tr>

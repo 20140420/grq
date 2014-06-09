@@ -7,7 +7,7 @@
 	<s:hidden name="level"></s:hidden>
 	<div id="right">
 	<div id="right_top"><img
-		src="${context_path}/css/images/blue.gif" width="16" height="16" /> <span
+		src="${context_path}/imgsystem/blue.gif" width="16" height="16" /> <span
 		class="word01">添加商品类别</span></div>
 	<div id="right_mid">
 	<div id="tiao">
@@ -27,6 +27,6 @@
 	</div>
 	</div>
 	<div id="right_foot"><s:submit type="image"
-		src="%{context_path}/css/images/ht_02_18.gif"></s:submit></div>
+		src="%{context_path}/imgsystem/ht_02_18.gif"></s:submit></div>
 	</div>
 </s:form>

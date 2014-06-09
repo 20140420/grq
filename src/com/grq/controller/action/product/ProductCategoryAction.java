@@ -9,7 +9,7 @@ import com.grq.model.pojo.product.ProductCategory;
 import com.opensymphony.xwork2.ModelDriven;
 /**
  * 商品类别Action对象
- * @author Li Yongqiang
+ * @author JiangQuan
  *
  */
 @Scope("prototype")
@@ -60,6 +60,7 @@ public class ProductCategoryAction extends BaseAction implements ModelDriven<Pro
 	 * @return
 	 * @throws Exception
 	 */
+	@Override
 	public String list() throws Exception{
 		Object[] params = null ;//定义对象数组初值为空
 		String where;//定义查询条件变量
@@ -77,6 +78,7 @@ public class ProductCategoryAction extends BaseAction implements ModelDriven<Pro
 	 * @return String
 	 * @throws Exception
 	 */
+	@Override
 	public String edit() throws Exception{
 		if(category.getId() != null && category.getId() > 0){//判断是否获得ID参数
 			this.category = categoryDao.get(category.getId());//加载对象ID参数
