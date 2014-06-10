@@ -4,7 +4,7 @@
 <s:form action="order_list" namespace="/admin/product">
 	<div id="right">
 	<div id="right_top"><img
-		src="${context_path}/css/images/blue.gif" width="16" height="16" /> <span
+		src="${context_path}/imgsystem/blue.gif" width="16" height="16" /> <span
 		class="word01">订单查询</span></div>
 	<div id="right_mid">
 	<div id="tiao">
@@ -16,8 +16,8 @@
 		<tr>
 			<td width="105" height="22" bgcolor="#c6e8ff" align="right">订单状态：</td>
 			<td><s:radio name="orderState"
-				list="@com.lyq.model.OrderState@getValues()"
-				value="@com.lyq.model.OrderState@getValues()[0]"></s:radio></td>
+				list="@com.grq.model.customizeenum.OrderState@getValues()"
+				value="@com.grq.model.customizeenum.OrderState@getValues()[0]"></s:radio></td>
 		</tr>
 		<tr>
 			<td width="105" height="22" bgcolor="#c6e8ff" align="right">会员名：</td>
@@ -31,6 +31,6 @@
 	</div>
 	</div>
 	<div id="right_foot"><s:submit type="image"
-		src="%{context_path}/css/images/ht_02_18.gif"></s:submit></div>
+		src="%{context_path}/imgsystem/ht_02_18.gif"></s:submit></div>
 	</div>
 </s:form>

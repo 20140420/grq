@@ -20,7 +20,7 @@
 	<s:hidden name="orderId"></s:hidden>
 	<p>
 	订单状态:
-	<s:radio name="orderState" list="@com.lyq.model.OrderState@getValues()" value="orderState.getName()"></s:radio>
+	<s:radio name="orderState" list="@com.grq.model.customizeenum.OrderState@getValues()" value="orderState.getName()"></s:radio>
 	</p>
 	<s:submit value="更新订单状态" ></s:submit>
 </s:form>

@@ -6,7 +6,7 @@ import java.util.Set;
 
 import com.grq.model.customizeenum.OrderState;
 import com.grq.model.customizeenum.PaymentWay;
-//import com.lyq.model.user.Customer;
+import com.grq.model.pojo.user.Customer;
 /**
  * 订单
  * @author JiangQuan
@@ -14,7 +14,7 @@ import com.grq.model.customizeenum.PaymentWay;
 public class Order implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String orderId;// 订单编号(手动分配)
-	//private Customer customer;// 所属用户
+	private Customer customer;// 所属用户
 	private String name;// 收货人姓名
 	private String address;// 收货人住址
 	private String mobile;// 收货人手机
@@ -29,17 +29,13 @@ public class Order implements Serializable {
 	public void setOrderId(String orderId) {
 		this.orderId = orderId;
 	}
-	/**
-	 * 
-	 * @return
-	 
 	public Customer getCustomer() {
 		return customer;
 	}
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	*/
+	
 	public String getName() {
 		return name;
 	}

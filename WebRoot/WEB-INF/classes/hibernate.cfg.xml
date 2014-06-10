@@ -26,6 +26,8 @@
 		<mapping resource="com/grq/model/pojo/product/UploadFile.hbm.xml"/>
 		<mapping resource="com/grq/model/pojo/product/Order.hbm.xml"/>
 		<mapping resource="com/grq/model/pojo/product/OrderItem.hbm.xml"/>
+		
+		<mapping resource="com/grq/model/pojo/user/Customer.hbm.xml"/>
 
     </session-factory>
 
