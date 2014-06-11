@@ -3,9 +3,9 @@
 <%@include file="/WEB-INF/pages/common/common_admin.jsp"%>
 <s:form action="order_list" namespace="/admin/product">
 	<div id="right">
-	<div id="right_top"><img
-		src="${context_path}/imgsystem/blue.gif" width="16" height="16" /> <span
-		class="word01">订单查询</span></div>
+	<div id="right_top"><img src="${context_path}/imgsystem/blue.gif" width="16" height="16" />
+		<span class="word01">订单查询</span>
+	</div>
 	<div id="right_mid">
 	<div id="tiao">
 	<table width="685" height="24" border="0">

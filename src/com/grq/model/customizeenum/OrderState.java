@@ -17,7 +17,7 @@ public enum OrderState {
 	FINISH{
 		@Override
 		public String getName() {
-			return "交易完成";
+			return "已完成";
 		}
 	},
 	CANCLE{

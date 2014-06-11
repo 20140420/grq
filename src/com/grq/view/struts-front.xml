@@ -18,7 +18,7 @@
 	<!-- 进入后台 -->
 	<package name="grq-manage" namespace="/manage" extends="grq-front">
         <action name="manage_*" class="manageAction" method="{1}">
-        	<!-- <result name="top">/WEB-INF/pages/manage/mheader.jsp</result> -->
+        	<result name="main">/WEB-INF/pages/manage/default.jsp</result> 
             <result name="usidebar">/WEB-INF/pages/manage/user/usidebar.jsp</result>
             <result name="msidebar">/WEB-INF/pages/manage/admin/msidebar.jsp</result>
         </action> 

@@ -14,7 +14,7 @@ public class ManageAction extends BaseAction {
 	 * 控制区别用户和管理员的后台页面
 	 */
 	public String sidebar() throws Exception {
-		if(0>1){
+		if(2>1){
 			return "usidebar";//USER后台主页
 		}
 		return "msidebar";//ADMIN后台主页

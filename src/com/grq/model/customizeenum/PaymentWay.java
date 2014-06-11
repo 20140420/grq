@@ -7,7 +7,7 @@ public enum PaymentWay {
 	NET_BANK{
 		@Override
 		public String getName() {
-			return "网上银行支付";
+			return "网银支付";
 		}
 	},
 	ALIPAY{
