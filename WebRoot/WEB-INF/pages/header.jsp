@@ -7,14 +7,17 @@
 	<ul>
         <li>
         <div>
-			<%   if(2>1){//注意权限为游客时%>
-            [<a href="register.jsp">注册</a>]|[<a href="login.jsp">登入</a>]
-            <% } else { %>
-            <span>欢迎光临:<i><% %></i>[<a href="control/front/#">注销</a>]</span>
-            <%}%>
+            <s:if test="#session.customer != null">
+				[欢迎: <s:property value="#session.customer.username"/>]
+				|[<s:a action="customer_logout" namespace="/customer">退出</s:a>]
+			</s:if>
+			<s:else>
+				[<a href="register.jsp">注册</a>]
+				|[<a href="login.jsp">登入</a>]
+			</s:else>
         </div>
         </li> 
-        <li><s:a action="invest_sales" namespace="/invest" target="_blank">活动</s:a></li>
+        <li><s:a action="sale_main" namespace="/sale" target="_blank">活动</s:a></li>
         <li><s:a action="invest_ranking" namespace="/invest">排名</s:a></li>
         <li><s:a action="invest_main" namespace="/invest" target="_blank">投资</s:a></li>
         <li><s:a action="indexweb" namespace="/">主页</s:a></li>           

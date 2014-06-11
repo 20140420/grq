@@ -51,7 +51,15 @@
 			<!-- invest页面主页 -->
 			<result name="main">/WEB-INF/pages/invest/investments.jsp</result>
 			<result name="ranking">/WEB-INF/pages/invest/ranking.jsp</result>
-			<result name="sales">/WEB-INF/pages/invest/sales.jsp</result>
+		</action>
+	</package>
+	
+	<!-- sale促销项目 -->
+	<package name="grq-sale" namespace="/sale" extends="grq-front">
+		<action name="sale_*" class="saleAction" method="{1}">
+			<!-- sale页面主页 -->
+			<result name="main">/WEB-INF/pages/sale/sales.jsp</result>
+
 		</action>
 	</package>
 	
