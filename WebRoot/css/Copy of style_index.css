@@ -107,8 +107,7 @@
 }
 #right_sp {
 	float: left;
-	height: auto;
-	/*height: 1050px;*/
+	height: 767px;
 	width: 676px;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -228,7 +227,7 @@
 }
 #xshangpin {
 	float: left;
-	height: auto;
+	height: 110px;
 	width: 654px;
 	margin-top: 10px;
 	padding-bottom: 5px;

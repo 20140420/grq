@@ -25,7 +25,7 @@ public class ProductDaoImpl extends DaoSupport<ProductInfo> implements ProductDa
 		Object[] parames = {true};
 		Map<String, String> orderby = new HashMap<String, String>();
 		orderby.put("createTime", "desc");
-		PageModel<ProductInfo> pageModel = find(where,parames ,orderby,1,10);
+		PageModel<ProductInfo> pageModel = find(where,parames ,orderby,1,5);
 		return pageModel.getList();
 	}
 	/**
@@ -36,7 +36,7 @@ public class ProductDaoImpl extends DaoSupport<ProductInfo> implements ProductDa
 	public List<ProductInfo> findClickcount() {
 		Map<String, String> orderby = new HashMap<String, String>();
 		orderby.put("clickcount", "desc");
-		PageModel<ProductInfo> pageModel = find(1, 10, orderby);
+		PageModel<ProductInfo> pageModel = find(1, 5, orderby);
 		return pageModel.getList();
 	}
 	/**
@@ -47,7 +47,7 @@ public class ProductDaoImpl extends DaoSupport<ProductInfo> implements ProductDa
 	public List<ProductInfo> findSellCount() {
 		Map<String, String> orderby = new HashMap<String, String>();
 		orderby.put("sellCount", "desc");
-		PageModel<ProductInfo> pageModel = find(1, 10, orderby);
+		PageModel<ProductInfo> pageModel = find(1, 5, orderby);
 		return pageModel.getList();
 	}
 }

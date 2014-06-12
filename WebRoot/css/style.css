@@ -1,8 +1,11 @@
+/*!
+ * Ç°Ì¨Ö÷Ò³Í¼Æ¬ÑùÊ½
+ */
 @charset "utf-8";
 
 *{ margin:0; padding:0;list-style-type:none;}
 img{ border:none;}
-body{font:12px/180% Arial, Helvetica, sans-serif, "æ–°å®‹ä½“";}
+body{font:12px/180% Arial, Helvetica, sans-serif, "ÐÂËÎÌå";}
 
 .absolute{position:absolute;}
 .relative{position:relative;}

@@ -61,6 +61,14 @@
 			<result name="main">/WEB-INF/pages/sale/sales.jsp</result>
 
 		</action>
+		<action name="product_*" class="productAction" method="{1}">
+			<!-- 列表和详情 -->
+			<result name="list">/WEB-INF/pages/sale/product/product_list.jsp</result>
+			<result name="select">/WEB-INF/pages/sale/product/product_select.jsp</result>
+			<!-- 首页右栏 人气、推荐、热销 -->
+			<result name="clickList">/WEB-INF/pages/sale/product/product_click_list.jsp</result>
+			<result name="findList">/WEB-INF/pages/sale/product/product_find_list.jsp</result>			
+		</action>
 	</package>
 	
 	<!-- price项目 -->

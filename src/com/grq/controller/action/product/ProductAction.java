@@ -29,6 +29,20 @@ import com.opensymphony.xwork2.ModelDriven;
 public class ProductAction extends BaseAction implements ModelDriven<ProductInfo>{
 	private static final long serialVersionUID = 1L;
 	/**
+	 * 根据名称模糊查询
+	 * @return String
+	 * @throws Exception
+	 */
+	public String findByName() throws Exception {
+		if(product.getName() != null){
+			String where = "where name like ?";//查询的条件语句
+			Object[] queryParams = {"%" + product.getName() + "%"};//为参数赋值
+			pageModel = productDao.find(pageNo, pageSize, where, queryParams );//执行查询方法
+		}
+		image.put("url", "04.gif");
+		return LIST;//返回列表首页
+	}
+	/**
 	 * 根据类别id查询所有商品信息
 	 * @return String
 	 * @throws Exception
@@ -39,7 +53,43 @@ public class ProductAction extends BaseAction implements ModelDriven<ProductInfo
 			Object[] queryParams = {product.getCategory().getId()};
 			pageModel = productDao.find(pageNo, pageSize, where, queryParams);
 		}
+		image.put("url", "02.gif");//设置副标题图片
 		return LIST;
+	}
+	/**
+	 * 按人气查询
+	 * @return String
+	 * @throws Exception
+	 */
+	public String findByClick() throws Exception{
+		Map<String, String> orderby = new HashMap<String, String>();//定义Map集合
+		orderby.put("clickcount", "desc");//为Map集合赋值
+		pageModel = productDao.find(1, 8, orderby );//执行查找方法
+		return "clickList";//返回product_click_list.jsp页面
+	}
+	/**
+	 * 按推荐查询
+	 * @return String
+	 * @throws Exception
+	 */
+	public String findByCommend() throws Exception{
+		Map<String, String> orderby = new HashMap<String, String>();//定义Map集合
+		orderby.put("sellCount", "desc");//为Map集合赋值
+		String where = "where commend = ?";//设置条件语句
+		Object[] queryParams = {true};//设置参数值
+		pageModel = productDao.find(where, queryParams, orderby, pageNo, pageSize);//执行查询方法
+		return "findList";//返回product_find_list.jsp页面 推荐列表
+	}
+	/**
+	 * 按销量查询
+	 * @return String
+	 * @throws Exception
+	 */
+	public String findBySellCount() throws Exception{
+		Map<String, String> orderby = new HashMap<String, String>();//定义Map集合
+		orderby.put("sellCount", "desc");//为Map集合赋值
+		pageModel = productDao.find(1, 6, orderby );//执行查询方法
+		return "findList";//返回热销商品列表
 	}
 	/**
 	 * 新品上市
@@ -91,57 +141,6 @@ public class ProductAction extends BaseAction implements ModelDriven<ProductInfo
 		image.put("url", "07.gif");
 		return "list";//返回商品列表页面
 	}
-	/**
-	 * 根据名称模糊查询
-	 * @return String
-	 * @throws Exception
-	 */
-	public String findByName() throws Exception {
-		if(product.getName() != null){
-			String where = "where name like ?";//查询的条件语句
-			Object[] queryParams = {"%" + product.getName() + "%"};//为参数赋值
-			pageModel = productDao.find(pageNo, pageSize, where, queryParams );//执行查询方法
-		}
-		image.put("url", "04.gif");
-		return LIST;//返回列表首页
-	}
-	/**
-	 * 按人气查询
-	 * @return String
-	 * @throws Exception
-	 */
-	public String findByClick() throws Exception{
-		Map<String, String> orderby = new HashMap<String, String>();//定义Map集合
-		orderby.put("clickcount", "desc");//为Map集合赋值
-		pageModel = productDao.find(1, 8, orderby );//执行查找方法
-		return "clickList";//返回product_click_list.jsp页面
-	}
-	/**
-	 * 按推荐查询
-	 * @return String
-	 * @throws Exception
-	 */
-	public String findByCommend() throws Exception{
-		Map<String, String> orderby = new HashMap<String, String>();//定义Map集合
-		orderby.put("sellCount", "desc");//为Map集合赋值
-		String where = "where commend = ?";//设置条件语句
-		Object[] queryParams = {true};//设置参数值
-		pageModel = productDao.find(where, queryParams, orderby, pageNo, pageSize);//执行查询方法
-		return "findList";//返回product_find_list.jsp页面
-	}
-	/**
-	 * 按销量查询
-	 * @return String
-	 * @throws Exception
-	 */
-	public String findBySellCount() throws Exception{
-		Map<String, String> orderby = new HashMap<String, String>();//定义Map集合
-		orderby.put("sellCount", "desc");//为Map集合赋值
-		pageModel = productDao.find(1, 6, orderby );//执行查询方法
-		return "findList";//返回热销商品列表
-	}
-	
-	
 	/**
 	 * 添加商品
 	 */
