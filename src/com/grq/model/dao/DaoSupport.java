@@ -41,6 +41,9 @@ public class DaoSupport<T> implements BaseDao<T>{
 	public void save(Object obj) {
 		getTemplate().save(obj);
 	}
+	/**
+	 * 保存或更新
+	 */
 	@Override
 	public void saveOrUpdate(Object obj) {
 		getTemplate().saveOrUpdate(obj);
