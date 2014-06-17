@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="grq"
+  id="myeclipse.1402997619418"
+  context-root="/grq"
+  j2ee-spec="6.0"
+  archive="grq.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
