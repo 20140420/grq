@@ -12,8 +12,8 @@
 				|[<s:a action="customer_logout" namespace="/customer">退出</s:a>]
 			</s:if>
 			<s:else>
-				[<a href="register.jsp">注册</a>]
-				|[<a href="login.jsp">登入</a>]
+				[<s:a action="customer_reg" namespace="/customer">注册</s:a>]
+				|[<s:a action="customer_login" namespace="/customer">登入</s:a>]
 			</s:else>
         </div>
         </li> 

@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
 <div class="container">
 	<div class="header">
-		
+		<%@ include file="/WEB-INF/pages/header.jsp"%>
 	</div><!-- end .header -->
 	<div class="content">
 	  <div class="login">	

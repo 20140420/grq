@@ -15,6 +15,7 @@ import com.grq.model.dao.product.ProductCategoryDao;
 import com.grq.model.dao.product.ProductDao;
 import com.grq.model.dao.product.UploadFileDao;
 import com.grq.model.dao.product.OrderDao;
+import com.grq.model.dao.user.CustomerDao;
 import com.grq.model.pojo.user.Customer;
 import com.grq.model.pojo.product.OrderItem;
 import com.opensymphony.xwork2.ActionSupport;
@@ -40,6 +41,8 @@ SessionAware{
 	protected UploadFileDao uploadFileDao;
 	@Autowired
 	protected OrderDao orderDao;
+	@Autowired
+	protected CustomerDao customerDao;
 	
 	// Map¿‡–Õµƒsession
 	protected Map<String, Object> session;
@@ -52,6 +55,10 @@ SessionAware{
 	public static final String EDIT = "edit";
 	public static final String SELECT = "select";
 	public static final String QUERY = "query";
+	public static final String LOGIN = "login";
+	public static final String REG = "reg";
+	
+	public static final String CUSTOMER_LOGIN = "customerLogin";
 	
 	
 
@@ -82,6 +89,12 @@ SessionAware{
 	}
 	public String query() throws Exception{
 		return QUERY;
+	}
+	public String login() throws Exception{
+		return LOGIN;
+	}
+	public String reg() throws Exception{
+		return REG;
 	}
 	
 	/**

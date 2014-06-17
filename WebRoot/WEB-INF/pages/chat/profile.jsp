@@ -4,7 +4,7 @@
 <div class="profile">
   <div class="profile-face"><img src="${context_path}/imgweb/user_face/profile_face_a01.png" width="48" height="48" /></div>
   <div class="profile-title-nickname">昵&nbsp;&nbsp;&nbsp;&nbsp;称：</div>
-  <div class="profile-nickname"><input type="text" placeholder="昵称" value="个人与团队"></div>
+  <div class="profile-nickname"><input type="text" placeholder="登入后显示昵称" value="<s:property value="#session.customer.username"/>"></div>
   <div class="profile-title-apprentice_number">徒&nbsp;&nbsp;&nbsp;&nbsp;弟：</div>
   <div class="profile-apprentice_number"><input type="text" placeholder="徒弟数量" value="108"></div>
   <div class="profile-title-silver_available">可用银币：</div>

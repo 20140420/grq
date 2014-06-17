@@ -10,15 +10,17 @@
 			<!-- 错误页面 -->
             <result name="error">#</result>
             <!-- 程序返回主页面 -->
-            <result name="index" type="redirectAction">#</result>
+            <result name="index" type="redirectAction">indexweb</result>
             <!-- 后台管理主页面 -->
             <result name="manage">/WEB-INF/pages/manage/manage.jsp</result>
             <!--会员注册 -->
-            <result name="reg">#</result>
+            <result name="reg">/WEB-INF/pages/customer_reg.jsp</result>
             <!--会员登录-->
-			<result name="customerLogin">#</result>
+			<result name="customerLogin">/WEB-INF/pages/customer_login.jsp</result>
+			<!--管理员注册 -->
+            <result name="userReg">/WEB-INF/pages/manage/register.jsp</result>
             <!--管理员登录-->
-            <result name="userLogin">#</result>
+            <result name="userLogin">/WEB-INF/pages/manage/login.jsp</result>
         </global-results>
 		<global-exception-mappings>
 			<exception-mapping result="error" exception="#"></exception-mapping>

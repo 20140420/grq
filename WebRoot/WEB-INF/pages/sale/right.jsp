@@ -58,6 +58,6 @@
 				</tr>
 			</table>
 	</div>
-	<div id="sckf"></div>
+	<!-- <div id="sckf"></div> -->
 </div>
 

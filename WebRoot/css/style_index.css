@@ -263,7 +263,7 @@
 	margin-right: auto;
 	margin-left: auto;
 	margin-bottom: 120px;
-	background-image: url(images/dl_03.gif);
+	background-image: url(../imgsystem/dl_03.gif);
 	background-repeat: no-repeat;
 	padding-right: 34px;
 	padding-left: 108px;
@@ -277,9 +277,9 @@
 	margin-right: auto;
 	margin-left: auto;
 	margin-bottom: 30px;
-	background-image: url(images/zc_03.gif);
+	background-image: url(../imgsystem/zc_03.gif);
 	background-repeat: no-repeat;
-	background-color: #ffffe1;
+	background-color: #ffffe1;/**/
 	background-position: top;
 	border: 1px solid #999999;
 	padding-top: 110px;

@@ -15,6 +15,12 @@
         </action>
 	</package>
 	
+	<!-- 消费者Action -->
+	<package name="grq-customer" extends="grq-default" namespace="/customer">
+		<action name="customer_*" method="{1}" class="customerAction">
+		</action>
+	</package>
+	
 	<!-- 进入后台 -->
 	<package name="grq-manage" namespace="/manage" extends="grq-front">
         <action name="manage_*" class="manageAction" method="{1}">
