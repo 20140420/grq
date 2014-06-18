@@ -17,10 +17,8 @@
             <result name="reg">/WEB-INF/pages/customer_reg.jsp</result>
             <!--会员登录-->
 			<result name="customerLogin">/WEB-INF/pages/customer_login.jsp</result>
-			<!--管理员注册 -->
-            <result name="userReg">/WEB-INF/pages/manage/register.jsp</result>
             <!--管理员登录-->
-            <result name="userLogin">/WEB-INF/pages/manage/login.jsp</result>
+            <result name="adminLogin">/WEB-INF/pages/admin_login.jsp</result>
         </global-results>
 		<global-exception-mappings>
 			<exception-mapping result="error" exception="#"></exception-mapping>

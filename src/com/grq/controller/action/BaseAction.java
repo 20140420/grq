@@ -59,6 +59,7 @@ SessionAware{
 	public static final String REG = "reg";
 	
 	public static final String CUSTOMER_LOGIN = "customerLogin";
+	public static final String ADMIN_LOGIN = "adminLogin";
 	
 	
 

@@ -10,6 +10,15 @@ import com.grq.controller.action.BaseAction;
 public class AdminAction extends BaseAction {
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * 管理员登入
+	 */
+	@Override
+	public String login() throws Exception{
+		return ADMIN_LOGIN;
+	}
+	
+	
 	
 	/**
 	 * msidebar页面
