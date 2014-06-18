@@ -12,12 +12,18 @@ public class ManageAction extends BaseAction {
 	
 	/**
 	 * 控制区别用户和管理员的后台页面
+	 * session.customer != null
+	 * session.get("customer") != null
 	 */
 	public String sidebar() throws Exception {
-		if(2>1){
+		if( (session.get("customer") != null) && (session.get("admin") == null) ){
+			return "usidebar";//USER后台主页
+		}else if( (session.get("customer") == null) && (session.get("admin") != null) ){
+			return "msidebar";//ADMIN后台主页
+		}else if((session.get("customer") != null) && (session.get("admin") != null)){
 			return "usidebar";//USER后台主页
 		}
-		return "msidebar";//ADMIN后台主页
+		return "usidebar";//USER后台主页
 	}
 		
 
