@@ -77,6 +77,7 @@
 		</action>
 	</package>
 	
+	
 	<!-- price项目 -->
 	<package name="grq-price" namespace="/price" extends="grq-front">
 		<action name="price_*" class="priceAction" method="{1}">

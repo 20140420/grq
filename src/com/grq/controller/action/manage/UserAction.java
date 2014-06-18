@@ -71,13 +71,6 @@ public class UserAction extends BaseAction {
 
 		return "uapprentice";
 	}
-	public String cart() throws Exception{
 
-		return "cart";
-	}
-	public String order() throws Exception{
-
-		return "order";
-	}
 
 }

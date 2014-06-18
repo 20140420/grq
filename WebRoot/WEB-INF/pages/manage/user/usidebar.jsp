@@ -49,7 +49,7 @@
 		</ul>
   		<h3>交割单</h3>
 		<ul class="hide">
-			<li><s:a action="usidebar_cart" namespace="/user" target="mdetail">我的购物车</s:a></li>
-			<li><s:a action="usidebar_order" namespace="/user" target="mdetail">我的订单</s:a></li>
+			<li><s:a action="cart_list" namespace="/cart" target="mdetail">我的购物车</s:a></li>
+			<li><s:a action="order_findByCustomer" namespace="/order" target="mdetail">我的订单</s:a></li>
 		</ul>
 <!--</div> -->

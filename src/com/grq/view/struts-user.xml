@@ -26,26 +26,27 @@
             <result name="ubankcard">/WEB-INF/pages/manage/user/ubankcard.jsp</result>
             <result name="umaster">/WEB-INF/pages/manage/user/umaster.jsp</result>
             <result name="uapprentice">/WEB-INF/pages/manage/user/uapprentice.jsp</result>
-            <result name="cart">/WEB-INF/pages/manage/user/umaster.jsp</result>
-            <result name="order">/WEB-INF/pages/manage/user/uapprentice.jsp</result>
 		</action>
-	</package>
-	<!-- 购物车Action
-	<package name="grq-cart" extends="grq-user" namespace="/product">
+	</package>	
+		
+	<!-- cart购物车Action -->
+	<package name="grq-cart" extends="grq-user" namespace="/cart">
 		<action name="cart_*" class="cartAction" method="{1}">
 			<result name="list">/WEB-INF/pages/cart/cart_list.jsp</result>
 			
 		</action>
-	</package> -->
-	<!-- 订单Action 
-	<package name="grq-order" extends="grq-user" namespace="/product">
+	</package>
+	
+	<!-- order订单Action -->
+	<package name="grq-order" extends="grq-user" namespace="/order">
 		<action name="order_*" class="orderAction" method="{1}">
 			<result name="add">/WEB-INF/pages/order/order_add.jsp</result>
 			<result name="confirm">/WEB-INF/pages/order/order_confirm.jsp</result>
+			<!-- order订单列表页面 -->
 			<result name="list">/WEB-INF/pages/order/order_list.jsp</result>
 			<result name="error">/WEB-INF/pages/order/order_error.jsp</result>
 			
 		</action>
-	</package>-->
+	</package>
 
 </struts>
