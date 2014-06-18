@@ -7,7 +7,14 @@
        <s:action name="manage_sidebar" namespace="/manage" executeResult="true"></s:action>
     <!-- end .sidebar1 --></div>
     <div class="content">
-    欢迎！xxx
+    	<!-- 注意区别不同用户类型 -->
+		<s:if test="#session.customer != null">
+			[欢迎：<span style="color:red;"> <s:property value="#session.customer.username"/></span>]
+		</s:if>
+		<s:else>
+			[<span style="font-weight:bold;"><s:a action="customer_login" namespace="/customer">请登入</s:a></span>]
+		</s:else>
+		通知公告
     <iframe src="${manage_main}" name="mdetail" scrolling="auto" frameborder="0" width="100%" height="500px"></iframe>
     <!-- end .content --></div>
 <%@include file="/WEB-INF/pages/manage/mfooter.jsp"%>

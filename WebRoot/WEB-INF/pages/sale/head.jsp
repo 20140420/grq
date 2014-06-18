@@ -11,7 +11,7 @@ td {
 </style>
 <div id="box">
 	<div id="dark">
-		<s:a action="cart_list" namespace="/product"><img src="${context_path}/imgsystem/index_03.gif" width="28" height="14" /> 我的购物车</s:a> | <s:a action="order_findByCustomer"	namespace="/product">我的订单</s:a>　
+		<s:a action="cart_list" namespace="/cart"><img src="${context_path}/imgsystem/index_03.gif" width="28" height="14" /> 我的购物车</s:a> | <s:a action="order_findByCustomer" namespace="/order">我的订单</s:a>　
 		<s:if test="#session.customer != null">
 			欢迎 <s:property value="#session.customer.username"/><s:a action="customer_logout" namespace="/customer">[退出]</s:a>
 		</s:if>

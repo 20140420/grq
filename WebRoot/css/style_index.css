@@ -292,7 +292,7 @@
 	height: 415px;
 	width: 193px;
 	border: 1px solid #999999;
-	background-image: url(images/zh_03.gif);
+	background-image: url(../imgsystem/zh_03.gif);
 	background-repeat: no-repeat;
 	background-position: top;
 	margin: 5px;
@@ -300,7 +300,7 @@
 	background-color: #e7f3c3;
 }
 #left_list {
-	background-image: url(images/zh01_07.gif);
+	background-image: url(../imgsystem/zh01_07.gif);
 	background-repeat: no-repeat;
 	background-position: center;
 	float: left;

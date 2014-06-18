@@ -54,7 +54,7 @@
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
-						<s:a action="cart_add" namespace="/sale">
+						<s:a action="cart_add" namespace="/cart">
 							<s:param name="productId" value="id"></s:param>
 							<img src="${context_path}/imgsystem/gm_06.gif" width="136" height="32" />
 						</s:a>

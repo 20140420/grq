@@ -17,13 +17,12 @@
         <li><a href="#">股如泉网上交易系统</a></li>
       </ul>
       <ul class="header-menu">
-        <li><a href="#">退出</a></li>
-        <li><a href="${context_path}/login.jsp">登入</a></li>
+        <li><s:a action="customer_logout" namespace="/customer">退出</s:a></li>
         <li><a href="#">锁屏</a></li>
         <li><a href="#">刷新</a></li>
         <li><a href="#">理财</a></li>
         <li><a href="#">安全</a></li>
-        <li><a href="manage.jsp">系统</a></li>
+        <li><s:a action="manage_manage" namespace="/manage">系统</s:a></li>
       </ul>
   <!--<a href="#"><img src="" alt="在此处插入徽标" name="Insert_logo" width="180" height="90" id="Insert_logo" style="background-color: #C6D580; display:block;" /></a 
     <!-- end .header --></div>
