@@ -56,6 +56,8 @@ public class ProductAction extends BaseAction implements ModelDriven<ProductInfo
 		image.put("url", "02.gif");//设置副标题图片
 		return LIST;
 	}
+	
+	
 	/**
 	 * 按人气查询
 	 * @return String
@@ -64,7 +66,7 @@ public class ProductAction extends BaseAction implements ModelDriven<ProductInfo
 	public String findByClick() throws Exception{
 		Map<String, String> orderby = new HashMap<String, String>();//定义Map集合
 		orderby.put("clickcount", "desc");//为Map集合赋值
-		pageModel = productDao.find(1, 8, orderby );//执行查找方法
+		pageModel = productDao.find(1, 5, orderby );//执行查找方法
 		return "clickList";//返回product_click_list.jsp页面
 	}
 	/**
@@ -77,7 +79,7 @@ public class ProductAction extends BaseAction implements ModelDriven<ProductInfo
 		orderby.put("sellCount", "desc");//为Map集合赋值
 		String where = "where commend = ?";//设置条件语句
 		Object[] queryParams = {true};//设置参数值
-		pageModel = productDao.find(where, queryParams, orderby, pageNo, pageSize);//执行查询方法
+		pageModel = productDao.find(where, queryParams, orderby, 1, 4);//执行查询方法
 		return "findList";//返回product_find_list.jsp页面 推荐列表
 	}
 	/**
@@ -88,9 +90,11 @@ public class ProductAction extends BaseAction implements ModelDriven<ProductInfo
 	public String findBySellCount() throws Exception{
 		Map<String, String> orderby = new HashMap<String, String>();//定义Map集合
 		orderby.put("sellCount", "desc");//为Map集合赋值
-		pageModel = productDao.find(1, 6, orderby );//执行查询方法
+		pageModel = productDao.find(1, 4, orderby );//执行查询方法
 		return "findList";//返回热销商品列表
 	}
+	
+	
 	/**
 	 * 新品上市
 	 * @return
@@ -99,7 +103,7 @@ public class ProductAction extends BaseAction implements ModelDriven<ProductInfo
 	public String findNewProduct() throws Exception{
 		Map<String, String> orderby = new HashMap<String, String>();//定义Map集合
 		orderby.put("createTime", "desc");//为Map集合赋值
-		pageModel = productDao.find(1, 5, orderby );//执行查找方法
+		pageModel = productDao.find(pageNo, pageSize, orderby );//执行查找方法
 		image.put("url", "01.gif");//设置副标题图片
 		return "list";//返回商品列表页面
 	}
@@ -141,6 +145,8 @@ public class ProductAction extends BaseAction implements ModelDriven<ProductInfo
 		image.put("url", "07.gif");
 		return "list";//返回商品列表页面
 	}
+	
+	
 	/**
 	 * 添加商品
 	 */

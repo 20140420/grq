@@ -30,7 +30,7 @@ SessionAware{
 	private static final long serialVersionUID = 1L;
 	
 	protected int pageNo = 1;//当前页
-	protected int pageSize = 6;//每页显示多少条
+	protected int pageSize = 4;//每页显示多少条
 	
 	// 注入Dao
 	@Autowired
