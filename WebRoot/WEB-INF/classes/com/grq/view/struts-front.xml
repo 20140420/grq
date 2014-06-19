@@ -22,12 +22,6 @@
         </action> 
 	</package> 
 	
-	<!-- 消费者Action -->
-	<package name="grq-customer" extends="grq-default" namespace="/customer">
-		<action name="customer_*" method="{1}" class="customerAction">
-		</action>
-	</package>
-	
 	<!-- shark项目 -->
 	<package name="grq-shark" namespace="/shark" extends="grq-front">
 		<action name="shark_*" class="sharkAction" method="{1}">

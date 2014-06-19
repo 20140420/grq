@@ -3,14 +3,24 @@
 	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" 
 	"http://struts.apache.org/dtds/struts-2.1.dtd" >
 <struts>
-	<!-- USER后台管理 -->
-	<package name="grq-user" namespace="/user" extends="grq-default">
-		<action name="user_*" class="userAction" method="{1}">
-        </action>        
+	<!-- CUSTOMER后台管理 -->
+	<package name="grq-customer" extends="grq-default" namespace="/customer">
+		<!-- 配置拦截器 -->
+		<interceptors>
+			<!-- 验证用户登录的拦截器 -->
+			<interceptor name="loginInterceptor" class="com.grq.controller.action.interceptor.CustomerLoginInteceptor"/>
+			<interceptor-stack name="customerDefaultStack">
+				<interceptor-ref name="loginInterceptor"/>
+    			<interceptor-ref name="defaultStack"/><!--必需引用这个，否则点下一个子ACTION会报错-->
+			</interceptor-stack>
+		</interceptors>
+		<!-- 顾客用户Action -->
+		<action name="customer_*" method="{1}" class="customerAction">
+		</action>
 	</package>
 	
-	<!-- 后台USER目录管理 -->
-	<package name="grq-usidebar" namespace="/user" extends="grq-user">
+	<!-- 后台CUSTOMER目录管理 -->
+	<package name="grq-usidebar" namespace="/user" extends="grq-customer">
 		<action name="usidebar_*" class="customerAction" method="{1}">
             <result name="usilverbuy">/WEB-INF/pages/manage/user/usilverbuy.jsp</result>
             <result name="usilversell">/WEB-INF/pages/manage/user/usilversell.jsp</result>
@@ -26,25 +36,26 @@
             <result name="ubankcard">/WEB-INF/pages/manage/user/ubankcard.jsp</result>
             <result name="umaster">/WEB-INF/pages/manage/user/umaster.jsp</result>
             <result name="uapprentice">/WEB-INF/pages/manage/user/uapprentice.jsp</result>
+            <interceptor-ref name="customerDefaultStack"/>
 		</action>
 	</package>	
 		
 	<!-- cart购物车Action -->
-	<package name="grq-cart" extends="grq-user" namespace="/cart">
+	<package name="grq-cart" extends="grq-customer" namespace="/cart">
 		<action name="cart_*" class="cartAction" method="{1}">
 			<result name="list">/WEB-INF/pages/manage/user/product/cart_list.jsp</result>
-			
+			<interceptor-ref name="customerDefaultStack"/>
 		</action>
 	</package>
 	
 	<!-- order订单Action -->
-	<package name="grq-order" extends="grq-user" namespace="/order">
+	<package name="grq-order" extends="grq-customer" namespace="/order">
 		<action name="order_*" class="orderAction" method="{1}">
 			<result name="add">/WEB-INF/pages/manage/user/product/order_add.jsp</result>
 			<result name="confirm">/WEB-INF/pages/manage/user/product/order_confirm.jsp</result>
 			<result name="list">/WEB-INF/pages/manage/user/product/order_list.jsp</result>
 			<result name="error">/WEB-INF/pages/manage/user/product/order_error.jsp</result>
-			
+			<interceptor-ref name="customerDefaultStack"/>
 		</action>
 	</package>
 
