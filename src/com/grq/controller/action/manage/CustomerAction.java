@@ -19,6 +19,22 @@ public class CustomerAction extends BaseAction implements ModelDriven<Customer>{
 	private Customer customer = new Customer();
 	// 确认密码
 	private String repassword;
+	@Override
+	public Customer getModel() {
+		return customer;
+	}
+	public Customer getCustomer() {
+		return customer;
+	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	public String getRepassword() {
+		return repassword;
+	}
+	public void setRepassword(String repassword) {
+		this.repassword = repassword;
+	}
 	/**
 	 * 继承BaseAction并重写，顾客用户登入页面
 	 * @return "customerLogin"
@@ -27,20 +43,6 @@ public class CustomerAction extends BaseAction implements ModelDriven<Customer>{
 	@Override
 	public String login() throws Exception{
 		return CUSTOMER_LOGIN;
-	}
-	/**
-	 * 用户注册
-	 * @return
-	 * @throws Exception
-	 */
-	public String save() throws Exception{
-		boolean unique = customerDao.isUnique(customer.getUsername());//判断用户名是否唯一
-		if(unique){//如果用户名可用
-			customerDao.save(customer);//保存注册信息
-			return CUSTOMER_LOGIN;//返回会员登录页面
-		}else{
-			throw new AppException("user have Already exists!!此用户名不可用");//否则返回页面错误信息
-		}
 	}
 	/**
 	 * 用户登录 
@@ -56,7 +58,7 @@ public class CustomerAction extends BaseAction implements ModelDriven<Customer>{
 			addFieldError("", "CustomerAction用户名或密码不正确！");//返回错误信息
 			return CUSTOMER_LOGIN;//返回会员登录页面
 		}
-		return INDEX;//返回网站首页
+		return CUSTOMER_MANAGE;//顾客登入成功后转入用户后台
 	}
 	/**
 	 * 用户退出
@@ -69,20 +71,83 @@ public class CustomerAction extends BaseAction implements ModelDriven<Customer>{
 		}
 		return INDEX;
 	}
-	public Customer getCustomer() {
-		return customer;
+	/**
+	 * 用户注册
+	 * @return
+	 * @throws Exception
+	 */
+	public String save() throws Exception{
+		boolean unique = customerDao.isUnique(customer.getUsername());//判断用户名是否唯一
+		if(unique){//如果用户名可用
+			customerDao.save(customer);//保存注册信息
+			return CUSTOMER_LOGIN;//返回会员登录页面
+		}else{
+			throw new AppException("user have Already exists!!此用户名不可用");//否则返回页面错误信息
+		}
 	}
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	
+	
+	
+	/**
+	 * usidebar页面
+	 * @return
+	 * @throws Exception
+	 */
+	public String usilverbuy() throws Exception{
+
+		return "usilverbuy";
 	}
-	public String getRepassword() {
-		return repassword;
+	public String usilversell() throws Exception{
+
+		return "usilversell";
 	}
-	public void setRepassword(String repassword) {
-		this.repassword = repassword;
+	public String uinquiryaccount() throws Exception{
+
+		return "uinquiryaccount";
 	}
-	@Override
-	public Customer getModel() {
-		return customer;
+	public String uinquirysilverrecord() throws Exception{
+
+		return "uinquirysilverrecord";
 	}
+	public String uinquirygame() throws Exception{
+
+		return "uinquirygame";
+	}
+	public String uinvest() throws Exception{
+
+		return "uinvest";
+	}
+	public String uinvestrecord() throws Exception{
+
+		return "uinvestrecord";
+	}
+	public String ugiro() throws Exception{
+
+		return "ugiro";
+	}
+	public String ugirorecord() throws Exception{
+
+		return "ugirorecord";
+	}
+	public String uprofile() throws Exception{
+
+		return "uprofile";
+	}
+	public String upassquestion() throws Exception{
+
+		return "upassquestion";
+	}
+	public String ubankcard() throws Exception{
+
+		return "ubankcard";
+	}
+	public String umaster() throws Exception{
+
+		return "umaster";
+	}
+	public String uapprentice() throws Exception{
+
+		return "uapprentice";
+	}
+	
 }

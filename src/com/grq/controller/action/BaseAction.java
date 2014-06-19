@@ -16,6 +16,7 @@ import com.grq.model.dao.product.ProductDao;
 import com.grq.model.dao.product.UploadFileDao;
 import com.grq.model.dao.product.OrderDao;
 import com.grq.model.dao.user.CustomerDao;
+import com.grq.model.dao.user.UserDao;
 import com.grq.model.pojo.user.Customer;
 import com.grq.model.pojo.product.OrderItem;
 import com.opensymphony.xwork2.ActionSupport;
@@ -43,13 +44,14 @@ SessionAware{
 	protected OrderDao orderDao;
 	@Autowired
 	protected CustomerDao customerDao;
+	@Autowired
+	protected UserDao userDao;
 	
 	// Map类型的session
 	protected Map<String, Object> session;
 	
 	public static final String INDEX = "index";
 	public static final String MAIN = "main";
-	public static final String MANAGE = "manage";
 	public static final String ADD = "add";
 	public static final String LIST = "list";
 	public static final String EDIT = "edit";
@@ -59,7 +61,9 @@ SessionAware{
 	public static final String REG = "reg";
 	
 	public static final String CUSTOMER_LOGIN = "customerLogin";
+	public static final String CUSTOMER_MANAGE = "customerManage";
 	public static final String ADMIN_LOGIN = "adminLogin";
+	public static final String ADMIN_MANAGE = "adminManage";
 	
 	
 
@@ -72,9 +76,6 @@ SessionAware{
 	}
 	public String main() throws Exception {
 		return MAIN;
-	}
-	public String manage() throws Exception {
-		return MANAGE;
 	}
 	public String add() throws Exception {
 		return ADD;
@@ -109,8 +110,8 @@ SessionAware{
 	
 
 	/**
-	 * 	 获取用户id
-	 * 	 获取用户对象
+	 * 	 获取顾客用户id
+	 * 	 获取顾客用户对象
 	 * @return
 	 */
 	public Customer getLoginCustomer(){

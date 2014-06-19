@@ -2,17 +2,17 @@
 <%@taglib prefix="s" uri="/struts-tags"%>
 <!-- 后台默认页面 -->
 <s:url action="manage_main" namespace="/manage" var="manage_main"></s:url>
-<%@include file="/WEB-INF/pages/manage/mheader.jsp"%>
+<%@include file="/WEB-INF/pages/manage/admin/mheader.jsp"%>
 	<div class="sidebar1">  
-       <s:action name="manage_sidebar" namespace="/manage" executeResult="true"></s:action>
+		<%@include file="/WEB-INF/pages/manage/admin/msidebar.jsp"%>
     <!-- end .sidebar1 --></div>
     <div class="content">
     	<!-- 注意区别不同用户类型 -->
-		<s:if test="#session.customer != null">
-			[欢迎：<span style="color:red;"> <s:property value="#session.customer.username"/></span>]
+		<s:if test="#session.admin != null">
+			[欢迎：<span style="color:red;"> <s:property value="#session.admin.username"/></span>]
 		</s:if>
 		<s:else>
-			[<span style="font-weight:bold;"><s:a action="customer_login" namespace="/customer">请登入</s:a></span>]
+			[<span style="font-weight:bold;"><s:a action="admin_login" namespace="/admin">请登入</s:a></span>]
 		</s:else>
 		通知公告
     <iframe src="${manage_main}" name="mdetail" scrolling="auto" frameborder="0" width="100%" height="500px"></iframe>

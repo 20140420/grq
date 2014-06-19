@@ -11,14 +11,16 @@
             <result name="error">#</result>
             <!-- 程序返回主页面 -->
             <result name="index" type="redirectAction">indexweb</result>
-            <!-- 后台管理主页面 -->
-            <result name="manage">/WEB-INF/pages/manage/manage.jsp</result>
             <!--会员注册 -->
             <result name="reg">/WEB-INF/pages/customer_reg.jsp</result>
             <!--会员登录-->
 			<result name="customerLogin">/WEB-INF/pages/customer_login.jsp</result>
+            <!-- 会员后台 -->
+            <result name="customerManage">/WEB-INF/pages/manage/user/manage.jsp</result>
             <!--管理员登录-->
             <result name="adminLogin">/WEB-INF/pages/admin_login.jsp</result>
+            <!-- 管理员后台 -->
+            <result name="adminManage">/WEB-INF/pages/manage/admin/manage.jsp</result>
         </global-results>
 		<global-exception-mappings>
 			<exception-mapping result="error" exception="#"></exception-mapping>

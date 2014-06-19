@@ -11,7 +11,7 @@
 	
 	<!-- 后台USER目录管理 -->
 	<package name="grq-usidebar" namespace="/user" extends="grq-user">
-		<action name="usidebar_*" class="userAction" method="{1}">
+		<action name="usidebar_*" class="customerAction" method="{1}">
             <result name="usilverbuy">/WEB-INF/pages/manage/user/usilverbuy.jsp</result>
             <result name="usilversell">/WEB-INF/pages/manage/user/usilversell.jsp</result>
             <result name="uinquiryaccount">/WEB-INF/pages/manage/user/uinquiryaccount.jsp</result>
