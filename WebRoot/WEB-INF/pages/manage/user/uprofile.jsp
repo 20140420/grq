@@ -49,7 +49,7 @@ td {
         </tr>
         <tr>
           <td>姓名：</td>
-          <td class="col4"><input type="text"></td>
+          <td class="col4"><input type="text" placeholder="姜泉"></td>
           <td>曾用名：</td>
           <td class="col4"><input type="text" placeholder="姜海泉" >          </td>
           <td colspan="2" rowspan="6" align="center"><img src="" alt="在此处插入徽标" width="120" height="150" style="background-color: #C6D580; display:block;"/></td>
