@@ -53,7 +53,7 @@ td {
 				  </td>
                   <td width="104" align="center" class="red"><s:property value="amount"/></td>
                   <td width="111" align="center">
-                  <s:a action="cart_delete" namespace="/product">
+                  <s:a action="cart_delete" namespace="/cart">
 					<s:param name="productId" value="productId"></s:param>
 					<img src="${context_path}/imgsystem/zh03_03.gif" width="52" height="23" />
 				  </s:a>
