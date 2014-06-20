@@ -268,7 +268,7 @@ form table .col3 input{/*设定小框*/
 form table .col4 input{/*系统显示用户昵称*/
 	width: 130px;
 	border: none;
-	color: #666;
+	color: #00F;
 	text-align: center;
 }
 form table .col4 textarea{/*文本区域*/

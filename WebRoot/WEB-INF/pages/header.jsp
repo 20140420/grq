@@ -8,7 +8,7 @@
         <li>
         <div>
             <s:if test="#session.customer != null">
-				[欢迎: <s:property value="#session.customer.username"/>]
+				[欢迎:<s:a action="usidebar_uprofile" namespace="/user"><s:property value="#session.customer.username"/></s:a>]
 				|[<s:a action="customer_logout" namespace="/customer">退出</s:a>]
 			</s:if>
 			<s:else>

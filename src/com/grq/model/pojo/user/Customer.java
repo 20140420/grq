@@ -9,11 +9,12 @@ public class Customer implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Integer id;// 用户编号
 	private String username;// 用户名
-	private String password;// 密码
-	private String realname;// 真实姓名
 	private String email;// 邮箱
-	private String address;// 住址
 	private String mobile;// 手机
+	private String address;// 住址
+	private String password;// 密码
+	//private String realname;// 真实姓名
+	
 	
 	public Integer getId() {
 		return id;
@@ -33,12 +34,14 @@ public class Customer implements Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	/* 
 	public String getRealname() {
 		return realname;
 	}
 	public void setRealname(String realname) {
 		this.realname = realname;
 	}
+	*/
 	public String getEmail() {
 		return email;
 	}

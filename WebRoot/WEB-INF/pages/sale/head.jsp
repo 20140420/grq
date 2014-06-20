@@ -13,11 +13,10 @@ td {
 	<div id="dark">
 		<s:a action="cart_list" namespace="/cart"><img src="${context_path}/imgsystem/index_03.gif" width="28" height="14" /> 我的购物车</s:a> | <s:a action="order_findByCustomer" namespace="/order">我的订单</s:a>　
 		<s:if test="#session.customer != null">
-			欢迎 <s:property value="#session.customer.username"/><s:a action="customer_logout" namespace="/customer">[退出]</s:a>
+			欢迎:[<s:a action="usidebar_uprofile" namespace="/user"><s:property value="#session.customer.username"/></s:a>] | [<s:a action="customer_logout" namespace="/customer">退出</s:a>]
 		</s:if>
 		<s:else>
-			[<s:a action="customer_reg" namespace="/customer">注册</s:a>]
-			|[<s:a action="customer_login" namespace="/customer">登入</s:a>]
+			[<s:a action="customer_reg" namespace="/customer">注册</s:a>] | [<s:a action="customer_login" namespace="/customer">登入</s:a>]
 		</s:else>
 	</div>
 	<div id="logo">

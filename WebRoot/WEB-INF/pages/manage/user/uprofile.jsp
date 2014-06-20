@@ -25,27 +25,19 @@ td {
           </tr>
         <tr>
           <td>ID：</td>
-          <td class="col4"><input type="text" placeholder="系统生产的ID" ></td>
+          <td class="col4"><input type="text" placeholder="系统生产的ID" value="<s:property value="#session.customer.id"/>" ></td>
           <td>昵称：</td>
-          <td class="col4"><input type="text" placeholder="个人与团队" >          </td>
+          <td class="col4"><input type="text" placeholder="用户名"  value="<s:property value="#session.customer.username"/>"></td>
           <td>邮箱：</td>
-          <td class="col4"><input type="text" placeholder="595121869@qq.com" ></td>
+          <td class="col4"><input type="text" placeholder="邮箱" value="<s:property value="#session.customer.email"/>"></td>
         </tr>
         <tr>
           <td>手机：</td>
-          <td class="col4"><input type="text" placeholder="13216680533" ></td>
-          <td>师傅：</td>
-          <td class="col4"><input type="text" placeholder="由系统给出" ></td>
-          <td>徒弟数量：</td>
-          <td class="col4"><input type="text" placeholder="由系统给出" ></td>
-        </tr>
-        <tr>
-          <td>注册时间：</td>
-          <td class="col4"><input type="text" placeholder="由系统给出" ></td>
-          <td>最近登入：</td>
-          <td class="col4"><input type="text" placeholder="由系统给出" ></td>
-          <td>在线时长：</td>
-          <td class="col4"><input type="text" placeholder="由系统给出" ></td>
+          <td class="col4"><input type="text" placeholder="手机" value="<s:property value="#session.customer.mobile"/>"></td>
+          <td>住址：</td>
+          <td colspan="3" class="col4">
+          	<input type="text" class="textarea1"  value="<s:property value="#session.customer.address"/>">
+          </td>
         </tr>
         </table>
 </form>
@@ -57,10 +49,16 @@ td {
         </tr>
         <tr>
           <td>姓名：</td>
-          <td class="col4"><input type="text" placeholder="姜泉" ></td>
+          <td class="col4"><input type="text"></td>
           <td>曾用名：</td>
           <td class="col4"><input type="text" placeholder="姜海泉" >          </td>
-          <td colspan="2" rowspan="5" align="center"><img src="" alt="在此处插入徽标" width="120" height="150" style="background-color: #C6D580; display:block;"/></td>
+          <td colspan="2" rowspan="6" align="center"><img src="" alt="在此处插入徽标" width="120" height="150" style="background-color: #C6D580; display:block;"/></td>
+          </tr>
+          <tr>
+          <td>师傅：</td>
+          <td class="col4"><input type="text" placeholder="由系统给出" ></td>
+          <td>徒弟数量：</td>
+          <td class="col4"><input type="text" placeholder="由系统给出" ></td>
           </tr>
         <tr>
           <td>年龄：</td>
@@ -92,6 +90,14 @@ td {
           <input type="radio" name="sex" value="0">
           女</td>
           </tr>
+          <tr>
+          <td>注册时间：</td>
+          <td class="col4"><input type="text" placeholder="由系统给出" ></td>
+          <td>最近登入：</td>
+          <td class="col4"><input type="text" placeholder="由系统给出" ></td>
+          <td>在线时长：</td>
+          <td class="col4"><input type="text" placeholder="由系统给出" ></td>
+        </tr>
         <tr>
           <td>身份证：</td>
           <td colspan="3" class="col4"><textarea rows="1" class="textarea1" placeholder="330881198901244315"></textarea></td>
