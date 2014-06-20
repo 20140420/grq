@@ -1,7 +1,18 @@
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
-<%@ taglib prefix="s" uri="/struts-tags"%>
-<s:set var="context_path" value="#request.get('javax.servlet.forward.context_path')"></s:set>
-<link href="${context_path}/css/manage.css" rel="stylesheet" type="text/css" />
+<%@taglib prefix="s" uri="/struts-tags"%>
+<!-- 顾客用户后台页面 -->
+<s:url action="manage_main" namespace="/manage" var="manage_main"></s:url>
+<%@include file="/WEB-INF/pages/manage/user/mheader.jsp"%>
+	<div class="sidebar1">
+		<%@include file="/WEB-INF/pages/manage/user/usidebar.jsp"%>
+    <!-- end .sidebar1 --></div>
+<style>
+<!--
+td {
+	font-size: 12px;
+}
+-->
+</style>
     <div class="content">
 <div class="upassquestion">
   <form action="#" method="post">
@@ -92,3 +103,4 @@
 </form>
    	  </div>
     <!-- end .content --></div>
+<%@include file="/WEB-INF/pages/manage/mfooter.jsp"%>
