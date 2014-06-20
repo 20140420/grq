@@ -18,10 +18,16 @@
       </ul>
       <ul class="header-menu">
         <li><s:a action="admin_logout" namespace="/admin">退出</s:a></li>
+        <li>
+			<s:if test="#session.admin != null">
+			[<span style="font-weight:bold;color:red;"><s:property value="#session.admin.username"/></span>]
+			</s:if>
+			<s:else>
+			<span style="font-weight:bold;color:red;"><s:a action="admin_login" namespace="/admin">请登入</s:a></span>
+			</s:else>
+		</li>
         <li><a href="#">锁屏</a></li>
         <li><a href="#">刷新</a></li>
-        <li><a href="#">理财</a></li>
-        <li><a href="#">安全</a></li>
         <li><s:a action="admin_manage" namespace="/admin">系统</s:a></li>
       </ul>
   <!--<a href="#"><img src="" alt="在此处插入徽标" name="Insert_logo" width="180" height="90" id="Insert_logo" style="background-color: #C6D580; display:block;" /></a 

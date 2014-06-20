@@ -18,10 +18,18 @@
       </ul>
       <ul class="header-menu">
         <li><s:a action="customer_logout" namespace="/customer">退出</s:a></li>
+        <li>
+			<s:if test="#session.customer != null">
+			<span style="font-weight:bold;"><s:a action="usidebar_uprofile" namespace="/user">[<s:property value="#session.customer.username"/>]</s:a></span>
+			</s:if>
+			<s:else>
+			<span style="font-weight:bold;"><s:a action="customer_login" namespace="/customer">[请登入]</s:a></span>
+			</s:else>
+		</li>
         <li><a href="#">锁屏</a></li>
         <li><a href="#">刷新</a></li>
-        <li><a href="#">理财</a></li>
-        <li><a href="#">安全</a></li>
+        <li><s:a action="usidebar_uinvest" namespace="/user">理财</s:a></li>
+        <li><s:a action="usidebar_upassquestion" namespace="/user">安全</s:a></li>
         <li><s:a action="customer_manage" namespace="/customer">系统</s:a></li>
       </ul>
   <!--<a href="#"><img src="" alt="在此处插入徽标" name="Insert_logo" width="180" height="90" id="Insert_logo" style="background-color: #C6D580; display:block;" /></a 

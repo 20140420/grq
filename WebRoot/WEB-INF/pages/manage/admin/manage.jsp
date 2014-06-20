@@ -7,14 +7,6 @@
 		<%@include file="/WEB-INF/pages/manage/admin/msidebar.jsp"%>
     <!-- end .sidebar1 --></div>
     <div class="content">
-    	<!-- 注意区别不同用户类型 -->
-		<s:if test="#session.admin != null">
-			[欢迎：<span style="color:red;"> <s:property value="#session.admin.username"/></span>]
-		</s:if>
-		<s:else>
-			[<span style="font-weight:bold;"><s:a action="admin_login" namespace="/admin">请登入</s:a></span>]
-		</s:else>
-		通知公告
     <iframe src="${admin_main}" name="mdetail" scrolling="auto" frameborder="0" width="100%" height="500px"></iframe>
     <!-- end .content --></div>
 <%@include file="/WEB-INF/pages/manage/mfooter.jsp"%>
