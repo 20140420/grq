@@ -26,8 +26,12 @@ td {
 				<div style="margin-top: 5px;">
 					<b>热搜商品：</b>
 					<s:a action="product_getByCategoryId" namespace="/sale">
-						<s:param name="category.id" value="'330'"></s:param>
-						软件
+						<s:param name="category.id" value="'53'"></s:param>
+						买银币						
+					</s:a>
+					<s:a action="product_getByCategoryId" namespace="/sale">
+						<s:param name="category.id" value="'54'"></s:param>
+						卖银币						
 					</s:a>
 				</div>
 			</div>

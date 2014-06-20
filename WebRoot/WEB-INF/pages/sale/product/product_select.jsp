@@ -19,7 +19,7 @@
 		<li>
 			<table border="0" width="100%" cellpadding="0" cellspacing="0">
 				<tr>
-					<td rowspan="5" width="160">
+					<td rowspan="6" width="160">
 					<s:a action="product_select" namespace="/sale" >
 						<s:param name="id" value="id"></s:param>
 						<img width="200" height="200" src="<s:property value="#request.get('javax.servlet.forward.context_path')"/>/upload/<s:property value="uploadFile.path"/>">
@@ -52,6 +52,12 @@
 						</s:if>
 					</td>
 				</tr>
+					<tr>
+						<td align="right" width="90">最新销量：</td>
+						<td>
+						<span class="red"><s:property value="sellCount"/></span>
+						</td>
+					</tr>
 				<tr>
 					<td colspan="2" align="center">
 						<s:a action="cart_add" namespace="/cart">

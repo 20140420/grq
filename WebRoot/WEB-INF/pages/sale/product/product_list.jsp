@@ -29,7 +29,7 @@ li {
 			<li>
 				<table border="0" width="100%" cellpadding="0" cellspacing="0">
 					<tr>
-						<td rowspan="5" width="160">
+						<td rowspan="6" width="160">
 						<s:a action="product_select" namespace="/sale" >
 							<s:param name="id" value="id"></s:param>
 							<img width="150" height="150" src="<s:property value="#request.get('javax.servlet.forward.context_path')"/>/upload/<s:property value="uploadFile.path"/>">
@@ -60,6 +60,12 @@ li {
 							<s:if test="sellprice <= marketprice">
 								　<font color="red">节省<s:property value="marketprice-sellprice"/></font>
 							</s:if>
+						</td>
+					</tr>
+					<tr>
+						<td align="right" width="90">最新销量：</td>
+						<td>
+						<span class="red"><s:property value="sellCount"/></span>
 						</td>
 					</tr>
 					<tr>
@@ -98,7 +104,7 @@ li {
 	</s:if>
 	<s:else>
 		<p>对不起，还没有添加商品信息。</p>
-		<s:a action="indexweb">返回主页</s:a>
+		<s:a action="sale_main" namespace="/sale">看看其他商品</s:a>
 	</s:else>
 	</div>
 </div>
