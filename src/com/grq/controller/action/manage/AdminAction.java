@@ -12,7 +12,7 @@ import com.opensymphony.xwork2.ModelDriven;
 public class AdminAction extends BaseAction implements ModelDriven<User>{
 	private static final long serialVersionUID = 1L;
 	
-	// 用户对象
+	// 管理员用户对象
 	private User user = new User();
 	@Override
 	public User getModel() {
@@ -63,10 +63,15 @@ public class AdminAction extends BaseAction implements ModelDriven<User>{
 	}
 	
 	/**
-	 * msidebar页面
+	 * 管理员用户后台页面
 	 * @return
 	 * @throws Exception
 	 */
+	@Override
+	public String manage() throws Exception{
+
+		return ADMIN_MANAGE;
+	}
 	public String webserver() throws Exception{
 
 		return "webserver";

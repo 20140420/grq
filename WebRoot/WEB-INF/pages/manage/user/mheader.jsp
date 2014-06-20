@@ -22,7 +22,7 @@
         <li><a href="#">刷新</a></li>
         <li><a href="#">理财</a></li>
         <li><a href="#">安全</a></li>
-        <li><s:a action="manage_manage" namespace="/manage">系统</s:a></li>
+        <li><s:a action="customer_manage" namespace="/customer">系统</s:a></li>
       </ul>
   <!--<a href="#"><img src="" alt="在此处插入徽标" name="Insert_logo" width="180" height="90" id="Insert_logo" style="background-color: #C6D580; display:block;" /></a 
     <!-- end .header --></div>

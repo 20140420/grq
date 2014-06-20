@@ -89,10 +89,15 @@ public class CustomerAction extends BaseAction implements ModelDriven<Customer>{
 	
 	
 	/**
-	 * usidebar页面
+	 * 顾客用户后台页面
 	 * @return
 	 * @throws Exception
 	 */
+	@Override
+	public String manage() throws Exception{
+
+		return CUSTOMER_MANAGE;
+	}
 	public String usilverbuy() throws Exception{
 
 		return "usilverbuy";

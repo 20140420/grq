@@ -51,6 +51,7 @@ SessionAware{
 	protected Map<String, Object> session;
 	
 	public static final String INDEX = "index";
+	public static final String MANAGE = "manage";
 	public static final String MAIN = "main";
 	public static final String ADD = "add";
 	public static final String LIST = "list";
@@ -73,6 +74,9 @@ SessionAware{
 	}
 	public String index() throws Exception {
 		return INDEX;
+	}
+	public String manage() throws Exception {
+		return MANAGE;
 	}
 	public String main() throws Exception {
 		return MAIN;
