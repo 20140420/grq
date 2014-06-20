@@ -7,8 +7,8 @@
 	<package name="grq-customer" extends="grq-default" namespace="/customer">
 		<!-- 配置拦截器 -->
 		<interceptors>
-			<!-- 验证用户登录的拦截器 -->
-			<interceptor name="loginInterceptor" class="com.grq.controller.action.interceptor.CustomerLoginInteceptor"/>
+			<!-- 验证顾客用户登录的拦截器 -->
+			<interceptor name="loginInterceptor" class="com.grq.controller.action.interceptor.CustomerLoginInterceptor"/>
 			<interceptor-stack name="customerDefaultStack">
 				<interceptor-ref name="loginInterceptor"/>
     			<interceptor-ref name="defaultStack"/><!--必需引用这个，否则点下一个子ACTION会报错-->

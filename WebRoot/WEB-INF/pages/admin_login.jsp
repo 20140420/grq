@@ -9,7 +9,7 @@
 <link href="${context_path}/css/style_ht.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
 	if (self != top) {
-		alert("对不起，您还没有登录！");
+		alert("对不起，管理员，您还没有登录！");
 		top.location = self.location;
 	}
 </script>

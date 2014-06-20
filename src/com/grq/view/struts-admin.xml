@@ -5,7 +5,17 @@
 <struts>
 	<!-- ADMIN后台管理 -->
 	<package name="grq-admin" namespace="/admin" extends="grq-default">
+		<!-- 配置拦截器 -->
+		<interceptors>
+			<!-- 验证用户登录的拦截器 -->
+			<interceptor name="loginInterceptor" class="com.grq.controller.action.interceptor.AdminLoginInterceptor"/>
+			<interceptor-stack name="adminDefaultStack">
+				<interceptor-ref name="loginInterceptor"/>
+    			<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
 		<action name="admin_*" class="adminAction" method="{1}">
+			
         </action>        
 	</package>
 	
@@ -22,7 +32,7 @@
             <result name="assetinvest" >/WEB-INF/pages/manage/admin/assetinvest.jsp</result>
             <result name="operatesales" >/WEB-INF/pages/manage/admin/operatesales.jsp</result>
             <result name="operateoption" >/WEB-INF/pages/manage/admin/operateoption.jsp</result>
-
+			<interceptor-ref name="adminDefaultStack"/>
 		</action>
 	</package>
     <!-- 商品管理 -->
@@ -32,14 +42,14 @@
 			<result name="list">/WEB-INF/pages/manage/admin/product/category_list.jsp</result>
 			<result name="input">/WEB-INF/pages/manage/admin/product/category_add.jsp</result>
 			<result name="edit">/WEB-INF/pages/manage/admin/product/category_edit.jsp</result>
-			
+			<interceptor-ref name="adminDefaultStack"/>
 		</action>	
 		<!-- 商品 -->
 		<action name="product_*" method="{1}" class="productAction">
 			<result name="list">/WEB-INF/pages/manage/admin/product/product_list.jsp</result>
 			<result name="input">/WEB-INF/pages/manage/admin/product/product_add.jsp</result>
 			<result name="edit">/WEB-INF/pages/manage/admin/product/product_edit.jsp</result>
-			
+			<interceptor-ref name="adminDefaultStack"/>
 		</action>
 		<!-- 订单 -->
 		<action name="order_*" method="{1}" class="orderAction">
@@ -47,7 +57,7 @@
 			<result name="select">/WEB-INF/pages/manage/admin/product/order_select.jsp</result>
 			<result name="query">/WEB-INF/pages/manage/admin/product/order_query.jsp</result>
 			<result name="update">/WEB-INF/pages/manage/admin/product/order_update_success.jsp</result>
-			
+			<interceptor-ref name="adminDefaultStack"/>
 		</action>
     </package>
 </struts>
