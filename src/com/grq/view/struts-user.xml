@@ -16,6 +16,8 @@
 		</interceptors>
 		<!-- 顾客用户Action -->
 		<action name="customer_*" method="{1}" class="customerAction">
+			<!-- 后台默认页面 -->
+			<result name="main">/WEB-INF/pages/manage/default.jsp</result>
 		</action>
 	</package>
 	

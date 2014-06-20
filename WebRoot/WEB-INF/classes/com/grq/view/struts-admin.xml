@@ -15,7 +15,8 @@
 			</interceptor-stack>
 		</interceptors>
 		<action name="admin_*" class="adminAction" method="{1}">
-			
+			<!-- 管理员后台默认页面 -->
+			<result name="main">/WEB-INF/pages/manage/default.jsp</result>
         </action>        
 	</package>
 	
