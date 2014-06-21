@@ -37,7 +37,7 @@ td {
 <TABLE cellSpacing=0 cellPadding=0 width="268" border=0>
   <TBODY>
     <TR>
-      <TD style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 2px">
+      <TD style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 2px; PADDING-TOP: 0px">
       	<A href="http://www.guruquan.com" target=_blank>
         	<IMG height=60 src="<%=basePath%>/imgweb/chat/01.jpg" width=268 border=0>
         </A>
@@ -81,7 +81,7 @@ td {
 <table cellspacing=0 cellpadding=0 width="268" border=0>
   <tbody>
     <tr>
-      <td style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 2px">
+      <td style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 2px; PADDING-TOP: 0px">
       <a href="http://www.guruquan.com" target=_blank>
       	<img height=60 src="<%=basePath%>/imgweb/chat/02.jpg" width=268 border=0>
       </a>
@@ -127,7 +127,7 @@ td {
 <table cellspacing=0 cellpadding=0 width="268" border=0>
   <tbody>
     <tr>
-      <td style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 2px">
+      <td style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 2px; PADDING-TOP: 0px">
       <a href="http://www.guruquan.com" target=_blank>
       	<img height=60 src="<%=basePath%>/imgweb/chat/03.jpg" width=268 border=0>
         </a>
