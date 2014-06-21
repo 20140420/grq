@@ -28,6 +28,16 @@
 		</action>
 	</package>
 	
+	<!-- chat项目 -->
+	<package name="grq-chat" namespace="/chat" extends="grq-front">
+		<action name="chat_*" class="chatAction" method="{1}">
+			<!-- chat页面主页 -->
+			<result name="main">/WEB-INF/pages/chat/chattool.jsp</result>
+			<!-- chat的minsales页面 -->
+			<result name="minsales">/WEB-INF/pages/chat/minsales_picture.jsp</result>
+		</action>
+	</package>
+	
 	<!-- snake项目 -->
 	<package name="grq-snake" namespace="/snake" extends="grq-front">
 		<action name="snake_*" class="snakeAction" method="{1}">

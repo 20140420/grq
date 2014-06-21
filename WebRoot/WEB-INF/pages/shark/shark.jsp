@@ -21,7 +21,7 @@
   <!-- end .header --></div>
   <!-- left-chat -->
   <div class="sidebar1">
-  	<%@include file="/WEB-INF/pages/chat/chattool.jsp"%>
+  	<s:action name="chat_main" namespace="/chat" executeResult="true"></s:action>
     <!-- end .sidebar1 --></div>
     
   <div class="content">

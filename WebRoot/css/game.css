@@ -1058,11 +1058,12 @@ table td,th{
 }
 .minsales .minsales-content {
 	height: 84px;
-	width: 266px;
+	width: 270px;
 	position: absolute;
 	margin: 8px 0px 0px 6px;
 	padding: 0px;
 	border: 0px solid #69AED7;
+	background-color: #FFF;
 }
 .minsales .minsales-content ul{
 	height: auto;
