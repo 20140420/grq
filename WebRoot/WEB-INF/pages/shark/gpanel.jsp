@@ -1,6 +1,7 @@
-<%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
-<!DOCTYPE html>
-<link href="../../../css/game.css" rel="stylesheet" type="text/css" />
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@taglib prefix="s" uri="/struts-tags"%>
+<s:set var="context_path" value="#request.get('javax.servlet.forward.context_path')"></s:set>
+<link href="%{context_path}/css/game.css" rel="stylesheet" type="text/css" />
 <!----><div class="gpanel">
   <div class="gpanel_count">
 	<div class="gpanel_silver_available"><input type="text" value="可用银币"></div>
@@ -50,13 +51,13 @@
         <div class="gpanel_personal_monkey"><input type="text" value=""></div>
         <div class="gpanel_personal_rabbit"><input type="text" value=""></div>
     </div>
-    <div class="gpanel_key_swallow"><img width="70" height="42" /></div>
-    <div class="gpanel_key_pigeon"><img width="70" height="42" /></div>
-    <div class="gpanel_key_peafowl"><img width="70" height="42" /></div>
-    <div class="gpanel_key_eagle"><img width="70" height="42" /></div>
-    <div class="gpanel_key_lion"><img width="70" height="42" /></div>
-    <div class="gpanel_key_panda"><img width="70" height="42" /></div>
-    <div class="gpanel_key_monkey"><img width="70" height="42" /></div>
-    <div class="gpanel_key_rabbit"><img width="70" height="42" /></div>
+    <div class="gpanel_key_swallow"><s:submit type="image" src="%{context_path}/imgsystem/key_swallow.png"></s:submit></div>
+    <div class="gpanel_key_pigeon"><s:submit type="image" src="%{context_path}/imgsystem/key_pigeon.png"></s:submit></div>
+    <div class="gpanel_key_peafowl"><s:submit type="image" src="%{context_path}/imgsystem/key_peafowl.png"></s:submit></div>
+    <div class="gpanel_key_eagle"><s:submit type="image" src="%{context_path}/imgsystem/key_eagle.png"></s:submit></div>
+    <div class="gpanel_key_lion"><s:submit type="image" src="%{context_path}/imgsystem/key_lion.png"></s:submit></div>
+    <div class="gpanel_key_panda"><s:submit type="image" src="%{context_path}/imgsystem/key_panda.png"></s:submit></div>
+    <div class="gpanel_key_monkey"><s:submit type="image" src="%{context_path}/imgsystem/key_monkey.png"></s:submit></div>
+    <div class="gpanel_key_rabbit"><s:submit type="image" src="%{context_path}/imgsystem/key_rabbit.png"></s:submit></div>
   </div>
 <!----></div>

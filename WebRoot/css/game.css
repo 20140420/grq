@@ -874,7 +874,6 @@ table td,th{
 	position: absolute;
 	margin: 4px 0px 0px 18px;
 	padding: 0px;
-	background-image: url(../imgsystem/key_swallow.png);
 }
 .gpanel .gpanel_key_pigeon {
 	height: 42px;
@@ -883,7 +882,6 @@ table td,th{
 	position: absolute;
 	margin: 4px 0px 0px 105px;
 	padding: 0px;
-	background-image: url(../imgsystem/key_pigeon.png);
 }
 .gpanel .gpanel_key_peafowl {
 	height: 42px;
@@ -892,7 +890,6 @@ table td,th{
 	position: absolute;
 	margin: 4px 0px 0px 190px;
 	padding: 0px;
-	background-image: url(../imgsystem/key_peafowl.png);
 }
 .gpanel .gpanel_key_eagle {
 	height: 42px;
@@ -901,7 +898,6 @@ table td,th{
 	position: absolute;
 	margin: 4px 0px 0px 273px;
 	padding: 0px;
-	background-image: url(../imgsystem/key_eagle.png);
 }
 .gpanel .gpanel_key_lion {
 	height: 42px;
@@ -910,7 +906,6 @@ table td,th{
 	position: absolute;
 	margin: 4px 0px 0px 358px;
 	padding: 0px;
-	background-image: url(../imgsystem/key_lion.png);
 }
 .gpanel .gpanel_key_panda {
 	height: 42px;
@@ -919,7 +914,6 @@ table td,th{
 	position: absolute;
 	margin: 4px 0px 0px 441px;
 	padding: 0px;
-	background-image: url(../imgsystem/key_panda.png);
 }
 .gpanel .gpanel_key_monkey {
 	height: 42px;
@@ -928,7 +922,6 @@ table td,th{
 	position: absolute;
 	margin: 4px 0px 0px 525px;
 	padding: 0px;
-	background-image: url(../imgsystem/key_monkey.png);
 }
 .gpanel .gpanel_key_rabbit {
 	height: 42px;
@@ -937,7 +930,6 @@ table td,th{
 	position: absolute;
 	margin: 4px 0px 0px 610px;
 	padding: 0px;
-	background-image: url(../imgsystem/key_rabbit.png);
 }
 /*右边栏chattool*/
 .sidebar1 {
