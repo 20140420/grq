@@ -93,5 +93,4 @@ public enum Prize {
 		}
 		return list;
 	}
-
 }
