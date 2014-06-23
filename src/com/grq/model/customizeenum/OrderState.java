@@ -4,26 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * ¶©µ¥×´Ì¬
+ * è®¢å•çŠ¶æ€
  * @author JiangQuan
  */
 public enum OrderState {
+	WAITING {
+		@Override
+		public String getName() {
+			return "å¾…å‘è´§";
+		}
+	},
 	DELIVERED {
 		@Override
 		public String getName() {
-			return "ÒÑ·¢»õ";
+			return "å·²å‘è´§";
 		}
 	},
 	FINISH{
 		@Override
 		public String getName() {
-			return "ÒÑÍê³É";
+			return "å·²å®Œæˆ";
 		}
 	},
 	CANCLE{
 		@Override
 		public String getName() {
-			return "ÒÑÈ¡Ïû";
+			return "å·²å–æ¶ˆ";
 		}
 	};
 	public abstract String getName();

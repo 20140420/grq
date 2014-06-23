@@ -18,7 +18,7 @@ import com.grq.model.pojo.product.ProductInfo;
 import com.grq.model.util.StringUtil;
 import com.opensymphony.xwork2.ModelDriven;
 /**
- * ¶©µ¥Action
+ * è®¢å•Action
  * @author JiangQuan
  */
 @Scope("prototype")
@@ -26,20 +26,20 @@ import com.opensymphony.xwork2.ModelDriven;
 public class OrderAction extends BaseAction implements ModelDriven<Order>{
 	private static final long serialVersionUID = 1L;
 	
-	// ¶©µ¥
+	// è®¢å•
 	private Order order = new Order();
 
-	private PageModel<Order> pageModel;// ·ÖÒ³×é¼ş
+	private PageModel<Order> pageModel;// åˆ†é¡µç»„ä»¶
 	
 	/**
-	 * ´Ë·½·¨ÊÇModeldriven½Ó¿ÚµÄ·½·¨£¬ÒªÖØĞ´
+	 * æ­¤æ–¹æ³•æ˜¯Modeldrivenæ¥å£çš„æ–¹æ³•ï¼Œè¦é‡å†™
 	 */
 	@Override
 	public Order getModel() {
 		return order;
 	}
 	/**
-	 * ÏÂ¶©µ¥
+	 * ä¸‹è®¢å•
 	 */
 	@Override
 	public String add() throws Exception {
@@ -49,117 +49,117 @@ public class OrderAction extends BaseAction implements ModelDriven<Order>{
 		return ADD;
 	}
 	/**
-	 * ¶©µ¥È·ÈÏ
+	 * è®¢å•ç¡®è®¤
 	 * @return
 	 * @throws Exception
 	 */
 	public String confirm() throws Exception {
-		return "confirm";//·µ»Ø¶©µ¥È·ÈÏÒ³Ãæ
+		return "confirm";//è¿”å›è®¢å•ç¡®è®¤é¡µé¢
 	}
 	/**
-	 * ½«¶©µ¥±£´æµ½Êı¾İ¿â
+	 * å°†è®¢å•ä¿å­˜åˆ°æ•°æ®åº“
 	 * @return String
 	 * @throws Exception
 	 */
 	public String save() throws Exception {
-		if(getLoginCustomer() != null){//Èç¹ûÓÃ»§ÒÑµÇÂ¼
-			order.setOrderId(StringUtil.createOrderId());// ÉèÖÃ¶©µ¥ºÅ
-			order.setCustomer(getLoginCustomer());// ÉèÖÃËùÊôÓÃ»§
-			Set<OrderItem> cart = getCart();// »ñÈ¡¹ºÎï³µ
-			if(cart.isEmpty()){//ÅĞ¶ÏÌõÄ¿ĞÅÏ¢ÊÇ·ñÎª¿Õ
-				return ERROR;//·µ»Ø¶©µ¥ĞÅÏ¢´íÎóÌáÊ¾Ò³Ãæ
+		if(getLoginCustomer() != null){//å¦‚æœç”¨æˆ·å·²ç™»å½•
+			order.setOrderId(StringUtil.createOrderId());// è®¾ç½®è®¢å•å·
+			order.setCustomer(getLoginCustomer());// è®¾ç½®æ‰€å±ç”¨æˆ·
+			Set<OrderItem> cart = getCart();// è·å–è´­ç‰©è½¦
+			if(cart.isEmpty()){//åˆ¤æ–­æ¡ç›®ä¿¡æ¯æ˜¯å¦ä¸ºç©º
+				return ERROR;//è¿”å›è®¢å•ä¿¡æ¯é”™è¯¯æç¤ºé¡µé¢
 			}
-			// ÒÀ´Î½«¸üĞÂ¶©µ¥ÏîÖĞµÄÉÌÆ·µÄÏúÊÛÊıÁ¿
-			for(OrderItem item : cart){//±éÀú¹ºÎï³µÖĞµÄ¶©µ¥ÌõÄ¿ĞÅÏ¢
-				Integer productId = item.getProductId();//»ñÈ¡ÉÌÆ·ID
-				ProductInfo product = productDao.load(productId);//×°ÔØÉÌÆ·¶ÔÏó
-				product.setSellCount(product.getSellCount() + item.getAmount());//¸üĞÂÉÌÆ·ÏúÊÛÊıÁ¿
-				productDao.update(product);//ĞŞ¸ÄÉÌÆ·ĞÅÏ¢
+			// ä¾æ¬¡å°†æ›´æ–°è®¢å•é¡¹ä¸­çš„å•†å“çš„é”€å”®æ•°é‡
+			for(OrderItem item : cart){//éå†è´­ç‰©è½¦ä¸­çš„è®¢å•æ¡ç›®ä¿¡æ¯
+				Integer productId = item.getProductId();//è·å–å•†å“ID
+				ProductInfo product = productDao.load(productId);//è£…è½½å•†å“å¯¹è±¡
+				product.setSellCount(product.getSellCount() + item.getAmount());//æ›´æ–°å•†å“é”€å”®æ•°é‡
+				productDao.update(product);//ä¿®æ”¹å•†å“ä¿¡æ¯
 			}
-			order.setOrderItems(cart);// ÉèÖÃ¶©µ¥Ïî
-			order.setOrderState(OrderState.DELIVERED);// ÉèÖÃ¶©µ¥×´Ì¬
-			float totalPrice = 0f;// ¼ÆËã×Ü¶îµÄ±äÁ¿
-			for (OrderItem orderItem : cart) {//±éÀú¹ºÎï³µÖĞµÄ¶©µ¥ÌõÄ¿ĞÅÏ¢
-				totalPrice += orderItem.getProductPrice() * orderItem.getAmount();//ÉÌÆ·µ¥¼Û*ÉÌÆ·ÊıÁ¿
+			order.setOrderItems(cart);// è®¾ç½®è®¢å•é¡¹
+			order.setOrderState(OrderState.WAITING);// è®¾ç½®è®¢å•çŠ¶æ€
+			float totalPrice = 0f;// è®¡ç®—æ€»é¢çš„å˜é‡
+			for (OrderItem orderItem : cart) {//éå†è´­ç‰©è½¦ä¸­çš„è®¢å•æ¡ç›®ä¿¡æ¯
+				totalPrice += orderItem.getProductPrice() * orderItem.getAmount();//å•†å“å•ä»·*å•†å“æ•°é‡
 			}
-			order.setTotalPrice(totalPrice);//ÉèÖÃ¶©µ¥µÄ×Ü¼Û¸ñ
-			orderDao.save(order);//±£´æ¶©µ¥ĞÅÏ¢
-			session.remove("cart");// Çå¿Õ¹ºÎï³µ
+			order.setTotalPrice(totalPrice);//è®¾ç½®è®¢å•çš„æ€»ä»·æ ¼
+			orderDao.save(order);//ä¿å­˜è®¢å•ä¿¡æ¯
+			session.remove("cart");// æ¸…ç©ºè´­ç‰©è½¦
 		}
-		return findByCustomer();//·µ»ØÏû·ÑÕß¶©µ¥²éÑ¯µÄ·½·¨
+		return findByCustomer();//è¿”å›æ¶ˆè´¹è€…è®¢å•æŸ¥è¯¢çš„æ–¹æ³•
 	}
 	/**
-	 * ²éÑ¯Ïû·ÑÕß¶©µ¥
+	 * æŸ¥è¯¢æ¶ˆè´¹è€…è®¢å•
 	 * @return String
 	 * @throws Exception
 	 */
 	public String findByCustomer() throws Exception {
-		if(getLoginCustomer() != null){//Èç¹ûÓÃ»§ÒÑµÇÂ¼
-			String where = "where customer.id = ?";//½«ÓÃ»§idÉèÖÃÎª²éÑ¯Ìõ¼ş
-			Object[] queryParams = {getLoginCustomer().getId()};//´´½¨¶ÔÏóÊı×é
-			Map<String, String> orderby = new HashMap<String, String>(1);//´´½¨Map¼¯ºÏ
-			orderby.put("createTime", "desc");//ÉèÖÃÅÅĞòÌõ¼ş¼°·½Ê½
-			pageModel = orderDao.find(where, queryParams, orderby , pageNo, pageSize);//Ö´ĞĞ²éÑ¯·½·¨
+		if(getLoginCustomer() != null){//å¦‚æœç”¨æˆ·å·²ç™»å½•
+			String where = "where customer.id = ?";//å°†ç”¨æˆ·idè®¾ç½®ä¸ºæŸ¥è¯¢æ¡ä»¶
+			Object[] queryParams = {getLoginCustomer().getId()};//åˆ›å»ºå¯¹è±¡æ•°ç»„
+			Map<String, String> orderby = new HashMap<String, String>(1);//åˆ›å»ºMapé›†åˆ
+			orderby.put("createTime", "desc");//è®¾ç½®æ’åºæ¡ä»¶åŠæ–¹å¼
+			pageModel = orderDao.find(where, queryParams, orderby , pageNo, pageSize);//æ‰§è¡ŒæŸ¥è¯¢æ–¹æ³•
 		}
-		return LIST;//·µ»Ø¶©µ¥ÁĞ±íÒ³Ãæ
+		return LIST;//è¿”å›è®¢å•åˆ—è¡¨é¡µé¢
 	}
 	
 	
 	/**
-	 * ²éÑ¯¶©µ¥
+	 * æŸ¥è¯¢è®¢å•
 	 * @return String
 	 * @throws Exception
 	 */
 	public String list() throws Exception {
-		Map<String, String> orderby = new HashMap<String, String>(1);//¶¨ÒåMap¼¯ºÏ
-		orderby.put("createTime", "desc");//ÉèÖÃ°´´´½¨Ê±¼äµ¹ĞòÅÅÁĞ
-		StringBuffer whereBuffer = new StringBuffer("");//´´½¨×Ö·û´®¶ÔÏó
+		Map<String, String> orderby = new HashMap<String, String>(1);//å®šä¹‰Mapé›†åˆ
+		orderby.put("createTime", "desc");//è®¾ç½®æŒ‰åˆ›å»ºæ—¶é—´å€’åºæ’åˆ—
+		StringBuffer whereBuffer = new StringBuffer("");//åˆ›å»ºå­—ç¬¦ä¸²å¯¹è±¡
 		List<Object> params = new ArrayList<Object>();
-		if(order.getOrderId() != null && order.getOrderId().length() > 0){//Èç¹û¶©µ¥ºÅ²»Îª¿Õ
-			whereBuffer.append("orderId = ?");//ÒÔ¶©µ¥ºÅÎª²éÑ¯Ìõ¼ş
-			params.add(order.getOrderId());//ÉèÖÃ²ÎÊı
+		if(order.getOrderId() != null && order.getOrderId().length() > 0){//å¦‚æœè®¢å•å·ä¸ä¸ºç©º
+			whereBuffer.append("orderId = ?");//ä»¥è®¢å•å·ä¸ºæŸ¥è¯¢æ¡ä»¶
+			params.add(order.getOrderId());//è®¾ç½®å‚æ•°
 		}
-		if(order.getOrderState() != null){//Èç¹û¶©µ¥×´Ì¬²»Îª¿Õ
+		if(order.getOrderState() != null){//å¦‚æœè®¢å•çŠ¶æ€ä¸ä¸ºç©º
 			if(params.size() > 0){
-				whereBuffer.append(" and ");//Ôö¼Ó²éÑ¯Ìõ¼ş
+				whereBuffer.append(" and ");//å¢åŠ æŸ¥è¯¢æ¡ä»¶
 			}
-			whereBuffer.append("orderState = ?");//ÉèÖÃ¶©µ¥×´Ì¬Îª²éÑ¯Ìõ¼ş
-			params.add(order.getOrderState());//ÉèÖÃ²ÎÊı
+			whereBuffer.append("orderState = ?");//è®¾ç½®è®¢å•çŠ¶æ€ä¸ºæŸ¥è¯¢æ¡ä»¶
+			params.add(order.getOrderState());//è®¾ç½®å‚æ•°
 		}
 		if(order.getCustomer() != null && order.getCustomer().getUsername() != null 
-				&& order.getCustomer().getUsername().length() > 0){//Èç¹û»áÔ±Ãû²»Îª¿Õ
-			if(params.size() > 0) whereBuffer.append(" and ");//Ôö¼Ó²éÑ¯Ìõ¼ş
-			whereBuffer.append("customer.username = ?");//ÉèÖÃ»áÔ±ÃûÎª²éÑ¯Ìõ¼ş
-			params.add(order.getCustomer().getUsername());//ÉèÖÃ²ÎÊı
+				&& order.getCustomer().getUsername().length() > 0){//å¦‚æœä¼šå‘˜åä¸ä¸ºç©º
+			if(params.size() > 0) whereBuffer.append(" and ");//å¢åŠ æŸ¥è¯¢æ¡ä»¶
+			whereBuffer.append("customer.username = ?");//è®¾ç½®ä¼šå‘˜åä¸ºæŸ¥è¯¢æ¡ä»¶
+			params.add(order.getCustomer().getUsername());//è®¾ç½®å‚æ•°
 		}
-		if(order.getName() != null && order.getName().length()>0){//Èç¹ûÊÕ¿îÈËĞÕÃû²»Îª¿Õ
-			if(params.size() > 0) whereBuffer.append(" and ");//Ôö¼Ó²éÑ¯Ìõ¼ş
-			whereBuffer.append("name = ?");//ÉèÖÃÊÕ¿îÈËĞÕÃûÎª²éÑ¯Ìõ¼ş
-			params.add(order.getName());//ÉèÖÃ²ÎÊı
+		if(order.getName() != null && order.getName().length()>0){//å¦‚æœæ”¶æ¬¾äººå§“åä¸ä¸ºç©º
+			if(params.size() > 0) whereBuffer.append(" and ");//å¢åŠ æŸ¥è¯¢æ¡ä»¶
+			whereBuffer.append("name = ?");//è®¾ç½®æ”¶æ¬¾äººå§“åä¸ºæŸ¥è¯¢æ¡ä»¶
+			params.add(order.getName());//è®¾ç½®å‚æ•°
 		}
-		//Èç¹ûwhereBufferÎª¿ÕÔò²éÑ¯Ìõ¼şÎª¿Õ£¬·ñÔòÒÔwhereBufferÎª²éÑ¯Ìõ¼ş
+		//å¦‚æœwhereBufferä¸ºç©ºåˆ™æŸ¥è¯¢æ¡ä»¶ä¸ºç©ºï¼Œå¦åˆ™ä»¥whereBufferä¸ºæŸ¥è¯¢æ¡ä»¶
 		String where = whereBuffer.length()>0 ? "where "+whereBuffer.toString() : "";
-		pageModel = orderDao.find(where, params.toArray(), orderby, pageNo, pageSize);//Ö´ĞĞ²éÑ¯·½·¨
-		return LIST;//·µ»ØºóÌ¨¶©µ¥ÁĞ±í
+		pageModel = orderDao.find(where, params.toArray(), orderby, pageNo, pageSize);//æ‰§è¡ŒæŸ¥è¯¢æ–¹æ³•
+		return LIST;//è¿”å›åå°è®¢å•åˆ—è¡¨
 	}
 	/**
-	 * ²éÑ¯Ö¸¶¨¶©µ¥
+	 * æŸ¥è¯¢æŒ‡å®šè®¢å•
 	 */
 	public String select() throws Exception {
 		order = orderDao.load(order.getOrderId());
 		return SELECT;
 	}
 	/**
-	 * ¸üĞÂ¶©µ¥×´Ì¬
+	 * æ›´æ–°è®¢å•çŠ¶æ€
 	 * @return
 	 * @throws Exception
 	 */
 	public String update() throws Exception {
-		OrderState orderState = order.getOrderState();//»ñÈ¡ÉèÖÃµÄ¶©µ¥×´Ì¬
-		order = orderDao.load(order.getOrderId());//×°ÔØ¶©µ¥¶ÔÏó
-		order.setOrderState(orderState);//ÉèÖÃµÄ¶©µ¥×´Ì¬
-		orderDao.update(order);//ĞŞ¸Ä¶©µ¥×´Ì¬
-		return "update";//·Å»Ø¶©µ¥×´Ì¬ĞŞ¸Ä³É¹¦Ò³Ãæ
+		OrderState orderState = order.getOrderState();//è·å–è®¾ç½®çš„è®¢å•çŠ¶æ€
+		order = orderDao.load(order.getOrderId());//è£…è½½è®¢å•å¯¹è±¡
+		order.setOrderState(orderState);//è®¾ç½®çš„è®¢å•çŠ¶æ€
+		orderDao.update(order);//ä¿®æ”¹è®¢å•çŠ¶æ€
+		return "update";//æ”¾å›è®¢å•çŠ¶æ€ä¿®æ”¹æˆåŠŸé¡µé¢
 	}
 	
 	public Order getOrder() {

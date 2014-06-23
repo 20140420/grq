@@ -8,7 +8,7 @@ import com.grq.model.PageModel;
 import com.grq.model.pojo.product.ProductCategory;
 import com.opensymphony.xwork2.ModelDriven;
 /**
- * ÉÌÆ·Àà±ğAction¶ÔÏó
+ * å•†å“ç±»åˆ«Actionå¯¹è±¡
  * @author JiangQuan
  *
  */
@@ -17,87 +17,87 @@ import com.opensymphony.xwork2.ModelDriven;
 public class ProductCategoryAction extends BaseAction implements ModelDriven<ProductCategory>{
 	private static final long serialVersionUID = 1L;
 	
-	private ProductCategory category = new ProductCategory();//Ò»¶¨ÒªÏÈ³õÊ¼»¯obj¶ÔÏó£¡
+	private ProductCategory category = new ProductCategory();//ä¸€å®šè¦å…ˆåˆå§‹åŒ–objå¯¹è±¡ï¼
 
-	// ¸¸Àà±ğid
+	// çˆ¶ç±»åˆ«id
 	private Integer pid;
-	// ËùÓĞÀà±ğ
+	// æ‰€æœ‰ç±»åˆ«
 	private PageModel<ProductCategory> pageModel;
 
 	/**
-	 * ´Ë·½·¨ÊÇModeldriven½Ó¿ÚµÄ·½·¨£¬ÒªÖØĞ´
+	 * æ­¤æ–¹æ³•æ˜¯Modeldrivenæ¥å£çš„æ–¹æ³•ï¼Œè¦é‡å†™
 	 */
 	@Override
 	public ProductCategory getModel() {
 		return category;
 	}	
 	/**
-	 * Ìøµ½Ìí¼ÓÀà±ğ
+	 * è·³åˆ°æ·»åŠ ç±»åˆ«
 	 */
 	@Override
 	public String add() throws Exception {
-		if(pid != null && pid>0){//Èç¹ûÓĞ¸¸½Úµã
-			ProductCategory parent = categoryDao.load(pid);//¼ÓÔØ¸¸Àà
-			//²ã´Î¼Ó1
+		if(pid != null && pid>0){//å¦‚æœæœ‰çˆ¶èŠ‚ç‚¹
+			ProductCategory parent = categoryDao.load(pid);//åŠ è½½çˆ¶ç±»
+			//å±‚æ¬¡åŠ 1
 			category.setLevel(parent.getLevel()+1);
 		}
 		return INPUT;
 	}
 	/**
-	 * Ìí¼ÓÀà±ğ
+	 * æ·»åŠ ç±»åˆ«
 	 * @return
 	 * @throws Exception
 	 */
 	public String save() throws Exception{
-		if(pid != null && pid > 0 ){//Èç¹ûÓĞ¸¸½Úµã
-			category.setParent(categoryDao.load(pid));//ÉèÖÃ¸¸½Úµã
+		if(pid != null && pid > 0 ){//å¦‚æœæœ‰çˆ¶èŠ‚ç‚¹
+			category.setParent(categoryDao.load(pid));//è®¾ç½®çˆ¶èŠ‚ç‚¹
 		}
-		categoryDao.saveOrUpdate(category);//Ìí¼ÓÀà±ğĞÅÏ¢
-		return list();//·µ»ØÀà±ğÁĞ±íµÄ²éÕÒ·½·¨
+		categoryDao.saveOrUpdate(category);//æ·»åŠ ç±»åˆ«ä¿¡æ¯
+		return list();//è¿”å›ç±»åˆ«åˆ—è¡¨çš„æŸ¥æ‰¾æ–¹æ³•
 	}
 	/**
-	 * ²éÑ¯Àà±ğ
+	 * æŸ¥è¯¢ç±»åˆ«
 	 * @return
 	 * @throws Exception
 	 */
 	@Override
 	public String list() throws Exception{
-		Object[] params = null ;//¶¨Òå¶ÔÏóÊı×é³õÖµÎª¿Õ
-		String where;//¶¨Òå²éÑ¯Ìõ¼ş±äÁ¿
-		if(pid != null && pid > 0 ){//Èç¹ûÓĞ¸¸½Úµã  
-			where = "where parent.id = ?";//Ö´ĞĞ²éÑ¯Ìõ¼ş
-			params = new Integer[]{pid};//ÉèÖÃ²ÎÊıÖµ
+		Object[] params = null ;//å®šä¹‰å¯¹è±¡æ•°ç»„åˆå€¼ä¸ºç©º
+		String where;//å®šä¹‰æŸ¥è¯¢æ¡ä»¶å˜é‡
+		if(pid != null && pid > 0 ){//å¦‚æœæœ‰çˆ¶èŠ‚ç‚¹  
+			where = "where parent.id = ?";//æ‰§è¡ŒæŸ¥è¯¢æ¡ä»¶
+			params = new Integer[]{pid};//è®¾ç½®å‚æ•°å€¼
 		}else{
-			where ="where parent is null";//²éÑ¯¸ù½Úµã
+			where ="where parent is null";//æŸ¥è¯¢æ ¹èŠ‚ç‚¹
 		}
-		pageModel = categoryDao.find(pageNo, pageSize, where, params);//Ö´ĞĞ·â×°µÄ ËÑË÷ĞÅÏ¢·ÖÒ³·½·¨ ²éÑ¯·½·¨
-		return LIST;//·µ»ØºóÌ¨Àà±ğÁĞ±íÒ³Ãæ
+		pageModel = categoryDao.find(pageNo, pageSize, where, params);//æ‰§è¡Œå°è£…çš„ æœç´¢ä¿¡æ¯åˆ†é¡µæ–¹æ³• æŸ¥è¯¢æ–¹æ³•
+		return LIST;//è¿”å›åå°ç±»åˆ«åˆ—è¡¨é¡µé¢
 	}
 	/**
-	 * ±à¼­Àà±ğ
+	 * ç¼–è¾‘ç±»åˆ«
 	 * @return String
 	 * @throws Exception
 	 */
 	@Override
 	public String edit() throws Exception{
-		if(category.getId() != null && category.getId() > 0){//ÅĞ¶ÏÊÇ·ñ»ñµÃID²ÎÊı
-			this.category = categoryDao.get(category.getId());//¼ÓÔØ¶ÔÏóID²ÎÊı
+		if(category.getId() != null && category.getId() > 0){//åˆ¤æ–­æ˜¯å¦è·å¾—IDå‚æ•°
+			this.category = categoryDao.get(category.getId());//åŠ è½½å¯¹è±¡IDå‚æ•°
 		}	
 		return EDIT;
 	}
 	/**
-	 * É¾³ıÀà±ğ
+	 * åˆ é™¤ç±»åˆ«
 	 * @return String
 	 * @throws Exception
 	 */
 	public String del() throws Exception{
-		if(category.getId() != null && category.getId() > 0){//ÅĞ¶ÏÊÇ·ñ»ñµÃID²ÎÊı
-			categoryDao.delete(category.getId());//Ö´ĞĞÉ¾³ı²Ù×÷
+		if(category.getId() != null && category.getId() > 0){//åˆ¤æ–­æ˜¯å¦è·å¾—IDå‚æ•°
+			categoryDao.delete(category.getId());//æ‰§è¡Œåˆ é™¤æ“ä½œ
 		}
-		return list();//·µ»ØÉÌÆ·Àà±ğÁĞ±íµÄ²éÕÒ·½·¨
+		return list();//è¿”å›å•†å“ç±»åˆ«åˆ—è¡¨çš„æŸ¥æ‰¾æ–¹æ³•
 	}
 	
-	//getterºÍsetter·½·¨
+	//getterå’Œsetteræ–¹æ³•
 	public Integer getPid() {
 		return pid;
 	}
