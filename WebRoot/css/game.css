@@ -614,7 +614,7 @@ table td,th{
 	position: absolute;
 	margin: 27px 0px 0px 13px;
 	padding: 0px;
-	background-image: url(../imgsystem/key_bird.png);
+	/*background-image: url(../imgsystem/key_bird.png);*/
 }
 .gpanel .gpanel_key_silver_shark {
 	height: 42px;
@@ -623,7 +623,6 @@ table td,th{
 	position: absolute;
 	margin: 27px 0px 0px 78px;
 	padding: 0px;
-	background-image: url(../imgsystem/key_silver_shark.png);
 }
 .gpanel .gpanel_key_bomb {
 	height: 42px;
@@ -632,7 +631,6 @@ table td,th{
 	position: absolute;
 	margin: 27px 0px 0px 143px;
 	padding: 0px;
-	background-image: url(../imgsystem/key_bomb.png);
 }
 .gpanel .gpanel_key_gold_shark {
 	height: 42px;
@@ -641,7 +639,6 @@ table td,th{
 	position: absolute;
 	margin: 27px 0px 0px 208px;
 	padding: 0px;
-	background-image: url(../imgsystem/key_gold_shark.png);
 }
 .gpanel .gpanel_key_beast {
 	height: 42px;
@@ -650,7 +647,6 @@ table td,th{
 	position: absolute;
 	margin: 27px 0px 0px 273px;
 	padding: 0px;
-	background-image: url(../imgsystem/key_beast.png);
 }
 /*调节区*/
 .gpanel .gpanel_regulate input {

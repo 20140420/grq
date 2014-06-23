@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		<div class="f_l add_chose">
 			<a class="reduce" onClick="setAmount.reduce('#qty_item_1')" href="javascript:void(0)">-</a>
-			<input type="text" name="qty_item_1" value="1" id="qty_item_1" onKeyUp="setAmount.modify('#qty_item_1')" class="text" />
+			<input type="text" name="qty_item_1" value="0" id="qty_item_1" onKeyUp="setAmount.modify('#qty_item_1')" class="text" />
 			<a class="add" onClick="setAmount.add('#qty_item_1')" href="javascript:void(0)">+</a>
 		</div>
 		

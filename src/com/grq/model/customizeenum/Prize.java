@@ -3,86 +3,74 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * ½±ÏîÃ¶¾Ù
+ * å¥–é¡¹æšä¸¾
  * @author JiangQuan
  */
 public enum Prize {
 	SWALLOW{
 		@Override
 		public String getName() {
-			return "Ñà×Ó";
+			return "ç‡•å­";
 		}
-	},
-	PIGEON{
+	},PIGEON{
 		@Override
 		public String getName() {
-			return "¸ë×Ó";
+			return "é¸½å­";
 		}
-	},
-	PEAFOWL{
+	}, PEAFOWL{
 		@Override
 		public String getName() {
-			return "¿×È¸";
+			return "å­”é›€";
 		}
-	},
-	EAGLE{
+	},EAGLE{
 		@Override
 		public String getName() {
-			return "ÀÏÓ¥";
+			return "è€é¹°";
 		}
-	},
-	LION{
+	},LION{
 		@Override
 		public String getName() {
-			return "Ê¨×Ó";
+			return "ç‹®å­";
 		}
-	},
-	PANDA{
+	},PANDA{
 		@Override
 		public String getName() {
-			return "ĞÜÃ¨";
+			return "ç†ŠçŒ«";
 		}
-	},
-	MONKEY{
+	},MONKEY{
 		@Override
 		public String getName() {
-			return "ºï×Ó";
+			return "çŒ´å­";
 		}
-	},
-	RABBIT{
+	},RABBIT{
 		@Override
 		public String getName() {
-			return "ÍÃ×Ó";
+			return "å…”å­";
 		}
-	},
-	BIRD{
+	},BIRD{
 		@Override
 		public String getName() {
-			return "·ÉÇİ";
+			return "é£ç¦½";
 		}
-	},
-	BEAST{
+	},SILVER_SHARK{
 		@Override
 		public String getName() {
-			return "×ßÊŞ";
+			return "é“¶é²¨";
 		}
-	},
-	GOLD_SHARK{
+	}, BOMB{
 		@Override
 		public String getName() {
-			return "½ğöè";
+			return "ç‚¸å¼¹";
 		}
-	},
-	SILVER_SHARK{
+	}, GOLD_SHARK{
 		@Override
 		public String getName() {
-			return "Òøöè";
+			return "é‡‘é²¨";
 		}
-	},
-	BOMB{
+	}, BEAST{
 		@Override
 		public String getName() {
-			return "Õ¨µ¯";
+			return "èµ°å…½";
 		}
 	};
 	public abstract String getName();

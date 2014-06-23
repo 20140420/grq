@@ -23,7 +23,6 @@
 			<!-- shark组成部分 -->
 			<result name="gdial">/WEB-INF/pages/shark/gdial.jsp</result>
 			<result name="gpanel">/WEB-INF/pages/shark/gpanel.jsp</result>
-			<result name="test">/WEB-INF/pages/shark/num.jsp</result>
 			<!-- shark其它部分 -->
 			<result name="grule">/WEB-INF/pages/shark/grule.jsp</result>
 		</action>
@@ -61,7 +60,7 @@
 		<action name="sale_*" class="saleAction" method="{1}">
 			<!-- sale页面主页 -->
 			<result name="main">/WEB-INF/pages/sale/sales.jsp</result>
-
+			<result name="test">/WEB-INF/pages/sale/num.jsp</result>
 		</action>
 		<action name="product_*" class="productAction" method="{1}">
 			<!-- 列表和详情 -->
