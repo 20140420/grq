@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<div class="p_number">
 	
-		<!-- <div style="height:36px;font-size:16px;">商品单价：<strong id="price_item_1">￥350.00</strong></div> -->
+		<div style="height:36px;font-size:16px;">商品单价：<strong id="price_item_1">￥350.00</strong></div>
 		
 		<div class="f_l add_chose">
 			<a class="reduce" onClick="setAmount.reduce('#qty_item_1')" href="javascript:void(0)">-</a>
@@ -29,11 +29,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<a class="add" onClick="setAmount.add('#qty_item_1')" href="javascript:void(0)">+</a>
 		</div>
 		
-		<!-- <div class="f_l buy">
+		<div class="f_l buy">
 			总价：<span class="total-font" id="total_item_1">￥89.00</span>
 			<input type="hidden" name="total_price" id="total_price" value="" />
 			<span class="jifen">购买商品可获得：<b id="total_points">18</b>积分</span>
-		</div> -->
+		</div>
 	
 	</div>
 
