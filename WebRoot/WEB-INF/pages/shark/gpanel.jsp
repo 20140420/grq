@@ -9,13 +9,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/payfor.js"></script>
 <link href="<%=basePath%>css/payfor.css" rel="stylesheet" type="text/css" />
-
 <link href="<%=basePath%>css/game.css" rel="stylesheet" type="text/css" />
 <!----><div class="gpanel">
   <div class="gpanel_count">
-	<div class="gpanel_silver_available"><input type="text" value="可用银币"></div>
+	<div class="gpanel_silver_available"><input type="text" value="70*14"></div>
 	<div class="gpanel_silver_dividend"><input type="text" value="装饰用彩金数"></div>
-	<div class="gpanel_silver_profit"><input type="text" value="70*14"></div>
+	<div class="gpanel_silver_profit">
+		<!-- 只有走兽能增加，与id无关 -->
+		<input type="text" id="total_item_" value="￥89.00">
+		<!-- <input type="hidden" name="total_price" id="total_price" value="" /> -->
+	</div>
   </div>
   <div class="gpanel_uncommon">
   	<!-- 显示押注 -->
@@ -28,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="gpanel_gold_shark">
 	<input type="text" name="qty_item_12" value="0" id="qty_item_12" onKeyUp="setAmount.modify('#qty_item_12')" class="text" /></div>
     <div class="gpanel_beast">
-    <input type="text" name="qty_item_13" value="47*16" id="qty_item_13" onKeyUp="setAmount.modify('#qty_item_13')" class="text" /></div>
+    <input type="text" name="qty_item_13" value="0" id="qty_item_13" onKeyUp="setAmount.modify('#qty_item_13')" class="text" /></div>
     <!-- 按键 -->
     <div class="gpanel_key_bird">
         <div class="f_l add_chose">
@@ -58,13 +61,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </div>
   <div class="gpanel_regulate">
   	<!-- 押注单量显示 -->
-    <div class="gpanel_single_bet"><input type="text" value="87*14"></div>
+    <div class="gpanel_single_bet">
+    	<!-- <input type="text" value="87*14"> -->
+    	<input type="text" id="price_item_1" value="￥10"/>
+    </div>
     <!-- 按键 -->
     <div class="gpanel_key_continue"><img width="48" height="26" /></div>
     <div class="gpanel_key_cancel"><img width="48" height="26" /></div>
     <div class="gpanel_key_change"><img width="48" height="26" /></div>
   </div>
   <div class="gpanel_common">
+  	<!-- 显示倍数 -->
 	<div class="gpanel_times">
     	<div class="gpanel_times_swallow"><input type="text" name="times_swallow" value="6"></div>
         <div class="gpanel_times_pigeon"><input type="text" name="times_pigeon" value="6"></div>
@@ -75,6 +82,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="gpanel_times_monkey"><input type="text" name="times_monkey" value="倍数"></div>
         <div class="gpanel_times_rabbit"><input type="text" name="times_rabbit" value="63*21"></div>
     </div>
+    <!-- 显示押注 -->
     <div class="gpanel_personal">
     	<div class="gpanel_personal_swallow">
     	<input type="text" name="qty_item_1" value="0" id="qty_item_1" onKeyUp="setAmount.modify('#qty_item_1')" class="text" /></div>
@@ -89,10 +97,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="gpanel_personal_panda">
 		<input type="text" name="qty_item_6" value="0" id="qty_item_6" onKeyUp="setAmount.modify('#qty_item_6')" class="text" /></div>
         <div class="gpanel_personal_monkey">
-        <input type="text" name="qty_item_7" value="筹码" id="qty_item_7" onKeyUp="setAmount.modify('#qty_item_7')" class="text" /></div>
+        <input type="text" name="qty_item_7" value="0" id="qty_item_7" onKeyUp="setAmount.modify('#qty_item_7')" class="text" /></div>
         <div class="gpanel_personal_rabbit">
-        <input type="text" name="qty_item_8" value="63*16" id="qty_item_8" onKeyUp="setAmount.modify('#qty_item_8')" class="text" /></div>
+        <input type="text" name="qty_item_8" value="0" id="qty_item_8" onKeyUp="setAmount.modify('#qty_item_8')" class="text" /></div>
     </div>
+    <!-- 按键 -->
     <div class="gpanel_key_swallow">
     	<div class="f_l add_chose">
 			<a class="add" onClick="setAmount.add('#qty_item_1')" href="javascript:void(0)"><img src="<%=basePath%>imgsystem/key_swallow.png" width="70" height="42" /></a>

@@ -533,7 +533,7 @@ table td,th{
 	width: 74px;
 	border: 0px solid #000;
 	position: absolute;
-	margin: 0px 0px 0px 100px;
+	margin: 1px 0px 0px 100px;
 	padding: 0px;
 }
 .gpanel .gpanel_silver_dividend {
@@ -541,15 +541,15 @@ table td,th{
 	width: 74px;
 	border: 0px solid #000;
 	position: absolute;
-	margin: 24px 0px 0px 100px;
+	margin: 25px 0px 0px 100px;
 	padding: 0px;
 }
 .gpanel .gpanel_silver_profit {
-	height: 18px;
+	height: 19px;
 	width: 74px;
 	border: 0px solid #000;
 	position: absolute;
-	margin: 48px 0px 0px 100px;
+	margin: 49px 0px 0px 100px;
 	padding: 0px;
 }
 /*非常见押键区*/
@@ -567,7 +567,7 @@ table td,th{
 	width: 48px;
 	border: 0px solid #000;
 	position: absolute;
-	margin: 1px 0px 0px 14px;
+	margin: 2px 0px 0px 14px;
 	padding: 0px;
 }
 .gpanel .gpanel_silver_shark {
@@ -575,7 +575,7 @@ table td,th{
 	width: 48px;
 	border: 0px solid #000;
 	position: absolute;
-	margin: 1px 0px 0px 79px;
+	margin: 2px 0px 0px 79px;
 	padding: 0px;
 }
 .gpanel .gpanel_bomb {
@@ -583,7 +583,7 @@ table td,th{
 	width: 48px;
 	border: 0px solid #000;
 	position: absolute;
-	margin: 1px 0px 0px 144px;
+	margin: 2px 0px 0px 144px;
 	padding: 0px;
 }
 .gpanel .gpanel_gold_shark {
@@ -591,7 +591,7 @@ table td,th{
 	width: 48px;
 	border: 0px solid #000;
 	position: absolute;
-	margin: 1px 0px 0px 209px;
+	margin: 2px 0px 0px 209px;
 	padding: 0px;
 }
 .gpanel .gpanel_beast {
@@ -599,7 +599,7 @@ table td,th{
 	width: 48px;
 	border: 0px solid #000;
 	position: absolute;
-	margin: 1px 0px 0px 274px;
+	margin: 2px 0px 0px 274px;
 	padding: 0px;
 }
 .gpanel .gpanel_uncommon img {
@@ -663,7 +663,7 @@ table td,th{
 	width: 88px;
 	border: 0px solid #000;
 	position: absolute;
-	margin: 0px 0px 0px 70px;
+	margin: 1px 0px 0px 70px;
 	padding: 0px;
 }
 .gpanel .gpanel_key_continue img {
