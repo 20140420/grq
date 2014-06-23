@@ -91,7 +91,7 @@
             };
             doCalc();
             return self.bind(opt.bind, doCalc);
-        }
+        };
     });
     var math = {sum: function (a) {
         var total = 0, precision = 0;
@@ -113,7 +113,7 @@
 /** ------------- choose -------------------- **/
 /* reduce_add */
 var setAmount = {
-    min:1,
+    min:0,
     max:999,
     reg:function(x) {
         return new RegExp("^[1-9]\\d*$").test(x);
@@ -128,7 +128,7 @@ var setAmount = {
             }
         } else {
             alert("请输入正确的数量！");
-            $(obj).val(1);
+            $(obj).val(0);
             $(obj).focus();
         }
         return x;
@@ -140,7 +140,7 @@ var setAmount = {
             recalc();
         } else {
             alert("商品数量最少为" + this.min);
-            $(obj).val(1);
+            $(obj).val(0);
             $(obj).focus();
         }
     },
@@ -159,21 +159,21 @@ var setAmount = {
         var x = $(obj).val();
         if (x < this.min || x > this.max || !this.reg(x)) {
             alert("请输入正确的数量！");
-            $(obj).val(1);
+            $(obj).val(0);
             $(obj).focus();
         }
     }
-}
+};
 
 function BuyUrl(wid) {
     var pcounts = $("input[id^=qty_item_]").val();
     var patrn = /^[0-9]{1,4}$/;
     if (!patrn.exec(pcounts)) {
-        pcounts = 1;
+        pcounts = 0;
     }
     else {
         if (pcounts <= 0)
-            pcounts = 1;
+            pcounts = 0;
         if (pcounts >= 1000)
             pcounts = 999;
     }
@@ -188,7 +188,7 @@ $(document).ready(function () {
 
 function recalc() {
 
-    $("input[id^=total_item]").val()
+    $("input[id^=total_item]").val();
 
     //产品价格统计
     $("[id^=total_item]").calc(
