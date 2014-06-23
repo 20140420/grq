@@ -6,20 +6,20 @@ import java.util.Random;
 public class PanelDataBean implements Serializable{
 
 	/**
-	 * ¼üÅÌÊı¾İ
+	 * é”®ç›˜æ•°æ®
 	 */
 	private static final long serialVersionUID = 1L;
-    private int prize;                //½±Ïî ÒÔºó¸Ä³Épojo¶ÔÏó£¬¼ÙÉèÊÇ6ĞÜÃ¨
-    private int times;                //Ä¬ÈÏÎŞ±¶Êı
-    private int chip;                   //³ïÂë
-    private boolean success  = false;   //Ä¬ÈÏÎ´ÖĞ½±
+    private int prize;                //å¥–é¡¹ ä»¥åæ”¹æˆpojoå¯¹è±¡ï¼Œå‡è®¾æ˜¯6ç†ŠçŒ«
+    private int times;                //é»˜è®¤æ— å€æ•°
+    private int chip;                   //ç­¹ç 
+    private boolean success  = false;   //é»˜è®¤æœªä¸­å¥–
     private Random random = new Random();
     
     public PanelDataBean() {
         reset();
     }
     /**
-     * ÖØÖÃ±¶Êı¡¢ÏÂ×¢³ïÂë
+     * é‡ç½®å€æ•°ã€ä¸‹æ³¨ç­¹ç 
      */
     public void reset() {
     	
@@ -29,19 +29,19 @@ public class PanelDataBean implements Serializable{
         chip = 0;
     }
     /**
-     * ´Ó6×é±¶ÊıÖĞËæ»úÒ»×é
+     * ä»6ç»„å€æ•°ä¸­éšæœºä¸€ç»„
      */
     public void createPrizeTimes(){
     	times = Math.abs(random.nextInt() % 6) + 1;
     }
     /**
-     * Éú³É½±Ïî£¨´ıÏêÏ¸£©
+     * ç”Ÿæˆå¥–é¡¹ï¼ˆå¾…è¯¦ç»†ï¼‰
      */
     public void createPrize(){
     	prize = Math.abs(random.nextInt() % 8) + 1;
     }
     
-    // Property accessors£¨getterºÍsettter·½·¨£©
+    // Property accessorsï¼ˆgetterå’Œsettteræ–¹æ³•ï¼‰
 	public int getPrize() {
 		return prize;
 	}

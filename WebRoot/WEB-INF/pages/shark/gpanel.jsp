@@ -15,7 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="gpanel_silver_available"><input type="text" value="70*14"></div>
 	<div class="gpanel_silver_dividend"><input type="text" value="装饰用彩金数"></div>
 	<div class="gpanel_silver_profit">
-		<!-- 只有走兽能增加，与id无关 -->
+		<!-- 只有走兽能增加，仅仅与id="total_item_"相关 -->
 		<input type="text" id="total_item_" value="￥89.00">
 		<!-- <input type="hidden" name="total_price" id="total_price" value="" /> -->
 	</div>
