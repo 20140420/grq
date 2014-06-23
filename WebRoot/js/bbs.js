@@ -1,3 +1,6 @@
+/*!
+ * chatµÄminsales.jsp
+ */
 var isStart=true;
 var nn;
 var tt;

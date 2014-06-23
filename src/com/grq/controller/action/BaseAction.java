@@ -21,7 +21,7 @@ import com.grq.model.pojo.user.Customer;
 import com.grq.model.pojo.product.OrderItem;
 import com.opensymphony.xwork2.ActionSupport;
 /**
- * »ù±¾Action¶ÔÏó£¬ÆäËüActionµÄ¸¸Àà
+ * åŸºæœ¬Actionå¯¹è±¡ï¼Œå…¶å®ƒActionçš„çˆ¶ç±»
  * @author JiangQuan
  */
 @Scope("prototype")
@@ -30,10 +30,10 @@ public class BaseAction extends ActionSupport implements
 SessionAware{
 	private static final long serialVersionUID = 1L;
 	
-	protected int pageNo = 1;//µ±Ç°Ò³
-	protected int pageSize = 4;//Ã¿Ò³ÏÔÊ¾¶àÉÙÌõ
+	protected int pageNo = 1;//å½“å‰é¡µ
+	protected int pageSize = 4;//æ¯é¡µæ˜¾ç¤ºå¤šå°‘æ¡
 	
-	// ×¢ÈëDao
+	// æ³¨å…¥Dao
 	@Autowired
 	protected ProductCategoryDao categoryDao;
 	@Autowired
@@ -47,9 +47,10 @@ SessionAware{
 	@Autowired
 	protected UserDao userDao;
 	
-	// MapÀàĞÍµÄsession
+	// Mapç±»å‹çš„session
 	protected Map<String, Object> session;
 	
+	public static final String TEST = "test";
 	public static final String INDEX = "index";
 	public static final String MANAGE = "manage";
 	public static final String MAIN = "main";
@@ -68,9 +69,12 @@ SessionAware{
 	
 	
 
-	// ´¦Àí·½·¨
+	// å¤„ç†æ–¹æ³•
 	public String execute() throws Exception {
 		return SUCCESS;
+	}
+	public String test() throws Exception {
+		return TEST;
 	}
 	public String index() throws Exception {
 		return INDEX;
@@ -104,18 +108,18 @@ SessionAware{
 	}
 	
 	/**
-	 * »ñÈ¡MapÀàĞÍµÄsession¸³Öµ
+	 * è·å–Mapç±»å‹çš„sessionèµ‹å€¼
 	 */
 	@Override
 	public void setSession(Map<String, Object> session) {
-		// »ñÈ¡MapÀàĞÍµÄsession¸³Öµ
+		// è·å–Mapç±»å‹çš„sessionèµ‹å€¼
 		this.session = session;
 	}
 	
 
 	/**
-	 * 	 »ñÈ¡¹Ë¿ÍÓÃ»§id
-	 * 	 »ñÈ¡¹Ë¿ÍÓÃ»§¶ÔÏó
+	 * 	 è·å–é¡¾å®¢ç”¨æˆ·id
+	 * 	 è·å–é¡¾å®¢ç”¨æˆ·å¯¹è±¡
 	 * @return
 	 */
 	public Customer getLoginCustomer(){
@@ -125,7 +129,7 @@ SessionAware{
 		return null;
 	}
 	/**
-	 * ´ÓsessionÖĞÈ¡³ö¹ºÎï³µ
+	 * ä»sessionä¸­å–å‡ºè´­ç‰©è½¦
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
@@ -140,7 +144,7 @@ SessionAware{
 	
 	
 	
-	// getterºÍsettter·½·¨
+	// getterå’Œsettteræ–¹æ³•
 	public int getPageNo() {
 		return pageNo;
 	}

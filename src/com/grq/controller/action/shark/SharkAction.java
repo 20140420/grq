@@ -11,7 +11,7 @@ public class SharkAction extends BaseAction {
 	private static final long serialVersionUID = 1L;
 		
 	/**
-	 * 转盘页面
+	 * 杞洏椤甸潰
 	 * @return
 	 * @throws Exception
 	 */
@@ -21,7 +21,7 @@ public class SharkAction extends BaseAction {
 	}
 	
 	/**
-	 * 按键键盘页面
+	 * 鎸夐敭閿洏椤甸潰
 	 * @return
 	 * @throws Exception
 	 */
@@ -31,7 +31,7 @@ public class SharkAction extends BaseAction {
 	}
 	
 	/**
-	 * 导向grule页面
+	 * 瀵煎悜grule椤甸潰
 	 * @return
 	 * @throws Exception
 	 */

@@ -23,6 +23,7 @@
 			<!-- shark组成部分 -->
 			<result name="gdial">/WEB-INF/pages/shark/gdial.jsp</result>
 			<result name="gpanel">/WEB-INF/pages/shark/gpanel.jsp</result>
+			<result name="test">/WEB-INF/pages/shark/num.jsp</result>
 			<!-- shark其它部分 -->
 			<result name="grule">/WEB-INF/pages/shark/grule.jsp</result>
 		</action>
