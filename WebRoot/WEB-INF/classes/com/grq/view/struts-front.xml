@@ -20,6 +20,7 @@
 		<action name="shark_*" class="sharkAction" method="{1}">
 			<!-- shark页面主页 -->
 			<result name="main">/WEB-INF/pages/shark/shark.jsp</result>
+			<result name="test">/WEB-INF/pages/shark/shark_cycle.jsp</result>
 			<!-- shark组成部分 -->
 			<result name="gdial">/WEB-INF/pages/shark/gdial.jsp</result>
 			<result name="gpanel">/WEB-INF/pages/shark/gpanel.jsp</result>

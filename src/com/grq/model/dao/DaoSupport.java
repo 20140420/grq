@@ -18,16 +18,16 @@ import org.springframework.transaction.annotation.Transactional;
 import com.grq.model.PageModel;
 import com.grq.model.util.GenericsUtils;
 /**
- * DaoÖ§³ÖÀà
+ * Daoæ”¯æŒç±»
  * @author JiangQuan
  * @param <T>
  */
 @Transactional
 @SuppressWarnings("unchecked")
 public class DaoSupport<T> implements BaseDao<T>{
-	// ·ºĞÍµÄÀàĞÍ
+	// æ³›å‹çš„ç±»å‹
 	protected Class<T> entityClass = GenericsUtils.getGenericType(this.getClass());
-	// HibernateÄ£°å
+	// Hibernateæ¨¡æ¿
 	@Autowired
 	protected HibernateTemplate template;
 	
@@ -35,21 +35,21 @@ public class DaoSupport<T> implements BaseDao<T>{
 		return template;
 	}
 	/**
-	 * ÀûÓÃsave()·½·¨±£´æ¶ÔÏóµÄÏêÏ¸ĞÅÏ¢
+	 * åˆ©ç”¨save()æ–¹æ³•ä¿å­˜å¯¹è±¡çš„è¯¦ç»†ä¿¡æ¯
 	 */
 	@Override
 	public void save(Object obj) {
 		getTemplate().save(obj);
 	}
 	/**
-	 * ±£´æ»ò¸üĞÂ
+	 * ä¿å­˜æˆ–æ›´æ–°
 	 */
 	@Override
 	public void saveOrUpdate(Object obj) {
 		getTemplate().saveOrUpdate(obj);
 	}
 	/**
-	 * ÀûÓÃupdate()·½·¨ĞŞ¸Ä¶ÔÏóµÄÏêÏ¸ĞÅÏ¢
+	 * åˆ©ç”¨update()æ–¹æ³•ä¿®æ”¹å¯¹è±¡çš„è¯¦ç»†ä¿¡æ¯
 	 */
 	@Override
 	public void update(Object obj) {
@@ -63,14 +63,14 @@ public class DaoSupport<T> implements BaseDao<T>{
 		}
 	}
 	/**
-	 * ÀûÓÃget()·½·¨¼ÓÔØ¶ÔÏó£¬»ñÈ¡¶ÔÏóµÄÏêÏ¸ĞÅÏ¢
+	 * åˆ©ç”¨get()æ–¹æ³•åŠ è½½å¯¹è±¡ï¼Œè·å–å¯¹è±¡çš„è¯¦ç»†ä¿¡æ¯
 	 */
 	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
 	public T get(Serializable entityId) {
 		return (T) getTemplate().get(this.entityClass, entityId);
 	}
 	/**
-	 * ÀûÓÃload()·½·¨¼ÓÔØ¶ÔÏó£¬»ñÈ¡¶ÔÏóµÄÏêÏ¸ĞÅÏ¢
+	 * åˆ©ç”¨load()æ–¹æ³•åŠ è½½å¯¹è±¡ï¼Œè·å–å¯¹è±¡çš„è¯¦ç»†ä¿¡æ¯
 	 */
 	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
 	public T load(Serializable entityId) {
@@ -78,7 +78,7 @@ public class DaoSupport<T> implements BaseDao<T>{
 		return (T) getTemplate().load(this.entityClass, entityId);
 	}
 	/**
-	 * ÀûÓÃhqlÓï¾ä²éÕÒµ¥ÌõĞÅÏ¢
+	 * åˆ©ç”¨hqlè¯­å¥æŸ¥æ‰¾å•æ¡ä¿¡æ¯
 	 */
 	@Override
 	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
@@ -87,14 +87,14 @@ public class DaoSupport<T> implements BaseDao<T>{
 			@Override
 			public Object doInHibernate(Session session) throws HibernateException,
 					SQLException {
-				Query query = session.createQuery(hql);//Ö´ĞĞ²éÑ¯
-				setQueryParams(query, queryParams);//ÉèÖÃ²éÑ¯²ÎÊı
+				Query query = session.createQuery(hql);//æ‰§è¡ŒæŸ¥è¯¢
+				setQueryParams(query, queryParams);//è®¾ç½®æŸ¥è¯¢å‚æ•°
 				return query.uniqueResult();
 			}
 		});
 	}
 	/**
-	 * »ñÈ¡Ö¸¶¨¶ÔÏóµÄĞÅÏ¢ÌõÊı
+	 * è·å–æŒ‡å®šå¯¹è±¡çš„ä¿¡æ¯æ¡æ•°
 	 */
 	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
 	public long getCount() {
@@ -116,70 +116,70 @@ public class DaoSupport<T> implements BaseDao<T>{
 		return find(null, null, orderby, pageNo, maxResult);
 	}
 	/**
-	 * ·ÖÒ³²éÑ¯
-	 * @param where ²éÑ¯Ìõ¼ş
-	 * @param queryParams hql²ÎÊıÖµ
-	 * @param orderby ÅÅĞò
-	 * @param pageNo µÚ¼¸Ò³
-	 * @param maxResult ·µ»Ø¼ÇÂ¼ÊıÁ¿
+	 * åˆ†é¡µæŸ¥è¯¢
+	 * @param where æŸ¥è¯¢æ¡ä»¶
+	 * @param queryParams hqlå‚æ•°å€¼
+	 * @param orderby æ’åº
+	 * @param pageNo ç¬¬å‡ é¡µ
+	 * @param maxResult è¿”å›è®°å½•æ•°é‡
 	 * return PageModel
 	 */
 	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
 	public PageModel<T> find(final String where, final Object[] queryParams,
 			final Map<String, String> orderby, final int pageNo,
 			final int maxResult) {
-		final PageModel<T> pageModel = new PageModel<T>();//ÊµÀı»¯·ÖÒ³¶ÔÏó
-		pageModel.setPageNo(pageNo);//ÉèÖÃµ±Ç°Ò³Êı
-		pageModel.setPageSize(maxResult);//ÉèÖÃÃ¿Ò³ÏÔÊ¾¼ÇÂ¼Êı
-		getTemplate().execute(new HibernateCallback() {//Ö´ĞĞÄÚ²¿·½·¨
+		final PageModel<T> pageModel = new PageModel<T>();//å®ä¾‹åŒ–åˆ†é¡µå¯¹è±¡
+		pageModel.setPageNo(pageNo);//è®¾ç½®å½“å‰é¡µæ•°
+		pageModel.setPageSize(maxResult);//è®¾ç½®æ¯é¡µæ˜¾ç¤ºè®°å½•æ•°
+		getTemplate().execute(new HibernateCallback() {//æ‰§è¡Œå†…éƒ¨æ–¹æ³•
 			@Override
 			public Object doInHibernate(Session session)
 					throws HibernateException, SQLException {
-				String hql = new StringBuffer().append("from ")//Ìí¼Óform×Ö¶Î
-								.append(GenericsUtils.getGenericName(entityClass))//Ìí¼Ó¶ÔÏóÀàĞÍ
-								.append(" ")//Ìí¼Ó¿Õ¸ñ
-								.append(where == null ? "" : where)//Èç¹ûwhereÎªnull¾ÍÌí¼Ó¿Õ¸ñ,·´Ö®Ìí¼Ówhere
-								.append(createOrderBy(orderby))//Ìí¼ÓÅÅĞòÌõ¼ş²ÎÊı
-								.toString();//×ª»¯Îª×Ö·û´®
-				Query query = session.createQuery(hql);//Ö´ĞĞ²éÑ¯
-				setQueryParams(query,queryParams);//Îª²ÎÊı¸³Öµ
-				List<T> list = null;//¶¨ÒåList¶ÔÏó
-				// Èç¹ûmaxResult<0£¬Ôò²éÑ¯ËùÓĞ
+				String hql = new StringBuffer().append("from ")//æ·»åŠ formå­—æ®µ
+								.append(GenericsUtils.getGenericName(entityClass))//æ·»åŠ å¯¹è±¡ç±»å‹
+								.append(" ")//æ·»åŠ ç©ºæ ¼
+								.append(where == null ? "" : where)//å¦‚æœwhereä¸ºnullå°±æ·»åŠ ç©ºæ ¼,åä¹‹æ·»åŠ where
+								.append(createOrderBy(orderby))//æ·»åŠ æ’åºæ¡ä»¶å‚æ•°
+								.toString();//è½¬åŒ–ä¸ºå­—ç¬¦ä¸²
+				Query query = session.createQuery(hql);//æ‰§è¡ŒæŸ¥è¯¢
+				setQueryParams(query,queryParams);//ä¸ºå‚æ•°èµ‹å€¼
+				List<T> list = null;//å®šä¹‰Listå¯¹è±¡
+				// å¦‚æœmaxResult<0ï¼Œåˆ™æŸ¥è¯¢æ‰€æœ‰
 				if(maxResult < 0 && pageNo < 0){
-					list = query.list();//½«²éÑ¯½á¹û×ª»¯ÎªList¶ÔÏó
+					list = query.list();//å°†æŸ¥è¯¢ç»“æœè½¬åŒ–ä¸ºListå¯¹è±¡
 				}else{
-					list = query.setFirstResult(getFirstResult(pageNo, maxResult))//ÉèÖÃ·ÖÒ³ÆğÊ¼Î»ÖÃ
-								.setMaxResults(maxResult)//ÉèÖÃÃ¿Ò³ÏÔÊ¾µÄ¼ÇÂ¼Êı
-								.list();//½«²éÑ¯½á¹û×ª»¯ÎªList¶ÔÏó
-					//¶¨Òå²éÑ¯×Ü¼ÇÂ¼ÊıµÄhqlÓï¾ä
-					hql = new StringBuffer().append("select count(*) from ")//Ìí¼ÓhqlÓï¾ä
-									.append(GenericsUtils.getGenericName(entityClass))//Ìí¼Ó¶ÔÏóÀàĞÍ
-									.append(" ")//Ìí¼Ó¿Õ¸ñ
-									.append(where == null ? "" : where)//Èç¹ûwhereÎªnull¾ÍÌí¼Ó¿Õ¸ñ,·´Ö®Ìí¼Ówhere
-									.toString();//×ª»¯Îª×Ö·û´®
-					query = session.createQuery(hql);//Ö´ĞĞ²éÑ¯
-					setQueryParams(query,queryParams);//ÉèÖÃhql²ÎÊı
-					int totalRecords = ((Long) query.uniqueResult()).intValue();//ÀàĞÍ×ª»»
-					pageModel.setTotalRecords(totalRecords);//ÉèÖÃ×Ü¼ÇÂ¼Êı
+					list = query.setFirstResult(getFirstResult(pageNo, maxResult))//è®¾ç½®åˆ†é¡µèµ·å§‹ä½ç½®
+								.setMaxResults(maxResult)//è®¾ç½®æ¯é¡µæ˜¾ç¤ºçš„è®°å½•æ•°
+								.list();//å°†æŸ¥è¯¢ç»“æœè½¬åŒ–ä¸ºListå¯¹è±¡
+					//å®šä¹‰æŸ¥è¯¢æ€»è®°å½•æ•°çš„hqlè¯­å¥
+					hql = new StringBuffer().append("select count(*) from ")//æ·»åŠ hqlè¯­å¥
+									.append(GenericsUtils.getGenericName(entityClass))//æ·»åŠ å¯¹è±¡ç±»å‹
+									.append(" ")//æ·»åŠ ç©ºæ ¼
+									.append(where == null ? "" : where)//å¦‚æœwhereä¸ºnullå°±æ·»åŠ ç©ºæ ¼,åä¹‹æ·»åŠ where
+									.toString();//è½¬åŒ–ä¸ºå­—ç¬¦ä¸²
+					query = session.createQuery(hql);//æ‰§è¡ŒæŸ¥è¯¢
+					setQueryParams(query,queryParams);//è®¾ç½®hqlå‚æ•°
+					int totalRecords = ((Long) query.uniqueResult()).intValue();//ç±»å‹è½¬æ¢
+					pageModel.setTotalRecords(totalRecords);//è®¾ç½®æ€»è®°å½•æ•°
 				}
-				pageModel.setList(list);//½«²éÑ¯µÄlist¶ÔÏó·ÅÈëÊµÌå¶ÔÏóÖĞ
+				pageModel.setList(list);//å°†æŸ¥è¯¢çš„listå¯¹è±¡æ”¾å…¥å®ä½“å¯¹è±¡ä¸­
 				return null;
 			}
 		});
-		return pageModel;//·µ»Ø·ÖÒ³µÄÊµÌå¶ÔÏó
+		return pageModel;//è¿”å›åˆ†é¡µçš„å®ä½“å¯¹è±¡
 	}
 	/**
-	 * »ñÈ¡·ÖÒ³²éÑ¯ÖĞ½á¹û¼¯µÄÆğÊ¼Î»ÖÃ
-	 * @param pageNo µÚ¼¸Ò³
-	 * @param maxResult Ò³ÃæÏÔÊ¾µÄ¼ÇÂ¼Êı
-	 * @return ÆğÊ¼Î»ÖÃ
+	 * è·å–åˆ†é¡µæŸ¥è¯¢ä¸­ç»“æœé›†çš„èµ·å§‹ä½ç½®
+	 * @param pageNo ç¬¬å‡ é¡µ
+	 * @param maxResult é¡µé¢æ˜¾ç¤ºçš„è®°å½•æ•°
+	 * @return èµ·å§‹ä½ç½®
 	 */
 	protected int getFirstResult(int pageNo,int maxResult){
 		int firstResult = (pageNo-1) * maxResult;
 		return firstResult < 0 ? 0 : firstResult;
 	}
 	/**
-	 * ¶ÔqueryÖĞµÄ²ÎÊı¸³Öµ
+	 * å¯¹queryä¸­çš„å‚æ•°èµ‹å€¼
 	 * @param query
 	 * @param queryParams
 	 */
@@ -191,9 +191,9 @@ public class DaoSupport<T> implements BaseDao<T>{
 		}
 	}
 	/**
-	 * ´´½¨ÅÅĞòhqlÓï¾ä
+	 * åˆ›å»ºæ’åºhqlè¯­å¥
 	 * @param orderby
-	 * @return ÅÅĞò×Ö·û´®
+	 * @return æ’åºå­—ç¬¦ä¸²
 	 */
 	protected String createOrderBy(Map<String, String> orderby){
 		StringBuffer sb = new StringBuffer("");
@@ -207,11 +207,11 @@ public class DaoSupport<T> implements BaseDao<T>{
 		return sb.toString();
 	}
 	/**
-	 * »ñÈ¡Session¶ÔÏó
+	 * è·å–Sessionå¯¹è±¡
 	 * @return
 	 */
 	protected Session getSession(){
-		System.out.print("ÕâÊÇDaoSupport.javaÎÄ¼şgetSession!");
+		System.out.print("è¿™æ˜¯DaoSupport.javaæ–‡ä»¶getSession!");
 		return (!this.template.isAllowCreate() ?
 		    SessionFactoryUtils.getSession(this.template.getSessionFactory(), false) :
 				SessionFactoryUtils.getSession(
