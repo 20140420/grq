@@ -9,14 +9,12 @@ $(function(){
 	//var circle_num= 2;//转盘圈数 后期由服务器取得
 	//var circle_speed= (28*80*circle_num)/time_spend;//计算转盘速度,28个跳格，setInterval()频率80毫秒
 
-	clock(time_cycle,time_display,time_wait,time_observe,time_bet,"#demo02 .minute","#demo02 .second");
+	clock(time_cycle,time_spend,time_display,time_wait,time_observe,time_bet,"#demo02 .minute","#demo02 .second");
 
 });
 
-function clock(time_length,time_display,time_wait,time_observe,time_bet,minute_elem,second_elem){
-	var timer = setInterval(
-		function(){
-
+function clock(time_length,time_spend,time_display,time_wait,time_observe,time_bet,minute_elem,second_elem){
+	var timer = setInterval(function(){
 			if(time_length > (time_observe+ time_bet+ time_display+ time_wait)){//转盘
 				time_length -=1;
 				spend=(time_length-(time_observe+ time_bet+ time_display+ time_wait));
@@ -42,8 +40,10 @@ function clock(time_length,time_display,time_wait,time_observe,time_bet,minute_e
 				$(second_elem).text(time_length<10?"0"+time_length:time_length); 
 				////alert("下注7秒");
 			} else {
-				clearInterval(timer);
+				//clearInterval(timer);
 				//alert("结束返回time_length："+time_length);
+				time_length = (time_spend+time_observe+ time_bet+ time_display+ time_wait);
+				//alert("无限循环重新赋值time_length："+time_length);
 			}
 		},1000);
 	//alert("返回timer："+timer);
