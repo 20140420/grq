@@ -10,6 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="<%=basePath%>js/payfor.js"></script>
 <link href="<%=basePath%>css/payfor.css" rel="stylesheet" type="text/css" />
 <link href="<%=basePath%>css/game.css" rel="stylesheet" type="text/css" />
+<s:form action="shark_save" name="panelform" namespace="/shark" enctype="multipart/form-data" method="post">
 <!----><div class="gpanel">
   <div class="gpanel_count">
 	<div class="gpanel_silver_available"><input type="text" value="70*14"></div>
@@ -144,3 +145,4 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
   </div>
 <!----></div>
+</s:form>

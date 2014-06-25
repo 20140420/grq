@@ -39,5 +39,16 @@ public class SharkAction extends BaseAction {
 
 		return "grule";
 	}
+	
+	/**
+	 * 从panel提交获得数据
+	 * @return shark页面
+	 * @throws Exception
+	 */
+	public String save() throws Exception{
+		System.out.print("panel提交的data");
+		
+		return MAIN;//返回shark主页面
+	}
 
 }

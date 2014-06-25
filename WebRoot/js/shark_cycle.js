@@ -42,11 +42,13 @@ function clock(time_length,time_spend,time_display,time_wait,time_observe,time_b
 			} else {
 				//clearInterval(timer);
 				//alert("结束返回time_length："+time_length);
+				document.panelform.submit();//下注结束后提交筹码
+				//alert("提交panelform后，给time_length赋值");
 				time_length = (time_spend+time_observe+ time_bet+ time_display+ time_wait);
 				//alert("无限循环重新赋值time_length："+time_length);
 			}
 		},1000);
 	//alert("返回timer："+timer);
-	alert("周期："+time_length);
-	return time_length;
+	//alert("周期："+time_length);
+	//return time_length;
 }
