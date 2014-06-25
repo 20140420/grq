@@ -2,7 +2,7 @@
 $(function(){
 	var time_spend= 3;//计算转盘花费的时间4秒，从而计算转盘速度
 	var time_observe= 6; //观察时长 后期由服务器取得
-	var time_bet= 7;//下注时长 后期由服务器取得
+	var time_bet= 12;//下注时长 后期由服务器取得
 	var time_display= 3;//展示时长 后期由服务器取得
 	var time_wait= 2;//等待时长 后期由服务器取得
 	var time_cycle= (time_spend+time_observe+ time_bet+ time_display+ time_wait);//一个周期时长 后期由服务器取得,展示-等待-观察-下注-转盘
