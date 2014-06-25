@@ -1,5 +1,12 @@
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
-<link href="../../../css/game.css" rel="stylesheet" type="text/css" />
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<script type="text/javascript" src="<%=basePath%>js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/shark_cycle.js"></script>
+<link href="<%=basePath%>css/shark_cycle.css" rel="stylesheet" type="text/css" />
+<link href="<%=basePath%>css/game.css" rel="stylesheet" type="text/css" />
 <div class="gdial"><!---->
  <div class="gdial-top">
 	<div class="gdial-top1"><img width="75" height="60" /></div>
@@ -22,7 +29,10 @@
  <!-- 中间展示区 -->
  <div class="gdial-display">
 	<div id="canvas-background-color" style="float: left" >
-		<canvas id="playground" width="537" height="308"></canvas>
+		<!-- <canvas id="playground" width="537" height="308"></canvas> -->
+		<div class="colockbox" id="demo04">
+			<span class="second">-</span>
+		</div>
 	</div> 
  </div>
  <div class="gdial-right">

@@ -9,7 +9,7 @@ $(function(){
 	//var circle_num= 2;//转盘圈数 后期由服务器取得
 	//var circle_speed= (28*80*circle_num)/time_spend;//计算转盘速度,28个跳格，setInterval()频率80毫秒
 
-	clock(time_cycle,time_spend,time_display,time_wait,time_observe,time_bet,"#demo02 .minute","#demo02 .second");
+	clock(time_cycle,time_spend,time_display,time_wait,time_observe,time_bet,"#demo04 .second","#demo04 .second");
 
 });
 
