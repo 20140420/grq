@@ -2,18 +2,18 @@ package com.grq.model.pojo.user;
 
 import java.io.Serializable;
 /**
- * Ïû·ÑÕßÓÃ»§
+ * æ¶ˆè´¹è€…ç”¨æˆ·
  * @author JiangQuan
  */
 public class Customer implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private Integer id;// ÓÃ»§±àºÅ
-	private String username;// ÓÃ»§Ãû
-	private String email;// ÓÊÏä
-	private String mobile;// ÊÖ»ú
-	private String address;// ×¡Ö·
-	private String password;// ÃÜÂë
-	//private String realname;// ÕæÊµĞÕÃû
+	private Integer id;// ç”¨æˆ·ç¼–å·
+	private String username;// ç”¨æˆ·å
+	private String email;// é‚®ç®±
+	private String mobile;// æ‰‹æœº
+	private String address;// ä½å€
+	private String password;// å¯†ç 
+	//private String realname;// çœŸå®å§“å
 	
 	
 	public Integer getId() {

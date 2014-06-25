@@ -8,21 +8,21 @@ import com.grq.model.customizeenum.OrderState;
 import com.grq.model.customizeenum.PaymentWay;
 import com.grq.model.pojo.user.Customer;
 /**
- * ¶©µ¥
+ * è®¢å•
  * @author JiangQuan
  */
 public class Order implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private String orderId;// ¶©µ¥±àºÅ(ÊÖ¶¯·ÖÅä)
-	private Customer customer;// ËùÊôÓÃ»§
-	private String name;// ÊÕ»õÈËĞÕÃû
-	private String address;// ÊÕ»õÈË×¡Ö·
-	private String mobile;// ÊÕ»õÈËÊÖ»ú
-	private Set<OrderItem> orderItems;// ËùÂòÉÌÆ·
-	private Float totalPrice;// ×Ü¶î
-	private PaymentWay paymentWay;// Ö§¸¶·½Ê½
-	private OrderState orderState;// ¶©µ¥×´Ì¬
-	private Date createTime = new Date();// ´´½¨Ê±¼ä
+	private String orderId;// è®¢å•ç¼–å·(æ‰‹åŠ¨åˆ†é…)
+	private Customer customer;// æ‰€å±ç”¨æˆ·
+	private String name;// æ”¶è´§äººå§“å
+	private String address;// æ”¶è´§äººä½å€
+	private String mobile;// æ”¶è´§äººæ‰‹æœº
+	private Set<OrderItem> orderItems;// æ‰€ä¹°å•†å“
+	private Float totalPrice;// æ€»é¢
+	private PaymentWay paymentWay;// æ”¯ä»˜æ–¹å¼
+	private OrderState orderState;// è®¢å•çŠ¶æ€
+	private Date createTime = new Date();// åˆ›å»ºæ—¶é—´
 	public String getOrderId() {
 		return orderId;
 	}

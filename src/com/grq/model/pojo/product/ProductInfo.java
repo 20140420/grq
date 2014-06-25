@@ -5,24 +5,24 @@ import java.util.Date;
 
 import com.grq.model.customizeenum.Sex;
 /**
- * ÉÌÆ·ĞÅÏ¢
+ * å•†å“ä¿¡æ¯
  * @author JiangQuan
  */
 public class ProductInfo implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private Integer id;// ÉÌÆ·±àºÅ
-	private String name;// ÉÌÆ·Ãû³Æ
-	private String description;// ÉÌÆ·ËµÃ÷
-	private Date createTime = new Date();// ÉÏ¼ÜÊ±¼ä
-	private Float baseprice;// ÉÌÆ·²É¹º¼Û¸ñ
-	private Float marketprice;// ÏÖÔÚÊĞ³¡¼Û¸ñ
-	private Float sellprice;// ÉÌ³ÇÏúÊÛ¼Û¸ñ
-	private Sex sexrequest;// ËùÊôĞÔ±ğ
-	private Boolean commend = false;// ÊÇ·ñÊÇÍÆ¼öÉÌÆ·£¨Ä¬ÈÏÖµÎªfalse£©
-	private Integer clickcount = 1;// ·ÃÎÊÁ¿£¨Í³¼ÆÊÜ»¶Ó­µÄ³Ì¶È£©
-	private Integer sellCount = 0;// ÏúÊÛÊıÁ¿£¨Í³¼ÆÈÈÏúÉÌÆ·£©
-	private ProductCategory category;// ËùÊôÀà±ğ
-	private UploadFile uploadFile;// ÉÏ´«ÎÄ¼ş
+	private Integer id;// å•†å“ç¼–å·
+	private String name;// å•†å“åç§°
+	private String description;// å•†å“è¯´æ˜
+	private Date createTime = new Date();// ä¸Šæ¶æ—¶é—´
+	private Float baseprice;// å•†å“é‡‡è´­ä»·æ ¼
+	private Float marketprice;// ç°åœ¨å¸‚åœºä»·æ ¼
+	private Float sellprice;// å•†åŸé”€å”®ä»·æ ¼
+	private Sex sexrequest;// æ‰€å±æ€§åˆ«
+	private Boolean commend = false;// æ˜¯å¦æ˜¯æ¨èå•†å“ï¼ˆé»˜è®¤å€¼ä¸ºfalseï¼‰
+	private Integer clickcount = 1;// è®¿é—®é‡ï¼ˆç»Ÿè®¡å—æ¬¢è¿çš„ç¨‹åº¦ï¼‰
+	private Integer sellCount = 0;// é”€å”®æ•°é‡ï¼ˆç»Ÿè®¡çƒ­é”€å•†å“ï¼‰
+	private ProductCategory category;// æ‰€å±ç±»åˆ«
+	private UploadFile uploadFile;// ä¸Šä¼ æ–‡ä»¶
 	public Integer getId() {
 		return id;
 	}

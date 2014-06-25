@@ -3,14 +3,14 @@ package com.grq.model.pojo.product;
 import java.io.Serializable;
 
 /**
- * 上传文件对象
+ * 涓婁紶鏂囦欢瀵硅薄
  * @author JiangQuan
  */
 public class UploadFile implements Serializable{
 	private static final long serialVersionUID = 1L;
-	// 编号
+	// 缂栧彿
 	private Integer id;
-	// 文件路径
+	// 鏂囦欢璺緞
 	private String path;
 	public Integer getId() {
 		return id;

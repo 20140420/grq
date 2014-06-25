@@ -12,7 +12,7 @@ import com.opensymphony.xwork2.ModelDriven;
 public class AdminAction extends BaseAction implements ModelDriven<User>{
 	private static final long serialVersionUID = 1L;
 	
-	// ¹ÜÀíÔ±ÓÃ»§¶ÔÏó
+	// ç®¡ç†å‘˜ç”¨æˆ·å¯¹è±¡
 	private User user = new User();
 	@Override
 	public User getModel() {
@@ -25,31 +25,31 @@ public class AdminAction extends BaseAction implements ModelDriven<User>{
 		this.user = user;
 	}
 	/**
-	 * ¹ÜÀíÔ±µÇÈë
+	 * ç®¡ç†å‘˜ç™»å…¥
 	 */
 	@Override
 	public String login() throws Exception{
 		return ADMIN_LOGIN;
 	}
 	/**
-	 * µÇÂ¼ 
+	 * ç™»å½• 
 	 * @return
 	 * @throws Exception
 	 */
 	public String logon() throws Exception{
-		//ÑéÖ¤ÓÃ»§ÃûºÍÃÜÂë
+		//éªŒè¯ç”¨æˆ·åå’Œå¯†ç 
 		User loginUser = userDao.login(user.getUsername(), user.getPassword());
-		if(loginUser != null){//Í¨¹ıÑéÖ¤
-			session.put("admin", loginUser);//½«¹ÜÀíÔ±ĞÅÏ¢±£´æÔÚSession¶ÔÏóadminÖĞ
+		if(loginUser != null){//é€šè¿‡éªŒè¯
+			session.put("admin", loginUser);//å°†ç®¡ç†å‘˜ä¿¡æ¯ä¿å­˜åœ¨Sessionå¯¹è±¡adminä¸­
 		}else{
-			addFieldError("", "ÓÃ»§Ãû»òÃÜÂë²»ÕıÈ·£¡");//·µ»Ø´íÎóÌáÊ¾ĞÅÏ¢
-			return ADMIN_LOGIN;//·µ»Ø¹ÜÀíÔ±ºóÌ¨µÇÂ¼Ò³Ãæ
+			addFieldError("", "adminç”¨æˆ·åæˆ–å¯†ç ä¸æ­£ç¡®ï¼");//è¿”å›é”™è¯¯æç¤ºä¿¡æ¯
+			return ADMIN_LOGIN;//è¿”å›ç®¡ç†å‘˜åå°ç™»å½•é¡µé¢
 		}
-		System.out.print("¹ÜÀíÔ±µÇÈë³É¹¦£¡OK");
-		return ADMIN_MANAGE;//·µ»Ø¹ÜÀíÔ±ºóÌ¨Ò³Ãæ
+		System.out.print("ç®¡ç†å‘˜ç™»å…¥æˆåŠŸï¼OK");
+		return ADMIN_MANAGE;//è¿”å›ç®¡ç†å‘˜åå°é¡µé¢
 	}
 	/**
-	 * ÍË³ö(ĞŞ¸ÄºóÖ»¹ÜÀíÔ±ÍË³ö)
+	 * é€€å‡º(ä¿®æ”¹ååªç®¡ç†å‘˜é€€å‡º)
 	 * @return String
 	 * @throws Exception
 	 */
@@ -63,7 +63,7 @@ public class AdminAction extends BaseAction implements ModelDriven<User>{
 	}
 	
 	/**
-	 * ¹ÜÀíÔ±ÓÃ»§ºóÌ¨Ò³Ãæ
+	 * ç®¡ç†å‘˜ç”¨æˆ·åå°é¡µé¢
 	 * @return
 	 * @throws Exception
 	 */

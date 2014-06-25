@@ -4,17 +4,17 @@ import java.io.Serializable;
 import java.util.Set;
 import java.util.TreeSet;
 /**
- * ²úÆ·Àà±ğ
+ * äº§å“ç±»åˆ«
  * @author JiangQuan
  */
 public class ProductCategory implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private Integer id;// Àà±ğ±àºÅ
-	private String name;// Àà±ğÃû³Æ
-	private int level = 1;// ²ã´Î
-	private Set<ProductCategory> children;// ×Ó²úÆ·Àà±ğ
-	private ProductCategory parent;// ¸¸Àà±ğ
-	private Set<ProductInfo> products = new TreeSet<ProductInfo>();// °üº¬ÉÌÆ·
+	private Integer id;// ç±»åˆ«ç¼–å·
+	private String name;// ç±»åˆ«åç§°
+	private int level = 1;// å±‚æ¬¡
+	private Set<ProductCategory> children;// å­äº§å“ç±»åˆ«
+	private ProductCategory parent;// çˆ¶ç±»åˆ«
+	private Set<ProductInfo> products = new TreeSet<ProductInfo>();// åŒ…å«å•†å“
 	public Integer getId() {
 		return id;
 	}

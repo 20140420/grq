@@ -21,7 +21,7 @@ import com.grq.model.pojo.product.UploadFile;
 import com.grq.model.util.StringUtil;
 import com.opensymphony.xwork2.ModelDriven;
 /**
- * ÉÌÆ·Action
+ * å•†å“Action
  * @author JiangQuan
  */
 @Scope("prototype")
@@ -29,21 +29,21 @@ import com.opensymphony.xwork2.ModelDriven;
 public class ProductAction extends BaseAction implements ModelDriven<ProductInfo>{
 	private static final long serialVersionUID = 1L;
 	/**
-	 * ¸ù¾İÃû³ÆÄ£ºı²éÑ¯
+	 * æ ¹æ®åç§°æ¨¡ç³ŠæŸ¥è¯¢
 	 * @return String
 	 * @throws Exception
 	 */
 	public String findByName() throws Exception {
 		if(product.getName() != null){
-			String where = "where name like ?";//²éÑ¯µÄÌõ¼şÓï¾ä
-			Object[] queryParams = {"%" + product.getName() + "%"};//Îª²ÎÊı¸³Öµ
-			pageModel = productDao.find(pageNo, pageSize, where, queryParams );//Ö´ĞĞ²éÑ¯·½·¨
+			String where = "where name like ?";//æŸ¥è¯¢çš„æ¡ä»¶è¯­å¥
+			Object[] queryParams = {"%" + product.getName() + "%"};//ä¸ºå‚æ•°èµ‹å€¼
+			pageModel = productDao.find(pageNo, pageSize, where, queryParams );//æ‰§è¡ŒæŸ¥è¯¢æ–¹æ³•
 		}
 		image.put("url", "04.gif");
-		return LIST;//·µ»ØÁĞ±íÊ×Ò³
+		return LIST;//è¿”å›åˆ—è¡¨é¦–é¡µ
 	}
 	/**
-	 * ¸ù¾İÀà±ğid²éÑ¯ËùÓĞÉÌÆ·ĞÅÏ¢
+	 * æ ¹æ®ç±»åˆ«idæŸ¥è¯¢æ‰€æœ‰å•†å“ä¿¡æ¯
 	 * @return String
 	 * @throws Exception
 	 */
@@ -53,102 +53,102 @@ public class ProductAction extends BaseAction implements ModelDriven<ProductInfo
 			Object[] queryParams = {product.getCategory().getId()};
 			pageModel = productDao.find(pageNo, pageSize, where, queryParams);
 		}
-		image.put("url", "02.gif");//ÉèÖÃ¸±±êÌâÍ¼Æ¬
+		image.put("url", "02.gif");//è®¾ç½®å‰¯æ ‡é¢˜å›¾ç‰‡
 		return LIST;
 	}
 	
 	
 	/**
-	 * °´ÈËÆø²éÑ¯
+	 * æŒ‰äººæ°”æŸ¥è¯¢
 	 * @return String
 	 * @throws Exception
 	 */
 	public String findByClick() throws Exception{
-		Map<String, String> orderby = new HashMap<String, String>();//¶¨ÒåMap¼¯ºÏ
-		orderby.put("clickcount", "desc");//ÎªMap¼¯ºÏ¸³Öµ
-		pageModel = productDao.find(1, 5, orderby );//Ö´ĞĞ²éÕÒ·½·¨
-		return "clickList";//·µ»Øproduct_click_list.jspÒ³Ãæ
+		Map<String, String> orderby = new HashMap<String, String>();//å®šä¹‰Mapé›†åˆ
+		orderby.put("clickcount", "desc");//ä¸ºMapé›†åˆèµ‹å€¼
+		pageModel = productDao.find(1, 5, orderby );//æ‰§è¡ŒæŸ¥æ‰¾æ–¹æ³•
+		return "clickList";//è¿”å›product_click_list.jspé¡µé¢
 	}
 	/**
-	 * °´ÍÆ¼ö²éÑ¯
+	 * æŒ‰æ¨èæŸ¥è¯¢
 	 * @return String
 	 * @throws Exception
 	 */
 	public String findByCommend() throws Exception{
-		Map<String, String> orderby = new HashMap<String, String>();//¶¨ÒåMap¼¯ºÏ
-		orderby.put("sellCount", "desc");//ÎªMap¼¯ºÏ¸³Öµ
-		String where = "where commend = ?";//ÉèÖÃÌõ¼şÓï¾ä
-		Object[] queryParams = {true};//ÉèÖÃ²ÎÊıÖµ
-		pageModel = productDao.find(where, queryParams, orderby, 1, 4);//Ö´ĞĞ²éÑ¯·½·¨
-		return "findList";//·µ»Øproduct_find_list.jspÒ³Ãæ ÍÆ¼öÁĞ±í
+		Map<String, String> orderby = new HashMap<String, String>();//å®šä¹‰Mapé›†åˆ
+		orderby.put("sellCount", "desc");//ä¸ºMapé›†åˆèµ‹å€¼
+		String where = "where commend = ?";//è®¾ç½®æ¡ä»¶è¯­å¥
+		Object[] queryParams = {true};//è®¾ç½®å‚æ•°å€¼
+		pageModel = productDao.find(where, queryParams, orderby, 1, 4);//æ‰§è¡ŒæŸ¥è¯¢æ–¹æ³•
+		return "findList";//è¿”å›product_find_list.jspé¡µé¢ æ¨èåˆ—è¡¨
 	}
 	/**
-	 * °´ÏúÁ¿²éÑ¯
+	 * æŒ‰é”€é‡æŸ¥è¯¢
 	 * @return String
 	 * @throws Exception
 	 */
 	public String findBySellCount() throws Exception{
-		Map<String, String> orderby = new HashMap<String, String>();//¶¨ÒåMap¼¯ºÏ
-		orderby.put("sellCount", "desc");//ÎªMap¼¯ºÏ¸³Öµ
-		pageModel = productDao.find(1, 4, orderby );//Ö´ĞĞ²éÑ¯·½·¨
-		return "findList";//·µ»ØÈÈÏúÉÌÆ·ÁĞ±í
+		Map<String, String> orderby = new HashMap<String, String>();//å®šä¹‰Mapé›†åˆ
+		orderby.put("sellCount", "desc");//ä¸ºMapé›†åˆèµ‹å€¼
+		pageModel = productDao.find(1, 4, orderby );//æ‰§è¡ŒæŸ¥è¯¢æ–¹æ³•
+		return "findList";//è¿”å›çƒ­é”€å•†å“åˆ—è¡¨
 	}
 	
 	
 	/**
-	 * ĞÂÆ·ÉÏÊĞ
+	 * æ–°å“ä¸Šå¸‚
 	 * @return
 	 * @throws Exception
 	 */
 	public String findNewProduct() throws Exception{
-		Map<String, String> orderby = new HashMap<String, String>();//¶¨ÒåMap¼¯ºÏ
-		orderby.put("createTime", "desc");//ÎªMap¼¯ºÏ¸³Öµ
-		pageModel = productDao.find(pageNo, pageSize, orderby );//Ö´ĞĞ²éÕÒ·½·¨
-		image.put("url", "01.gif");//ÉèÖÃ¸±±êÌâÍ¼Æ¬
-		return "list";//·µ»ØÉÌÆ·ÁĞ±íÒ³Ãæ
+		Map<String, String> orderby = new HashMap<String, String>();//å®šä¹‰Mapé›†åˆ
+		orderby.put("createTime", "desc");//ä¸ºMapé›†åˆèµ‹å€¼
+		pageModel = productDao.find(pageNo, pageSize, orderby );//æ‰§è¡ŒæŸ¥æ‰¾æ–¹æ³•
+		image.put("url", "01.gif");//è®¾ç½®å‰¯æ ‡é¢˜å›¾ç‰‡
+		return "list";//è¿”å›å•†å“åˆ—è¡¨é¡µé¢
 	}
 	/**
-	 * ÈÈÏúÉÌÆ·
+	 * çƒ­é”€å•†å“
 	 * @return
 	 * @throws Exception
 	 */
 	public String findSellProduct() throws Exception{
-		Map<String, String> orderby = new HashMap<String, String>();//¶¨ÒåMap¼¯ºÏ
-		orderby.put("sellCount", "desc");//ÎªMap¼¯ºÏ¸³Öµ
-		pageModel = productDao.find(pageNo, pageSize, orderby );//Ö´ĞĞ²éÕÒ·½·¨
+		Map<String, String> orderby = new HashMap<String, String>();//å®šä¹‰Mapé›†åˆ
+		orderby.put("sellCount", "desc");//ä¸ºMapé›†åˆèµ‹å€¼
+		pageModel = productDao.find(pageNo, pageSize, orderby );//æ‰§è¡ŒæŸ¥æ‰¾æ–¹æ³•
 		image.put("url", "03.gif");
-		return "list";//·µ»ØÉÌÆ·ÁĞ±íÒ³Ãæ
+		return "list";//è¿”å›å•†å“åˆ—è¡¨é¡µé¢
 	}
 	/**
-	 * ÍÆ¼öÉÌÆ·
+	 * æ¨èå•†å“
 	 * @return
 	 * @throws Exception
 	 */
 	public String findCommendProduct() throws Exception{
-		Map<String, String> orderby = new HashMap<String, String>();//¶¨ÒåMap¼¯ºÏ
-		orderby.put("createTime", "desc");//ÎªMap¼¯ºÏ¸³Öµ
-		String where = "where commend = ?";//ÉèÖÃÌõ¼şÓï¾ä
-		Object[] queryParams = {true};//ÉèÖÃ²ÎÊıÖµ
-		pageModel = productDao.find(where, queryParams, orderby, pageNo, pageSize);//Ö´ĞĞ²éÑ¯·½·¨
+		Map<String, String> orderby = new HashMap<String, String>();//å®šä¹‰Mapé›†åˆ
+		orderby.put("createTime", "desc");//ä¸ºMapé›†åˆèµ‹å€¼
+		String where = "where commend = ?";//è®¾ç½®æ¡ä»¶è¯­å¥
+		Object[] queryParams = {true};//è®¾ç½®å‚æ•°å€¼
+		pageModel = productDao.find(where, queryParams, orderby, pageNo, pageSize);//æ‰§è¡ŒæŸ¥è¯¢æ–¹æ³•
 		image.put("url", "06.gif");
-		return "list";//·µ»ØÉÌÆ·ÁĞ±íÒ³Ãæ
+		return "list";//è¿”å›å•†å“åˆ—è¡¨é¡µé¢
 	}
 	/**
-	 * ÈËÆøÉÌÆ·
+	 * äººæ°”å•†å“
 	 * @return
 	 * @throws Exception
 	 */
 	public String findEnjoyProduct() throws Exception{
-		Map<String, String> orderby = new HashMap<String, String>();//¶¨ÒåMap¼¯ºÏ
-		orderby.put("clickcount", "desc");//ÎªMap¼¯ºÏ¸³Öµ
-		pageModel = productDao.find(pageNo,pageSize, orderby );//Ö´ĞĞ²éÕÒ·½·¨
+		Map<String, String> orderby = new HashMap<String, String>();//å®šä¹‰Mapé›†åˆ
+		orderby.put("clickcount", "desc");//ä¸ºMapé›†åˆèµ‹å€¼
+		pageModel = productDao.find(pageNo,pageSize, orderby );//æ‰§è¡ŒæŸ¥æ‰¾æ–¹æ³•
 		image.put("url", "07.gif");
-		return "list";//·µ»ØÉÌÆ·ÁĞ±íÒ³Ãæ
+		return "list";//è¿”å›å•†å“åˆ—è¡¨é¡µé¢
 	}
 	
 	
 	/**
-	 * Ìí¼ÓÉÌÆ·
+	 * æ·»åŠ å•†å“
 	 */
 	@Override
 	public String add() throws Exception {
@@ -156,32 +156,32 @@ public class ProductAction extends BaseAction implements ModelDriven<ProductInfo
 		return INPUT;
 	}
 	/**
-	 * ±£´æÉÌÆ·
+	 * ä¿å­˜å•†å“
 	 * @return
 	 * @throws Exception
 	 */
 	public String save() throws Exception{
-		if(file != null ){//Èç¹ûÎÄ¼şÂ·¾¶²»Îª¿Õ
-			//»ñÈ¡·şÎñÆ÷µÄ¾ø¶ÔÂ·¾¶
+		if(file != null ){//å¦‚æœæ–‡ä»¶è·¯å¾„ä¸ä¸ºç©º
+			//è·å–æœåŠ¡å™¨çš„ç»å¯¹è·¯å¾„
 			String path = ServletActionContext.getServletContext().getRealPath("/upload");
 			File dir = new File(path);
-			if(!dir.exists()){//Èç¹ûÎÄ¼ş¼Ğ²»´æÔÚ
-				dir.mkdir();//´´½¨ÎÄ¼ş¼Ğ
+			if(!dir.exists()){//å¦‚æœæ–‡ä»¶å¤¹ä¸å­˜åœ¨
+				dir.mkdir();//åˆ›å»ºæ–‡ä»¶å¤¹
 			}
-			String fileName = StringUtil.getStringTime() + ".jpg";//×Ô¶¨ÒåÍ¼Æ¬Ãû³Æ
-			FileInputStream fis = null;//ÊäÈëÁ÷
-			FileOutputStream fos = null;//Êä³öÁ÷
+			String fileName = StringUtil.getStringTime() + ".jpg";//è‡ªå®šä¹‰å›¾ç‰‡åç§°
+			FileInputStream fis = null;//è¾“å…¥æµ
+			FileOutputStream fos = null;//è¾“å‡ºæµ
 			try {
-				fis = new FileInputStream(file);//¸ù¾İÉÏ´«ÎÄ¼ş´´½¨InputStreamÊµÀı
-				fos = new FileOutputStream(new File(dir,fileName)); //´´½¨Ğ´Èë·şÎñÆ÷µØÖ·µÄÊä³öÁ÷¶ÔÏó
-				byte[] bs = new byte[1024 * 4]; //´´½¨×Ö½ÚÊı×éÊµÀı
+				fis = new FileInputStream(file);//æ ¹æ®ä¸Šä¼ æ–‡ä»¶åˆ›å»ºInputStreamå®ä¾‹
+				fos = new FileOutputStream(new File(dir,fileName)); //åˆ›å»ºå†™å…¥æœåŠ¡å™¨åœ°å€çš„è¾“å‡ºæµå¯¹è±¡
+				byte[] bs = new byte[1024 * 4]; //åˆ›å»ºå­—èŠ‚æ•°ç»„å®ä¾‹
 				int len = -1;
-				while((len = fis.read(bs)) != -1){//Ñ­»·¶ÁÈ¡ÎÄ¼ş
-					fos.write(bs, 0, len);//ÏòÖ¸¶¨µÄÎÄ¼ş¼ĞÖĞĞ´Êı¾İ
+				while((len = fis.read(bs)) != -1){//å¾ªç¯è¯»å–æ–‡ä»¶
+					fos.write(bs, 0, len);//å‘æŒ‡å®šçš„æ–‡ä»¶å¤¹ä¸­å†™æ•°æ®
 				}
-				UploadFile uploadFile = new UploadFile();//ÊµÀı»¯¶ÔÏó
-				uploadFile.setPath(fileName);//ÉèÖÃÎÄ¼şÃû³Æ
-				product.setUploadFile(uploadFile);//ÉèÖÃÉÏ´«Â·¾¶
+				UploadFile uploadFile = new UploadFile();//å®ä¾‹åŒ–å¯¹è±¡
+				uploadFile.setPath(fileName);//è®¾ç½®æ–‡ä»¶åç§°
+				product.setUploadFile(uploadFile);//è®¾ç½®ä¸Šä¼ è·¯å¾„
 			} catch (Exception e) {
 				e.printStackTrace();
 			}finally{
@@ -190,62 +190,62 @@ public class ProductAction extends BaseAction implements ModelDriven<ProductInfo
 				fis.close();
 			}
 		}
-		//Èç¹ûÉÌÆ·Àà±ğºÍÉÌÆ·Àà±ğID²»Îª¿Õ£¬Ôò±£´æÉÌÆ·Àà±ğĞÅÏ¢
+		//å¦‚æœå•†å“ç±»åˆ«å’Œå•†å“ç±»åˆ«IDä¸ä¸ºç©ºï¼Œåˆ™ä¿å­˜å•†å“ç±»åˆ«ä¿¡æ¯
 		if(product.getCategory() != null && product.getCategory().getId() != null){
 			product.setCategory(categoryDao.load(product.getCategory().getId()));
 		}
-		//Èç¹ûÉÏ´«ÎÄ¼şºÍÉÏ´«ÎÄ¼şID²»Îª¿Õ£¬Ôò±£´æÎÄ¼şµÄÉÏ´«Â·¾¶ĞÅÏ¢
+		//å¦‚æœä¸Šä¼ æ–‡ä»¶å’Œä¸Šä¼ æ–‡ä»¶IDä¸ä¸ºç©ºï¼Œåˆ™ä¿å­˜æ–‡ä»¶çš„ä¸Šä¼ è·¯å¾„ä¿¡æ¯
 		if(product.getUploadFile() != null && product.getUploadFile().getId() != null){
 			product.setUploadFile(uploadFileDao.load(product.getUploadFile().getId()));
 		}
-		productDao.saveOrUpdate(product);//±£´æÉÌÆ·ĞÅÏ¢
+		productDao.saveOrUpdate(product);//ä¿å­˜å•†å“ä¿¡æ¯
 		return list();
 	}
 	/**
-	 * ÑéÖ¤ÉÌÆ·ĞÅÏ¢ÊÇ·ñÓĞĞ§
+	 * éªŒè¯å•†å“ä¿¡æ¯æ˜¯å¦æœ‰æ•ˆ
 	 */
 	public void validateSave() {
 		if(!StringUtil.validateString(product.getName())){
-			addFieldError("name", "ÉÌÆ·Ãû³Æ²»ÄÜÎª¿Õ£¡");
+			addFieldError("name", "å•†å“åç§°ä¸èƒ½ä¸ºç©ºï¼");
 		}
 		if(!StringUtil.validateFloat(product.getBaseprice())){
-			addFieldError("baseprice", "²É¹º¼Û¸ñÌîĞ´ÓĞÎó£¡");
+			addFieldError("baseprice", "é‡‡è´­ä»·æ ¼å¡«å†™æœ‰è¯¯ï¼");
 		}
 		if(!StringUtil.validateFloat(product.getMarketprice())){
-			addFieldError("marketprice", "ÊĞ³¡¼Û¸ñÌîĞ´ÓĞÎó£¡");
+			addFieldError("marketprice", "å¸‚åœºä»·æ ¼å¡«å†™æœ‰è¯¯ï¼");
 		}
 		if(!StringUtil.validateFloat(product.getSellprice())){
-			addFieldError("sellprice", "ÏúÊÛ¼Û¸ñÌîĞ´ÓĞÎó£¡");
+			addFieldError("sellprice", "é”€å”®ä»·æ ¼å¡«å†™æœ‰è¯¯ï¼");
 		}
 		if(!StringUtil.validateString(product.getDescription())){
-			addFieldError("description", "ÉÌÆ·ËµÃ÷²»ÄÜÎª¿Õ£¡");
+			addFieldError("description", "å•†å“è¯´æ˜ä¸èƒ½ä¸ºç©ºï¼");
 		}
 		createCategoryTree();
 	}
 	
 	/**
-	 * ²éÑ¯ÉÌÆ·
+	 * æŸ¥è¯¢å•†å“
 	 * @return
 	 * @throws Exception
 	 */
 	@Override
 	public String list() throws Exception{
-		pageModel = productDao.find(pageNo, pageSize);//µ÷ÓÃ¹«¹²µÄ²éÑ¯·½·¨
-		return LIST;//·µ»ØºóÌ¨ÉÌÆ·ÁĞ±íÒ³Ãæ
+		pageModel = productDao.find(pageNo, pageSize);//è°ƒç”¨å…¬å…±çš„æŸ¥è¯¢æ–¹æ³•
+		return LIST;//è¿”å›åå°å•†å“åˆ—è¡¨é¡µé¢
 	}
 	/**
-	 * ±à¼­ÉÌÆ·
+	 * ç¼–è¾‘å•†å“
 	 * @return String
 	 * @throws Exception
 	 */
 	@Override
 	public String edit() throws Exception{
-		this.product = productDao.get(product.getId());//Ö´ĞĞ·â×°µÄ²éÑ¯·½·¨
-		createCategoryTree();//Éú³ÉÉÌÆ·µÄÀà±ğÊ÷
-		return EDIT;//·µ»ØÉÌÆ·ĞÅÏ¢±à¼­Ò³Ãæ
+		this.product = productDao.get(product.getId());//æ‰§è¡Œå°è£…çš„æŸ¥è¯¢æ–¹æ³•
+		createCategoryTree();//ç”Ÿæˆå•†å“çš„ç±»åˆ«æ ‘
+		return EDIT;//è¿”å›å•†å“ä¿¡æ¯ç¼–è¾‘é¡µé¢
 	}
 	/**
-	 * ¸ù¾İid²é¿´ÉÌÆ·ĞÅÏ¢(²é¿´ºó¸üĞÂÈËÆøµã»÷´ÎÊı)
+	 * æ ¹æ®idæŸ¥çœ‹å•†å“ä¿¡æ¯(æŸ¥çœ‹åæ›´æ–°äººæ°”ç‚¹å‡»æ¬¡æ•°)
 	 * @return String
 	 * @throws Exception
 	 */
@@ -259,75 +259,75 @@ public class ProductAction extends BaseAction implements ModelDriven<ProductInfo
 		return SELECT;
 	}
 	/**
-	 * É¾³ıÉÌÆ·
+	 * åˆ é™¤å•†å“
 	 * @return String
 	 * @throws Exception
 	 */
 	public String del() throws Exception{
-		productDao.delete(product.getId());//Ö´ĞĞÉ¾³ı²Ù×÷
-		return list();//·µ»ØÉÌÆ·ÁĞ±í²éÕÒ·½·¨
+		productDao.delete(product.getId());//æ‰§è¡Œåˆ é™¤æ“ä½œ
+		return list();//è¿”å›å•†å“åˆ—è¡¨æŸ¥æ‰¾æ–¹æ³•
 	}
 	/**
-	 * Éú³ÉÀà±ğÊ÷
+	 * ç”Ÿæˆç±»åˆ«æ ‘
 	 */
 	private void createCategoryTree(){
-		String where = "where level=1";//²éÑ¯Ò»¼¶½Úµã
-		PageModel<ProductCategory> pageModel = categoryDao.find(-1, -1,where ,null);//Ö´ĞĞ²éÑ¯·½·¨
+		String where = "where level=1";//æŸ¥è¯¢ä¸€çº§èŠ‚ç‚¹
+		PageModel<ProductCategory> pageModel = categoryDao.find(-1, -1,where ,null);//æ‰§è¡ŒæŸ¥è¯¢æ–¹æ³•
 		List<ProductCategory> allCategorys = pageModel.getList();
-		map = new LinkedHashMap<Integer, String>();//´´½¨ĞÂµÄ¼¯ºÏ
-		for(ProductCategory category : allCategorys){//±éÀúËùÓĞµÄÒ»¼¶½Úµã
-			setNodeMap(map,category,false);//½«½ÚµãÌí¼Óµ½Map¼¯ºÏÖĞ
+		map = new LinkedHashMap<Integer, String>();//åˆ›å»ºæ–°çš„é›†åˆ
+		for(ProductCategory category : allCategorys){//éå†æ‰€æœ‰çš„ä¸€çº§èŠ‚ç‚¹
+			setNodeMap(map,category,false);//å°†èŠ‚ç‚¹æ·»åŠ åˆ°Mapé›†åˆä¸­
 		}
 	}
 	/**
-	 * ½«½ÚµãÉèÖÃµ½MapÖĞ
-	 * @param map Àà±ğÊ÷Map
-	 * @param node Àà±ğ
-	 * @param flag ÊÇ·ñÎªÄ©½Úµã
+	 * å°†èŠ‚ç‚¹è®¾ç½®åˆ°Mapä¸­
+	 * @param map ç±»åˆ«æ ‘Map
+	 * @param node ç±»åˆ«
+	 * @param flag æ˜¯å¦ä¸ºæœ«èŠ‚ç‚¹
 	 */
 	private void setNodeMap(Map<Integer, String> map,ProductCategory node,boolean flag){
-		if (node == null) {//Èç¹û½ÚµãÎª¿Õ
-			return;//·µ»Ø¿Õ£¬½áÊø³ÌĞòÔËĞĞ
+		if (node == null) {//å¦‚æœèŠ‚ç‚¹ä¸ºç©º
+			return;//è¿”å›ç©ºï¼Œç»“æŸç¨‹åºè¿è¡Œ
 		}
-		int level = node.getLevel();//»ñÈ¡½Úµã¼¶±ğ
-		StringBuffer sb = new StringBuffer();//¶¨Òå×Ö·û´®¶ÔÏó
-		if (level > 1) {//Èç¹û²»ÊÇ¸ù½Úµã
+		int level = node.getLevel();//è·å–èŠ‚ç‚¹çº§åˆ«
+		StringBuffer sb = new StringBuffer();//å®šä¹‰å­—ç¬¦ä¸²å¯¹è±¡
+		if (level > 1) {//å¦‚æœä¸æ˜¯æ ¹èŠ‚ç‚¹
 			for (int i = 0; i < level; i++) {
-				 sb.append("¡¡");//Ìí¼Ó¿Õ¸ñ
+				 sb.append("ã€€");//æ·»åŠ ç©ºæ ¼
 			}
-			sb.append(flag ? "©À" : "©¸");//Èç¹ûÎªÄ©½ÚµãÌí¼Ó"©¸"£¬·´Ö®Ìí¼Ó"©À"
+			sb.append(flag ? "â”œ" : "â””");//å¦‚æœä¸ºæœ«èŠ‚ç‚¹æ·»åŠ "â””"ï¼Œåä¹‹æ·»åŠ "â”œ"
 		}
-		map.put(node.getId(), sb.append(node.getName()).toString());//½«½ÚµãÌí¼ÓµÄ¼¯ºÏÖĞ
-		Set<ProductCategory> children = node.getChildren();//»ñÈ¡Æä×Ó½Úµã	
-		// °üº¬×ÓÀà±ğ
-		if(children != null &&  children.size() > 0){//Èç¹û½Úµã²»Îª¿Õ
+		map.put(node.getId(), sb.append(node.getName()).toString());//å°†èŠ‚ç‚¹æ·»åŠ çš„é›†åˆä¸­
+		Set<ProductCategory> children = node.getChildren();//è·å–å…¶å­èŠ‚ç‚¹	
+		// åŒ…å«å­ç±»åˆ«
+		if(children != null &&  children.size() > 0){//å¦‚æœèŠ‚ç‚¹ä¸ä¸ºç©º
 			int i = 0;
-			// ±éÀú×ÓÀà±ğ
+			// éå†å­ç±»åˆ«
 			for (ProductCategory child : children) {
 				boolean b = true;
-				if(i == children.size()-1){//Èç¹û×Ó½Úµã³¤¶È¼õ1Îªi,ËµÃ÷ÎªÄ©½Úµã
-					b = false;//ÉèÖÃ²¼¶û³£Á¿Îªfalse
+				if(i == children.size()-1){//å¦‚æœå­èŠ‚ç‚¹é•¿åº¦å‡1ä¸ºi,è¯´æ˜ä¸ºæœ«èŠ‚ç‚¹
+					b = false;//è®¾ç½®å¸ƒå°”å¸¸é‡ä¸ºfalse
 				}
-				setNodeMap(map,child,b);//ÖØĞÂµ÷ÓÃ¸Ã·½·¨
+				setNodeMap(map,child,b);//é‡æ–°è°ƒç”¨è¯¥æ–¹æ³•
 			}
 		}
 	}
-	// ÉÌÆ·¶ÔÏó
-	private ProductInfo product = new ProductInfo();//Ò»¶¨ÒªÏÈ³õÊ¼»¯obj¶ÔÏó£¡
-	// ÉÏ´«ÎÄ¼ş
+	// å•†å“å¯¹è±¡
+	private ProductInfo product = new ProductInfo();//ä¸€å®šè¦å…ˆåˆå§‹åŒ–objå¯¹è±¡ï¼
+	// ä¸Šä¼ æ–‡ä»¶
 	private File file;
-	// ËùÓĞÀà±ğ
+	// æ‰€æœ‰ç±»åˆ«
 	private Map<Integer, String> map;
-	// ·ÖÒ³×é¼ş
+	// åˆ†é¡µç»„ä»¶
 	private PageModel<ProductInfo> pageModel;
 	
 	Map<String, String> image = new HashMap<String, String>();
 	
 	@Override
-	public ProductInfo getModel() {//´Ë·½·¨ÊÇModeldriven½Ó¿ÚµÄ·½·¨£¬ÒªÖØĞ´
+	public ProductInfo getModel() {//æ­¤æ–¹æ³•æ˜¯Modeldrivenæ¥å£çš„æ–¹æ³•ï¼Œè¦é‡å†™
 		return product;
 	}
-	// getterºÍsettter·½·¨
+	// getterå’Œsettteræ–¹æ³•
 	public Map<String, String> getImage() {
 		return image;
 	}

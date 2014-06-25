@@ -2,18 +2,18 @@ package com.grq.model.pojo.product;
 
 import java.io.Serializable;
 /**
- * ¶©µ¥ÖĞµÄÉÌÆ·ÌõÄ¿
+ * è®¢å•ä¸­çš„å•†å“æ¡ç›®
  * @author JiangQuan
  */
 public class OrderItem implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private Integer id;// ÉÌÆ·ÌõÄ¿±àºÅ
-	private Integer productId;// ÉÌÆ·id
-	private String productName;// ÉÌÆ·Ãû³Æ
-	private Float productMarketprice;// ÊĞ³¡¼Û¸ñ
-	private Float productPrice;// ÉÌÆ·ÏúÊÛ¼Û¸ñ
-	private Integer amount=1;// ¹ºÂòÊıÁ¿
-	private Order order;// ËùÊô¶©µ¥
+	private Integer id;// å•†å“æ¡ç›®ç¼–å·
+	private Integer productId;// å•†å“id
+	private String productName;// å•†å“åç§°
+	private Float productMarketprice;// å¸‚åœºä»·æ ¼
+	private Float productPrice;// å•†å“é”€å”®ä»·æ ¼
+	private Integer amount=1;// è´­ä¹°æ•°é‡
+	private Order order;// æ‰€å±è®¢å•
 	public Integer getId() {
 		return id;
 	}
