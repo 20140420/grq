@@ -6,19 +6,19 @@ import java.util.Map;
 import com.grq.model.PageModel;
 
 public interface BaseDao<T> {
-	//»ù±¾Êı¾İ¿â²Ù×÷·½·¨
-	public void save(Object obj);//±£´æÊı¾İ
-	public void saveOrUpdate(Object obj);//±£´æ»òĞŞ¸ÄÊı¾İ
-	public void update(Object obj);//ĞŞ¸ÄÊı¾İ
-	public void delete(Serializable ... ids);//É¾³ıÊı¾İ
-	public T get(Serializable entityId);//¼ÓÔØÊµÌå¶ÔÏó
-	public T load(Serializable entityId);//¼ÓÔØÊµÌå¶ÔÏó
-	public Object uniqueResult(String hql, Object[] queryParams);//Ê¹ÓÃhqlÓï¾ä²Ù×÷
-	//·ÖÒ³²Ù×÷
-	public long getCount();//»ñÈ¡×ÜĞÅÏ¢Êı
-	public PageModel<T> find(int pageNo, int maxResult);//ÆÕÍ¨·ÖÒ³²Ù×÷
-	public PageModel<T> find(int pageNo, int maxResult,String where, Object[] queryParams);//ËÑË÷ĞÅÏ¢·ÖÒ³·½·¨
-	public PageModel<T> find(int pageNo, int maxResult,Map<String, String> orderby);//°´Ö¸¶¨Ìõ¼şÅÅĞò·ÖÒ³·½·¨
+	//åŸºæœ¬æ•°æ®åº“æ“ä½œæ–¹æ³•
+	public void save(Object obj);//ä¿å­˜æ•°æ®
+	public void saveOrUpdate(Object obj);//ä¿å­˜æˆ–ä¿®æ”¹æ•°æ®
+	public void update(Object obj);//ä¿®æ”¹æ•°æ®
+	public void delete(Serializable ... ids);//åˆ é™¤æ•°æ®
+	public T get(Serializable entityId);//åŠ è½½å®ä½“å¯¹è±¡
+	public T load(Serializable entityId);//åŠ è½½å®ä½“å¯¹è±¡
+	public Object uniqueResult(String hql, Object[] queryParams);//ä½¿ç”¨hqlè¯­å¥æ“ä½œ
+	//åˆ†é¡µæ“ä½œ
+	public long getCount();//è·å–æ€»ä¿¡æ¯æ•°
+	public PageModel<T> find(int pageNo, int maxResult);//æ™®é€šåˆ†é¡µæ“ä½œ
+	public PageModel<T> find(int pageNo, int maxResult,String where, Object[] queryParams);//æœç´¢ä¿¡æ¯åˆ†é¡µæ–¹æ³•
+	public PageModel<T> find(int pageNo, int maxResult,Map<String, String> orderby);//æŒ‰æŒ‡å®šæ¡ä»¶æ’åºåˆ†é¡µæ–¹æ³•
 	public PageModel<T> find(String where, Object[] queryParams,
-			Map<String, String> orderby, int pageNo, int maxResult);//°´Ö¸¶¨Ìõ¼ş·ÖÒ³ºÍÅÅĞòµÄ·ÖÒ³·½·¨
+			Map<String, String> orderby, int pageNo, int maxResult);//æŒ‰æŒ‡å®šæ¡ä»¶åˆ†é¡µå’Œæ’åºçš„åˆ†é¡µæ–¹æ³•
 }

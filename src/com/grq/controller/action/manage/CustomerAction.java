@@ -8,16 +8,16 @@ import com.grq.model.pojo.user.Customer;
 import com.grq.model.util.AppException;
 import com.opensymphony.xwork2.ModelDriven;
 /**
- * ¹Ë¿ÍAction
+ * é¡¾å®¢Action
  * @author JiangQuan
  */
 @Scope("prototype")
 @Controller("customerAction")
 public class CustomerAction extends BaseAction implements ModelDriven<Customer>{
 	private static final long serialVersionUID = 1L;
-	// ¹Ë¿Í
+	// é¡¾å®¢
 	private Customer customer = new Customer();
-	// È·ÈÏÃÜÂë
+	// ç¡®è®¤å¯†ç 
 	private String repassword;
 	@Override
 	public Customer getModel() {
@@ -36,7 +36,7 @@ public class CustomerAction extends BaseAction implements ModelDriven<Customer>{
 		this.repassword = repassword;
 	}
 	/**
-	 * ¼Ì³ĞBaseAction²¢ÖØĞ´£¬¹Ë¿ÍÓÃ»§µÇÈëÒ³Ãæ
+	 * ç»§æ‰¿BaseActionå¹¶é‡å†™ï¼Œé¡¾å®¢ç”¨æˆ·ç™»å…¥é¡µé¢
 	 * @return "customerLogin"
 	 * @throws Exception
 	 */
@@ -45,23 +45,23 @@ public class CustomerAction extends BaseAction implements ModelDriven<Customer>{
 		return CUSTOMER_LOGIN;
 	}
 	/**
-	 * ÓÃ»§µÇÂ¼ 
+	 * ç”¨æˆ·ç™»å½• 
 	 * @return
 	 * @throws Exception
 	 */
 	public String logon() throws Exception{
-		//ÑéÖ¤ÓÃ»§ÃûºÍÃÜÂëÊÇ·ñÕıÈ·
+		//éªŒè¯ç”¨æˆ·åå’Œå¯†ç æ˜¯å¦æ­£ç¡®
 		Customer loginCustomer = customerDao.login(customer.getUsername(), customer.getPassword());
-		if(loginCustomer != null){//Èç¹ûÍ¨¹ıÑéÖ¤
-			session.put("customer", loginCustomer);//½«µÇÂ¼»áÔ±ĞÅÏ¢±£´æÔÚSessionÖĞ
-		}else{//ÑéÖ¤Ê§°Ü
-			addFieldError("", "CustomerActionÓÃ»§Ãû»òÃÜÂë²»ÕıÈ·£¡");//·µ»Ø´íÎóĞÅÏ¢
-			return CUSTOMER_LOGIN;//·µ»Ø»áÔ±µÇÂ¼Ò³Ãæ
+		if(loginCustomer != null){//å¦‚æœé€šè¿‡éªŒè¯
+			session.put("customer", loginCustomer);//å°†ç™»å½•ä¼šå‘˜ä¿¡æ¯ä¿å­˜åœ¨Sessionä¸­
+		}else{//éªŒè¯å¤±è´¥
+			addFieldError("", "CustomerActionç”¨æˆ·åæˆ–å¯†ç ä¸æ­£ç¡®ï¼");//è¿”å›é”™è¯¯ä¿¡æ¯
+			return CUSTOMER_LOGIN;//è¿”å›ä¼šå‘˜ç™»å½•é¡µé¢
 		}
-		return CUSTOMER_MANAGE;//¹Ë¿ÍµÇÈë³É¹¦ºó×ªÈëÓÃ»§ºóÌ¨
+		return CUSTOMER_MANAGE;//é¡¾å®¢ç™»å…¥æˆåŠŸåè½¬å…¥ç”¨æˆ·åå°
 	}
 	/**
-	 * ÓÃ»§ÍË³ö
+	 * ç”¨æˆ·é€€å‡º
 	 * @return String
 	 * @throws Exception
 	 */
@@ -72,24 +72,24 @@ public class CustomerAction extends BaseAction implements ModelDriven<Customer>{
 		return INDEX;
 	}
 	/**
-	 * ÓÃ»§×¢²á
+	 * ç”¨æˆ·æ³¨å†Œ
 	 * @return
 	 * @throws Exception
 	 */
 	public String save() throws Exception{
-		boolean unique = customerDao.isUnique(customer.getUsername());//ÅĞ¶ÏÓÃ»§ÃûÊÇ·ñÎ¨Ò»
-		if(unique){//Èç¹ûÓÃ»§Ãû¿ÉÓÃ
-			customerDao.save(customer);//±£´æ×¢²áĞÅÏ¢
-			return CUSTOMER_LOGIN;//·µ»Ø»áÔ±µÇÂ¼Ò³Ãæ
+		boolean unique = customerDao.isUnique(customer.getUsername());//åˆ¤æ–­ç”¨æˆ·åæ˜¯å¦å”¯ä¸€
+		if(unique){//å¦‚æœç”¨æˆ·åå¯ç”¨
+			customerDao.save(customer);//ä¿å­˜æ³¨å†Œä¿¡æ¯
+			return CUSTOMER_LOGIN;//è¿”å›ä¼šå‘˜ç™»å½•é¡µé¢
 		}else{
-			throw new AppException("user have Already exists!!´ËÓÃ»§Ãû²»¿ÉÓÃ");//·ñÔò·µ»ØÒ³Ãæ´íÎóĞÅÏ¢
+			throw new AppException("user have Already exists!!æ­¤ç”¨æˆ·åä¸å¯ç”¨");//å¦åˆ™è¿”å›é¡µé¢é”™è¯¯ä¿¡æ¯
 		}
 	}
 	
 	
 	
 	/**
-	 * ¹Ë¿ÍÓÃ»§ºóÌ¨Ò³Ãæ
+	 * é¡¾å®¢ç”¨æˆ·åå°é¡µé¢
 	 * @return
 	 * @throws Exception
 	 */

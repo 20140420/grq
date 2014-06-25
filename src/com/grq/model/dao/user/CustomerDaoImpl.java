@@ -13,7 +13,7 @@ import com.grq.model.pojo.user.Customer;
 @Transactional
 public class CustomerDaoImpl extends DaoSupport<Customer> implements CustomerDao {
 	/**
-	 * ÊµÏÖ½Ó¿Ú·½·¨login()
+	 * å®ç°æ¥å£æ–¹æ³•login()
 	 */
 	@Override
 	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
@@ -30,7 +30,7 @@ public class CustomerDaoImpl extends DaoSupport<Customer> implements CustomerDao
 	}
 
 	/**
-	 * ÅĞ¶ÏÊÇ·ñÎ¨Ò»£¬ÊÇ²»´æÔÚ
+	 * åˆ¤æ–­æ˜¯å¦å”¯ä¸€ï¼Œæ˜¯ä¸å­˜åœ¨
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
