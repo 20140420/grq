@@ -29,6 +29,8 @@
 		
 		<mapping resource="com/grq/model/pojo/user/Customer.hbm.xml"/>
 		<mapping resource="com/grq/model/pojo/user/User.hbm.xml"/>
+		
+		<!-- <mapping resource="com/grq/model/pojo/shark/PanelInfo.hbm.xml"/> -->
 
     </session-factory>
 
