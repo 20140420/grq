@@ -3,28 +3,32 @@ package com.grq.model.pojo.shark;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.grq.model.pojo.user.Customer;
+
 /**
- * 键盘十三个奖项信息
+ * 键盘十三个奖项下注信息
  * @author JiangQuan
  */
 public class PanelInfo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	// Fields
-	private Integer id;// 编号
+	private String panelBetId;// 键盘下注编号(手动分配)
+	private Customer customer;// 所属用户
 	private Date createTime = new Date();// 提交时间即截止时间
-	private String swallow;// 燕子
-	private String pigeon;// 鸽子
-	private String peafowl;// 孔雀
-	private String eagle;// 老鹰
-	private String lion;// 狮子
-	private String panda;// 熊猫
-	private String monkey;// 猴子
-	private String rabbit;// 兔子
-	private String bird;// 飞禽
-	private String silver_shark;// 银鲨
-	private String bomb;// 炸弹
-	private String gold_shark;// 金鲨
-	private String beast;// 走兽
+	private Integer swallow;// 燕子
+	private Integer pigeon;// 鸽子
+	private Integer peafowl;// 孔雀
+	private Integer eagle;// 老鹰
+	private Integer lion;// 狮子
+	private Integer panda;// 熊猫
+	private Integer monkey;// 猴子
+	private Integer rabbit;// 兔子
+	private Integer bird;// 飞禽
+	private Integer silver_shark;// 银鲨
+	private Integer bomb;// 炸弹
+	private Integer gold_shark;// 金鲨
+	private Integer beast;// 走兽
+	private Integer totalBet;// 下注总数（非总额）
 	
 	// Constructors
 	/** default constructor */
@@ -33,12 +37,24 @@ public class PanelInfo implements Serializable {
 	
 
 	// Property accessors	
-	public Integer getId() {
-		return id;
+
+	public String getPanelBetId() {
+		return panelBetId;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+
+	public void setPanelBetId(String panelBetId) {
+		this.panelBetId = panelBetId;
+	}
+
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 
@@ -52,135 +68,143 @@ public class PanelInfo implements Serializable {
 	}
 
 
-	public String getSwallow() {
+	public Integer getSwallow() {
 		return swallow;
 	}
 
 
-	public void setSwallow(String swallow) {
+	public void setSwallow(Integer swallow) {
 		this.swallow = swallow;
 	}
 
 
-	public String getPigeon() {
+	public Integer getPigeon() {
 		return pigeon;
 	}
 
 
-	public void setPigeon(String pigeon) {
+	public void setPigeon(Integer pigeon) {
 		this.pigeon = pigeon;
 	}
 
 
-	public String getPeafowl() {
+	public Integer getPeafowl() {
 		return peafowl;
 	}
 
 
-	public void setPeafowl(String peafowl) {
+	public void setPeafowl(Integer peafowl) {
 		this.peafowl = peafowl;
 	}
 
 
-	public String getEagle() {
+	public Integer getEagle() {
 		return eagle;
 	}
 
 
-	public void setEagle(String eagle) {
+	public void setEagle(Integer eagle) {
 		this.eagle = eagle;
 	}
 
 
-	public String getLion() {
+	public Integer getLion() {
 		return lion;
 	}
 
 
-	public void setLion(String lion) {
+	public void setLion(Integer lion) {
 		this.lion = lion;
 	}
 
 
-	public String getPanda() {
+	public Integer getPanda() {
 		return panda;
 	}
 
 
-	public void setPanda(String panda) {
+	public void setPanda(Integer panda) {
 		this.panda = panda;
 	}
 
 
-	public String getMonkey() {
+	public Integer getMonkey() {
 		return monkey;
 	}
 
 
-	public void setMonkey(String monkey) {
+	public void setMonkey(Integer monkey) {
 		this.monkey = monkey;
 	}
 
 
-	public String getRabbit() {
+	public Integer getRabbit() {
 		return rabbit;
 	}
 
 
-	public void setRabbit(String rabbit) {
+	public void setRabbit(Integer rabbit) {
 		this.rabbit = rabbit;
 	}
 
 
-	public String getBird() {
+	public Integer getBird() {
 		return bird;
 	}
 
 
-	public void setBird(String bird) {
+	public void setBird(Integer bird) {
 		this.bird = bird;
 	}
 
 
-	public String getSilver_shark() {
+	public Integer getSilver_shark() {
 		return silver_shark;
 	}
 
 
-	public void setSilver_shark(String silver_shark) {
+	public void setSilver_shark(Integer silver_shark) {
 		this.silver_shark = silver_shark;
 	}
 
 
-	public String getBomb() {
+	public Integer getBomb() {
 		return bomb;
 	}
 
 
-	public void setBomb(String bomb) {
+	public void setBomb(Integer bomb) {
 		this.bomb = bomb;
 	}
 
 
-	public String getGold_shark() {
+	public Integer getGold_shark() {
 		return gold_shark;
 	}
 
 
-	public void setGold_shark(String gold_shark) {
+	public void setGold_shark(Integer gold_shark) {
 		this.gold_shark = gold_shark;
 	}
 
 
-	public String getBeast() {
+	public Integer getBeast() {
 		return beast;
 	}
 
 
-	public void setBeast(String beast) {
+	public void setBeast(Integer beast) {
 		this.beast = beast;
 	}
-	
-	
-	
+
+
+	public Integer getTotalBet() {
+		return totalBet;
+	}
+
+
+	public void setTotalBet(Integer totalBet) {
+		this.totalBet = totalBet;
+	}
+
 }

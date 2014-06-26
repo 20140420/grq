@@ -196,7 +196,7 @@ function recalc() {
         "qty * price",
 
         {
-            qty: $("input[name^=qty_item_]"),
+            qty: $("input[id^=qty_item_]"),
             price: $("[id^=price_item_]")
         },
 

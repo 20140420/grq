@@ -24,15 +24,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="gpanel_uncommon">
   	<!-- 显示押注 -->
     <div class="gpanel_bird">
-	<input type="text" name="qty_item_9" value="0" id="qty_item_9" onKeyUp="setAmount.modify('#qty_item_9')" class="text" /></div>
+	<input type="text" name="bird" value="0" id="qty_item_9" onKeyUp="setAmount.modify('#qty_item_9')" class="text" /></div>
     <div class="gpanel_silver_shark">
-	<input type="text" name="qty_item_10" value="0" id="qty_item_10" onKeyUp="setAmount.modify('#qty_item_10')" class="text" /></div>
+	<input type="text" name="silver_shark" value="0" id="qty_item_10" onKeyUp="setAmount.modify('#qty_item_10')" class="text" /></div>
     <div class="gpanel_bomb">
-    <input type="text" name="qty_item_11" value="0" id="qty_item_11" onKeyUp="setAmount.modify('#qty_item_11')" class="text" /></div>
+    <input type="text" name="bomb" value="0" id="qty_item_11" onKeyUp="setAmount.modify('#qty_item_11')" class="text" /></div>
     <div class="gpanel_gold_shark">
-	<input type="text" name="qty_item_12" value="0" id="qty_item_12" onKeyUp="setAmount.modify('#qty_item_12')" class="text" /></div>
+	<input type="text" name="gold_shark" value="0" id="qty_item_12" onKeyUp="setAmount.modify('#qty_item_12')" class="text" /></div>
     <div class="gpanel_beast">
-    <input type="text" name="qty_item_13" value="0" id="qty_item_13" onKeyUp="setAmount.modify('#qty_item_13')" class="text" /></div>
+    <input type="text" name="beast" value="0" id="qty_item_13" onKeyUp="setAmount.modify('#qty_item_13')" class="text" /></div>
     <!-- 按键 -->
     <div class="gpanel_key_bird">
         <div class="f_l add_chose">
@@ -86,21 +86,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- 显示押注 -->
     <div class="gpanel_personal">
     	<div class="gpanel_personal_swallow">
-    	<input type="text" name="qty_item_1" value="0" id="qty_item_1" onKeyUp="setAmount.modify('#qty_item_1')" class="text" /></div>
+    	<input type="text" name="swallow" value="0" id="qty_item_1" onKeyUp="setAmount.modify('#qty_item_1')" class="text" /></div>
         <div class="gpanel_personal_pigeon">
-		<input type="text" name="qty_item_2" value="0" id="qty_item_2" onKeyUp="setAmount.modify('#qty_item_2')" class="text" /></div>
+		<input type="text" name="pigeon" value="0" id="qty_item_2" onKeyUp="setAmount.modify('#qty_item_2')" class="text" /></div>
         <div class="gpanel_personal_peafowl">
-		<input type="text" name="qty_item_3" value="0" id="qty_item_3" onKeyUp="setAmount.modify('#qty_item_3')" class="text" /></div>
+		<input type="text" name="peafowl" value="0" id="qty_item_3" onKeyUp="setAmount.modify('#qty_item_3')" class="text" /></div>
         <div class="gpanel_personal_eagle">
-		<input type="text" name="qty_item_4" value="0" id="qty_item_4" onKeyUp="setAmount.modify('#qty_item_4')" class="text" /></div>
+		<input type="text" name="eagle" value="0" id="qty_item_4" onKeyUp="setAmount.modify('#qty_item_4')" class="text" /></div>
         <div class="gpanel_personal_lion">
-        <input type="text" name="qty_item_5" value="0" id="qty_item_5" onKeyUp="setAmount.modify('#qty_item_5')" class="text" /></div>
+        <input type="text" name="lion" value="0" id="qty_item_5" onKeyUp="setAmount.modify('#qty_item_5')" class="text" /></div>
         <div class="gpanel_personal_panda">
-		<input type="text" name="qty_item_6" value="0" id="qty_item_6" onKeyUp="setAmount.modify('#qty_item_6')" class="text" /></div>
+		<input type="text" name="panda" value="0" id="qty_item_6" onKeyUp="setAmount.modify('#qty_item_6')" class="text" /></div>
         <div class="gpanel_personal_monkey">
-        <input type="text" name="qty_item_7" value="0" id="qty_item_7" onKeyUp="setAmount.modify('#qty_item_7')" class="text" /></div>
+        <input type="text" name="monkey" value="0" id="qty_item_7" onKeyUp="setAmount.modify('#qty_item_7')" class="text" /></div>
         <div class="gpanel_personal_rabbit">
-        <input type="text" name="qty_item_8" value="0" id="qty_item_8" onKeyUp="setAmount.modify('#qty_item_8')" class="text" /></div>
+        <input type="text" name="rabbit" value="0" id="qty_item_8" onKeyUp="setAmount.modify('#qty_item_8')" class="text" /></div>
     </div>
     <!-- 按键 -->
     <div class="gpanel_key_swallow">
