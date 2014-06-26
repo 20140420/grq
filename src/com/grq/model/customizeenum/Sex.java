@@ -4,31 +4,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * ĞÔ±ğÃ¶¾ÙÀà
+ * æ€§åˆ«æšä¸¾ç±»
  * @author JiangQuan
  */
 public enum Sex {
 	BOY{
 		@Override
 		public String getName() {
-			return "ÄĞ";
+			return "ç”·";
 		}
 	},
 	GIRL{
 		@Override
 		public String getName() {
-			return "Å®";
+			return "å¥³";
 		}
 	},
 	ALL{
 		@Override
 		public String getName() {
-			return "²»ÏŞ";
+			return "ä¸é™";
 		}
 	};
 	/**
-	 * »ñÈ¡Ãû³ÆµÄ³éÏó·½·¨
-	 * @return Ãû³Æ
+	 * è·å–åç§°çš„æŠ½è±¡æ–¹æ³•
+	 * @return åç§°
 	 */
 	public abstract String getName();
 	public static List<String> getValues(){

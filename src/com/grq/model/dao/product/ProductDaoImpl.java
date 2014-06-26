@@ -16,7 +16,7 @@ import com.grq.model.pojo.product.ProductInfo;
 public class ProductDaoImpl extends DaoSupport<ProductInfo> implements ProductDao {
 
 	/**
-	 * ²éÑ¯ÍÆ¼öÉÌÆ·µÄÇ°10¼ş£¬°´ÉÏ¼ÜÊ±¼ä½µĞòÅÅĞò
+	 * æŸ¥è¯¢æ¨èå•†å“çš„å‰10ä»¶ï¼ŒæŒ‰ä¸Šæ¶æ—¶é—´é™åºæ’åº
 	 */
 	@Override
 	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
@@ -29,7 +29,7 @@ public class ProductDaoImpl extends DaoSupport<ProductInfo> implements ProductDa
 		return pageModel.getList();
 	}
 	/**
-	 * ²éÑ¯µã»÷ÅÅÃûÇ°10¸öÉÌÆ·
+	 * æŸ¥è¯¢ç‚¹å‡»æ’åå‰10ä¸ªå•†å“
 	 */
 	@Override
 	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
@@ -40,7 +40,7 @@ public class ProductDaoImpl extends DaoSupport<ProductInfo> implements ProductDa
 		return pageModel.getList();
 	}
 	/**
-	 * ²éÑ¯ÈËÆø×îºÃµÄÇ°10¼şÉÌÆ·
+	 * æŸ¥è¯¢äººæ°”æœ€å¥½çš„å‰10ä»¶å•†å“
 	 */
 	@Override
 	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)

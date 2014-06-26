@@ -1,31 +1,31 @@
 package com.grq.model.customizeenum;
 /**
- * Ö§¸¶·½Ê½
+ * æ”¯ä»˜æ–¹å¼
  * @author JiangQuan
  */
 public enum PaymentWay {
 	NET_BANK{
 		@Override
 		public String getName() {
-			return "ÍøÒøÖ§¸¶";
+			return "ç½‘é“¶æ”¯ä»˜";
 		}
 	},
 	ALIPAY{
 		@Override
 		public String getName() {
-			return "Ö§¸¶±¦";
+			return "æ”¯ä»˜å®";
 		}
 	},
 	FINISH_PAY{
 		@Override
 		public String getName() {
-			return "»õµ½¸¶¿î";
+			return "è´§åˆ°ä»˜æ¬¾";
 		}
 	},
 	POSTOFFICE_PAY{
 		@Override
 		public String getName() {
-			return "ÓÊ¾Ö»ã¿î";
+			return "é‚®å±€æ±‡æ¬¾";
 		}
 	};
 	public abstract String getName();

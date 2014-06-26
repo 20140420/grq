@@ -6,7 +6,7 @@ import com.grq.model.dao.BaseDao;
 import com.grq.model.pojo.product.ProductInfo;
 
 public interface ProductDao extends BaseDao<ProductInfo>{
-	public List<ProductInfo> findCommend();//²éÑ¯ÍÆ¼öÉÌÆ·µÄÇ°10¼ş£¬°´ÉÏ¼ÜÊ±¼ä½µĞòÅÅĞò
-	public List<ProductInfo> findClickcount();//²éÑ¯µã»÷ÅÅÃûÇ°10¸öÉÌÆ·
-	public List<ProductInfo> findSellCount();//²éÑ¯ÈËÆø×îºÃµÄÇ°10¼şÉÌÆ·
+	public List<ProductInfo> findCommend();//æŸ¥è¯¢æ¨èå•†å“çš„å‰10ä»¶ï¼ŒæŒ‰ä¸Šæ¶æ—¶é—´é™åºæ’åº
+	public List<ProductInfo> findClickcount();//æŸ¥è¯¢ç‚¹å‡»æ’åå‰10ä¸ªå•†å“
+	public List<ProductInfo> findSellCount();//æŸ¥è¯¢äººæ°”æœ€å¥½çš„å‰10ä»¶å•†å“
 }
