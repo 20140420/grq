@@ -4,7 +4,7 @@
 a,img{border:0;}
 body{font:12px/180% Arial, Helvetica, sans-serif,"宋体";}
 /* colockbox */
-.colockbox{width:283px;height:76px;margin:90px 245px;background:url(../imgsystem/colockbg.png) no-repeat;}
+.colockbox{width:283px;height:76px;margin:90px 245px;overflow:hidden;/*background:url(../imgsystem/colockbg.png) no-repeat;*/}
 .colockbox span{float:left;display:block;width:58px;height:48px;line-height:48px;font-size:26px;text-align:center;color:#ffffff;margin:0 17px 0 0;}
 .colockbox span.second{margin:0;}
 #demo02{width:208px;background-position:-75px 0;}

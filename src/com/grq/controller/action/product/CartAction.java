@@ -10,7 +10,7 @@ import com.grq.controller.action.BaseAction;
 import com.grq.model.pojo.product.OrderItem;
 import com.grq.model.pojo.product.ProductInfo;
 /**
- * ¹ºÎï³µAction
+ * è´­ç‰©è½¦Action
  * @author JiangQuan
  */
 @Scope("prototype")
@@ -18,7 +18,7 @@ import com.grq.model.pojo.product.ProductInfo;
 public class CartAction extends BaseAction {
 	private static final long serialVersionUID = 1L;
 
-	// ÉÌÆ·id
+	// å•†å“id
 	private Integer productId;
 
 	public Integer getProductId() {
@@ -28,24 +28,24 @@ public class CartAction extends BaseAction {
 		this.productId = productId;
 	}
 	/**
-	 * Ïò¹ºÎï³µÖĞÌí¼ÓÉÌÆ·
+	 * å‘è´­ç‰©è½¦ä¸­æ·»åŠ å•†å“
 	 * @return 
 	 */
 	@Override
 	public String add() throws Exception {
 		if(productId != null && productId > 0){
-			// »ñÈ¡¹ºÎï³µ
+			// è·å–è´­ç‰©è½¦
 			Set<OrderItem> cart = getCart();
-			// ±ê¼ÇÌí¼ÓµÄÉÌÆ·ÊÇ·ñÊÇÍ¬Ò»¼şÉÌÆ·
+			// æ ‡è®°æ·»åŠ çš„å•†å“æ˜¯å¦æ˜¯åŒä¸€ä»¶å•†å“
 			boolean same = false;
 			for (OrderItem item : cart) {
 				if(item.getProductId() == productId){
-					// ¹ºÂòÏàÍ¬µÄÉÌÆ·£¬¸üĞÂÊıÁ¿
+					// è´­ä¹°ç›¸åŒçš„å•†å“ï¼Œæ›´æ–°æ•°é‡
 					item.setAmount(item.getAmount() + 1);
 					same = true;
 				}
 			}
-			// ²»ÊÇÍ¬Ò»¼şÉÌÆ·
+			// ä¸æ˜¯åŒä¸€ä»¶å•†å“
 			if(!same){
 				OrderItem item = new OrderItem();
 				ProductInfo pro = productDao.load(productId);
@@ -59,25 +59,25 @@ public class CartAction extends BaseAction {
 		}
 		return LIST;
 	}
-	// ²é¿´¹ºÎï³µ
+	// æŸ¥çœ‹è´­ç‰©è½¦
 	public String list() throws Exception {
-		return LIST;//·µ»Ø¹ºÎï³µÒ³Ãæ
+		return LIST;//è¿”å›è´­ç‰©è½¦é¡µé¢
 	}
-	// ´Ó¹ºÎï³µÖĞÉ¾³ıÉÌÆ·
+	// ä»è´­ç‰©è½¦ä¸­åˆ é™¤å•†å“
 	public String delete() throws Exception {
-		Set<OrderItem> cart = getCart();// »ñÈ¡¹ºÎï³µ
-		// ´Ë´¦Ê¹ÓÃIterator£¬·ñÔò³öÏÖjava.util.ConcurrentModificationException
+		Set<OrderItem> cart = getCart();// è·å–è´­ç‰©è½¦
+		// æ­¤å¤„ä½¿ç”¨Iteratorï¼Œå¦åˆ™å‡ºç°java.util.ConcurrentModificationException
 		Iterator<OrderItem> it = cart.iterator();
-		while(it.hasNext()){//Ê¹ÓÃµü´úÆ÷±éÀúÉÌÆ·¶©µ¥ÌõÄ¿ĞÅÏ¢
+		while(it.hasNext()){//ä½¿ç”¨è¿­ä»£å™¨éå†å•†å“è®¢å•æ¡ç›®ä¿¡æ¯
 			OrderItem item = it.next();
 			if(item.getProductId() == productId){
-				it.remove();//ÒÆ³ıÉÌÆ·¶©µ¥ÌõÄ¿ĞÅÏ¢
+				it.remove();//ç§»é™¤å•†å“è®¢å•æ¡ç›®ä¿¡æ¯
 			}
 		}
-		session.put("cart", cart);//½«Çå¿ÕºóµÄĞÅÏ¢ÖØĞÂ·ÅÈëSessionÖĞ
-		return LIST;//·µ»Ø¹ºÎï³µÒ³Ãæ
+		session.put("cart", cart);//å°†æ¸…ç©ºåçš„ä¿¡æ¯é‡æ–°æ”¾å…¥Sessionä¸­
+		return LIST;//è¿”å›è´­ç‰©è½¦é¡µé¢
 	}
-	// Çå¿Õ¹ºÎï³µ
+	// æ¸…ç©ºè´­ç‰©è½¦
 	public String clear() throws Exception {
 		session.remove("cart");
 		return LIST;
