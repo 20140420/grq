@@ -49,6 +49,6 @@ function clock(time_length,time_spend,time_display,time_wait,time_observe,time_b
 			}
 		},1000);
 	//alert("返回timer："+timer);
-	//alert("周期："+time_length);
+	alert("去掉本提示就可以无限循环，周期："+time_length);
 	//return time_length;
 }
