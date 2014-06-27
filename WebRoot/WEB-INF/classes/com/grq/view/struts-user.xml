@@ -60,5 +60,13 @@
 			<interceptor-ref name="customerDefaultStack"/>
 		</action>
 	</package>
+	
+	<!-- 个人用户下注Action -->
+	<package name="grq-bet" extends="grq-customer" namespace="/user/shark">
+		<action name="bet_*" class="sharkAction" method="{1}">
+			<result name="list">/WEB-INF/pages/manage/user/shark/bet_list.jsp</result>
+			<interceptor-ref name="customerDefaultStack"/>
+		</action>
+	</package>
 
 </struts>

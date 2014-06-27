@@ -24,7 +24,7 @@
 		<ul>
 			<li><s:a action="usidebar_uinquiryaccount" namespace="/user">账户资金</s:a></li>
 			<li><s:a action="usidebar_uinquirysilverrecord" namespace="/user">资金明细</s:a></li>
-			<li><s:a action="usidebar_uinquirygame" namespace="/user">当日游戏</s:a></li>
+			<li><s:a action="bet_uinquirybet" namespace="/user/shark">历史下注</s:a></li>
 		</ul>
 		<h3>投资理财</h3>
 		<ul>

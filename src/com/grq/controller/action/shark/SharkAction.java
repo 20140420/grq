@@ -133,6 +133,10 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		}
 		return CUSTOMER_LOGIN;//返回登入页面
 	}
+	public String uinquirybet() throws Exception{
+
+		return findByCustomer();//返回查询个人下注的方法
+	}
 	/**
 	 * 查询个人下注
 	 * @return String
@@ -176,7 +180,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	}
 	
 	/**
-	 * 查询指定一场的下注情况
+	 * 查询指定一下注单的下注情况
 	 */
 	public String select() throws Exception {
 		panelData = sharkDao.load(panelData.getPanelBetId());
@@ -193,5 +197,4 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		
 		return prize.toString();//返回奖项字符串
 	}
-
 }
