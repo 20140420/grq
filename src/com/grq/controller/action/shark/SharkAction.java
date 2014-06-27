@@ -105,8 +105,9 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 				sharkDao.save(panelData);//保存panel获得数据	
 				//记得重置panel下注
 			}
+			return MAIN;//返回shark主页面
 		}
-		return MAIN;//返回shark主页面
+		return CUSTOMER_LOGIN;//返回登入页面
 	}
 
 }
