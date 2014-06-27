@@ -55,14 +55,14 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	}
 	
 	/**
-	 * 从panel提交获得数据
+	 * 从panel提交获得数据,
 	 * @return shark页面
 	 * @throws Exception
 	 */
 	public String save() throws Exception{
-		System.out.print("panel提交的data");
+		//System.out.print("panel提交的data");
 		if(getLoginCustomer() != null){//如果用户已登录
-			System.out.print("用户登入的");			
+			//System.out.print("用户登入的");			
 			Integer swallow =panelData.getSwallow();// 燕子
 			Integer pigeon =panelData.getPigeon();// 鸽子
 			Integer peafowl =panelData.getPeafowl();// 孔雀
@@ -77,33 +77,34 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 			Integer gold_shark =panelData.getGold_shark();// 金鲨
 			Integer beast =panelData.getBeast();// 走兽
 			Integer totalBet =0;// 计算下注总数（非总额）的变量
-			float single_bet=panelData.getSingle_bet(); //单注额度
-			System.out.print("单注："+single_bet);
-			float totalPrice = 0f; // 计算总额的变量
 			totalBet=(swallow+pigeon+peafowl+eagle+lion+panda+monkey+rabbit+bird+silver_shark+bomb+gold_shark+beast);
-			//System.out.print("下注总数："+totalBet);
-			totalPrice =single_bet*totalBet;
-			System.out.print("总额："+totalPrice);
-			panelData.setPanelBetId(StringUtil.createOrderId());// 设置21位的订单号
-			panelData.setCustomer(getLoginCustomer());// 设置所属用户	
-			panelData.setSwallow(swallow);
-			panelData.setPigeon(pigeon);
-			panelData.setPeafowl(peafowl);
-			panelData.setEagle(eagle);
-			panelData.setLion(lion);
-			panelData.setPanda(panda);
-			panelData.setMonkey(monkey);
-			panelData.setRabbit(rabbit);
-			panelData.setBird(bird);
-			panelData.setSilver_shark(silver_shark);
-			panelData.setBomb(bomb);
-			panelData.setGold_shark(gold_shark);
-			panelData.setBeast(beast);
-			panelData.setTotalBet(totalBet);//把下注总数加到对象panelData中
-			panelData.setSingle_bet(single_bet);
-			panelData.setTotalPrice(totalPrice);//把下注总额度
-			sharkDao.save(panelData);//保存panel获得数据	
-			//记得重置panel下注
+			System.out.print("下注总数："+totalBet);
+			if (totalBet != 0){//如果有下注
+				float single_bet=panelData.getSingle_bet(); //单注额度
+				float totalPrice = 0f; // 计算总额的变量
+				totalPrice =single_bet*totalBet;
+				System.out.print("总额："+totalPrice);
+				panelData.setPanelBetId(StringUtil.createOrderId());// 设置21位的订单号
+				panelData.setCustomer(getLoginCustomer());// 设置所属用户	
+				panelData.setSwallow(swallow);
+				panelData.setPigeon(pigeon);
+				panelData.setPeafowl(peafowl);
+				panelData.setEagle(eagle);
+				panelData.setLion(lion);
+				panelData.setPanda(panda);
+				panelData.setMonkey(monkey);
+				panelData.setRabbit(rabbit);
+				panelData.setBird(bird);
+				panelData.setSilver_shark(silver_shark);
+				panelData.setBomb(bomb);
+				panelData.setGold_shark(gold_shark);
+				panelData.setBeast(beast);
+				panelData.setTotalBet(totalBet);//把下注总数加到对象panelData中
+				panelData.setSingle_bet(single_bet);
+				panelData.setTotalPrice(totalPrice);//把下注总额度
+				sharkDao.save(panelData);//保存panel获得数据	
+				//记得重置panel下注
+			}
 		}
 		return MAIN;//返回shark主页面
 	}
