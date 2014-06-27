@@ -104,15 +104,4 @@ public class AdminAction extends BaseAction implements ModelDriven<User>{
 
 		return "assetinvest";
 	}
-	public String operatesales() throws Exception{
-
-		return "operatesales";
-	}
-	public String operateoption() throws Exception{
-
-		return "operateoption";
-	}
-		
-
-
 }

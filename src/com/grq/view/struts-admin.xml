@@ -31,8 +31,6 @@
             <result name="assetgiro" >/WEB-INF/pages/manage/admin/assetgiro.jsp</result>
             <result name="assetsilver" >/WEB-INF/pages/manage/admin/assetsilver.jsp</result>
             <result name="assetinvest" >/WEB-INF/pages/manage/admin/assetinvest.jsp</result>
-            <result name="operatesales" >/WEB-INF/pages/manage/admin/operatesales.jsp</result>
-            <result name="operateoption" >/WEB-INF/pages/manage/admin/operateoption.jsp</result>
 			<interceptor-ref name="adminDefaultStack"/>
 		</action>
 	</package>
@@ -58,6 +56,20 @@
 			<result name="select">/WEB-INF/pages/manage/admin/product/order_select.jsp</result>
 			<result name="query">/WEB-INF/pages/manage/admin/product/order_query.jsp</result>
 			<result name="update">/WEB-INF/pages/manage/admin/product/order_update_success.jsp</result>
+			<interceptor-ref name="adminDefaultStack"/>
+		</action>
+    </package>
+    <!-- 运营管理 -->
+    <package name="grq-operate" namespace="/admin/operate" extends="grq-admin">
+		<!-- 下注情况 -->
+		<action name="bet_*" method="{1}" class="sharkAction">
+			<result name="list">/WEB-INF/pages/manage/admin/shark/bet_list.jsp</result>
+			<result name="query">/WEB-INF/pages/manage/admin/shark/bet_query.jsp</result>
+			<interceptor-ref name="adminDefaultStack"/>
+		</action>
+		<!-- 游戏设定 -->
+		<action name="shark_*" method="{1}" class="sharkAction">
+			<result name="option" >/WEB-INF/pages/manage/admin/shark/option.jsp</result>
 			<interceptor-ref name="adminDefaultStack"/>
 		</action>
     </package>

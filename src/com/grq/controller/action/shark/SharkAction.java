@@ -1,9 +1,15 @@
 package com.grq.controller.action.shark;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.grq.controller.action.BaseAction;
+import com.grq.model.PageModel;
 import com.grq.model.pojo.shark.PanelInfo;
 import com.grq.model.util.StringUtil;
 import com.opensymphony.xwork2.ModelDriven;
@@ -15,6 +21,8 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	
 	// 键盘panel对象
 	private PanelInfo panelData = new PanelInfo();//一定要先初始化obj对象！
+	
+	private PageModel<PanelInfo> pageModel;// 分页组件
 	/**
 	 * 此方法是Modeldriven接口的方法，要重写
 	 * @return
@@ -23,7 +31,15 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	public PanelInfo getModel() {
 		return panelData;
 	}
-		
+	//getter和setter方法，放入request中，好在jsp页面中能拿到	
+	public PageModel<PanelInfo> getPageModel() {
+		return pageModel;
+	}
+
+	public void setPageModel(PageModel<PanelInfo> pageModel) {
+		this.pageModel = pageModel;
+	}
+
 	/**
 	 * 转盘页面
 	 * @return
@@ -53,7 +69,15 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 
 		return "grule";
 	}
-	
+	/**
+	 * 游戏shark的设定
+	 * @return shark设定页面
+	 * @throws Exception
+	 */
+	public String option() throws Exception{
+
+		return "option";
+	}
 	/**
 	 * 从panel提交获得数据,
 	 * @return shark页面
@@ -78,7 +102,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 			Integer beast =panelData.getBeast();// 走兽
 			Integer totalBet =0;// 计算下注总数（非总额）的变量
 			totalBet=(swallow+pigeon+peafowl+eagle+lion+panda+monkey+rabbit+bird+silver_shark+bomb+gold_shark+beast);
-			System.out.print("下注总数："+totalBet);
+			//System.out.print("下注总数："+totalBet);
 			if (totalBet != 0){//如果有下注
 				float single_bet=panelData.getSingle_bet(); //单注额度
 				float totalPrice = 0f; // 计算总额的变量
@@ -108,6 +132,66 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 			return MAIN;//返回shark主页面
 		}
 		return CUSTOMER_LOGIN;//返回登入页面
+	}
+	/**
+	 * 查询个人下注
+	 * @return String
+	 * @throws Exception
+	 */
+	public String findByCustomer() throws Exception {
+		if(getLoginCustomer() != null){//如果用户已登录
+			String where = "where customer.id = ?";//将用户id设置为查询条件
+			Object[] queryParams = {getLoginCustomer().getId()};//创建对象数组
+			Map<String, String> orderby = new HashMap<String, String>(1);//创建Map集合
+			orderby.put("createTime", "desc");//设置排序条件及方式
+			pageModel = sharkDao.find(where, queryParams, orderby , pageNo, pageSize);//执行查询方法
+		}
+		return LIST;//返回订单列表页面
+	}
+	
+	/**
+	 * 查询所有人下注
+	 * @return String
+	 * @throws Exception
+	 */
+	public String list() throws Exception {
+		Map<String, String> orderby = new HashMap<String, String>(1);//定义Map集合
+		orderby.put("createTime", "desc");//设置按创建时间倒序排列
+		StringBuffer whereBuffer = new StringBuffer("");//创建字符串对象
+		List<Object> params = new ArrayList<Object>();//创建列表集合
+		if(panelData.getPanelBetId() != null && panelData.getPanelBetId().length() > 0){//如果下注单不为空
+			whereBuffer.append("panelBetId = ?");//以下注单号为查询条件
+			params.add(panelData.getPanelBetId());//设置参数
+		}
+		if(panelData.getCustomer() != null && panelData.getCustomer().getUsername() != null 
+				&& panelData.getCustomer().getUsername().length() > 0){//如果会员名不为空
+			if(params.size() > 0) whereBuffer.append(" and ");//增加查询条件
+			whereBuffer.append("customer.username = ?");//设置会员名为查询条件
+			params.add(panelData.getCustomer().getUsername());//设置参数
+		}
+		//如果whereBuffer为空则查询条件为空，否则以whereBuffer为查询条件
+		String where = whereBuffer.length()>0 ? "where "+whereBuffer.toString() : "";
+		pageModel = sharkDao.find(where, params.toArray(), orderby, pageNo, pageSize);//执行查询方法
+		return LIST;//返回后台下注列表
+	}
+	
+	/**
+	 * 查询指定一场的下注情况
+	 */
+	public String select() throws Exception {
+		panelData = sharkDao.load(panelData.getPanelBetId());
+		return SELECT;
+	}
+	
+	/**
+	 * 统计押注出奖项结果
+	 * @return
+	 * @throws Exception
+	 */
+	public String countBet(){
+		StringBuffer prize = new StringBuffer();//定义字符串对象
+		
+		return prize.toString();//返回奖项字符串
 	}
 
 }
