@@ -100,5 +100,10 @@
                 <comment>总额</comment>
             </column>
         </property>
+        <property name="betCount" type="java.lang.Boolean">
+            <column name="betCount" not-null="true">
+                <comment>是否处理过</comment>
+            </column>
+        </property>
     </class>
 </hibernate-mapping>

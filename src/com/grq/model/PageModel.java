@@ -2,25 +2,25 @@ package com.grq.model;
 
 import java.util.List;
 /**
- * ·ÖÒ³×é¼ş
+ * åˆ†é¡µç»„ä»¶
  * @author JiangQuan
- * @param <T> ÊµÌå¶ÔÏó
+ * @param <T> å®ä½“å¯¹è±¡
  */
 public class PageModel<T> {
-	private int totalRecords;//×Ü¼ÇÂ¼Êı
-	private List<T> list;//½á¹û¼¯
-	private int pageNo;//µ±Ç°Ò³
-	private int pageSize;//Ã¿Ò³ÏÔÊ¾¶àÉÙÌõ 
+	private int totalRecords;//æ€»è®°å½•æ•°
+	private List<T> list;//ç»“æœé›†
+	private int pageNo;//å½“å‰é¡µ
+	private int pageSize;//æ¯é¡µæ˜¾ç¤ºå¤šå°‘æ¡ 
 	/**
-	 * È¡µÃµÚÒ»Ò³
-	 * @return µÚÒ»Ò³
+	 * å–å¾—ç¬¬ä¸€é¡µ
+	 * @return ç¬¬ä¸€é¡µ
 	 */
 	public int getTopPageNo() {
 		return 1;
 	}
 	/**
-	 * È¡µÃÉÏÒ»Ò³
-	 * @return ÉÏÒ»Ò³
+	 * å–å¾—ä¸Šä¸€é¡µ
+	 * @return ä¸Šä¸€é¡µ
 	 */
 	public int getPreviousPageNo() {
 		if (pageNo <= 1) {
@@ -29,8 +29,8 @@ public class PageModel<T> {
 		return pageNo -1;
 	}
 	/**
-	 * È¡µÃÏÂÒ»Ò³
-	 * @return ÏÂÒ»Ò³
+	 * å–å¾—ä¸‹ä¸€é¡µ
+	 * @return ä¸‹ä¸€é¡µ
 	 */
 	public int getNextPageNo() {
 		if (pageNo >= getTotalPages()) {
@@ -39,14 +39,14 @@ public class PageModel<T> {
 		return pageNo + 1;
 	}
 	/**
-	 * È¡µÃ×îºóÒ»Ò³
-	 * @return ×îºóÒ»Ò³
+	 * å–å¾—æœ€åä¸€é¡µ
+	 * @return æœ€åä¸€é¡µ
 	 */
 	public int getBottomPageNo() {
 		return getTotalPages() == 0 ? 1 : getTotalPages();
 	}
 	/**
-	 * È¡µÃ×ÜÒ³Êı
+	 * å–å¾—æ€»é¡µæ•°
 	 * @return
 	 */
 	public int getTotalPages() {
@@ -54,7 +54,7 @@ public class PageModel<T> {
 	}
 	
 	
-	//getterºÍsetter·½·¨
+	//getterå’Œsetteræ–¹æ³•
 	public int getTotalRecords() {
 		return totalRecords;
 	}

@@ -22,7 +22,7 @@ public class PanelInfo  implements java.io.Serializable {
 	
 	private String panelBetId;// 键盘下注编号(手动分配)
 	private Customer customer;// 所属用户
-     private Date createTime = new Date();// 提交时间即截止时间
+    private Date createTime = new Date();// 提交时间即截止时间
  	private Integer swallow;// 燕子
  	private Integer pigeon;// 鸽子
  	private Integer peafowl;// 孔雀
@@ -39,6 +39,7 @@ public class PanelInfo  implements java.io.Serializable {
  	private Integer totalBet;// 下注总数（非总额）
  	private Float single_bet;// 单注额度
  	private Float totalPrice;// 下注总额度
+ 	private Boolean betCount = false;// 用于判断是否是统计过（默认值为false）
 
 
     // Constructors
@@ -232,13 +233,14 @@ public class PanelInfo  implements java.io.Serializable {
     public void setTotalPrice(Float totalPrice) {
         this.totalPrice = totalPrice;
     }
-   
 
 
+	public Boolean getBetCount() {
+		return betCount;
+	}
 
 
-
-
-
-
+	public void setBetCount(Boolean betCount) {
+		this.betCount = betCount;
+	}
 }

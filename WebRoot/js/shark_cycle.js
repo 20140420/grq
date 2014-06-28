@@ -24,21 +24,21 @@ function clock(time_length,time_spend,time_display,time_wait,time_observe,time_b
 				time_length -=1;
 				display=(time_length-(time_observe+ time_bet+ time_wait));
 				$(minute_elem).text(display<10?"0"+display:display);
-				//////////alert("展示3秒");
+				//alert("展示3秒");
 			} else if(time_length > (time_observe+ time_bet)){//等待				
 				time_length -=1;
 				wait=(time_length-(time_observe+ time_bet));
 				$(second_elem).text(wait<10?"0"+wait:wait);
-				////////alert("等待2秒"); 
+				//alert("等待2秒"); 
 			} else if(time_length > time_bet){//观察				
 				time_length -=1;
 				observe=(time_length-time_bet);
 				$(minute_elem).text(observe<10?"0"+observe:observe); 
-				//////alert("观察6秒");
+				//alert("观察6秒");
 			} else if(time_length >0){//剩于下注				
 				time_length -=1;
 				$(second_elem).text(time_length<10?"0"+time_length:time_length); 
-				////alert("下注7秒");
+				//alert("下注7秒");
 			} else {
 				//clearInterval(timer);
 				//alert("结束返回time_length："+time_length);

@@ -31,6 +31,7 @@ td {
 				<td align="center">金鲨</td>
 				<td align="center">走兽</td>
 				<td align="center">期号</td>
+				<td align="center">是否统计</td>
 			</tr>
 		</table>
 	</div>
@@ -58,6 +59,7 @@ td {
 						<td align="center"><s:property value="gold_shark" /></td>
 						<td align="center"><s:property value="beast" /></td>
 						<td align="center"><s:property value="panelBetId" /></td>
+						<td align="center"><s:property value="betCount" /></td>
 					</tr>
 				</s:iterator>
 			</table>

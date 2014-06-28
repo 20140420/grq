@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,25 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	 * 此方法是Modeldriven接口的方法，要重写
 	 * @return
 	 */
+	
+
+	private float dividend = 300;//彩金池变量
+	private double commission_rate = 0.10;//佣金费率
+	private float totalPriceSum = 0f; //统计下注总额之和的变量
+	private float totalSwallowSum = 0f; //统计燕子下注总额之和
+	private float totalPigeonSum = 0f;
+	private float totalPeafowlSum = 0f;
+	private float totalEagleSum = 0f;
+	private float totalLionSum = 0f;
+	private float totalPandaSum = 0f;
+	private float totalMonkeySum = 0f;
+	private float totalRabbitSum = 0f;
+	private float totalBirdSum = 0f;
+	private float totalSilverSum = 0f;
+	private float totalBombSum = 0f;
+	private float totalGoldSum = 0f;
+	private float totalBeastSum = 0f;
+	
 	@Override
 	public PanelInfo getModel() {
 		return panelData;
@@ -108,6 +128,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 				float totalPrice = 0f; // 计算总额的变量
 				totalPrice =single_bet*totalBet;
 				System.out.print("总额："+totalPrice);
+				Boolean betCount = false;// 用于判断是否是统计过（默认值为false）
 				panelData.setPanelBetId(StringUtil.createOrderId());// 设置21位的订单号
 				panelData.setCustomer(getLoginCustomer());// 设置所属用户	
 				panelData.setSwallow(swallow);
@@ -126,6 +147,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 				panelData.setTotalBet(totalBet);//把下注总数加到对象panelData中
 				panelData.setSingle_bet(single_bet);
 				panelData.setTotalPrice(totalPrice);//把下注总额度
+				panelData.setBetCount(betCount);// 用于判断是否是统计过（默认值为false）
 				sharkDao.save(panelData);//保存panel获得数据	
 				//记得重置panel下注
 			}
@@ -186,15 +208,229 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		panelData = sharkDao.load(panelData.getPanelBetId());
 		return SELECT;
 	}
+
 	
 	/**
-	 * 统计押注出奖项结果
-	 * @return
-	 * @throws Exception
+	 * 出奖
+	 * @return String 奖项
 	 */
-	public String countBet(){
+	public String getPrize(){
 		StringBuffer prize = new StringBuffer();//定义字符串对象
-		
+		float totalBetSum = countTotalPrice();//获得下注总额之和
+		if( (totalBetSum*(1-commission_rate)+dividend) > (totalBetSum*99) ){//如果已有99倍余额
+			turnAgain();
+			sharkPrize();//鲨鱼函数,根据返回值确定是金鲨还是银鲨
+		} else if( (totalBetSum*(1-commission_rate)+dividend) > (totalBetSum*24) ){//如果已有24倍余额
+			randomPrize();//随机函数
+		} else if( (totalBetSum*(1-commission_rate)+dividend) > 0){
+			dividendUpPrize();//彩金池增加的吃分函数
+		} else {
+			attractPrize();//诱惑函数
+		}
+		System.out.print("奖项为："+prize);
 		return prize.toString();//返回奖项字符串
+	}
+
+	/**
+	 * 统计各奖项押注之和，及总押注总额之和
+	 * @return float 未操作押注总额之和 totalBetSum
+	 */
+	private float countTotalPrice(){
+		Map<String, String> orderby = new HashMap<String, String>(1);//定义Map集合
+		orderby.put("createTime", "desc");//设置按创建时间倒序排列
+		String where = "where betCount = ?";//设置查询条件语句
+		Object[] queryParams = {false};//获取未操作过的参数值
+		pageModel = sharkDao.find(where, queryParams, orderby, -1, -1);//执行查询方法
+		List<PanelInfo> allBet = pageModel.getList();//获取所有未操作过的下注条目
+		for(PanelInfo panelInfo : allBet){//遍历所有的下注条目
+			float totalPrice = panelInfo.getTotalPrice();//获取每一条目下注总额
+			float single_bet = panelInfo.getSingle_bet();//获取每一条单注额度
+			Integer swallow = panelInfo.getSwallow();
+			Integer pigeon = panelInfo.getPigeon();
+			Integer peafowl = panelInfo.getPeafowl();
+			Integer eagle = panelInfo.getEagle();
+			Integer lion = panelInfo.getLion();
+			Integer panda = panelInfo.getPanda();
+			Integer monkey = panelInfo.getMonkey();
+			Integer rabbit = panelInfo.getRabbit();
+			Integer bird = panelInfo.getBird();
+			Integer silver = panelInfo.getSilver_shark();
+			Integer bomb = panelInfo.getBomb();
+			Integer gold = panelInfo.getGold_shark();
+			Integer beast = panelInfo.getBeast();
+			boolean betCount = panelInfo.getBetCount();//获得条目统计状态
+			if(betCount == false){//如果条目未操作过
+				float totalSwallow = swallow*single_bet;
+				setTotalSwallowSum(getTotalSwallowSum() + totalSwallow);
+				float totalPigeon = pigeon*single_bet;
+				setTotalPigeonSum(getTotalPigeonSum() + totalPigeon);//等同于totalPigeonSum += totalPigeon;
+				float totalPeafowl = peafowl*single_bet;
+				totalPeafowlSum += totalPeafowl;
+				float totalEagle = eagle*single_bet;
+				totalEagleSum += totalEagle;
+				float totalLion = lion*single_bet;
+				totalLionSum += totalLion;
+				float totalPanda = panda*single_bet;
+				totalPandaSum += totalPanda;
+				float totalMonkey = monkey*single_bet;
+				totalMonkeySum += totalMonkey;
+				float totalRabbit = rabbit*single_bet;
+				totalRabbitSum += totalRabbit;
+				float totalBird = bird*single_bet;
+				totalBirdSum += totalBird;
+				float totalSilver = silver*single_bet;
+				totalSilverSum += totalSilver;
+				float totalBomb = bomb*single_bet;
+				totalBombSum += totalBomb;
+				float totalGold = gold*single_bet;
+				totalGoldSum += totalGold;
+				float totalBeast = beast*single_bet;
+				totalBeastSum += totalBeast;//相加所有条目禽兽的下注总额
+				totalPriceSum += totalPrice;//相加所有条目的下注总额
+				betCount = true; //设置改变标记为已经统计过
+				panelData = sharkDao.load(panelData.getPanelBetId());//装载订单对象
+				panelData.setBetCount(betCount);// 设置操作情况
+				sharkDao.update(panelData);//更新修改操作状态
+			}
+		}
+		System.out.print("单场押注总额之和为："+totalPriceSum);		
+		return totalPriceSum;//返回总下注数目之和
+	}
+	
+	/**
+	 * 鲨鱼函数
+	 */
+	private String sharkPrize() {
+		// TODO Auto-generated method stub
+		double a = Math.floor(randomNum.nextInt(2));//随机获取大于等于0到小于2的整数部分,即随机获取0或1
+		int b = (int)a;//将double数据类型转换成int
+		if(b == 0){//为银鲨概率1/2
+			float silverOutScore = getTotalSilverSum()*24;//银鲨总出分
+			dividend = dividend + countTotalPrice() - silverOutScore; //彩金池数目变动
+			//记得更新到数据库
+			return "silver_shark";
+		} else if(b == 1){//为金鲨概率1/2
+			int times =(int)(Math.floor(randomNum.nextInt(75))+25);//随机获取大于等于25到小于100的整数
+			float goldOutScore = getTotalGoldSum()*times;//金鲨总出分
+			dividend = dividend + countTotalPrice() - goldOutScore; //彩金池数目变动
+			//记得更新到数据库
+			return "gold_shark";
+		} else {
+			System.out.print("不应该出现的error");
+		}
+		return null;
+	}
+	
+	/**
+	 * 再转函数
+	 */
+	private void turnAgain() {
+		// TODO Auto-generated method stub
+		
+	}
+	/**
+	 * 彩金池增加的吃分函数
+	 */
+	private void dividendUpPrize() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	/**
+	 * 诱惑函数
+	 */
+	private void attractPrize() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	Random randomNum = new Random();
+	/** 
+	 * 随机函数
+	 */
+	private void randomPrize() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	//getter和setter方法
+	public float getTotalSwallowSum() {
+		return totalSwallowSum;
+	}
+	public void setTotalSwallowSum(float totalSwallowSum) {
+		this.totalSwallowSum = totalSwallowSum;
+	}
+
+	public float getTotalPeafowlSum() {
+		return totalPeafowlSum;
+	}
+	public void setTotalPeafowlSum(float totalPeafowlSum) {
+		this.totalPeafowlSum = totalPeafowlSum;
+	}
+	public float getTotalPigeonSum() {
+		return totalPigeonSum;
+	}
+	public void setTotalPigeonSum(float totalPigeonSum) {
+		this.totalPigeonSum = totalPigeonSum;
+	}
+	public float getTotalEagleSum() {
+		return totalEagleSum;
+	}
+	public void setTotalEagleSum(float totalEagleSum) {
+		this.totalEagleSum = totalEagleSum;
+	}
+	public float getTotalLionSum() {
+		return totalLionSum;
+	}
+	public void setTotalLionSum(float totalLionSum) {
+		this.totalLionSum = totalLionSum;
+	}
+	public float getTotalPandaSum() {
+		return totalPandaSum;
+	}
+	public void setTotalPandaSum(float totalPandaSum) {
+		this.totalPandaSum = totalPandaSum;
+	}
+	public float getTotalMonkeySum() {
+		return totalMonkeySum;
+	}
+	public void setTotalMonkeySum(float totalMonkeySum) {
+		this.totalMonkeySum = totalMonkeySum;
+	}
+	public float getTotalRabbitSum() {
+		return totalRabbitSum;
+	}
+	public void setTotalRabbitSum(float totalRabbitSum) {
+		this.totalRabbitSum = totalRabbitSum;
+	}
+	public float getTotalBirdSum() {
+		return totalBirdSum;
+	}
+	public void setTotalBirdSum(float totalBirdSum) {
+		this.totalBirdSum = totalBirdSum;
+	}
+	public float getTotalSilverSum() {
+		return totalSilverSum;
+	}
+	public void setTotalSilverSum(float totalSilverSum) {
+		this.totalSilverSum = totalSilverSum;
+	}
+	public float getTotalBombSum() {
+		return totalBombSum;
+	}
+	public void setTotalBombSum(float totalBombSum) {
+		this.totalBombSum = totalBombSum;
+	}
+	public float getTotalGoldSum() {
+		return totalGoldSum;
+	}
+	public void setTotalGoldSum(float totalGoldSum) {
+		this.totalGoldSum = totalGoldSum;
+	}
+	public float getTotalBeastSum() {
+		return totalBeastSum;
+	}
+	public void setTotalBeastSum(float totalBeastSum) {
+		this.totalBeastSum = totalBeastSum;
 	}
 }
