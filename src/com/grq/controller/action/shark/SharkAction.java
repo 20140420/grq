@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Vector;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -36,11 +37,11 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	private float totalPandaSum = 0f;
 	private float totalMonkeySum = 0f;
 	private float totalRabbitSum = 0f;
-	private float totalBirdSum = 0f;
+	private float totalBirdSum = 0f;//统计飞禽下注总额之和
 	private float totalSilverSum = 0f;
 	private float totalBombSum = 0f;
 	private float totalGoldSum = 0f;
-	private float totalBeastSum = 0f;
+	private float totalBeastSum = 0f;//统计走兽下注总额之和
 	private boolean againOrNot = false; //是否重转，默认否
 	private String prizeString=null;//奖项变量，默认空值
 
@@ -52,7 +53,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	 */
 	@Override
 	public String main(){
-		havePrize();
+		//havePrize();
 		if(againOrNot == true){//如果是则获得再转一次
 			turnAgain();
 			againOrNot = false;//重置
@@ -65,11 +66,11 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	 */
 	private String havePrize(){
 		//StringBuffer prize = new StringBuffer();//定义字符串对象
-		float totalBetSum = countTotalPrice();//获得下注总额之和
-		dividend = dividend + totalBetSum*(1-commission_rate);//筹码注入彩金池
-		if( dividend > (totalBetSum*99) ){//如果已有99倍余额
+		float totalPriceSum = countTotalPrice();//获得下注总额之和
+		dividend = dividend + totalPriceSum*(1-commission_rate);//筹码注入彩金池
+		if( dividend > (totalPriceSum*99) ){//如果已有99倍余额
 			prizeString = sharkPrize();//鲨鱼函数,根据返回值确定是金鲨还是银鲨，等同setPrizeString(sharkPrize());
-		} else if( dividend > (totalBetSum*24) ){//如果已有24倍余额
+		} else if( dividend > (totalPriceSum*24) ){//如果已有24倍余额
 			setPrizeString(randomPrize());//随机函数
 		} else if( dividend > 0){
 			setPrizeString(dividendUpPrize());//彩金池增加的吃分函数
@@ -151,8 +152,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	/**
 	 * 鲨鱼函数
 	 */
-	private String sharkPrize() {
-		// TODO Auto-generated method stub		
+	private String sharkPrize() {	
 		double a = Math.floor(randomNum.nextInt(2));//随机获取大于等于0到小于2的整数部分,即随机获取0或1
 		int silverOrGold = (int)a;//将double数据类型转换成int
 		if(silverOrGold == 0){//为银鲨概率1/2
@@ -177,7 +177,6 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	 * 随机函数
 	 */
 	private String randomPrize() {
-		// TODO Auto-generated method stub
 		setAgainOrNot(false); //设置为false不重转
 		int birdOrBeast =(int)(Math.floor(randomNum.nextInt(2)));//随机获取大于等于0到小于2的整数部分,即随机获取0或1
 		if(birdOrBeast == 0){//为飞禽概率1/2
@@ -191,11 +190,11 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 			} else if(birdWhat == 1){//奖项鸽子
 				float peafowlOutScore = getTotalPeafowlSum()*6;//鸽子总出分，倍数暂时固定
 				dividend = dividend - peafowlOutScore; //发了第二个奖鸽子后的彩金池
-				return "peafowl";
+				return "pigeon";
 			} else if(birdWhat == 2){//奖项孔雀
 				float pigeonOutScore = getTotalPigeonSum()*8;//鸽子总出分，倍数暂时固定
 				dividend = dividend - pigeonOutScore; //发了第二个奖鸽子后的彩金池
-				return "pigeon";
+				return "peafowl";
 			} else if(birdWhat == 3){//奖项老鹰
 				float eagleOutScore = getTotalEagleSum()*24;//鸽子总出分，倍数暂时固定
 				dividend = dividend - eagleOutScore; //发了第二个奖鸽子后的彩金池
@@ -236,22 +235,78 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	 * 彩金池增加的吃分函数
 	 */
 	private String dividendUpPrize() {
-		// TODO Auto-generated method stub
+		double priceForPrize = totalPriceSum*(1-commission_rate);//单场用于发奖注额
+		double totalBird[] = new double[]{totalSwallowSum,totalPigeonSum,totalPeafowlSum,totalEagleSum};//用于临时保存飞禽各个奖项的和
+		double totalBeast[] = new double[]{totalLionSum, totalPandaSum,totalMonkeySum,totalRabbitSum};//用于临时保存走兽各个奖项的和
+		float birdOutScore = getTotalBirdSum()*2;//飞禽总出分 ;
+		float beastOutScore = getTotalBeastSum()*2;//走兽总出分 ;
+		
+		double[] lessBird = lessThan(totalBird,birdOutScore,priceForPrize);//比较获得能吃分的几个飞禽类奖项
+		Vector<Object> vBird = new Vector<Object>(lessBird.length);//用于记录可吃分奖项的索引
+		for (int i = 0; i < lessBird.length; i++){//获取添加能吃分的索引到vBird
+	    	if(lessBird[i] != 0){
+	    		vBird.add(i);
+	    	}
+	    }
+		int index=(int)(Math.random()*vBird.size());//随机一个能吃分奖的索引的索引
+		if((Integer)vBird.get(index) == 0){
+			System.out.println("燕子："+lessBird[(Integer) vBird.get(index)]);
+			return "swallow"; 
+		} else if((Integer)vBird.get(index) == 1){
+			System.out.println("鸽子："+lessBird[(Integer) vBird.get(index)]);
+			return "pigeon";
+		} else if((Integer)vBird.get(index) == 2){
+			System.out.println("孔雀："+lessBird[(Integer) vBird.get(index)]);
+			return "peafowl";
+		} else if((Integer)vBird.get(index) == 3){
+			System.out.println("老鹰："+lessBird[(Integer) vBird.get(index)]);
+			return "eagle";
+		} else{
+			System.out.print("不应该出现的error");
+		}
+		
+		double[] lessBeast = lessThan(totalBeast,beastOutScore,priceForPrize);//比较获得能吃分的几个走兽类奖项
+		Vector<Object> vBeast = new Vector<Object>(lessBeast.length);//用于记录可吃分奖项的索引
+		for (int i = 0; i < lessBeast.length; i++){//获取添加能吃分的索引到vBeast
+	    	if(lessBeast[i] != 0){
+	    		vBeast.add(i);
+	    	}
+	    }
+		int indexBeast=(int)(Math.random()*vBeast.size());//随机一个能吃分奖的索引的索引
+		if((Integer)vBeast.get(indexBeast) == 0){
+			System.out.println("狮子："+lessBeast[(Integer) vBeast.get(indexBeast)]);
+			return "lion"; 
+		}
+
 		return null;
+	}
+	/**
+	 * 获得能吃分的几个奖项
+	 * @param totalSum
+	 * @param priceForPrize
+	 * @return
+	 */
+	private double[] lessThan(double[] totalSum,double bScore, double priceForPrize) {
+		double[] less = new double[totalSum.length];
+		for(int i=0 ; i<totalSum.length ; i++){
+            if (totalSum[i] < (priceForPrize - bScore)){
+            	less[i] =totalSum[i];
+        	}else {
+	    		less[i] = 0;
+	    	}
+        }
+		return less;
 	}
 	/**
 	 * 诱惑函数
 	private String attractPrize() {
-		// TODO Auto-generated method stub
 		return null;
 	} */
 	
 	/**
 	 * 再转函数
 	 */
-	private String turnAgain() {
-		// TODO Auto-generated method stub
-		
+	private String turnAgain() {		
 		return null;
 	}
 	
