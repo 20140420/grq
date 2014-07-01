@@ -21,13 +21,38 @@ import com.opensymphony.xwork2.ModelDriven;
 public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	private static final long serialVersionUID = 1L;
 	
+	/* 游戏配置后期单独做一块 */
+	//游戏倍数
+	int timesSwallow = 6;
+	int timesPigeon = 6;
+	int timesPeafowl = 8;
+	int timesEagle = 24;
+	int timesLion = 24;
+	int timesPanda = 8;
+	int timesMonkey = 6;
+	int timesRabbit = 6;
+	int timesMax = 99;//最高倍数
+	//配置时间
+	int time_spend= 3;//计算转盘花费的时间4秒，从而计算转盘速度
+	int time_observe= 6; //观察时长 后期由服务器取得
+	int time_bet= 12;//下注时长 后期由服务器取得
+	int time_display= 3;//展示时长 后期由服务器取得
+	int time_wait= 2;//等待时长 后期由服务器取得
+	//int time_cycle;//一个周期时长 计算所得非配置,转盘-展示-等待-观察-下注
+	//转盘配置
+	int circle_num= 2;//转盘圈数 后期由服务器取得
+	//关键配置	
+	double dividend = 300.00; //彩金池变量
+	double commission_rate = 0.10; //佣金费率
+	double single_bet = 1000.00; //单注上限
+	int bet_limit = 999; //押注上限
+	
+	
 	// 键盘panel对象
 	private PanelInfo panelData = new PanelInfo();//一定要先初始化obj对象！
 	
 	private PageModel<PanelInfo> pageModel;// 分页组件
 	private Random randomNum = new Random();//用于获取随机数
-	private float dividend = (float) 300.00;//彩金池变量
-	private float commission_rate = (float) 0.10;//佣金费率
 	private float totalPriceSum = 0f; //统计下注总额之和的变量
 	private float totalSwallowSum = 0f; //统计燕子下注总额之和
 	private float totalPigeonSum = 0f;
@@ -45,14 +70,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	private boolean againOrNot = false; //是否重转，默认否
 	private String prizeString=null;//奖项变量，默认空值
 	
-	int timesSwallow = 6;
-	int timesPigeon = 6;
-	int timesPeafowl = 8;
-	int timesEagle = 24;
-	int timesLion = 24;
-	int timesPanda = 8;
-	int timesMonkey = 6;
-	int timesRabbit = 6;
+
 
 	
 	/**
@@ -245,7 +263,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	 */
 	private String dividendUpPrize() {
 		setAgainOrNot(false); //设置为false不重转
-		float priceForPrize = totalPriceSum*(1-commission_rate);//单场用于发奖注额
+		float priceForPrize = (float) (totalPriceSum*(1-commission_rate));//单场用于发奖注额
 		float swallowOutScore = (float) (totalSwallowSum*timesSwallow);
 		float pigeonOutScore = (float) (totalPigeonSum*timesPigeon);
 		float peafowlOutScore = (float) (totalPeafowlSum*timesPeafowl);
