@@ -1,10 +1,15 @@
 package com.grq.controller.action.shark;
 
-import java.util.Vector;
+/**
+ * 可行
 
+ */
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Vector;
 public class test { 
 	private static float totalSwallowSum = 6.0f; //统计燕子下注总额之和
-	private static float totalPigeonSum = 4.5f;
+	private static float totalPigeonSum = 4.6151f;
 	private static float totalPeafowlSum = 3.0f;
 	private static float totalEagleSum = 3.5f;
 	private static float totalLionSum = 5.0f;
@@ -13,7 +18,93 @@ public class test {
 	private static float totalRabbitSum = 6.5f;
 	private static float priceForPrize = 5.0f;
 	public static void main(String[] args) {
-		double totalSum[] = new double[]{totalSwallowSum,totalPigeonSum,totalPeafowlSum,totalEagleSum,totalLionSum, totalPandaSum,totalMonkeySum,totalRabbitSum};
+		float swallowOutScore = (float) (totalSwallowSum*0.8);
+		float pigeonOutScore = (float) (totalPigeonSum*1);
+		float peafowlOutScore = (float) (totalPeafowlSum*8);
+		float eagleOutScore = (float) (totalEagleSum*0.5);
+		float lionOutScore = (float) (totalLionSum*24);
+		float pandaOutScore = (float) (totalPandaSum*8);
+		float monkeyOutScore = (float) (totalMonkeySum*6);
+		float rabbitOutScore = (float) (totalRabbitSum*6);		
+		ArrayList<Object> totalSum = new ArrayList<Object>();		
+		totalSum.add(swallowOutScore);
+		totalSum.add(pigeonOutScore);
+		totalSum.add(peafowlOutScore);
+		totalSum.add(eagleOutScore);
+		totalSum.add(lionOutScore);
+		totalSum.add(pandaOutScore);
+		totalSum.add(monkeyOutScore);
+		totalSum.add(rabbitOutScore);
+		/**
+		ArrayList<Object> totalSumFormat = new ArrayList<Object>();//用于保存格式化后的值
+		for(int i = 0; i < totalSum.size(); i++){
+			BigDecimal   bd   =   new   BigDecimal((Float)totalSum.get(i));
+			bd   =   bd.setScale(2,BigDecimal.ROUND_HALF_UP);//2是设置位数，BigDecimal.ROUND_HALF_UP表示四舍五入，可以选择其他舍值方式
+			float bdFloat  =   bd.floatValue();
+			System.out.println("bdFloat:"+pigeonOutScore); 
+			totalSumFormat.add(bdFloat);
+		}*/
+		Vector<Object> less = lessThan(totalSum,priceForPrize);
+	    for (int i = 0; i < less.size(); i++){ 
+	    	System.out.println(less.get(i)); 
+		    System.out.println("第"+i+"个");
+	    }
+	}
+	
+
+	private static Vector<Object> lessThan(ArrayList<Object> totalSum,float b) {
+		Vector<Object> v = new Vector<Object>(totalSum.size()); 
+		for(int i=0 ; i<totalSum.size() ; i++){
+			if ((Float)totalSum.get(i) < b){
+				v.add(totalSum.get(i));
+				//System.out.println("第"+i+"个");
+			}
+		}
+		return v;
+	}
+
+}
+
+/**
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.util.Vector;
+
+public class test { 
+	private static float totalSwallowSum = 6.0f; //统计燕子下注总额之和
+	private static float totalPigeonSum = 4.611f;
+	private static float totalPeafowlSum = 3.0f;
+	private static float totalEagleSum = 3.5f;
+	private static float totalLionSum = 5.0f;
+	private static float totalPandaSum = 5.5f;
+	private static float totalMonkeySum = 4.0f;
+	private static float totalRabbitSum = 6.5f;
+	private static float priceForPrize = 5.0f;
+	public static void main(String[] args) {
+		float swallowOutScore =(float)(totalSwallowSum*6);
+		float pigeonOutScore =totalPigeonSum*1;
+		
+		String parten = "#.##";
+		DecimalFormat decimal = new DecimalFormat(parten);
+		String str= decimal.format(pigeonOutScore);
+		
+		//float   ft   =   134.3435f;  
+		//  int   scale   =   2;//设置位数  
+		 // int   roundingMode   =   4;//表示四舍五入，可以选择其他舍值方式，例如去尾，等等.  
+		//  BigDecimal   bd   =   new   BigDecimal((double)pigeonOutScore);  
+		 // bd   =   bd.setScale(scale,roundingMode);  
+		 // pigeonOutScore   =   bd.floatValue(); 
+		
+		System.out.println("出分："+str+"个");
+		float peafowlOutScore = totalPeafowlSum*8;
+		float eagleOutScore = totalEagleSum*24;
+		float lionOutScore =totalLionSum*24;
+		float pandaOutScore =totalPandaSum*8;
+		float monkeyOutScore =totalMonkeySum*6;
+		float rabbitOutScore =totalRabbitSum*6;
+				
+		//double totalSum[] = new double[]{swallowOutScore,pigeonOutScore,peafowlOutScore,eagleOutScore,lionOutScore,pandaOutScore,monkeyOutScore,rabbitOutScore};
+		double totalSum[] = new double[]{swallowOutScore,pigeonOutScore,totalPeafowlSum,totalEagleSum,totalLionSum, totalPandaSum,totalMonkeySum,totalRabbitSum};
 		double[] less = lessThan(totalSum,priceForPrize);
 		Vector<Object> v = new Vector<Object>(less.length);//用于记录可吃分奖项的索引
 		for (int i = 0; i < less.length; i++){
@@ -40,7 +131,7 @@ public class test {
 	}
 	
 }
-
+*/
 
 /**
  * 
@@ -124,21 +215,6 @@ public class test {
 	        return v.toArray();
 	    }
 }
-	    		if(i == 0){
-	    			System.out.println("燕子："+lessBird[i]);
-	    			return "swallow"; 
-	    		} else if(i == 1){
-	    			System.out.println("鸽子："+lessBird[i]);
-	    			return "pigeon";
-	    		} else if(i == 2){
-	    			System.out.println("孔雀："+lessBird[i]);
-	    			return "peafowl";
-	    		} else if(i == 3){
-	    			System.out.println("老鹰："+lessBird[i]);
-	    			return "eagle";
-	    		} else{
-	    			System.out.print("不应该出现的error");
-	    		}
  */
 
 

@@ -26,8 +26,8 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	
 	private PageModel<PanelInfo> pageModel;// 分页组件
 	private Random randomNum = new Random();//用于获取随机数
-	private double dividend = 300.00;//彩金池变量
-	private double commission_rate = 0.10;//佣金费率
+	private float dividend = (float) 300.00;//彩金池变量
+	private float commission_rate = (float) 0.10;//佣金费率
 	private float totalPriceSum = 0f; //统计下注总额之和的变量
 	private float totalSwallowSum = 0f; //统计燕子下注总额之和
 	private float totalPigeonSum = 0f;
@@ -44,6 +44,15 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	private float totalBeastSum = 0f;//统计走兽下注总额之和
 	private boolean againOrNot = false; //是否重转，默认否
 	private String prizeString=null;//奖项变量，默认空值
+	
+	int timesSwallow = 6;
+	int timesPigeon = 6;
+	int timesPeafowl = 8;
+	int timesEagle = 24;
+	int timesLion = 24;
+	int timesPanda = 8;
+	int timesMonkey = 6;
+	int timesRabbit = 6;
 
 	
 	/**
@@ -188,12 +197,12 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 				dividend = dividend - swallowOutScore; //发了第二个奖燕子后的彩金池
 				return "swallow";
 			} else if(birdWhat == 1){//奖项鸽子
-				float peafowlOutScore = getTotalPeafowlSum()*6;//鸽子总出分，倍数暂时固定
-				dividend = dividend - peafowlOutScore; //发了第二个奖鸽子后的彩金池
+				float pigeonOutScore = getTotalPigeonSum()*6;//鸽子总出分，倍数暂时固定
+				dividend = dividend - pigeonOutScore; //发了第二个奖鸽子后的彩金池
 				return "pigeon";
 			} else if(birdWhat == 2){//奖项孔雀
-				float pigeonOutScore = getTotalPigeonSum()*8;//鸽子总出分，倍数暂时固定
-				dividend = dividend - pigeonOutScore; //发了第二个奖鸽子后的彩金池
+				float peafowlOutScore = getTotalPeafowlSum()*8;//鸽子总出分，倍数暂时固定
+				dividend = dividend - peafowlOutScore; //发了第二个奖鸽子后的彩金池
 				return "peafowl";
 			} else if(birdWhat == 3){//奖项老鹰
 				float eagleOutScore = getTotalEagleSum()*24;//鸽子总出分，倍数暂时固定
@@ -235,74 +244,106 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	 * 彩金池增加的吃分函数
 	 */
 	private String dividendUpPrize() {
-		double priceForPrize = totalPriceSum*(1-commission_rate);//单场用于发奖注额
-		double totalBird[] = new double[]{totalSwallowSum,totalPigeonSum,totalPeafowlSum,totalEagleSum};//用于临时保存飞禽各个奖项的和
-		double totalBeast[] = new double[]{totalLionSum, totalPandaSum,totalMonkeySum,totalRabbitSum};//用于临时保存走兽各个奖项的和
+		setAgainOrNot(false); //设置为false不重转
+		float priceForPrize = totalPriceSum*(1-commission_rate);//单场用于发奖注额
+		float swallowOutScore = (float) (totalSwallowSum*timesSwallow);
+		float pigeonOutScore = (float) (totalPigeonSum*timesPigeon);
+		float peafowlOutScore = (float) (totalPeafowlSum*timesPeafowl);
+		float eagleOutScore = (float) (totalEagleSum*timesEagle);
+		float lionOutScore = (float) (totalLionSum*timesLion);
+		float pandaOutScore = (float) (totalPandaSum*timesPanda);
+		float monkeyOutScore = (float) (totalMonkeySum*timesMonkey);
+		float rabbitOutScore = (float) (totalRabbitSum*timesRabbit);		
+		ArrayList<Object> totalSum = new ArrayList<Object>();		
+		totalSum.add(swallowOutScore);//注意顺序不能弄乱
+		totalSum.add(pigeonOutScore);
+		totalSum.add(peafowlOutScore);
+		totalSum.add(eagleOutScore);
+		totalSum.add(lionOutScore);
+		totalSum.add(pandaOutScore);
+		totalSum.add(monkeyOutScore);
+		totalSum.add(rabbitOutScore);
 		float birdOutScore = getTotalBirdSum()*2;//飞禽总出分 ;
 		float beastOutScore = getTotalBeastSum()*2;//走兽总出分 ;
-		
-		double[] lessBird = lessThan(totalBird,birdOutScore,priceForPrize);//比较获得能吃分的几个飞禽类奖项
-		Vector<Object> vBird = new Vector<Object>(lessBird.length);//用于记录可吃分奖项的索引
-		for (int i = 0; i < lessBird.length; i++){//获取添加能吃分的索引到vBird
-	    	if(lessBird[i] != 0){
-	    		vBird.add(i);
-	    	}
-	    }
-		int index=(int)(Math.random()*vBird.size());//随机一个能吃分奖的索引的索引
-		if((Integer)vBird.get(index) == 0){
-			System.out.println("燕子："+lessBird[(Integer) vBird.get(index)]);
-			return "swallow"; 
-		} else if((Integer)vBird.get(index) == 1){
-			System.out.println("鸽子："+lessBird[(Integer) vBird.get(index)]);
-			return "pigeon";
-		} else if((Integer)vBird.get(index) == 2){
-			System.out.println("孔雀："+lessBird[(Integer) vBird.get(index)]);
-			return "peafowl";
-		} else if((Integer)vBird.get(index) == 3){
-			System.out.println("老鹰："+lessBird[(Integer) vBird.get(index)]);
-			return "eagle";
-		} else{
-			System.out.print("不应该出现的error");
+		Vector<Object> less = lessThan(totalSum,birdOutScore,beastOutScore,priceForPrize);//获得能吃分的几个奖项的索引的集合
+		if(less.size() > 0 && less != null){//如果存在能吃分的奖项的索引
+			int index=(int)(Math.random()*less.size());//从总共less.size()个能吃分奖中，随机一个能吃分奖的索引的索引，
+			if((Integer)less.get(index) == 0){//第index个吃分奖对应的索引
+				System.out.println("燕子发奖："+totalSum.get((Integer) less.get(index)));
+				return "swallow";
+			} else if((Integer)less.get(index) == 1){
+				System.out.println("鸽子发奖："+totalSum.get((Integer) less.get(index)));
+				return "pigeon";
+			} else if((Integer)less.get(index) == 2){
+				System.out.println("孔雀发奖："+totalSum.get((Integer) less.get(index)));
+				return "peafowl";
+			} else if((Integer)less.get(index) == 3){
+				System.out.println("老鹰发奖："+totalSum.get((Integer) less.get(index)));
+				return "eagle";
+			} else if((Integer)less.get(index) == 4){
+				System.out.println("狮子发奖："+totalSum.get((Integer) less.get(index)));
+				return "lion"; 
+			} else if((Integer)less.get(index) == 5){
+				System.out.println("熊猫发奖："+totalSum.get((Integer) less.get(index)));
+				return "panda";
+			}  else if((Integer)less.get(index) == 6){
+				System.out.println("猴子发奖："+totalSum.get((Integer) less.get(index)));
+				return "monkey";
+			}  else if((Integer)less.get(index) == 7){
+				System.out.println("兔子发奖："+totalSum.get((Integer) less.get(index)));
+				return "rabbit";
+			} else{
+				System.out.print("不应该出现的error");
+			}
+		} else {
+			int bombNum = 15;
+			if(bombNum > 20){//判断20场内是否出现地雷奖项
+				//去totaSum集合中+类型出分最小值
+			} else {
+				bombPrize();
+			}
+			
 		}
-		
-		double[] lessBeast = lessThan(totalBeast,beastOutScore,priceForPrize);//比较获得能吃分的几个走兽类奖项
-		Vector<Object> vBeast = new Vector<Object>(lessBeast.length);//用于记录可吃分奖项的索引
-		for (int i = 0; i < lessBeast.length; i++){//获取添加能吃分的索引到vBeast
-	    	if(lessBeast[i] != 0){
-	    		vBeast.add(i);
-	    	}
-	    }
-		int indexBeast=(int)(Math.random()*vBeast.size());//随机一个能吃分奖的索引的索引
-		if((Integer)vBeast.get(indexBeast) == 0){
-			System.out.println("狮子："+lessBeast[(Integer) vBeast.get(indexBeast)]);
-			return "lion"; 
-		}
-
 		return null;
 	}
+
 	/**
-	 * 获得能吃分的几个奖项
+	 * 获得能吃分的几个奖项的索引
 	 * @param totalSum
+	 * @param birdOutScore
+	 * @param beastOutScore
 	 * @param priceForPrize
-	 * @return
+	 * @return 奖项的索引
 	 */
-	private double[] lessThan(double[] totalSum,double bScore, double priceForPrize) {
-		double[] less = new double[totalSum.length];
-		for(int i=0 ; i<totalSum.length ; i++){
-            if (totalSum[i] < (priceForPrize - bScore)){
-            	less[i] =totalSum[i];
-        	}else {
-	    		less[i] = 0;
-	    	}
-        }
-		return less;
+	private Vector<Object> lessThan(ArrayList<Object> totalSum,
+			float birdOutScore, float beastOutScore, float priceForPrize) {
+		Vector<Object> v = new Vector<Object>(totalSum.size());
+		for(int i=0 ; i<totalSum.size() ; i++){
+			if( i < (totalSum.size()/2) ){//飞禽类
+				if ((Float)totalSum.get(i) < (priceForPrize - birdOutScore)){
+					v.add(i);
+				}
+			} else {//走兽类
+				if ((Float)totalSum.get(i) < (priceForPrize - beastOutScore)){
+					v.add(i);
+				}
+			}
+
+		}
+		return v;
+	}
+	/**
+	 * 炸弹函数
+	 */
+	private void bombPrize() {
+		// TODO Auto-generated method stub
+		
 	}
 	/**
 	 * 诱惑函数
 	private String attractPrize() {
 		return null;
 	} */
-	
 	/**
 	 * 再转函数
 	 */
