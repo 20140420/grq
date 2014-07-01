@@ -1,9 +1,10 @@
 package com.grq.controller.action.shark;
 
+
 /**
  * 可行
 
- */
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -35,7 +36,7 @@ public class test {
 		totalSum.add(pandaOutScore);
 		totalSum.add(monkeyOutScore);
 		totalSum.add(rabbitOutScore);
-		/**
+		
 		ArrayList<Object> totalSumFormat = new ArrayList<Object>();//用于保存格式化后的值
 		for(int i = 0; i < totalSum.size(); i++){
 			BigDecimal   bd   =   new   BigDecimal((Float)totalSum.get(i));
@@ -43,7 +44,7 @@ public class test {
 			float bdFloat  =   bd.floatValue();
 			System.out.println("bdFloat:"+pigeonOutScore); 
 			totalSumFormat.add(bdFloat);
-		}*/
+		}
 		Vector<Object> less = lessThan(totalSum,priceForPrize);
 	    for (int i = 0; i < less.size(); i++){ 
 	    	System.out.println(less.get(i)); 
@@ -63,7 +64,7 @@ public class test {
 		return v;
 	}
 
-}
+} */
 
 /**
 import java.math.BigDecimal;
@@ -264,6 +265,7 @@ public class test {
  * 
  * @author 泉
  *
+
 import java.util.Arrays;
 public class test{  
 	public static void main(String[] args)  {   
@@ -272,4 +274,41 @@ public class test{
 		for(int i=0;i<a.length;i++)     
 			System.out.println(a[i]);    
 		}
-	} */
+	} 
+ **/
+import java.util.ArrayList;
+
+public class test{ 
+	public static void main(String[] args) { 
+		ArrayList<Object> totalSum = new ArrayList<Object>();		
+		totalSum.add("5");//注意顺序不能弄乱
+		totalSum.add("2");
+		totalSum.add("3");
+		totalSum.add("10");
+		totalSum.add("4");
+		totalSum.add("9");
+		totalSum.add("-8");
+		totalSum.add("-4");
+		double minNum = calculationMin(totalSum);
+		System.out.println(minNum);
+	}
+
+	private static double calculationMin(ArrayList<Object> sampleList) {
+        try{
+        	double min = Double.parseDouble(sampleList.get(0).toString());
+            int totalCount = sampleList.size();
+            if (totalCount > 0){
+              for (int i = 0; i < totalCount; i++){
+             	 double temp = Double.parseDouble(sampleList.get(i).toString());
+             	 if (min > temp){
+             		 min = temp;
+             	 }
+              }
+            }
+            return min;
+        }catch (Exception ex) {
+     	   System.out.printf("通用计算公式", "获取集合中的最小值:" + ex.getMessage());
+        }
+		return (Double) null;
+    }
+}

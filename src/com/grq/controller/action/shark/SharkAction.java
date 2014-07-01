@@ -297,8 +297,35 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 			}
 		} else {
 			int bombNum = 15;
-			if(bombNum > 20){//判断20场内是否出现地雷奖项
-				//去totaSum集合中+类型出分最小值
+			if(bombNum < 20){//判断20场内是否出现地雷奖项，这里要再写
+				int index = outScoreMin(totalSum,birdOutScore,beastOutScore);//获取符合要求的值的索引
+				if(index == 0){//第一个奖对应的索引
+					System.out.println("燕子发奖："+totalSum.get((Integer) less.get(index)));
+					return "swallow";
+				} else if(index == 1){
+					System.out.println("鸽子发奖："+totalSum.get((Integer) less.get(index)));
+					return "pigeon";
+				} else if(index == 2){
+					System.out.println("孔雀发奖："+totalSum.get((Integer) less.get(index)));
+					return "peafowl";
+				} else if(index == 3){
+					System.out.println("老鹰发奖："+totalSum.get((Integer) less.get(index)));
+					return "eagle";
+				} else if(index == 4){
+					System.out.println("狮子发奖："+totalSum.get((Integer) less.get(index)));
+					return "lion"; 
+				} else if(index == 5){
+					System.out.println("熊猫发奖："+totalSum.get((Integer) less.get(index)));
+					return "panda";
+				}  else if(index == 6){
+					System.out.println("猴子发奖："+totalSum.get((Integer) less.get(index)));
+					return "monkey";
+				}  else if(index == 7){
+					System.out.println("兔子发奖："+totalSum.get((Integer) less.get(index)));
+					return "rabbit";
+				} else{
+					System.out.print("不应该出现的error");
+				}
 			} else {
 				bombPrize();
 			}
@@ -306,7 +333,41 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		}
 		return null;
 	}
+	/**
+	 * 得到符合要求的和值最小的奖的索引
+	 * @param totalSum
+	 * @param birdOutScore
+	 * @param beastOutScore
+	 * @return 
+	 */
+	private int outScoreMin(ArrayList<Object> totalSum, float birdOutScore,float beastOutScore) {
+		try{
+			int index = 0;//预定义集合第一个值为符合要求值,记下索引值
+			double min = Float.parseFloat(totalSum.get(0).toString()) + birdOutScore;//预定义集合第一个值加和为符合要求值
+			if (totalSum.size() > 0){//集合多于两个值时
+				for(int i=0 ; i<totalSum.size() ; i++){
+					double temp = Float.parseFloat(totalSum.get(i).toString());
+					if( i < (totalSum.size()/2) ){//飞禽类
+						if ( min > (temp+birdOutScore)){
+							min = (temp+birdOutScore);
+							index = i;
+						}
+					} else {//走兽类
+						if ( min > (temp+beastOutScore)){
+							min = (temp+beastOutScore);
+							index = i;
+						}
+					}
 
+				}
+				return index;//返回符合要求的和最小的奖的索引
+			}
+			
+		}catch (Exception ex) {
+			System.out.printf("通用计算公式", "计算符合要求的值的索引:" + ex.getMessage());
+        }
+		return (Integer) null;
+	}
 	/**
 	 * 获得能吃分的几个奖项的索引
 	 * @param totalSum
@@ -336,8 +397,17 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	 * 炸弹函数
 	 */
 	private void bombPrize() {
-		// TODO Auto-generated method stub
-		
+		try{
+			if( totalBombSum > 0 ){//如果有人下注
+				
+			} else {
+				
+			}
+			
+		} catch  (Exception ex) {
+			System.out.printf("炸弹分奖", "炸弹奖:" + ex.getMessage());
+		}
+
 	}
 	/**
 	 * 诱惑函数
