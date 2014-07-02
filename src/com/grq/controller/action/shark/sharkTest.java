@@ -37,7 +37,7 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 	//转盘配置
 	int circle_num= 2;//转盘圈数 后期由服务器取得
 	//关键配置	
-	static double dividend = 3000.00; //彩金池变量
+	static double dividend = 500.00; //彩金池变量
 	static double commission_rate = 0.10; //佣金费率
 	double single_bet = 1000.00; //单注上限
 	int bet_limit = 999; //押注上限
@@ -209,10 +209,10 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 			double birdOutScore, double beastOutScore) {
 		try{
 			int x = 0;//预定义集合第一个值为符合要求值,记下索引值
-			double min = Float.parseFloat(totalSum.get(0).toString()) + birdOutScore;//预定义集合第一个值加和为符合要求值
+			double min = Double.parseDouble(totalSum.get(0).toString()) + birdOutScore;//预定义集合第一个值加和为符合要求值
 			if (totalSum.size() > 0){//集合多于两个值时
 				for(int i=0 ; i<totalSum.size() ; i++){
-					double temp = Float.parseFloat(totalSum.get(i).toString());
+					double temp = Double.parseDouble(totalSum.get(i).toString());
 					if( i < (totalSum.size()/2) ){//飞禽类
 						if ( min > (temp+birdOutScore)){
 							min = (temp+birdOutScore);
