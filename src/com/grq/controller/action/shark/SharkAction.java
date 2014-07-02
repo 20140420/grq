@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 
 import com.grq.controller.action.BaseAction;
 import com.grq.model.PageModel;
-import com.grq.model.customizeenum.OrderState;
 import com.grq.model.customizeenum.Prize;
 import com.grq.model.pojo.shark.PanelInfo;
 import com.grq.model.util.StringUtil;
@@ -70,7 +69,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	private float totalGoldSum = 0f;
 	private float totalBeastSum = 0f;//统计走兽下注总额之和
 	private boolean againOrNot = false; //是否重转，默认否
-	private String prizeString=null;//奖项变量，默认空值
+	private Prize prizeString = Prize.RAFFLING;//奖项变量，默认正在抽奖
 	
 
 
@@ -82,23 +81,23 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	 */
 	@Override
 	public String main(){
-		//havePrize();
-		if(againOrNot == true){//如果是则获得再转一次
+		//prizeString = havePrize();
+		/*if(againOrNot == true){//如果是则获得再转一次
 			turnAgain();
 			againOrNot = false;//重置
-		}		
+		}*/
 		return MAIN;//返回主题页	
 	}
 	/**
 	 * 出奖
 	 * @return
 	 */
-	private String havePrize(){
+	private Prize havePrize(){
 		//StringBuffer prize = new StringBuffer();//定义字符串对象
 		float totalPriceSum = countTotalPrice();//获得下注总额之和
 		dividend = dividend + totalPriceSum*(1-commission_rate);//筹码注入彩金池
-		if( dividend > (totalPriceSum*99) ){//如果已有99倍余额
-			prizeString = sharkPrize();//鲨鱼函数,根据返回值确定是金鲨还是银鲨，等同setPrizeString(sharkPrize());
+		if( dividend > (totalPriceSum*timesMax) ){//如果已有99倍余额
+			setPrizeString(sharkPrize());//鲨鱼函数,根据返回值确定是金鲨还是银鲨，等同setPrizeString(sharkPrize());
 		} else if( dividend > (totalPriceSum*24) ){//如果已有24倍余额
 			setPrizeString(randomPrize());//随机函数
 		} else if( dividend > 0){
@@ -181,7 +180,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	/**
 	 * 鲨鱼函数
 	 */
-	private String sharkPrize() {	
+	private Prize sharkPrize() {	
 		double a = Math.floor(randomNum.nextInt(2));//随机获取大于等于0到小于2的整数部分,即随机获取0或1
 		int silverOrGold = (int)a;//将double数据类型转换成int
 		if(silverOrGold == 0){//为银鲨概率1/2
@@ -189,14 +188,14 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 			dividend = dividend - silverOutScore; //发了银鲨奖的彩金池
 			//记得更新到数据库
 			againOrNot = true;//设置为true，用于再转一次,等同于setAgainOrNot(true); 
-			return "silver_shark";//出奖银鲨+再转一次
+			return Prize.SILVER_SHARK;//出奖银鲨+再转一次
 		} else if(silverOrGold == 1){//为金鲨概率1/2
 			int goldSharkTimes =(int)(Math.floor(randomNum.nextInt(75))+25);//随机获取大于等于25到小于100的整数
 			float goldOutScore = getTotalGoldSum()*goldSharkTimes;//金鲨总出分
 			dividend = dividend - goldOutScore; //发了金鲨奖的彩金池
 			//记得更新到数据库
 			setAgainOrNot(true); //设置为true，用于再转一次
-			return "gold_shark";//出奖金鲨+再转一次
+			return Prize.GOLD_SHARK;//出奖金鲨+再转一次
 		} else {
 			System.out.print("不应该出现的error");
 		}
@@ -205,7 +204,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	/** 
 	 * 随机函数
 	 */
-	private String randomPrize() {
+	private Prize randomPrize() {
 		setAgainOrNot(false); //设置为false不重转
 		int birdOrBeast =(int)(Math.floor(randomNum.nextInt(2)));//随机获取大于等于0到小于2的整数部分,即随机获取0或1
 		if(birdOrBeast == 0){//为飞禽概率1/2
@@ -215,19 +214,19 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 			if(birdWhat == 0){//奖项燕子
 				float swallowOutScore = getTotalSwallowSum()*6;//燕子总出分，倍数暂时固定
 				dividend = dividend - swallowOutScore; //发了第二个奖燕子后的彩金池
-				return "swallow";
+				return Prize.SWALLOW;
 			} else if(birdWhat == 1){//奖项鸽子
 				float pigeonOutScore = getTotalPigeonSum()*6;//鸽子总出分，倍数暂时固定
 				dividend = dividend - pigeonOutScore; //发了第二个奖鸽子后的彩金池
-				return "pigeon";
+				return Prize.PIGEON;
 			} else if(birdWhat == 2){//奖项孔雀
 				float peafowlOutScore = getTotalPeafowlSum()*8;//鸽子总出分，倍数暂时固定
 				dividend = dividend - peafowlOutScore; //发了第二个奖鸽子后的彩金池
-				return "peafowl";
+				return Prize.PEAFOWL;
 			} else if(birdWhat == 3){//奖项老鹰
 				float eagleOutScore = getTotalEagleSum()*24;//鸽子总出分，倍数暂时固定
 				dividend = dividend - eagleOutScore; //发了第二个奖鸽子后的彩金池
-				return "eagle";
+				return Prize.EAGLE;
 			} else {
 				System.out.print("不应该出现的error");
 			}
@@ -239,19 +238,19 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 			if(beastWhat == 0){//奖项兔子
 				float rabbitOutScore = getTotalRabbitSum()*6;//兔子总出分，倍数暂时固定
 				dividend = dividend - rabbitOutScore; //发了第二个奖兔子后的彩金池
-				return "rabbit";
+				return Prize.RABBIT;
 			} else if(beastWhat == 1){//奖项猴子
 				float monkeyOutScore = getTotalMonkeySum()*6;//猴子总出分，倍数暂时固定
 				dividend = dividend - monkeyOutScore; //发了第二个奖猴子后的彩金池
-				return "monkey";
+				return Prize.MONKEY;
 			} else if(beastWhat == 2){//奖项熊猫
 				float pandaOutScore = getTotalPandaSum()*8;//熊猫总出分，倍数暂时固定
 				dividend = dividend - pandaOutScore; //发了第二个奖熊猫后的彩金池
-				return "panda";
+				return Prize.PANDA;
 			} else if(beastWhat == 3){//奖项狮子
 				float lionOutScore = getTotalLionSum()*24;//狮子总出分，倍数暂时固定
 				dividend = dividend - lionOutScore; //发了第二个奖狮子后的彩金池
-				return "lion";
+				return Prize.LION;
 			} else {
 				System.out.print("不应该出现的error");
 			}
@@ -263,7 +262,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	/**
 	 * 彩金池增加的吃分函数
 	 */
-	private String dividendUpPrize() {
+	private Prize dividendUpPrize() {
 		setAgainOrNot(false); //设置为false不重转
 		float priceForPrize = (float) (totalPriceSum*(1-commission_rate));//单场用于发奖注额
 		float swallowOutScore = (float) (totalSwallowSum*timesSwallow);
@@ -290,28 +289,28 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 			int index=(int)(Math.random()*less.size());//从总共less.size()个能吃分奖中，随机一个能吃分奖的索引的索引，
 			if((Integer)less.get(index) == 0){//第index个吃分奖对应的索引
 				System.out.println("燕子发奖："+totalSum.get((Integer) less.get(index)));
-				return "swallow";
+				return Prize.SWALLOW;
 			} else if((Integer)less.get(index) == 1){
 				System.out.println("鸽子发奖："+totalSum.get((Integer) less.get(index)));
-				return "pigeon";
+				return Prize.PIGEON;
 			} else if((Integer)less.get(index) == 2){
 				System.out.println("孔雀发奖："+totalSum.get((Integer) less.get(index)));
-				return "peafowl";
+				return Prize.PEAFOWL;
 			} else if((Integer)less.get(index) == 3){
 				System.out.println("老鹰发奖："+totalSum.get((Integer) less.get(index)));
-				return "eagle";
+				return Prize.EAGLE;
 			} else if((Integer)less.get(index) == 4){
 				System.out.println("狮子发奖："+totalSum.get((Integer) less.get(index)));
-				return "lion"; 
+				return Prize.LION; 
 			} else if((Integer)less.get(index) == 5){
 				System.out.println("熊猫发奖："+totalSum.get((Integer) less.get(index)));
-				return "panda";
+				return Prize.PANDA;
 			}  else if((Integer)less.get(index) == 6){
 				System.out.println("猴子发奖："+totalSum.get((Integer) less.get(index)));
-				return "monkey";
+				return Prize.MONKEY;
 			}  else if((Integer)less.get(index) == 7){
 				System.out.println("兔子发奖："+totalSum.get((Integer) less.get(index)));
-				return "rabbit";
+				return Prize.RABBIT;
 			} else{
 				System.out.print("不应该出现的error");
 			}
@@ -321,28 +320,28 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 				int index = outScoreMin(totalSum,birdOutScore,beastOutScore);//获取符合要求的值的索引
 				if(index == 0){//第一个奖对应的索引
 					System.out.println("燕子发奖："+totalSum.get((Integer) less.get(index)));
-					return "swallow";
+					return Prize.SWALLOW;
 				} else if(index == 1){
 					System.out.println("鸽子发奖："+totalSum.get((Integer) less.get(index)));
-					return "pigeon";
+					return Prize.PIGEON;
 				} else if(index == 2){
 					System.out.println("孔雀发奖："+totalSum.get((Integer) less.get(index)));
-					return "peafowl";
+					return Prize.PEAFOWL;
 				} else if(index == 3){
 					System.out.println("老鹰发奖："+totalSum.get((Integer) less.get(index)));
-					return "eagle";
+					return Prize.EAGLE;
 				} else if(index == 4){
 					System.out.println("狮子发奖："+totalSum.get((Integer) less.get(index)));
-					return "lion"; 
+					return Prize.LION; 
 				} else if(index == 5){
 					System.out.println("熊猫发奖："+totalSum.get((Integer) less.get(index)));
-					return "panda";
+					return Prize.PANDA;
 				}  else if(index == 6){
 					System.out.println("猴子发奖："+totalSum.get((Integer) less.get(index)));
-					return "monkey";
+					return Prize.MONKEY;
 				}  else if(index == 7){
 					System.out.println("兔子发奖："+totalSum.get((Integer) less.get(index)));
-					return "rabbit";
+					return Prize.RABBIT;
 				} else{
 					System.out.print("不应该出现的error");
 				}
@@ -496,7 +495,8 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 				sharkDao.save(panelData);//保存panel获得数据	
 				//记得重置panel下注
 			}
-			return MAIN;//返回shark主页面
+			//return MAIN;//返回shark主页面
+			return main();//通过主函数返回shark主页面，可进行统计出结果
 		}
 		return CUSTOMER_LOGIN;//返回登入页面
 	}
@@ -697,11 +697,12 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	public void setAgainOrNot(boolean againOrNot) {
 		this.againOrNot = againOrNot;
 	}
-	public String getPrizeString() {
+	public Prize getPrizeString() {
 		return prizeString;
 	}
-	public void setPrizeString(String prizeString) {
+	public void setPrizeString(Prize prizeString) {
 		this.prizeString = prizeString;
 	}
+
 	
 }
