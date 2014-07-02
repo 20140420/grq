@@ -277,19 +277,19 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 			dividend = dividend - birdOutScore; //发了飞禽奖的彩金池
 			int birdWhat =(int)(Math.floor(randomNum.nextInt(4)));//随机获取大于等于0到小于4的整数部分,即随机获取0或1或2或3，概率都为1/4。
 			if(birdWhat == 0){//奖项燕子
-				double swallowOutScore = getTotalSwallowSum()*6;//燕子总出分，倍数暂时固定
+				double swallowOutScore = getTotalSwallowSum()*timesSwallow;//燕子总出分，倍数暂时固定
 				dividend = dividend - swallowOutScore; //发了第二个奖燕子后的彩金池
 				return Prize.SWALLOW;
 			} else if(birdWhat == 1){//奖项鸽子
-				double pigeonOutScore = getTotalPigeonSum()*6;//鸽子总出分，倍数暂时固定
+				double pigeonOutScore = getTotalPigeonSum()*timesPigeon;//鸽子总出分，倍数暂时固定
 				dividend = dividend - pigeonOutScore; //发了第二个奖鸽子后的彩金池
 				return Prize.PIGEON;
 			} else if(birdWhat == 2){//奖项孔雀
-				double peafowlOutScore = getTotalPeafowlSum()*8;//鸽子总出分，倍数暂时固定
+				double peafowlOutScore = getTotalPeafowlSum()*timesPeafowl;//鸽子总出分，倍数暂时固定
 				dividend = dividend - peafowlOutScore; //发了第二个奖鸽子后的彩金池
 				return Prize.PEAFOWL;
 			} else if(birdWhat == 3){//奖项老鹰
-				double eagleOutScore = getTotalEagleSum()*24;//鸽子总出分，倍数暂时固定
+				double eagleOutScore = getTotalEagleSum()*timesEagle;//鸽子总出分，倍数暂时固定
 				dividend = dividend - eagleOutScore; //发了第二个奖鸽子后的彩金池
 				return Prize.EAGLE;
 			} else {
@@ -301,19 +301,19 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 			dividend = dividend - beastOutScore; //发了走兽奖的彩金池
 			int beastWhat =(int)(Math.floor(randomNum.nextInt(4)));//随机获取大于等于0到小于4的整数部分,即随机获取0或1或2或3，概率都为1/4。
 			if(beastWhat == 0){//奖项兔子
-				double rabbitOutScore = getTotalRabbitSum()*6;//兔子总出分，倍数暂时固定
+				double rabbitOutScore = getTotalRabbitSum()*timesRabbit;//兔子总出分，倍数暂时固定
 				dividend = dividend - rabbitOutScore; //发了第二个奖兔子后的彩金池
 				return Prize.RABBIT;
 			} else if(beastWhat == 1){//奖项猴子
-				double monkeyOutScore = getTotalMonkeySum()*6;//猴子总出分，倍数暂时固定
+				double monkeyOutScore = getTotalMonkeySum()*timesMonkey;//猴子总出分，倍数暂时固定
 				dividend = dividend - monkeyOutScore; //发了第二个奖猴子后的彩金池
 				return Prize.MONKEY;
 			} else if(beastWhat == 2){//奖项熊猫
-				double pandaOutScore = getTotalPandaSum()*8;//熊猫总出分，倍数暂时固定
+				double pandaOutScore = getTotalPandaSum()*timesPanda;//熊猫总出分，倍数暂时固定
 				dividend = dividend - pandaOutScore; //发了第二个奖熊猫后的彩金池
 				return Prize.PANDA;
 			} else if(beastWhat == 3){//奖项狮子
-				double lionOutScore = getTotalLionSum()*24;//狮子总出分，倍数暂时固定
+				double lionOutScore = getTotalLionSum()*timesLion;//狮子总出分，倍数暂时固定
 				dividend = dividend - lionOutScore; //发了第二个奖狮子后的彩金池
 				return Prize.LION;
 			} else {
