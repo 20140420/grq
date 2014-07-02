@@ -6,7 +6,7 @@ import org.apache.struts2.util.StrutsTypeConverter;
 
 import com.grq.model.customizeenum.OrderState;
 /**
- * 订单状态类型转换器
+ * 璁㈠崟鐘舵�佺被鍨嬭浆鎹㈠櫒
  * @author JiangQuan
  *
  */

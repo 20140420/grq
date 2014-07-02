@@ -105,5 +105,10 @@
                 <comment>是否处理过</comment>
             </column>
         </property>
+		<property name="prizeItem" type="com.grq.model.util.hibernate.PrizeType">
+            <column name="prize" length="15" not-null="true">
+                <comment>奖项</comment>
+            </column>
+        </property>
     </class>
 </hibernate-mapping>

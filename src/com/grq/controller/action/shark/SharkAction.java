@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 
 import com.grq.controller.action.BaseAction;
 import com.grq.model.PageModel;
+import com.grq.model.customizeenum.OrderState;
+import com.grq.model.customizeenum.Prize;
 import com.grq.model.pojo.shark.PanelInfo;
 import com.grq.model.util.StringUtil;
 import com.opensymphony.xwork2.ModelDriven;
@@ -490,6 +492,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 				panelData.setSingle_bet(single_bet);
 				panelData.setTotalPrice(totalPrice);//把下注总额度
 				panelData.setBetCount(betCount);// 用于判断是否是统计过（默认值为false）
+				panelData.setPrizeItem(Prize.RAFFLING);// 设置奖项状态为正在抽奖
 				sharkDao.save(panelData);//保存panel获得数据	
 				//记得重置panel下注
 			}

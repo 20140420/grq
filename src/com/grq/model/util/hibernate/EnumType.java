@@ -9,16 +9,16 @@ import java.sql.Types;
 import org.hibernate.HibernateException;
 import org.hibernate.usertype.UserType;
 /**
- * ×Ô¶¨ÒåHibernateÓ³ÉäÃ¶¾ÙÀàĞÍ
+ * è‡ªå®šä¹‰Hibernateæ˜ å°„æšä¸¾ç±»å‹
  * @author JiangQuan
  * @param <T>
  */
 public class EnumType<T extends Enum<T>> implements UserType {
-	// Éú³ÉµÄÊı¾İ¿âÊı¾İÀàĞÍ
+	// ç”Ÿæˆçš„æ•°æ®åº“æ•°æ®ç±»å‹
 	private static final int[] SQL_TYPES = { Types.VARCHAR };
 	// Class
 	private Class<T> clazz = null;
-	// ¹¹Ôì·½·¨
+	// æ„é€ æ–¹æ³•
 	public EnumType(Class<T> c) {
 		this.clazz = c;
 	}
@@ -36,7 +36,7 @@ public class EnumType<T extends Enum<T>> implements UserType {
 		return (Serializable) arg0;
 	}
 	/**
-	 * ÏàµÈ
+	 * ç›¸ç­‰
 	 */
 	@Override
 	public boolean equals(Object arg0, Object arg1) throws HibernateException {
@@ -59,9 +59,9 @@ public class EnumType<T extends Enum<T>> implements UserType {
 			throws HibernateException, SQLException {
 		try {
 //			if (!rs.wasNull()) {
-				// »ñÈ¡×Ö¶ÎÖµ
+				// è·å–å­—æ®µå€¼
 				String name = rs.getString(names[0]).toUpperCase();
-				// ½«×Ö¶ÎÖµ×ª»»³ÉÎªÃ¶¾Ù
+				// å°†å­—æ®µå€¼è½¬æ¢æˆä¸ºæšä¸¾
 				return Enum.valueOf(clazz, name);
 //			}else{
 //				System.out.println("----------------rs.wasNull()-------------------");
@@ -79,7 +79,7 @@ public class EnumType<T extends Enum<T>> implements UserType {
 		if (null == arg1) {
 			arg0.setNull(arg2, Types.VARCHAR);
 		} else {
-			// ½«Ã¶¾Ù×ª»»³ÉÎª×Ö·û´®
+			// å°†æšä¸¾è½¬æ¢æˆä¸ºå­—ç¬¦ä¸²
 			arg0.setString(arg2, ((Enum) arg1).name());
 		}
 	}

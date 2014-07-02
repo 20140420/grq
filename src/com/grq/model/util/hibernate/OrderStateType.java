@@ -2,11 +2,11 @@ package com.grq.model.util.hibernate;
 
 import com.grq.model.customizeenum.OrderState;
 /**
- * ¶©µ¥×´Ì¬HibernateÓ³ÉäÀàĞÍ
+ * è®¢å•çŠ¶æ€Hibernateæ˜ å°„ç±»å‹
  * @author JiangQuan
  */
 public class OrderStateType extends EnumType<OrderState> {
-	//½á¹¹Ìå
+	//ç»“æ„ä½“
 	public OrderStateType() {
 		super(OrderState.class);
 	}

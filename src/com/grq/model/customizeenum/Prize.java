@@ -7,7 +7,12 @@ import java.util.List;
  * @author JiangQuan
  */
 public enum Prize {
-	SWALLOW{
+	RAFFLING{
+		@Override
+		public String getName() {
+			return "正在抽奖";
+		}
+	},SWALLOW{
 		@Override
 		public String getName() {
 			return "燕子";

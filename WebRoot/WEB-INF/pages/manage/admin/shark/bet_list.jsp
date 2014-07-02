@@ -16,6 +16,7 @@ td {
 				<td align="center">下注总数</td>
 				<td align="center">单注额度</td>
 				<td align="center">总金额</td>
+				<td align="center">奖项</td>
 				<td align="center">创建时间</td>
 				<td align="center">燕子</td>
 				<td align="center">鸽子</td>
@@ -44,6 +45,7 @@ td {
 						<td align="center"><s:property value="totalBet" /></td>
 						<td align="center"><s:property value="single_bet" /></td>
 						<td align="center"><s:property value="totalPrice" /></td>
+						<td align="center"><s:property value="prizeItem.getName()"/></td>
 						<td align="center"><s:date name="createTime" format="yyyy年MM月d日HH:mm" /></td>
 						<td align="center"><s:property value="swallow" /></td>
 						<td align="center"><s:property value="pigeon" /></td>
