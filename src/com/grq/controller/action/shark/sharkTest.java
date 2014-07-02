@@ -37,7 +37,7 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 	//转盘配置
 	int circle_num= 2;//转盘圈数 后期由服务器取得
 	//关键配置	
-	static double dividend = 3000.00; //彩金池变量
+	static double initial_dividend = 3000.00; //彩金池初值
 	static double commission_rate = 0.10; //佣金费率
 	double single_bet = 1000.00; //单注上限
 	int bet_limit = 999; //押注上限
@@ -60,11 +60,14 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 	private static double totalGoldSum = 0.0;
 	private static double totalBeastSum = 0f;//统计走兽下注总额之和
 	private static boolean againOrNot = false; //是否重转，默认否
+	private static double dividendNum = initial_dividend; //上场彩金池余量
 	private static Prize prizeString = Prize.RAFFLING;//奖项变量，默认正在抽奖
+	private static double dividend;//彩金池变量
 	
 	
 	public static void main(String[] args) {
-		System.out.println("上一期彩金："+dividend);
+		
+		System.out.println("上一期彩金："+dividendNum);
 		prizeString = havePrize();
 		if(againOrNot == true){//如果是则获得再转一次
 			turnAgain();
@@ -72,7 +75,7 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 		}
 		System.out.println("单场押注总额之和为："+totalPriceSum);
 		System.out.println("奖项为:"+prizeString);
-		System.out.println("发奖后彩金："+dividend);
+		System.out.println("发奖后彩金："+dividendNum);
 	}
 	private static void turnAgain() {
 		System.out.println("再转函数");		
@@ -83,7 +86,7 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 	 */
 	private static Prize havePrize(){
 		double totalPriceSum = countTotalPrice();//获得下注总额之和
-		dividend = dividend + totalPriceSum*(1-commission_rate);//筹码注入彩金池
+		dividend = dividendNum + totalPriceSum*(1-commission_rate);//筹码注入彩金池
 		System.out.println("发奖前彩金："+dividend);
 		if( dividend > (totalPriceSum*timesMax) ){//如果已有99倍余额
 			return sharkPrize();
@@ -330,15 +333,17 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 		int silverOrGold = (int)a;//将double数据类型转换成int
 		if(silverOrGold == 0){//为银鲨概率1/2
 			double silverOutScore = getTotalSilverSum()*24;//银鲨总出分
-			dividend = dividend - silverOutScore; //发了银鲨奖的彩金池
+			dividendNum = dividend - silverOutScore; //发了银鲨奖的彩金池
 			//记得更新到数据库
+			System.out.println("1发奖后彩金："+dividendNum);
 			return Prize.SILVER_SHARK;//出奖银鲨+再转一次
 		} else if(silverOrGold == 1){//为金鲨概率1/2
 			int goldSharkTimes =(int)(Math.floor(randomNum.nextInt(timesMax-23))+24);//随机获取大于等于24到小于100的整数，即最高99倍
 			double goldOutScore = getTotalGoldSum()*goldSharkTimes;//金鲨总出分
-			dividend = dividend - goldOutScore; //发了金鲨奖的彩金池
+			dividendNum = dividend - goldOutScore; //发了金鲨奖的彩金池
 			//记得更新到数据库
 			System.out.print("金鲨倍数："+goldSharkTimes);
+			System.out.println("1发奖后彩金："+dividendNum);
 			return Prize.GOLD_SHARK;//出奖金鲨+再转一次
 		} else {
 			System.out.print("不应该出现的error");
@@ -350,6 +355,7 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 	 * @return float 未操作押注总额之和 totalBetSum
 	 */
 	private static double countTotalPrice() {
+		dividend =dividendNum ;
 		totalSwallowSum =1.5;
 		totalPigeonSum =1.4;
 		totalPeafowlSum =1.0;
@@ -476,4 +482,5 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 	public void setAgainOrNot(boolean againOrNot) {
 		this.againOrNot = againOrNot;
 	}
+
 }
