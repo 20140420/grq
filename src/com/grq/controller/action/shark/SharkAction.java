@@ -97,18 +97,15 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		float totalPriceSum = countTotalPrice();//获得下注总额之和
 		dividend = dividend + totalPriceSum*(1-commission_rate);//筹码注入彩金池
 		if( dividend > (totalPriceSum*timesMax) ){//如果已有99倍余额
-			setPrizeString(sharkPrize());//鲨鱼函数,根据返回值确定是金鲨还是银鲨，等同setPrizeString(sharkPrize());
+			return sharkPrize();//鲨鱼函数,根据返回值确定是金鲨还是银鲨，等同setPrizeString(sharkPrize());
 		} else if( dividend > (totalPriceSum*24) ){//如果已有24倍余额
-			setPrizeString(randomPrize());//随机函数
+			return randomPrize();//随机函数
 		} else if( dividend > 0){
-			setPrizeString(dividendUpPrize());//彩金池增加的吃分函数
+			return dividendUpPrize();//彩金池增加的吃分函数
 		} else {
 			//setPrizeString(attractPrize());//诱惑函数
-			setPrizeString(randomPrize());//随机函数
+			return randomPrize();//随机函数
 		}
-		//System.out.print("奖项为："+prize);
-		//return prize.toString();//返回奖项字符串
-		return null;
 	}
 
 	/**
@@ -180,21 +177,20 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	/**
 	 * 鲨鱼函数
 	 */
-	private Prize sharkPrize() {	
+	private Prize sharkPrize() {
+		againOrNot = true;//设置为true，用于再转一次,等同于setAgainOrNot(true); 
 		double a = Math.floor(randomNum.nextInt(2));//随机获取大于等于0到小于2的整数部分,即随机获取0或1
 		int silverOrGold = (int)a;//将double数据类型转换成int
 		if(silverOrGold == 0){//为银鲨概率1/2
 			float silverOutScore = getTotalSilverSum()*24;//银鲨总出分
 			dividend = dividend - silverOutScore; //发了银鲨奖的彩金池
 			//记得更新到数据库
-			againOrNot = true;//设置为true，用于再转一次,等同于setAgainOrNot(true); 
 			return Prize.SILVER_SHARK;//出奖银鲨+再转一次
 		} else if(silverOrGold == 1){//为金鲨概率1/2
 			int goldSharkTimes =(int)(Math.floor(randomNum.nextInt(75))+25);//随机获取大于等于25到小于100的整数
 			float goldOutScore = getTotalGoldSum()*goldSharkTimes;//金鲨总出分
 			dividend = dividend - goldOutScore; //发了金鲨奖的彩金池
 			//记得更新到数据库
-			setAgainOrNot(true); //设置为true，用于再转一次
 			return Prize.GOLD_SHARK;//出奖金鲨+再转一次
 		} else {
 			System.out.print("不应该出现的error");

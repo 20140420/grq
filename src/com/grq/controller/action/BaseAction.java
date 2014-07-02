@@ -49,6 +49,8 @@ SessionAware{
 	protected UserDao userDao;
 	@Autowired
 	protected SharkDao sharkDao;
+	@Autowired
+	protected static SharkDao sharkDaoTest;
 	
 	// Map类型的session
 	protected Map<String, Object> session;

@@ -52,7 +52,7 @@ public class PanelInfo  implements java.io.Serializable {
 
     
     /** full constructor */
-    public PanelInfo(String panelBetId, Customer customer, Date createTime, Integer swallow, Integer pigeon, Integer peafowl, Integer eagle, Integer lion, Integer panda, Integer monkey, Integer rabbit, Integer bird, Integer silverShark, Integer bomb, Integer goldShark, Integer beast, Integer totalBet, Float singleBet, Float totalPrice) {
+    public PanelInfo(String panelBetId, Customer customer, Date createTime, Integer swallow, Integer pigeon, Integer peafowl, Integer eagle, Integer lion, Integer panda, Integer monkey, Integer rabbit, Integer bird, Integer silverShark, Integer bomb, Integer goldShark, Integer beast, Integer totalBet, Float singleBet, Float totalPrice, Prize prizeItem, Boolean betCount) {
         this.panelBetId = panelBetId;
         this.customer = customer;
         this.setCreateTime(createTime);
@@ -72,6 +72,8 @@ public class PanelInfo  implements java.io.Serializable {
         this.totalBet = totalBet;
         this.single_bet = singleBet;
         this.totalPrice = totalPrice;
+        this.prizeItem = prizeItem;
+        this.betCount = betCount;
     }
 
    
