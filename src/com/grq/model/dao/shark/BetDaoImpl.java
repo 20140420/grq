@@ -5,8 +5,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.grq.model.dao.DaoSupport;
 import com.grq.model.pojo.shark.PanelInfo;
-@Repository("sharkDao")
+@Repository("betDao")
 @Transactional
-public class SharkDaoImpl extends DaoSupport<PanelInfo> implements SharkDao {
+public class BetDaoImpl extends DaoSupport<PanelInfo> implements BetDao {
 
 }

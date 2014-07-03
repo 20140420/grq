@@ -2,8 +2,7 @@ package com.grq.controller.action.shark;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import java.util.Random;
 import java.util.Vector;
 
@@ -11,6 +10,7 @@ import com.grq.controller.action.BaseAction;
 import com.grq.model.PageModel;
 import com.grq.model.customizeenum.Prize;
 import com.grq.model.pojo.shark.PanelInfo;
+import com.grq.model.pojo.shark.PrizeRecord;
 import com.opensymphony.xwork2.ModelDriven;
 
 public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{ 
@@ -39,7 +39,7 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 	//转盘配置
 	int circle_num= 2;//转盘圈数 后期由服务器取得
 	//关键配置	
-	static double dividend = 3000.00; //彩金池变量需要储存在数据库中
+	static double dividend = 300.00; //彩金池变量需要储存在数据库中
 	static double commission_rate = 0.10; //佣金费率
 	double single_bet = 1000.00; //单注上限
 	int bet_limit = 999; //押注上限
@@ -165,7 +165,7 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 		} else {
 			System.out.println("需要非正常吃分奖项");
 			int countNum = 20 ;//统计20场			
-			bombOrNot = queryNum(countNum);//查看20场内是否存在地雷
+			bombOrNot = queryNumResult(countNum);//查看20场内是否存在地雷
 			if( bombOrNot == true){//如果20场内出现地雷奖项
 				int i = outScoreMin(totalSum,birdOutScore,beastOutScore);//获取符合要求最小出分的奖项的索引
 				if(i == 0){//第一个奖对应的索引
@@ -210,11 +210,35 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 		}
 		return null;
 	}
+	// 奖项列表
+	private static List<PrizeRecord> prizelist;
 	
-	private static boolean queryNum(int countNum) {
-		
-		Map<String, String> orderby = new HashMap<String, String>(1);//创建Map集合
+	private static boolean queryNumResult(int countNum) {
+		/*String field ="prize";//选择字段奖项
+		String where = null;
+		Object[] queryParams = null;
+		Map<String, String> orderby = new HashMap<String, String>();//定义Map集合
 		orderby.put("createTime", "desc");//设置排序条件及方式
+		list = prizeRecordDao.getNumResult(field, where, queryParams, orderby, 0, countNum);*/
+		
+		//添加数据测试
+		prizelist=new ArrayList<PrizeRecord>();		
+		PrizeRecord prize1 = new PrizeRecord();
+		prize1.setPrizeId("2014");
+		prize1.setCommissionRate(0.10);
+		prize1.setCreateTime(null);	
+		prize1.setPrizeName(Prize.RAFFLING);
+		prizelist.add(prize1);		
+		PrizeRecord prize2 = new PrizeRecord();
+		prize2.setPrizeName(Prize.BOMB);
+		prizelist.add(prize2);
+		
+		for(int i=0 ; i < prizelist.size() ;i++){
+			System.out.println(prizelist.get(i).getPrizeName());
+			if(prizelist.get(i).getPrizeName() == Prize.BOMB){
+				return true;//如果遍历的第一个就是地雷，后面19个就不遍历了
+			}
+		}
 		return false;
 	}
 	private static int outScoreMin(ArrayList<Object> totalSum,
@@ -236,7 +260,6 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 							x = i;
 						}
 					}
-
 				}
 				return x;//返回符合要求的和最小的奖的索引
 			}
@@ -362,21 +385,114 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 	 * @return float 未操作押注总额之和 totalBetSum
 	 */
 	private static double countTotalPrice() {
-		totalSwallowSum =1.5;
-		totalPigeonSum =1.4;
-		totalPeafowlSum =1.0;
-		totalEagleSum =1.1;
-		totalLionSum =1.0;
-		totalPandaSum =1.0;
-		totalMonkeySum =7.0;		
-		totalRabbitSum =1.5;
-		totalBirdSum =1.0;
-		totalBombSum =0.5;
-		totalBeastSum =1.0;
-		totalSilverSum = 1.0;
-		totalGoldSum = 1.0;
-		totalPriceSum = totalSwallowSum+totalPigeonSum+totalPeafowlSum+totalEagleSum+totalLionSum+totalPandaSum+totalMonkeySum+totalRabbitSum+totalBirdSum+totalBombSum+totalBeastSum+ totalSilverSum + totalGoldSum;
-		//System.out.print("系统单场押注总额之和为："+totalPriceSum);
+		/*
+		Map<String, String> orderby = new HashMap<String, String>(1);//定义Map集合
+		orderby.put("createTime", "desc");//设置按创建时间倒序排列
+		String where = "where betCount = ?";//设置查询条件语句
+		Object[] queryParams = {false};//获取未操作过的参数值
+		pageModel = sharkDaoTest.find(where, queryParams, orderby, -1, -1);//执行查询方法
+		List<PanelInfo> allBet = pageModel.getList();//获取所有未操作过的下注条目
+		*/
+		// 下注列表
+		List<PanelInfo> allBet;
+		
+		//添加数据测试
+		allBet = new ArrayList<PanelInfo>();		
+		PanelInfo bet1 = new PanelInfo();
+		bet1.setTotalPrice(8.0f);
+		bet1.setSingle_bet(10.0f);
+		bet1.setSwallow(1);
+		bet1.setPigeon(1);
+		bet1.setPeafowl(1);
+		bet1.setEagle(1);
+		bet1.setLion(1);
+		bet1.setPanda(1);
+		bet1.setMonkey(1);
+		bet1.setRabbit(1);
+		bet1.setBird(1);
+		bet1.setBeast(1);
+		bet1.setBomb(1);
+		bet1.setSilver_shark(1);
+		bet1.setGold_shark(1);
+		bet1.setCreateTime(null);	
+		bet1.setPrizeItem(Prize.RAFFLING);
+		bet1.setBetCount(false);
+		allBet.add(bet1);
+		
+		PanelInfo bet2 = new PanelInfo();
+		bet2.setTotalPrice(4.0f);
+		bet2.setSingle_bet(10.0f);
+		bet2.setSwallow(1);
+		bet2.setPigeon(1);
+		bet2.setPeafowl(1);
+		bet2.setEagle(1);
+		bet2.setLion(1);
+		bet2.setPanda(1);
+		bet2.setMonkey(1);
+		bet2.setRabbit(1);
+		bet2.setBird(1);
+		bet2.setBeast(1);
+		bet2.setBomb(1);
+		bet2.setSilver_shark(1);
+		bet2.setGold_shark(1);
+		bet2.setCreateTime(null);	
+		bet2.setPrizeItem(Prize.RAFFLING);
+		bet2.setBetCount(false);
+		allBet.add(bet2);
+		
+		
+		for(PanelInfo panelInfo : allBet){//遍历所有的下注条目
+			float totalPrice = panelInfo.getTotalPrice();//获取每一条目下注总额
+			float single_bet = panelInfo.getSingle_bet();//获取每一条单注额度
+			Integer swallow = panelInfo.getSwallow();
+			Integer pigeon = panelInfo.getPigeon();
+			Integer peafowl = panelInfo.getPeafowl();
+			Integer eagle = panelInfo.getEagle();
+			Integer lion = panelInfo.getLion();
+			Integer panda = panelInfo.getPanda();
+			Integer monkey = panelInfo.getMonkey();
+			Integer rabbit = panelInfo.getRabbit();
+			Integer bird = panelInfo.getBird();
+			Integer silver = panelInfo.getSilver_shark();
+			Integer bomb = panelInfo.getBomb();
+			Integer gold = panelInfo.getGold_shark();
+			Integer beast = panelInfo.getBeast();
+			boolean betCount = panelInfo.getBetCount();//获得条目统计状态
+			if(betCount == false){//如果条目未操作过
+				float totalSwallow = swallow*single_bet;
+				totalSwallow += totalSwallow;
+				float totalPigeon = pigeon*single_bet;
+				totalPigeonSum += totalPigeon;//在totalPigeonSum不要求为静态等同于setTotalPigeonSum(getTotalPigeonSum() + totalPigeon)
+				float totalPeafowl = peafowl*single_bet;
+				totalPeafowlSum += totalPeafowl;
+				float totalEagle = eagle*single_bet;
+				totalEagleSum += totalEagle;
+				float totalLion = lion*single_bet;
+				totalLionSum += totalLion;
+				float totalPanda = panda*single_bet;
+				totalPandaSum += totalPanda;
+				float totalMonkey = monkey*single_bet;
+				totalMonkeySum += totalMonkey;
+				float totalRabbit = rabbit*single_bet;
+				totalRabbitSum += totalRabbit;
+				float totalBird = bird*single_bet;
+				totalBirdSum += totalBird;
+				float totalSilver = silver*single_bet;
+				totalSilverSum += totalSilver;
+				float totalBomb = bomb*single_bet;
+				totalBombSum += totalBomb;
+				float totalGold = gold*single_bet;
+				totalGoldSum += totalGold;
+				float totalBeast = beast*single_bet;
+				totalBeastSum += totalBeast;//相加所有条目禽兽的下注总额
+				totalPriceSum += totalPrice;//相加所有条目的下注总额
+				betCount = true; //设置改变标记为已经统计过
+				//panelData = sharkDaoTest.load(panelData.getPanelBetId());//装载订单对象
+				panelData.setBetCount(betCount);// 设置操作情况
+				//sharkDaoTest.update(panelData);//更新修改操作状态
+			}
+		}
+		System.out.println("系统单场押注总额之和为："+totalPriceSum);
 		return totalPriceSum;//返回总下注数目之和
 	}
 
@@ -395,97 +511,103 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 		return pageModel;
 	}
 	public void setPageModel(PageModel<PanelInfo> pageModel) {
-		this.pageModel = pageModel;
+		sharkTest.pageModel = pageModel;
 	}
 	//getter和setter方法
 	public double getTotalPriceSum() {
 		return totalPriceSum;
 	}
 	public void setTotalPriceSum(float totalPriceSum) {
-		this.totalPriceSum = totalPriceSum;
+		sharkTest.totalPriceSum = totalPriceSum;
 	}
 	public static double getTotalSwallowSum() {
 		return totalSwallowSum;
 	}
-	public void setTotalSwallowSum(float totalSwallowSum) {
-		this.totalSwallowSum = totalSwallowSum;
+	public static void setTotalSwallowSum(double totalSwallowSum) {
+		sharkTest.totalSwallowSum = totalSwallowSum;
 	}
 	public static double getTotalPigeonSum() {
 		return totalPigeonSum;
 	}
 	public void setTotalPigeonSum(float totalPigeonSum) {
-		this.totalPigeonSum = totalPigeonSum;
+		sharkTest.totalPigeonSum = totalPigeonSum;
 	}
 	public static double getTotalPeafowlSum() {
 		return totalPeafowlSum;
 	}
 	public void setTotalPeafowlSum(float totalPeafowlSum) {
-		this.totalPeafowlSum = totalPeafowlSum;
+		sharkTest.totalPeafowlSum = totalPeafowlSum;
 	}
 	public static double getTotalEagleSum() {
 		return totalEagleSum;
 	}
 	public void setTotalEagleSum(float totalEagleSum) {
-		this.totalEagleSum = totalEagleSum;
+		sharkTest.totalEagleSum = totalEagleSum;
 	}
 	public static double getTotalLionSum() {
 		return totalLionSum;
 	}
 	public void setTotalLionSum(float totalLionSum) {
-		this.totalLionSum = totalLionSum;
+		sharkTest.totalLionSum = totalLionSum;
 	}
 	public static double getTotalPandaSum() {
 		return totalPandaSum;
 	}
 	public void setTotalPandaSum(float totalPandaSum) {
-		this.totalPandaSum = totalPandaSum;
+		sharkTest.totalPandaSum = totalPandaSum;
 	}
 	public static double getTotalMonkeySum() {
 		return totalMonkeySum;
 	}
 	public void setTotalMonkeySum(float totalMonkeySum) {
-		this.totalMonkeySum = totalMonkeySum;
+		sharkTest.totalMonkeySum = totalMonkeySum;
 	}
 	public static double getTotalRabbitSum() {
 		return totalRabbitSum;
 	}
 	public void setTotalRabbitSum(float totalRabbitSum) {
-		this.totalRabbitSum = totalRabbitSum;
+		sharkTest.totalRabbitSum = totalRabbitSum;
 	}
 	public static double getTotalBirdSum() {
 		return totalBirdSum;
 	}
 	public void setTotalBirdSum(float totalBirdSum) {
-		this.totalBirdSum = totalBirdSum;
+		sharkTest.totalBirdSum = totalBirdSum;
 	}
 	public static double getTotalSilverSum() {
 		return totalSilverSum;
 	}
 	public void setTotalSilverSum(float totalSilverSum) {
-		this.totalSilverSum = totalSilverSum;
+		sharkTest.totalSilverSum = totalSilverSum;
 	}
 	public double getTotalBombSum() {
 		return totalBombSum;
 	}
 	public void setTotalBombSum(float totalBombSum) {
-		this.totalBombSum = totalBombSum;
+		sharkTest.totalBombSum = totalBombSum;
 	}
 	public static double getTotalGoldSum() {
 		return totalGoldSum;
 	}
 	public void setTotalGoldSum(float totalGoldSum) {
-		this.totalGoldSum = totalGoldSum;
+		sharkTest.totalGoldSum = totalGoldSum;
 	}
 	public static double getTotalBeastSum() {
 		return totalBeastSum;
 	}
 	public void setTotalBeastSum(float totalBeastSum) {
-		this.totalBeastSum = totalBeastSum;
+		sharkTest.totalBeastSum = totalBeastSum;
 	}
 	public boolean isAgainOrNot() {
 		return againOrNot;
 	}
 	public void setAgainOrNot(boolean againOrNot) {
-		this.againOrNot = againOrNot;
+		sharkTest.againOrNot = againOrNot;
+	}
+	public static List<PrizeRecord> getPrizelist() {
+		return prizelist;
+	}
+	public static void setPrizelist(List<PrizeRecord> prizelist) {
+		sharkTest.prizelist = prizelist;
 	}
 }

@@ -17,7 +17,8 @@ import com.grq.model.dao.product.UploadFileDao;
 import com.grq.model.dao.product.OrderDao;
 import com.grq.model.dao.user.CustomerDao;
 import com.grq.model.dao.user.UserDao;
-import com.grq.model.dao.shark.SharkDao;
+import com.grq.model.dao.shark.PrizeRecordDao;
+import com.grq.model.dao.shark.BetDao;
 import com.grq.model.pojo.user.Customer;
 import com.grq.model.pojo.product.OrderItem;
 import com.opensymphony.xwork2.ActionSupport;
@@ -48,9 +49,11 @@ SessionAware{
 	@Autowired
 	protected UserDao userDao;
 	@Autowired
-	protected SharkDao sharkDao;
+	protected BetDao betDao;
 	@Autowired
-	protected static SharkDao sharkDaoTest;
+	protected static PrizeRecordDao prizeRecordDao;
+	@Autowired
+	protected static BetDao sharkDaoTest;
 	
 	// Map类型的session
 	protected Map<String, Object> session;

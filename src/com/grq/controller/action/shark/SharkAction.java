@@ -117,7 +117,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		orderby.put("createTime", "desc");//设置按创建时间倒序排列
 		String where = "where betCount = ?";//设置查询条件语句
 		Object[] queryParams = {false};//获取未操作过的参数值
-		pageModel = sharkDao.find(where, queryParams, orderby, -1, -1);//执行查询方法
+		pageModel = betDao.find(where, queryParams, orderby, -1, -1);//执行查询方法
 		List<PanelInfo> allBet = pageModel.getList();//获取所有未操作过的下注条目
 		for(PanelInfo panelInfo : allBet){//遍历所有的下注条目
 			float totalPrice = panelInfo.getTotalPrice();//获取每一条目下注总额
@@ -140,7 +140,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 				float totalSwallow = swallow*single_bet;
 				setTotalSwallowSum(getTotalSwallowSum() + totalSwallow);
 				float totalPigeon = pigeon*single_bet;
-				setTotalPigeonSum(getTotalPigeonSum() + totalPigeon);//等同于totalPigeonSum += totalPigeon;
+				setTotalPigeonSum(getTotalPigeonSum() + totalPigeon);//在totalPigeonSum不要求为静态时，等同于totalPigeonSum += totalPigeon;
 				float totalPeafowl = peafowl*single_bet;
 				totalPeafowlSum += totalPeafowl;
 				float totalEagle = eagle*single_bet;
@@ -165,9 +165,9 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 				totalBeastSum += totalBeast;//相加所有条目禽兽的下注总额
 				totalPriceSum += totalPrice;//相加所有条目的下注总额
 				betCount = true; //设置改变标记为已经统计过
-				panelData = sharkDao.load(panelData.getPanelBetId());//装载订单对象
+				panelData = betDao.load(panelData.getPanelBetId());//装载订单对象
 				panelData.setBetCount(betCount);// 设置操作情况
-				sharkDao.update(panelData);//更新修改操作状态
+				betDao.update(panelData);//更新修改操作状态
 			}
 		}
 		System.out.print("单场押注总额之和为："+totalPriceSum);		
@@ -488,7 +488,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 				panelData.setTotalPrice(totalPrice);//把下注总额度
 				panelData.setBetCount(betCount);// 用于判断是否是统计过（默认值为false）
 				panelData.setPrizeItem(Prize.RAFFLING);// 设置奖项状态为正在抽奖
-				sharkDao.save(panelData);//保存panel获得数据	
+				betDao.save(panelData);//保存panel获得数据	
 				//记得重置panel下注
 			}
 			//return MAIN;//返回shark主页面
@@ -511,7 +511,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 			Object[] queryParams = {getLoginCustomer().getId()};//创建对象数组
 			Map<String, String> orderby = new HashMap<String, String>(1);//创建Map集合
 			orderby.put("createTime", "desc");//设置排序条件及方式
-			pageModel = sharkDao.find(where, queryParams, orderby , pageNo, pageSize);//执行查询方法
+			pageModel = betDao.find(where, queryParams, orderby , pageNo, pageSize);//执行查询方法
 		}
 		return LIST;//返回订单列表页面
 	}
@@ -538,7 +538,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		}
 		//如果whereBuffer为空则查询条件为空，否则以whereBuffer为查询条件
 		String where = whereBuffer.length()>0 ? "where "+whereBuffer.toString() : "";
-		pageModel = sharkDao.find(where, params.toArray(), orderby, pageNo, pageSize);//执行查询方法
+		pageModel = betDao.find(where, params.toArray(), orderby, pageNo, pageSize);//执行查询方法
 		return LIST;//返回后台下注列表
 	}
 	
@@ -546,7 +546,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	 * 查询指定一下注单的下注情况
 	 */
 	public String select() throws Exception {
-		panelData = sharkDao.load(panelData.getPanelBetId());
+		panelData = betDao.load(panelData.getPanelBetId());
 		return SELECT;
 	}
 	

@@ -94,6 +94,41 @@ public class DaoSupport<T> implements BaseDao<T>{
 		});
 	}
 	/**
+	 * 获取指定对象的指定条数的信息集合
+	 * @param where
+	 * @param queryParams
+	 * @param orderby 排序
+	 * @param startNo 从几条开始
+	 * @param limitResult 限制共几条
+	 * @return List
+	 */
+	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
+	public List<T> getNumResult(final String field,final String where, 
+			final Object[] queryParams,
+			final Map<String, String> orderby,
+			final int startNo,final int limitResult) {
+		final List<T> list = null;//定义List对象,不知是否一定要实例化
+		getTemplate().execute(new HibernateCallback() {//执行内部方法
+			@Override
+			public Object doInHibernate(Session session)
+					throws HibernateException, SQLException {
+				String hql = new StringBuffer().append("select "+field+" from ")//添加select范围和form字段
+						.append(GenericsUtils.getGenericName(entityClass))//添加对象类型
+						.append(" ")//添加空格
+						.append(where == null ? "" : where)//如果where为null就添加空格,反之添加where
+						.append(createOrderBy(orderby))//添加排序条件参数
+						.append(" ")//添加空格
+						.append("limit" + " " + startNo + limitResult)//添加限制条件参数
+						.toString();//转化为字符串
+				Query query = session.createQuery(hql);//执行查询
+				setQueryParams(query,queryParams);//为参数赋值
+				query.list();//将查询结果转化为List对象
+				return null;
+			}
+		});
+		return list;//返回符合条件的实体对象
+	}
+	/**
 	 * 获取指定对象的信息条数
 	 */
 	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
@@ -101,6 +136,7 @@ public class DaoSupport<T> implements BaseDao<T>{
 		String hql = "select count(*) from " + GenericsUtils.getGenericName(this.entityClass);
 		return (Long)uniqueResult(hql,null);
 	}
+	
 	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
 	public PageModel<T> find(final int pageNo, int maxResult) {
 		return find(null, null, null, pageNo, maxResult);
