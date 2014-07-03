@@ -37,7 +37,7 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 	//转盘配置
 	int circle_num= 2;//转盘圈数 后期由服务器取得
 	//关键配置	
-	static double dividend = 3000.00; //彩金池变量
+	static double dividend = 3000.00; //彩金池变量需要储存在数据库中
 	static double commission_rate = 0.10; //佣金费率
 	double single_bet = 1000.00; //单注上限
 	int bet_limit = 999; //押注上限
