@@ -1,8 +1,9 @@
-package com.grq.model.pojo.shark;
 // default package
+package com.grq.model.pojo.shark;
 
-import java.sql.Time;
+import java.util.Timer;
 
+import com.grq.model.customizeenum.Prize;
 
 /**
  * PrizeRecord entity. @author MyEclipse Persistence Tools
@@ -18,21 +19,21 @@ public class PrizeRecord  implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private String prizeId;
-    private Time createTime;
-    private Double totalPriceSum;
-    private Double commissionRate;
-    private String prizeName;
-    private Double dividend;
-    private Integer timesSwallow;
-    private Integer timesPigeon;
-    private Integer timesPeafowl;
-    private Integer timesEagle;
-    private Integer timesLion;
-    private Integer timesPanda;
-    private Integer timesMonkey;
-    private Integer timesRabbit;
-    private Integer goldSharkTimes;
+	private String prizeId;//奖项期号(手动分配)
+    private Timer createTime =new Timer() ;//生成时间
+    private Double totalPriceSum;//单场下注总额
+    private Double commissionRate;//佣金费率
+    private Prize prizeName;//中奖的奖项
+    private Double dividend;//剩余彩金池
+    private Integer timesSwallow;//燕子倍数
+    private Integer timesPigeon;//鸽子倍数
+    private Integer timesPeafowl;//孔雀倍数
+    private Integer timesEagle;//老鹰倍数
+    private Integer timesLion;//狮子倍数
+    private Integer timesPanda;//熊猫倍数
+    private Integer timesMonkey;//猴子倍数
+    private Integer timesRabbit;//兔子倍数
+    private Integer goldSharkTimes;//金鲨倍数
 
 
     // Constructors
@@ -43,7 +44,7 @@ public class PrizeRecord  implements java.io.Serializable {
 
     
     /** full constructor */
-    public PrizeRecord(String prizeId, Time createTime, Double totalPriceSum, Double commissionRate, String prizeName, Double dividend, Integer timesSwallow, Integer timesPigeon, Integer timesPeafowl, Integer timesEagle, Integer timesLion, Integer timesPanda, Integer timesMonkey, Integer timesRabbit, Integer goldSharkTimes) {
+    public PrizeRecord(String prizeId, Timer createTime, Double totalPriceSum, Double commissionRate, Prize prizeName, Double dividend, Integer timesSwallow, Integer timesPigeon, Integer timesPeafowl, Integer timesEagle, Integer timesLion, Integer timesPanda, Integer timesMonkey, Integer timesRabbit, Integer goldSharkTimes) {
         this.prizeId = prizeId;
         this.createTime = createTime;
         this.totalPriceSum = totalPriceSum;
@@ -72,11 +73,11 @@ public class PrizeRecord  implements java.io.Serializable {
         this.prizeId = prizeId;
     }
 
-    public Time getCreateTime() {
+    public Timer getCreateTime() {
         return this.createTime;
     }
     
-    public void setCreateTime(Time createTime) {
+    public void setCreateTime(Timer createTime) {
         this.createTime = createTime;
     }
 
@@ -96,11 +97,11 @@ public class PrizeRecord  implements java.io.Serializable {
         this.commissionRate = commissionRate;
     }
 
-    public String getPrizeName() {
+    public Prize getPrizeName() {
         return this.prizeName;
     }
     
-    public void setPrizeName(String prizeName) {
+    public void setPrizeName(Prize prizeName) {
         this.prizeName = prizeName;
     }
 
