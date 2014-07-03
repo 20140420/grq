@@ -2,6 +2,8 @@ package com.grq.controller.action.shark;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.Vector;
 
@@ -37,11 +39,7 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 	//转盘配置
 	int circle_num= 2;//转盘圈数 后期由服务器取得
 	//关键配置	
-<<<<<<< HEAD
 	static double dividend = 3000.00; //彩金池变量需要储存在数据库中
-=======
-	static double dividend = 500.00; //彩金池变量
->>>>>>> origin/master
 	static double commission_rate = 0.10; //佣金费率
 	double single_bet = 1000.00; //单注上限
 	int bet_limit = 999; //押注上限
@@ -65,6 +63,8 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 	private static double totalBeastSum = 0f;//统计走兽下注总额之和
 	private static boolean againOrNot = false; //是否重转，默认否
 	private static Prize prizeString = Prize.RAFFLING;//奖项变量，默认正在抽奖
+	
+	private static boolean bombOrNot = false; //是否存在炸弹，默认否
 	
 	
 	public static void main(String[] args) {
@@ -164,9 +164,10 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 			}
 		} else {
 			System.out.println("需要非正常吃分奖项");
-			int bombNum = 21;
-			if(bombNum < 20){//判断20场内是否出现地雷奖项，这里要再写
-				int i = outScoreMin(totalSum,birdOutScore,beastOutScore);//获取符合要求的值的索引
+			int countNum = 20 ;//统计20场			
+			bombOrNot = queryNum(countNum);//查看20场内是否存在地雷
+			if( bombOrNot == true){//如果20场内出现地雷奖项
+				int i = outScoreMin(totalSum,birdOutScore,beastOutScore);//获取符合要求最小出分的奖项的索引
 				if(i == 0){//第一个奖对应的索引
 					System.out.println("燕子发奖："+totalSum.get(i));
 					dividend= dividend -swallowOutScore-birdOutScore;
@@ -208,6 +209,13 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 			
 		}
 		return null;
+	}
+	
+	private static boolean queryNum(int countNum) {
+		
+		Map<String, String> orderby = new HashMap<String, String>(1);//创建Map集合
+		orderby.put("createTime", "desc");//设置排序条件及方式
+		return false;
 	}
 	private static int outScoreMin(ArrayList<Object> totalSum,
 			double birdOutScore, double beastOutScore) {
