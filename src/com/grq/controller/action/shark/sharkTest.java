@@ -441,7 +441,7 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 		//添加数据测试
 		allBet = new ArrayList<PanelInfo>();		
 		PanelInfo bet1 = new PanelInfo();
-		bet1.setSingle_bet(10.0f);
+		bet1.setSingle_bet(10);
 		bet1.setSwallow(1);
 		bet1.setPigeon(1);
 		bet1.setPeafowl(1);
@@ -461,7 +461,7 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 		allBet.add(bet1);
 		
 		PanelInfo bet2 = new PanelInfo();
-		bet2.setSingle_bet(10.0f);
+		bet2.setSingle_bet(10);
 		bet2.setSwallow(1);
 		bet2.setPigeon(1);
 		bet2.setPeafowl(1);

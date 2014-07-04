@@ -64,7 +64,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<!-- 押注单量显示 需要完善js防止非数字输入-->
     <div class="gpanel_single_bet">
     	<!-- <input type="text" value="87*14"> -->
-    	<input type="text" id="price_item_1" name="single_bet" value="10.0"/>
+    	<input type="text" id="price_item_1" name="single_bet" value="1"/>
     </div>
     <!-- 按键 -->
     <div class="gpanel_key_continue"><img width="48" height="26" /></div>

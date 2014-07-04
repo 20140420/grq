@@ -463,7 +463,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 			totalBet=(swallow+pigeon+peafowl+eagle+lion+panda+monkey+rabbit+bird+silver_shark+bomb+gold_shark+beast);
 			//System.out.print("下注总数："+totalBet);
 			if (totalBet != 0){//如果有下注
-				float single_bet=panelData.getSingle_bet(); //单注额度
+				Integer single_bet=panelData.getSingle_bet(); //单注额度
 				float totalPrice = 0f; // 计算总额的变量
 				totalPrice =single_bet*totalBet;
 				System.out.print("总额："+totalPrice);
