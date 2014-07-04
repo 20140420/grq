@@ -160,7 +160,7 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 		totalOutSum.add(pandaOutScore);
 		totalOutSum.add(monkeyOutScore);
 		totalOutSum.add(rabbitOutScore);
-		System.out.println("八个奖出分集合totalSum值："+totalOutSum);
+		System.out.println("八个奖出分集合totalOutSum值："+totalOutSum);
 		double birdOutScore = getTotalBirdSum()*2;//飞禽总出分 ;
 		double beastOutScore = getTotalBeastSum()*2;//走兽总出分 ;
 		Vector<Object> less = lessThan(totalOutSum,birdOutScore,beastOutScore,priceForPrize);//获得能吃分的几个奖项的索引的集合
