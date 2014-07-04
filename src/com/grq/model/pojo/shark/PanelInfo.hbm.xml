@@ -90,8 +90,8 @@
                 <comment>下注总数</comment>
             </column>
         </property>
-        <property name="single_bet" type="java.lang.Integer">
-            <column name="single_bet" not-null="true">
+        <property name="single_bet" type="java.lang.Float">
+            <column name="single_bet" precision="12" scale="0" not-null="true">
                 <comment>单注额度</comment>
             </column>
         </property>

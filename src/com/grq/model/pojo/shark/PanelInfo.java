@@ -38,7 +38,7 @@ public class PanelInfo  implements java.io.Serializable {
  	private Integer gold_shark;// 金鲨
  	private Integer beast;// 走兽
  	private Integer totalBet;// 下注总数（非总额）
- 	private Integer single_bet;// 单注额度
+ 	private Float single_bet;// 单注额度
  	private Float totalPrice;// 下注总额度
  	private Prize prizeItem; //奖项
  	private Boolean betCount = false;// 用于判断是否是统计过（默认值为false）
@@ -52,7 +52,7 @@ public class PanelInfo  implements java.io.Serializable {
 
     
     /** full constructor */
-    public PanelInfo(String panelBetId, Customer customer, Date createTime, Integer swallow, Integer pigeon, Integer peafowl, Integer eagle, Integer lion, Integer panda, Integer monkey, Integer rabbit, Integer bird, Integer silverShark, Integer bomb, Integer goldShark, Integer beast, Integer totalBet, Integer singleBet, Float totalPrice, Prize prizeItem, Boolean betCount) {
+    public PanelInfo(String panelBetId, Customer customer, Date createTime, Integer swallow, Integer pigeon, Integer peafowl, Integer eagle, Integer lion, Integer panda, Integer monkey, Integer rabbit, Integer bird, Integer silverShark, Integer bomb, Integer goldShark, Integer beast, Integer totalBet, Float singleBet, Float totalPrice, Prize prizeItem, Boolean betCount) {
         this.panelBetId = panelBetId;
         this.customer = customer;
         this.setCreateTime(createTime);
@@ -221,12 +221,12 @@ public class PanelInfo  implements java.io.Serializable {
         this.totalBet = totalBet;
     }
 
-    public Integer getSingle_bet() {
+    public Float getSingle_bet() {
 		return single_bet;
 	}
 
 
-	public void setSingle_bet(Integer single_bet) {
+	public void setSingle_bet(Float single_bet) {
 		this.single_bet = single_bet;
 	}
 

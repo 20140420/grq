@@ -445,7 +445,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	public String save() throws Exception{
 		//System.out.print("panel提交的data");
 		if(getLoginCustomer() != null){//如果用户已登录
-			System.out.print("用户登入的");			
+			//System.out.print("用户登入的");			
 			Integer swallow =panelData.getSwallow();// 燕子
 			Integer pigeon =panelData.getPigeon();// 鸽子
 			Integer peafowl =panelData.getPeafowl();// 孔雀
@@ -460,11 +460,10 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 			Integer gold_shark =panelData.getGold_shark();// 金鲨
 			Integer beast =panelData.getBeast();// 走兽
 			Integer totalBet =0;// 计算下注总数（非总额）的变量
-			System.out.print("1下注总数："+totalBet);
-			//totalBet = (swallow+pigeon+peafowl+eagle+lion+panda+monkey+rabbit+bird+silver_shark+bomb+gold_shark+beast);
-			System.out.print("下注总数："+totalBet);
-			//if (totalBet != 0){//如果有下注
-				Integer single_bet=panelData.getSingle_bet(); //单注额度
+			totalBet=(swallow+pigeon+peafowl+eagle+lion+panda+monkey+rabbit+bird+silver_shark+bomb+gold_shark+beast);
+			//System.out.print("下注总数："+totalBet);
+			if (totalBet != 0){//如果有下注
+				float single_bet=panelData.getSingle_bet(); //单注额度
 				float totalPrice = 0f; // 计算总额的变量
 				totalPrice =single_bet*totalBet;
 				System.out.print("总额："+totalPrice);
@@ -491,7 +490,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 				panelData.setPrizeItem(Prize.RAFFLING);// 设置奖项状态为正在抽奖
 				betDao.save(panelData);//保存panel获得数据	
 				//记得重置panel下注
-			//}
+			}
 			//return MAIN;//返回shark主页面
 			return main();//通过主函数返回shark主页面，可进行统计出结果
 		}
