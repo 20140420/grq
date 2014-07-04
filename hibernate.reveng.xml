@@ -7,9 +7,15 @@
 			<generator class="assigned"></generator>
 		</primary-key>
 	</table>
-<table name="tb_prize_record" catalog="guruquan" class="PrizeRecord">
+	<table name="tb_prize_record" catalog="guruquan"
+		class="PrizeRecord">
+		<primary-key>
+			<generator class="assigned"></generator>
+		</primary-key>
+	</table>
+<table name="tb_shark_config" catalog="guruquan" class="SharkConfig">
 	<primary-key>
-		<generator class="assigned"></generator>
+		<generator class="native"></generator>
 	</primary-key>
 </table>
 </hibernate-reverse-engineering>
