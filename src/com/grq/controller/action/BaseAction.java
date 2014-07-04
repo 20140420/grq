@@ -19,6 +19,7 @@ import com.grq.model.dao.user.CustomerDao;
 import com.grq.model.dao.user.UserDao;
 import com.grq.model.dao.shark.PrizeRecordDao;
 import com.grq.model.dao.shark.BetDao;
+import com.grq.model.dao.shark.SharkConfigDao;
 import com.grq.model.pojo.user.Customer;
 import com.grq.model.pojo.product.OrderItem;
 import com.opensymphony.xwork2.ActionSupport;
@@ -52,6 +53,8 @@ SessionAware{
 	protected BetDao betDao;
 	@Autowired
 	protected static PrizeRecordDao prizeRecordDao;
+	@Autowired
+	protected SharkConfigDao sharkConfigDao;
 	@Autowired
 	protected static BetDao sharkDaoTest;
 	
