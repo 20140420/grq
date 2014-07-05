@@ -2,14 +2,11 @@ package com.grq.controller.action.shark;
 
 
 import java.util.ArrayList;
-
 import java.util.List;
-
 import java.util.Random;
 import java.util.Vector;
 
 import com.grq.controller.action.BaseAction;
-//import com.grq.model.PageModel;
 import com.grq.model.customizeenum.Prize;
 import com.grq.model.pojo.shark.PanelInfo;
 import com.grq.model.pojo.shark.PrizeRecord;
@@ -22,16 +19,6 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	/* 游戏配置后期单独做一块 */
-	//游戏倍数系统内部生成
-	static int timesSwallow = 6;
-	static int timesPigeon = 6;
-	static int timesPeafowl = 8;
-	static int timesEagle = 24;
-	static int timesLion = 24;
-	static int timesPanda = 8;
-	static int timesMonkey = 6;
-	static int timesRabbit = 6;
 	
 	/*暂时还未用着
 	//配置时间
@@ -50,11 +37,23 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 	*/
 	
 	//本类中的区域变量
+	
+	//游戏倍数
+	private static int timesSwallow;
+	private static int timesPigeon;
+	private static int timesPeafowl;
+	private static int timesEagle;
+	private static int timesLion;
+	private static int timesPanda;
+	private static int timesMonkey;
+	private static int timesRabbit;
+	//游戏配置
 	private static double commission_rate; //佣金费率
 	private static int timesMax;//最高倍数
-	
+	private static double commissionProfit;//佣金收益
+	private static double lastDividend;
 	private static double dividend; //彩金池变量需要储存在数据库中
-	private static Random randomNum = new Random();//用于获取随机数
+	
 	private static double totalSwallowSum; //统计燕子下注总额之和
 	private static double totalPigeonSum;
 	private static double totalPeafowlSum;
@@ -68,36 +67,48 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 	private static double totalBombSum;
 	private static double totalGoldSum;
 	private static double totalBeastSum;//统计走兽下注总额之和
+	private static double totalBetSum;//一场下注总金额
+	private static Integer totalBet;//一条下注订单总筹码
+	
+	private static Random randomNum = new Random();//用于获取随机数
+	
 	private static boolean againOrNot; //是否重转，默认否	
 	private static boolean bombOrNot; //是否存在炸弹，默认否
-	private static Integer totalBet;//一条下注订单总筹码
-	private static double totalBetSum;//一场下注总金额
 	
 	// 实体变量
-	private static List<PrizeRecord> prizelist;
+	private static List<PrizeRecord> prizeEntity;
 	private static List<TimesEntity> timesEntity;
+	private static List<SharkConfig> configEntity;
+	private static List<PanelInfo> betEntity;
 	
 	//自定义类型变量
 	private static Prize prizeString;//奖项变量，默认正在抽奖
 	
 	
 	public static void main(String[] args) {
-		ArrayList<Object> oneTimesList = timesHave();
+		/** 随机获得倍数 */
+		List<Object> oneTimesList = timesHave();
 		System.out.println("随机中的一组倍数列表："+oneTimesList);
 		
-		List<SharkConfig> sharkConfig = getSharkConfig();
-		commission_rate = sharkConfig.get(0).getCommissionRate();//获取费率配置
-		System.out.println("系统费率："+commission_rate);
-		timesMax = sharkConfig.get(0).getTimesMax();//获取费率配置
-		System.out.println("最高倍数："+timesMax);
+		/** 获取系统配置 */
+		List<Object> lastConfigList = sharkConfigHave();
+		System.out.println("最新配置列表："+lastConfigList);
 		
-		List<PrizeRecord> beforePrizeList = beforePrize();
-		dividend = beforePrizeList.get(0).getDividend();//获取上一盘彩金池
-		System.out.println("上一期彩金："+dividend);
+		/** 获取上期彩金池 */
+		lastDividend = lastDividendHave();
+		System.out.println("上一期彩金："+lastDividend);
 		
+		/** 统计获取奖项 */
 		prizeString = havePrize();
-		System.out.println("单场押注总额之和为："+totalBetSum);		
+		System.out.println("单场押注总额之和为："+totalBetSum);
+		System.out.println("佣金收益为："+commissionProfit);
 		System.out.println("本场中奖奖项为:"+prizeString);
+		
+		ArrayList<Object> beforePrizeList = new ArrayList<Object>();//之前中奖列表
+		for(PrizeRecord prizeRecord: prizeEntity){
+			beforePrizeList.add(prizeRecord.getPrizeName());
+		}
+		System.out.println("历次中奖奖项为:"+beforePrizeList);
 		
 		if(againOrNot == true){//如果是则获得再转一次
 			turnAgain();
@@ -106,9 +117,13 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 		}
 		System.out.println("发奖后彩金："+dividend);
 	}
-	private static ArrayList<Object> timesHave() {
+	/**
+	 * 获取倍数
+	 * @return
+	 */
+	private static List<Object> timesHave() {
 		//添加数据测试
-		List<TimesEntity> timesEntity=new ArrayList<TimesEntity>();		
+		timesEntity=new ArrayList<TimesEntity>();		
 		TimesEntity timesList1 = new TimesEntity();	
 		timesList1.setTimesSwallow(6);
 		timesList1.setTimesPigeon(8);
@@ -142,6 +157,14 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 		
 		int timesIndex=(int)(Math.random()*timesEntity.size());//从总共less.size()组倍数中随机一组倍数
 		ArrayList<Object> oneTimesList = new ArrayList<Object>();//之前中奖列表
+		timesSwallow = timesEntity.get(timesIndex).getTimesSwallow();
+		timesPigeon = timesEntity.get(timesIndex).getTimesPigeon();
+		timesPeafowl = timesEntity.get(timesIndex).getTimesPeafowl();
+		timesEagle = timesEntity.get(timesIndex).getTimesEagle();
+		timesLion = timesEntity.get(timesIndex).getTimesLion();
+		timesPanda = timesEntity.get(timesIndex).getTimesPanda();
+		timesMonkey = timesEntity.get(timesIndex).getTimesMonkey();
+		timesRabbit = timesEntity.get(timesIndex).getTimesRabbit();
 		oneTimesList.add(timesEntity.get(timesIndex).getTimesSwallow());//注意添加的顺序
 		oneTimesList.add(timesEntity.get(timesIndex).getTimesPigeon());
 		oneTimesList.add(timesEntity.get(timesIndex).getTimesPeafowl());
@@ -153,7 +176,11 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 		
 		return oneTimesList;
 	}
-	private static List<SharkConfig> getSharkConfig() {
+	/**
+	 * 获取配置
+	 * @return
+	 */
+	private static List<Object> sharkConfigHave() {
 		/*String field =" dividend,prize_name ";//选择字段奖项
 		String where = null;
 		Object[] queryParams = null;
@@ -162,7 +189,7 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 		prizelist = prizeRecordDao.getNumResult(field, where, queryParams, orderby, 0, 1);//参数1表示只获取最近一条数据
 		*/
 		//添加数据测试
-		List<SharkConfig> configEntity=new ArrayList<SharkConfig>();		
+		configEntity=new ArrayList<SharkConfig>();		
 		SharkConfig config1 = new SharkConfig();	
 		config1.setCommissionRate(0.1);
 		config1.setTimesMax(99);
@@ -171,17 +198,28 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 		config2.setCommissionRate(0.6);
 		config2.setTimesMax(99);
 		configEntity.add(config2);
-
-		return configEntity;
-	}
-	private static void turnAgain() {
-		System.out.println("再转函数");		
+		
+		ArrayList<Object> lastConfigList = new ArrayList<Object>();//之前中奖列表
+		commission_rate = configEntity.get(0).getCommissionRate();//获取最新的费率配置
+		timesMax = configEntity.get(0).getTimesMax();//获取最新的最大倍率配置
+		lastConfigList.add(configEntity.get(0).getCommissionRate());
+		lastConfigList.add(configEntity.get(0).getTimesMax());
+		return lastConfigList;
 	}
 	/**
-	 * 上一场的奖项记录
+	 * 获取上场彩金池
 	 * @return
 	 */
-	private static List<PrizeRecord> beforePrize() {
+	private static double lastDividendHave() {
+		prizeEntity = prizeRecordHave();
+		Double lastDividend = prizeEntity.get(0).getDividend();//获取上场奖项记录的彩金池记录
+		return lastDividend;
+	}
+	/**
+	 * 获取奖项记录
+	 * @return
+	 */
+	private static List<PrizeRecord> prizeRecordHave() {
 		/*String field =" dividend,prize_name ";//选择字段奖项
 		String where = null;
 		Object[] queryParams = null;
@@ -189,18 +227,40 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 		orderby.put("createTime", "desc");//设置排序条件及方式
 		prizelist = prizeRecordDao.getNumResult(field, where, queryParams, orderby, 0, 1);//参数1表示只获取最近一条数据
 		*/
+		/*String field ="prize";//选择字段奖项
+		String where = null;
+		Object[] queryParams = null;
+		Map<String, String> orderby = new HashMap<String, String>();//定义Map集合
+		orderby.put("createTime", "desc");//设置排序条件及方式
+		list = prizeRecordDao.getNumResult(field, where, queryParams, orderby, 0, countNum);*/
+		
 		//添加数据测试
-		prizelist=new ArrayList<PrizeRecord>();		
-		PrizeRecord prize1 = new PrizeRecord();	
-		prize1.setDividend(300.0);
-		prize1.setPrizeName(Prize.RABBIT);
-		prizelist.add(prize1);		
+		prizeEntity=new ArrayList<PrizeRecord>();		
+		PrizeRecord prize1 = new PrizeRecord();
+		prize1.setPrizeId("2014");
+		prize1.setCommissionRate(0.10);
+		prize1.setCreateTime(null);	
+		prize1.setPrizeName(Prize.RAFFLING);
+		prize1.setDividend(310.0);
+		prizeEntity.add(prize1);		
 		PrizeRecord prize2 = new PrizeRecord();
 		prize2.setDividend(320.0);
-		prize2.setPrizeName(Prize.PIGEON);
-		prizelist.add(prize2);
+		prize2.setPrizeName(Prize.SWALLOW);
+		prizeEntity.add(prize2);
+		PrizeRecord prize3 = new PrizeRecord();
+		prize3.setPrizeName(Prize.RABBIT);
+		prizeEntity.add(prize3);
+		PrizeRecord prize4 = new PrizeRecord();
+		prize4.setPrizeName(Prize.PEAFOWL);
+		prizeEntity.add(prize4);
+		PrizeRecord prize5 = new PrizeRecord();
+		prize5.setPrizeName(Prize.EAGLE);
+		prizeEntity.add(prize5);
+		PrizeRecord prize6 = new PrizeRecord();
+		prize6.setPrizeName(Prize.PANDA);
+		prizeEntity.add(prize6);
 
-		return prizelist;
+		return prizeEntity;
 	}
 	/**
 	 * 出奖
@@ -208,7 +268,8 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 	 */
 	private static Prize havePrize(){
 		double totalPriceSum = countTotalPrice();//获得下注总额之和
-		dividend = dividend + totalPriceSum*(1-commission_rate);//筹码注入彩金池
+		dividend = lastDividend + totalPriceSum*(1-commission_rate);//筹码注入彩金池
+		commissionProfit = totalPriceSum*commission_rate;//佣金收益
 		System.out.println("发奖前彩金："+dividend);
 		if( dividend > (totalPriceSum*timesMax) ){//如果已有99倍余额
 			return sharkPrize();
@@ -221,8 +282,109 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 			return randomPrize();//随机函数
 		}
 	}
+	/**
+	 * 统计各奖项押注之和，及总押注总额之和
+	 * @return float 未操作押注总额之和 totalBetSum
+	 */
+	private static double countTotalPrice() {
+		/*
+		Map<String, String> orderby = new HashMap<String, String>(1);//定义Map集合
+		orderby.put("createTime", "desc");//设置按创建时间倒序排列
+		String where = "where betCount = ?";//设置查询条件语句
+		Object[] queryParams = {false};//获取未操作过的参数值
+		pageModel = sharkDaoTest.find(where, queryParams, orderby, -1, -1);//执行查询方法
+		List<PanelInfo> allBet = pageModel.getList();//获取所有未操作过的下注条目
+		*/
+		
+		//添加数据测试
+		betEntity = new ArrayList<PanelInfo>();		
+		PanelInfo bet1 = new PanelInfo();
+		bet1.setSingle_bet(10);
+		bet1.setSwallow(1);
+		bet1.setPigeon(1);
+		bet1.setPeafowl(1);
+		bet1.setEagle(1);
+		bet1.setLion(1);
+		bet1.setPanda(1);
+		bet1.setMonkey(1);
+		bet1.setRabbit(1);
+		bet1.setBird(1);
+		bet1.setBeast(1);
+		bet1.setBomb(1);
+		bet1.setSilver_shark(1);
+		bet1.setGold_shark(1);
+		bet1.setCreateTime(null);	
+		bet1.setPrizeItem(Prize.RAFFLING);
+		bet1.setBetCount(false);
+		betEntity.add(bet1);
+		
+		PanelInfo bet2 = new PanelInfo();
+		bet2.setSingle_bet(10);
+		bet2.setSwallow(1);
+		bet2.setPigeon(1);
+		bet2.setPeafowl(1);
+		bet2.setEagle(1);
+		bet2.setLion(1);
+		bet2.setPanda(1);
+		bet2.setMonkey(1);
+		bet2.setRabbit(1);
+		bet2.setBird(1);
+		bet2.setBeast(1);
+		bet2.setBomb(0);
+		bet2.setSilver_shark(1);
+		bet2.setGold_shark(1);
+		bet2.setCreateTime(null);	
+		bet2.setPrizeItem(Prize.RAFFLING);
+		bet2.setBetCount(false);
+		betEntity.add(bet2);
+		
+		
+		for(PanelInfo panelInfo : betEntity){//遍历所有的下注条目
+			//float single_bet = panelInfo.getSingle_bet();//获取每一条单注额度
+			Integer swallow = panelInfo.getSwallow();
+			Integer pigeon = panelInfo.getPigeon();
+			Integer peafowl = panelInfo.getPeafowl();
+			Integer eagle = panelInfo.getEagle();
+			Integer lion = panelInfo.getLion();
+			Integer panda = panelInfo.getPanda();
+			Integer monkey = panelInfo.getMonkey();
+			Integer rabbit = panelInfo.getRabbit();
+			Integer bird = panelInfo.getBird();
+			Integer silver = panelInfo.getSilver_shark();
+			Integer bomb = panelInfo.getBomb();
+			Integer gold = panelInfo.getGold_shark();
+			Integer beast = panelInfo.getBeast();
+			boolean betCount = panelInfo.getBetCount();//获得条目统计状态
+			if(betCount == false){//如果条目未操作过
+				totalSwallowSum += swallow;
+				totalPigeonSum += pigeon;//在totalPigeonSum不要求为静态等同于setTotalPigeonSum(getTotalPigeonSum() + totalPigeon)
+				totalPeafowlSum += peafowl;
+				totalEagleSum += eagle;
+				totalLionSum += lion;
+				totalPandaSum += panda;
+				totalMonkeySum += monkey;
+				totalRabbitSum += rabbit;
+				totalBirdSum += bird;
+				totalSilverSum += silver;
+				totalBombSum += bomb;
+				totalGoldSum += gold;
+				totalBeastSum += beast;//相加所有条目禽兽的下注总额
+				totalBet = (swallow+pigeon+peafowl+eagle+lion+panda+monkey+rabbit+bird+silver+bomb+gold+beast);//一条订单总下注
+				setTotalBetSum(getTotalBetSum() + totalBet);//相加所有条目的下注总额
+				betCount = true; //设置改变标记为已经统计过
+				//panelData = sharkDaoTest.load(panelData.getPanelBetId());//装载订单对象
+				//panelData.setBetCount(betCount);// 设置操作情况
+				//sharkDaoTest.update(panelData);//更新修改操作状态
+			}
+		}
+		return totalBetSum;//返回总下注数目之和
+	}
+	/**
+	 * 吃分函数
+	 * @return
+	 */
 	private static Prize dividendUpPrize() {
-		System.out.print("吃分函数：");
+		System.out.println("吃分函数：");
 		againOrNot = false; //设置为false不重转
 		double priceForPrize = totalBetSum*(1-commission_rate);//单场用于发奖注额
 		double swallowOutScore = totalSwallowSum*timesSwallow;
@@ -287,7 +449,7 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 		} else {
 			System.out.println("需要非正常吃分奖项");
 			int countNum = 20 ;//统计20场			
-			bombOrNot = queryNumResult(countNum);//查看20场内是否存在地雷
+			bombOrNot = ifExistBomb(countNum);//查看20场内是否存在地雷
 			if( bombOrNot == true){//如果20场内出现地雷奖项
 				int i = outScoreMin(totalOutSum,birdOutScore,beastOutScore);//获取符合要求最小出分的奖项的索引
 				if(i == 0){//第一个奖对应的索引
@@ -332,39 +494,35 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 		}
 		return null;
 	}
-
-	
-	private static boolean queryNumResult(int countNum) {
-		/*String field ="prize";//选择字段奖项
-		String where = null;
-		Object[] queryParams = null;
-		Map<String, String> orderby = new HashMap<String, String>();//定义Map集合
-		orderby.put("createTime", "desc");//设置排序条件及方式
-		list = prizeRecordDao.getNumResult(field, where, queryParams, orderby, 0, countNum);*/
-		
-		//添加数据测试
-		prizelist=new ArrayList<PrizeRecord>();		
-		PrizeRecord prize1 = new PrizeRecord();
-		prize1.setPrizeId("2014");
-		prize1.setCommissionRate(0.10);
-		prize1.setCreateTime(null);	
-		prize1.setPrizeName(Prize.RAFFLING);
-		prizelist.add(prize1);		
-		PrizeRecord prize2 = new PrizeRecord();
-		prize2.setPrizeName(Prize.BOMB);
-		prizelist.add(prize2);
-		ArrayList<Object> onlyPrizeList = new ArrayList<Object>();//之前中奖列表
-		for(PrizeRecord prizeRecord: prizelist){
-			onlyPrizeList.add(prizeRecord.getPrizeName());
-		}
-		System.out.println("query之前中奖列表："+onlyPrizeList);
-		for(int i=0 ; i < prizelist.size() ;i++){
-			if(prizelist.get(i).getPrizeName() == Prize.BOMB){
-				return true;//如果遍历的第一个就是地雷，后面19个就不遍历了
+	/**
+	 * 几场之内是否存在地雷奖
+	 * @param countNum
+	 * @return
+	 */
+	private static boolean ifExistBomb(int countNum) {
+		prizeEntity = prizeRecordHave();//获取奖项记录实体
+		if(prizeEntity.size() < countNum ){
+			for(int i=0 ; i < prizeEntity.size() ;i++){
+				if(prizeEntity.get(i).getPrizeName() == Prize.BOMB){
+					return true;//如果遍历的第一个就是地雷，后面就不遍历了
+				}
+			}
+		} else {
+			for(int i=0 ; i < countNum ;i++){
+				if(prizeEntity.get(i).getPrizeName() == Prize.BOMB){
+					return true;//如果遍历的第一个就是地雷，后面19个就不遍历了
+				}
 			}
 		}
 		return false;
 	}
+	/**
+	 * 符合要求时最小的奖的索引
+	 * @param totalSum
+	 * @param birdOutScore
+	 * @param beastOutScore
+	 * @return
+	 */
 	private static int outScoreMin(ArrayList<Object> totalSum,
 			double birdOutScore, double beastOutScore) {
 		try{
@@ -385,7 +543,7 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 						}
 					}
 				}
-				return x;//返回符合要求的和最小的奖的索引
+				return x;//返回符合要求时最小的奖的索引
 			}
 			
 		}catch (Exception ex) {
@@ -393,6 +551,14 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
         }
 		return 0;
 	}
+	/**
+	 * 获取能吃分的奖项的索引
+	 * @param totalOutSum
+	 * @param birdOutScore
+	 * @param beastOutScore
+	 * @param priceForPrize
+	 * @return 索引集合
+	 */
 	private static Vector<Object> lessThan(ArrayList<Object> totalOutSum,
 			double birdOutScore, double beastOutScore, double priceForPrize) {
 		Vector<Object> v = new Vector<Object>(totalOutSum.size());
@@ -410,10 +576,14 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 		}
 		return v;
 	}
+	/**
+	 * 炸弹函数
+	 * @return
+	 */
 	private static Prize bombPrize() {
 		try{
 			if( totalBombSum > 0 ){//如果有人下注
-				System.out.println("炸有人:" + totalBombSum);
+				System.out.println("炸弹有人:" + totalBombSum);
 				dividend= dividend -totalBetSum*(1-commission_rate);
 				System.out.println("发炸弹金额:" + totalBetSum*(1-commission_rate));
 				return Prize.BOMB;
@@ -427,6 +597,10 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 		}
 		return null;
 	}
+	/**
+	 * 随机函数
+	 * @return
+	 */
 	private static Prize randomPrize() {
 		System.out.print("随机函数：");
 		againOrNot = false; //设置为false不重转
@@ -483,6 +657,10 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 		}
 		return null;
 	}
+	/**
+	 * 鲨鱼函数
+	 * @return
+	 */
 	private static Prize sharkPrize() {
 		againOrNot = true; //设置为true，用于再转一次
 		double a = Math.floor(randomNum.nextInt(2));//随机获取大于等于0到小于2的整数部分,即随机获取0或1
@@ -505,104 +683,10 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 		return null;
 	}
 	/**
-	 * 统计各奖项押注之和，及总押注总额之和
-	 * @return float 未操作押注总额之和 totalBetSum
+	 * 再转函数
 	 */
-	private static double countTotalPrice() {
-		/*
-		Map<String, String> orderby = new HashMap<String, String>(1);//定义Map集合
-		orderby.put("createTime", "desc");//设置按创建时间倒序排列
-		String where = "where betCount = ?";//设置查询条件语句
-		Object[] queryParams = {false};//获取未操作过的参数值
-		pageModel = sharkDaoTest.find(where, queryParams, orderby, -1, -1);//执行查询方法
-		List<PanelInfo> allBet = pageModel.getList();//获取所有未操作过的下注条目
-		*/
-		// 下注列表
-		List<PanelInfo> allBet;
-		
-		//添加数据测试
-		allBet = new ArrayList<PanelInfo>();		
-		PanelInfo bet1 = new PanelInfo();
-		bet1.setSingle_bet(10);
-		bet1.setSwallow(1);
-		bet1.setPigeon(1);
-		bet1.setPeafowl(1);
-		bet1.setEagle(1);
-		bet1.setLion(1);
-		bet1.setPanda(1);
-		bet1.setMonkey(1);
-		bet1.setRabbit(1);
-		bet1.setBird(1);
-		bet1.setBeast(1);
-		bet1.setBomb(1);
-		bet1.setSilver_shark(1);
-		bet1.setGold_shark(1);
-		bet1.setCreateTime(null);	
-		bet1.setPrizeItem(Prize.RAFFLING);
-		bet1.setBetCount(false);
-		allBet.add(bet1);
-		
-		PanelInfo bet2 = new PanelInfo();
-		bet2.setSingle_bet(10);
-		bet2.setSwallow(1);
-		bet2.setPigeon(1);
-		bet2.setPeafowl(1);
-		bet2.setEagle(1);
-		bet2.setLion(1);
-		bet2.setPanda(1);
-		bet2.setMonkey(1);
-		bet2.setRabbit(1);
-		bet2.setBird(1);
-		bet2.setBeast(1);
-		bet2.setBomb(1);
-		bet2.setSilver_shark(1);
-		bet2.setGold_shark(1);
-		bet2.setCreateTime(null);	
-		bet2.setPrizeItem(Prize.RAFFLING);
-		bet2.setBetCount(false);
-		allBet.add(bet2);
-		
-		
-		for(PanelInfo panelInfo : allBet){//遍历所有的下注条目
-			//float single_bet = panelInfo.getSingle_bet();//获取每一条单注额度
-			Integer swallow = panelInfo.getSwallow();
-			Integer pigeon = panelInfo.getPigeon();
-			Integer peafowl = panelInfo.getPeafowl();
-			Integer eagle = panelInfo.getEagle();
-			Integer lion = panelInfo.getLion();
-			Integer panda = panelInfo.getPanda();
-			Integer monkey = panelInfo.getMonkey();
-			Integer rabbit = panelInfo.getRabbit();
-			Integer bird = panelInfo.getBird();
-			Integer silver = panelInfo.getSilver_shark();
-			Integer bomb = panelInfo.getBomb();
-			Integer gold = panelInfo.getGold_shark();
-			Integer beast = panelInfo.getBeast();
-			boolean betCount = panelInfo.getBetCount();//获得条目统计状态
-			if(betCount == false){//如果条目未操作过
-				totalSwallowSum += swallow;
-				totalPigeonSum += pigeon;//在totalPigeonSum不要求为静态等同于setTotalPigeonSum(getTotalPigeonSum() + totalPigeon)
-				totalPeafowlSum += peafowl;
-				totalEagleSum += eagle;
-				totalLionSum += lion;
-				totalPandaSum += panda;
-				totalMonkeySum += monkey;
-				totalRabbitSum += rabbit;
-				totalBirdSum += bird;
-				totalSilverSum += silver;
-				totalBombSum += silver;
-				totalGoldSum += gold;
-				totalBeastSum += beast;//相加所有条目禽兽的下注总额
-				totalBet = (swallow+pigeon+peafowl+eagle+lion+panda+monkey+rabbit+bird+silver+bomb+gold+beast);//一条订单总下注
-				setTotalBetSum(getTotalBetSum() + totalBet);//相加所有条目的下注总额
-				betCount = true; //设置改变标记为已经统计过
-				//panelData = sharkDaoTest.load(panelData.getPanelBetId());//装载订单对象
-				panelData.setBetCount(betCount);// 设置操作情况
-				//sharkDaoTest.update(panelData);//更新修改操作状态
-			}
-		}
-		System.out.println("系统单场押注总额之和为："+totalBetSum);
-		return totalBetSum;//返回总下注数目之和
+	private static void turnAgain() {
+		System.out.println("再转函数");		
 	}
 
 	// 键盘panel对象
@@ -700,12 +784,6 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 	}
 	public void setTotalBeastSum(float totalBeastSum) {
 		sharkTest.totalBeastSum = totalBeastSum;
-	}
-	public static List<PrizeRecord> getPrizelist() {
-		return prizelist;
-	}
-	public static void setPrizelist(List<PrizeRecord> prizelist) {
-		sharkTest.prizelist = prizelist;
 	}
 	public static double getTotalBetSum() {
 		return totalBetSum;

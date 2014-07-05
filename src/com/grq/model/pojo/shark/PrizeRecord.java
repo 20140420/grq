@@ -21,7 +21,6 @@ public class PrizeRecord  implements java.io.Serializable {
 	
 	private String prizeId;//奖项期号(手动分配)
     private Timer createTime =new Timer() ;//生成时间
-    private Double totalPriceSum;//单场下注总额
     private Double commissionRate;//佣金费率
     private Prize prizeName;//中奖的奖项
     private Double dividend;//剩余彩金池
@@ -33,7 +32,21 @@ public class PrizeRecord  implements java.io.Serializable {
     private Integer timesPanda;//熊猫倍数
     private Integer timesMonkey;//猴子倍数
     private Integer timesRabbit;//兔子倍数
-    private Integer goldSharkTimes;//金鲨倍数
+    private Integer timesGoldShark;//金鲨倍数
+	private Double totalSwallowSum; //燕子下注总额之和
+	private Double totalPigeonSum;//鸽子下注总额之和
+	private Double totalPeafowlSum;//孔雀下注总额之和
+	private Double totalEagleSum;//老鹰下注总额之和
+	private Double totalLionSum;//狮子下注总额之和
+	private Double totalPandaSum;//熊猫下注总额之和
+	private Double totalMonkeySum;//猴子
+	private Double totalRabbitSum;//兔子
+	private Double totalBirdSum;//统计飞禽下注总额之和
+	private Double totalSilverSum;//银鲨
+	private Double totalBombSum;//炸弹
+	private Double totalGoldSum;//金鲨
+	private Double totalBeastSum;//统计走兽下注总额之和
+	private Double totalBetSum;//一场下注总金额
 
 
     // Constructors
@@ -44,10 +57,9 @@ public class PrizeRecord  implements java.io.Serializable {
 
     
     /** full constructor */
-    public PrizeRecord(String prizeId, Timer createTime, Double totalPriceSum, Double commissionRate, Prize prizeName, Double dividend, Integer timesSwallow, Integer timesPigeon, Integer timesPeafowl, Integer timesEagle, Integer timesLion, Integer timesPanda, Integer timesMonkey, Integer timesRabbit, Integer goldSharkTimes) {
+    public PrizeRecord(String prizeId, Timer createTime, Double commissionRate, Prize prizeName, Double dividend, Integer timesSwallow, Integer timesPigeon, Integer timesPeafowl, Integer timesEagle, Integer timesLion, Integer timesPanda, Integer timesMonkey, Integer timesRabbit, Double totalSwallowSum, Double totalPigeonSum, Double totalPeafowlSum, Double totalEagleSum, Double totalLionSum, Double totalPandaSum, Double totalMonkeySum, Double totalRabbitSum, Double totalBirdSum, Double totalSilverSum, Double totalBombSum, Double totalGoldSum, Double totalBeastSum, Double totalBetSum)  {
         this.prizeId = prizeId;
         this.createTime = createTime;
-        this.totalPriceSum = totalPriceSum;
         this.commissionRate = commissionRate;
         this.prizeName = prizeName;
         this.dividend = dividend;
@@ -59,12 +71,24 @@ public class PrizeRecord  implements java.io.Serializable {
         this.timesPanda = timesPanda;
         this.timesMonkey = timesMonkey;
         this.timesRabbit = timesRabbit;
-        this.goldSharkTimes = goldSharkTimes;
+        this.totalSwallowSum = totalSwallowSum;
+        this.totalPigeonSum = totalPigeonSum;
+        this.totalPeafowlSum = totalPeafowlSum;
+        this.totalEagleSum = totalEagleSum;
+        this.totalLionSum = totalLionSum;
+        this.totalPandaSum = totalPandaSum;
+        this.totalMonkeySum = totalMonkeySum;
+        this.totalRabbitSum = totalRabbitSum;
+        this.totalBirdSum = totalBirdSum;
+        this.totalSilverSum = totalSilverSum;
+        this.totalBombSum = totalBombSum;
+        this.totalGoldSum = totalGoldSum;
+        this.totalBeastSum = totalBeastSum;
+        this.totalBetSum = totalBetSum;
     }
 
    
     // Property accessors
-
     public String getPrizeId() {
         return this.prizeId;
     }
@@ -79,14 +103,6 @@ public class PrizeRecord  implements java.io.Serializable {
     
     public void setCreateTime(Timer createTime) {
         this.createTime = createTime;
-    }
-
-    public Double getTotalPriceSum() {
-        return this.totalPriceSum;
-    }
-    
-    public void setTotalPriceSum(Double totalPriceSum) {
-        this.totalPriceSum = totalPriceSum;
     }
 
     public Double getCommissionRate() {
@@ -177,20 +193,124 @@ public class PrizeRecord  implements java.io.Serializable {
         this.timesRabbit = timesRabbit;
     }
 
-    public Integer getGoldSharkTimes() {
-        return this.goldSharkTimes;
+    public Integer getTimesGoldShark() {
+        return this.timesGoldShark;
     }
     
-    public void setGoldSharkTimes(Integer goldSharkTimes) {
-        this.goldSharkTimes = goldSharkTimes;
+    public void setTimesGoldShark(Integer timesGoldShark) {
+        this.timesGoldShark = timesGoldShark;
     }
-   
 
+    public Double getTotalSwallowSum() {
+        return this.totalSwallowSum;
+    }
+    
+    public void setTotalSwallowSum(Double totalSwallowSum) {
+        this.totalSwallowSum = totalSwallowSum;
+    }
 
+    public Double getTotalPigeonSum() {
+        return this.totalPigeonSum;
+    }
+    
+    public void setTotalPigeonSum(Double totalPigeonSum) {
+        this.totalPigeonSum = totalPigeonSum;
+    }
 
+    public Double getTotalPeafowlSum() {
+        return this.totalPeafowlSum;
+    }
+    
+    public void setTotalPeafowlSum(Double totalPeafowlSum) {
+        this.totalPeafowlSum = totalPeafowlSum;
+    }
 
+    public Double getTotalEagleSum() {
+        return this.totalEagleSum;
+    }
+    
+    public void setTotalEagleSum(Double totalEagleSum) {
+        this.totalEagleSum = totalEagleSum;
+    }
 
+    public Double getTotalLionSum() {
+        return this.totalLionSum;
+    }
+    
+    public void setTotalLionSum(Double totalLionSum) {
+        this.totalLionSum = totalLionSum;
+    }
 
+    public Double getTotalPandaSum() {
+        return this.totalPandaSum;
+    }
+    
+    public void setTotalPandaSum(Double totalPandaSum) {
+        this.totalPandaSum = totalPandaSum;
+    }
 
+    public Double getTotalMonkeySum() {
+        return this.totalMonkeySum;
+    }
+    
+    public void setTotalMonkeySum(Double totalMonkeySum) {
+        this.totalMonkeySum = totalMonkeySum;
+    }
+
+    public Double getTotalRabbitSum() {
+        return this.totalRabbitSum;
+    }
+    
+    public void setTotalRabbitSum(Double totalRabbitSum) {
+        this.totalRabbitSum = totalRabbitSum;
+    }
+
+    public Double getTotalBirdSum() {
+        return this.totalBirdSum;
+    }
+    
+    public void setTotalBirdSum(Double totalBirdSum) {
+        this.totalBirdSum = totalBirdSum;
+    }
+
+    public Double getTotalSilverSum() {
+        return this.totalSilverSum;
+    }
+    
+    public void setTotalSilverSum(Double totalSilverSum) {
+        this.totalSilverSum = totalSilverSum;
+    }
+
+    public Double getTotalBombSum() {
+        return this.totalBombSum;
+    }
+    
+    public void setTotalBombSum(Double totalBombSum) {
+        this.totalBombSum = totalBombSum;
+    }
+
+    public Double getTotalGoldSum() {
+        return this.totalGoldSum;
+    }
+    
+    public void setTotalGoldSum(Double totalGoldSum) {
+        this.totalGoldSum = totalGoldSum;
+    }
+
+    public Double getTotalBeastSum() {
+        return this.totalBeastSum;
+    }
+    
+    public void setTotalBeastSum(Double totalBeastSum) {
+        this.totalBeastSum = totalBeastSum;
+    }
+
+    public Double getTotalBetSum() {
+        return this.totalBetSum;
+    }
+    
+    public void setTotalBetSum(Double totalBetSum) {
+        this.totalBetSum = totalBetSum;
+    }
 
 }

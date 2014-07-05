@@ -1,6 +1,13 @@
 package com.grq.model.pojo.shark;
 
-public class TimesEntity {
+public class TimesEntity  implements java.io.Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	// Fields 
 	
 	private Integer timesSwallow;//燕子倍数
 	private Integer timesPigeon;//鸽子
