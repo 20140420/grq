@@ -1,27 +1,21 @@
 package com.grq.controller.action.shark;
 
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.Vector;
 
-import com.grq.controller.action.BaseAction;
-import com.grq.model.PageModel;
 import com.grq.model.customizeenum.Prize;
 import com.grq.model.pojo.shark.PanelInfo;
 import com.grq.model.pojo.shark.PrizeRecord;
 import com.grq.model.pojo.shark.SharkConfig;
 import com.grq.model.pojo.shark.TimesEntity;
-import com.opensymphony.xwork2.ModelDriven;
 
-public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{ 
+public class sharkTest {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	//private static final long serialVersionUID = 1L;
 	
 	/*暂时还未用着
 	//配置时间
@@ -85,7 +79,7 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 	private static List<SharkConfig> configEntity;
 	private static List<PanelInfo> betEntity;
 	
-	private static PageModel<PanelInfo> pageModel;// 分页组件
+	//private static PageModel<PanelInfo> pageModel;// 分页组件
 	
 	//自定义类型变量
 	private static Prize prizeString;//奖项变量，默认正在抽奖
@@ -695,22 +689,4 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 	private static void turnAgain() {
 		System.out.println("再转函数");		
 	}
-
-	// 键盘panel对象
-	private static PanelInfo panelData = new PanelInfo();//一定要先初始化obj对象！
-	/**
-	 * 此方法是Modeldriven接口的方法，要重写
-	 * @return
-	 */
-	@Override
-	public PanelInfo getModel() {
-		return panelData;
-	}
-	//getter和setter方法，放入request中，好在jsp页面中能拿到
-	//public PageModel<PanelInfo> getPageModel() {
-	//	return pageModel;
-	//}
-	//public void setPageModel(PageModel<PanelInfo> pageModel) {
-	//	sharkTest.pageModel = pageModel;
-	//}
 }
