@@ -13,6 +13,8 @@ import com.grq.controller.action.BaseAction;
 import com.grq.model.customizeenum.Prize;
 import com.grq.model.pojo.shark.PanelInfo;
 import com.grq.model.pojo.shark.PrizeRecord;
+import com.grq.model.pojo.shark.SharkConfig;
+import com.grq.model.pojo.shark.TimesEntity;
 import com.opensymphony.xwork2.ModelDriven;
 
 public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{ 
@@ -31,24 +33,27 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 	static int timesMonkey = 6;
 	static int timesRabbit = 6;
 	
+	/*暂时还未用着
 	//配置时间
-	int time_circle= 3;//计算转盘花费的时间4秒，从而计算转盘速度
-	int time_observe= 6; //观察时长 后期由服务器取得
-	int time_bet= 12;//下注时长 后期由服务器取得
-	int time_display= 3;//展示时长 后期由服务器取得
-	int time_wait= 2;//等待时长 后期由服务器取得
+	int timeCircle= 3;//计算转盘花费的时间4秒，从而计算转盘速度
+	int timeObserve= 6; //观察时长 后期由服务器取得
+	int timeBet= 12;//下注时长 后期由服务器取得
+	int timeDisplay= 3;//展示时长 后期由服务器取得
+	int timeWait= 2;//等待时长 后期由服务器取得
 	//int time_cycle;//一个周期时长 计算所得非配置,转盘-展示-等待-观察-下注
 	//转盘配置
-	int circle_num= 2;//转盘圈数 后期由服务器取得
-	//关键配置
-	static int timesMax = 99;//最高倍数
-	static double commission_rate = 0.60; //佣金费率
-	//int single_bet = 1; //单注额度调整
-	int bet_limit = 999; //押注上限
-	double initial_dividend =300;//彩金初始值
+	int circleNum= 2;//转盘圈数 后期由服务器取得
+	//关键配置		
+	int singleBet = 1; //单注额度调整
+	int betLimit = 999; //押注上限
+	double initialDividend =300;//彩金初始值
+	*/
 	
 	//本类中的区域变量
-	static double dividend; //彩金池变量需要储存在数据库中
+	private static double commission_rate; //佣金费率
+	private static int timesMax;//最高倍数
+	
+	private static double dividend; //彩金池变量需要储存在数据库中
 	private static Random randomNum = new Random();//用于获取随机数
 	private static double totalSwallowSum; //统计燕子下注总额之和
 	private static double totalPigeonSum;
@@ -63,34 +68,111 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 	private static double totalBombSum;
 	private static double totalGoldSum;
 	private static double totalBeastSum;//统计走兽下注总额之和
-	private static boolean againOrNot; //是否重转，默认否
-	private static Prize prizeString;//奖项变量，默认正在抽奖
-	
+	private static boolean againOrNot; //是否重转，默认否	
 	private static boolean bombOrNot; //是否存在炸弹，默认否
-	// 奖项实体列表
-	private static List<PrizeRecord> prizelist;
 	private static Integer totalBet;//一条下注订单总筹码
 	private static double totalBetSum;//一场下注总金额
 	
+	// 实体变量
+	private static List<PrizeRecord> prizelist;
+	private static List<TimesEntity> timesEntity;
 	
+	//自定义类型变量
+	private static Prize prizeString;//奖项变量，默认正在抽奖
 	
 	
 	public static void main(String[] args) {
+		ArrayList<Object> oneTimesList = timesHave();
+		System.out.println("随机中的一组倍数列表："+oneTimesList);
+		
+		List<SharkConfig> sharkConfig = getSharkConfig();
+		commission_rate = sharkConfig.get(0).getCommissionRate();//获取费率配置
+		System.out.println("系统费率："+commission_rate);
+		timesMax = sharkConfig.get(0).getTimesMax();//获取费率配置
+		System.out.println("最高倍数："+timesMax);
+		
 		List<PrizeRecord> beforePrizeList = beforePrize();
 		dividend = beforePrizeList.get(0).getDividend();//获取上一盘彩金池
-		
 		System.out.println("上一期彩金："+dividend);
-		prizeString = havePrize();
-		System.out.println("单场押注总额之和为："+totalBetSum);
 		
-		System.out.println("系统费率："+commission_rate);
+		prizeString = havePrize();
+		System.out.println("单场押注总额之和为："+totalBetSum);		
 		System.out.println("本场中奖奖项为:"+prizeString);
+		
 		if(againOrNot == true){//如果是则获得再转一次
 			turnAgain();
 			System.out.println("本奖项有重转。");
 			againOrNot = false;//重置
 		}
 		System.out.println("发奖后彩金："+dividend);
+	}
+	private static ArrayList<Object> timesHave() {
+		//添加数据测试
+		List<TimesEntity> timesEntity=new ArrayList<TimesEntity>();		
+		TimesEntity timesList1 = new TimesEntity();	
+		timesList1.setTimesSwallow(6);
+		timesList1.setTimesPigeon(8);
+		timesList1.setTimesPeafowl(8);
+		timesList1.setTimesEagle(12);
+		timesList1.setTimesLion(12);
+		timesList1.setTimesPanda(8);
+		timesList1.setTimesMonkey(8);
+		timesList1.setTimesRabbit(6);
+		timesEntity.add(timesList1);		
+		TimesEntity timesList2 = new TimesEntity();
+		timesList2.setTimesSwallow(4);
+		timesList2.setTimesPigeon(8);
+		timesList2.setTimesPeafowl(12);
+		timesList2.setTimesEagle(24);
+		timesList2.setTimesLion(24);
+		timesList2.setTimesPanda(12);
+		timesList2.setTimesMonkey(8);
+		timesList2.setTimesRabbit(4);
+		timesEntity.add(timesList2);
+		TimesEntity timesList3 = new TimesEntity();
+		timesList3.setTimesSwallow(6);
+		timesList3.setTimesPigeon(6);
+		timesList3.setTimesPeafowl(8);
+		timesList3.setTimesEagle(24);
+		timesList3.setTimesLion(24);
+		timesList3.setTimesPanda(8);
+		timesList3.setTimesMonkey(6);
+		timesList3.setTimesRabbit(6);
+		timesEntity.add(timesList3);
+		
+		int timesIndex=(int)(Math.random()*timesEntity.size());//从总共less.size()组倍数中随机一组倍数
+		ArrayList<Object> oneTimesList = new ArrayList<Object>();//之前中奖列表
+		oneTimesList.add(timesEntity.get(timesIndex).getTimesSwallow());//注意添加的顺序
+		oneTimesList.add(timesEntity.get(timesIndex).getTimesPigeon());
+		oneTimesList.add(timesEntity.get(timesIndex).getTimesPeafowl());
+		oneTimesList.add(timesEntity.get(timesIndex).getTimesEagle());
+		oneTimesList.add(timesEntity.get(timesIndex).getTimesLion());
+		oneTimesList.add(timesEntity.get(timesIndex).getTimesPanda());
+		oneTimesList.add(timesEntity.get(timesIndex).getTimesMonkey());
+		oneTimesList.add(timesEntity.get(timesIndex).getTimesRabbit());
+		
+		return oneTimesList;
+	}
+	private static List<SharkConfig> getSharkConfig() {
+		/*String field =" dividend,prize_name ";//选择字段奖项
+		String where = null;
+		Object[] queryParams = null;
+		Map<String, String> orderby = new HashMap<String, String>();//定义Map集合
+		orderby.put("createTime", "desc");//设置排序条件及方式
+		prizelist = prizeRecordDao.getNumResult(field, where, queryParams, orderby, 0, 1);//参数1表示只获取最近一条数据
+		*/
+		//添加数据测试
+		List<SharkConfig> configEntity=new ArrayList<SharkConfig>();		
+		SharkConfig config1 = new SharkConfig();	
+		config1.setCommissionRate(0.1);
+		config1.setTimesMax(99);
+		configEntity.add(config1);		
+		SharkConfig config2 = new SharkConfig();
+		config2.setCommissionRate(0.6);
+		config2.setTimesMax(99);
+		configEntity.add(config2);
+
+		return configEntity;
 	}
 	private static void turnAgain() {
 		System.out.println("再转函数");		
