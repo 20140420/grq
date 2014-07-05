@@ -47,13 +47,7 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 	private static int timesPanda;
 	private static int timesMonkey;
 	private static int timesRabbit;
-	//游戏配置
-	private static double commission_rate; //佣金费率
-	private static int timesMax;//最高倍数
-	private static double commissionProfit;//佣金收益
-	private static double lastDividend;
-	private static double dividend; //彩金池变量需要储存在数据库中
-	
+	//一场下注总额
 	private static double totalSwallowSum; //统计燕子下注总额之和
 	private static double totalPigeonSum;
 	private static double totalPeafowlSum;
@@ -68,8 +62,15 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 	private static double totalGoldSum;
 	private static double totalBeastSum;//统计走兽下注总额之和
 	private static double totalBetSum;//一场下注总金额
+	//一单下注
 	private static Integer totalBet;//一条下注订单总筹码
-	
+	//游戏配置
+	private static double commission_rate; //佣金费率
+	private static int timesMax;//最高倍数
+	private static double commissionProfit;//佣金收益
+	private static double lastDividend;
+	private static double dividend; //彩金池变量需要储存在数据库中
+
 	private static Random randomNum = new Random();//用于获取随机数
 	
 	private static boolean againOrNot; //是否重转，默认否	
@@ -370,7 +371,7 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 				totalGoldSum += gold;
 				totalBeastSum += beast;//相加所有条目禽兽的下注总额
 				totalBet = (swallow+pigeon+peafowl+eagle+lion+panda+monkey+rabbit+bird+silver+bomb+gold+beast);//一条订单总下注
-				setTotalBetSum(getTotalBetSum() + totalBet);//相加所有条目的下注总额
+				totalBetSum += totalBet;//相加所有条目的下注总额
 				betCount = true; //设置改变标记为已经统计过
 				//panelData = sharkDaoTest.load(panelData.getPanelBetId());//装载订单对象
 				//panelData.setBetCount(betCount);// 设置操作情况
@@ -405,8 +406,8 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 		totalOutSum.add(monkeyOutScore);
 		totalOutSum.add(rabbitOutScore);
 		System.out.println("八个奖出分集合totalOutSum值："+totalOutSum);
-		double birdOutScore = getTotalBirdSum()*2;//飞禽总出分 ;
-		double beastOutScore = getTotalBeastSum()*2;//走兽总出分 ;
+		double birdOutScore = totalBirdSum*2;//飞禽总出分 ;
+		double beastOutScore = totalBeastSum*2;//走兽总出分 ;
 		Vector<Object> less = lessThan(totalOutSum,birdOutScore,beastOutScore,priceForPrize);//获得能吃分的几个奖项的索引的集合
 		if(less.size() > 0 && less != null){//如果存在能吃分的奖项的索引
 			System.out.println("存在正常吃分奖项");
@@ -606,23 +607,23 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 		againOrNot = false; //设置为false不重转
 		int birdOrBeast =(int)(Math.floor(randomNum.nextInt(2)));//随机获取大于等于0到小于2的整数部分,即随机获取0或1
 		if(birdOrBeast == 0){//为飞禽概率1/2
-			double birdOutScore = getTotalBirdSum()*2;//飞禽总出分
+			double birdOutScore = totalBirdSum*2;//飞禽总出分
 			dividend = dividend - birdOutScore; //发了飞禽奖的彩金池
 			int birdWhat =(int)(Math.floor(randomNum.nextInt(4)));//随机获取大于等于0到小于4的整数部分,即随机获取0或1或2或3，概率都为1/4。
 			if(birdWhat == 0){//奖项燕子
-				double swallowOutScore = getTotalSwallowSum()*timesSwallow;//燕子总出分，倍数暂时固定
+				double swallowOutScore = totalSwallowSum*timesSwallow;//燕子总出分，倍数暂时固定
 				dividend = dividend - swallowOutScore; //发了第二个奖燕子后的彩金池
 				return Prize.SWALLOW;
 			} else if(birdWhat == 1){//奖项鸽子
-				double pigeonOutScore = getTotalPigeonSum()*timesPigeon;//鸽子总出分，倍数暂时固定
+				double pigeonOutScore = totalPigeonSum*timesPigeon;//鸽子总出分，倍数暂时固定
 				dividend = dividend - pigeonOutScore; //发了第二个奖鸽子后的彩金池
 				return Prize.PIGEON;
 			} else if(birdWhat == 2){//奖项孔雀
-				double peafowlOutScore = getTotalPeafowlSum()*timesPeafowl;//鸽子总出分，倍数暂时固定
+				double peafowlOutScore = totalPeafowlSum*timesPeafowl;//鸽子总出分，倍数暂时固定
 				dividend = dividend - peafowlOutScore; //发了第二个奖鸽子后的彩金池
 				return Prize.PEAFOWL;
 			} else if(birdWhat == 3){//奖项老鹰
-				double eagleOutScore = getTotalEagleSum()*timesEagle;//鸽子总出分，倍数暂时固定
+				double eagleOutScore = totalEagleSum*timesEagle;//鸽子总出分，倍数暂时固定
 				dividend = dividend - eagleOutScore; //发了第二个奖鸽子后的彩金池
 				return Prize.EAGLE;
 			} else {
@@ -630,23 +631,23 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 			}
 			//记得更新到数据库
 		} else if(birdOrBeast == 1){//为走兽概率1/2
-			double beastOutScore = getTotalBeastSum()*2;//走兽总出分
+			double beastOutScore = totalBeastSum*2;//走兽总出分
 			dividend = dividend - beastOutScore; //发了走兽奖的彩金池
 			int beastWhat =(int)(Math.floor(randomNum.nextInt(4)));//随机获取大于等于0到小于4的整数部分,即随机获取0或1或2或3，概率都为1/4。
 			if(beastWhat == 0){//奖项兔子
-				double rabbitOutScore = getTotalRabbitSum()*timesRabbit;//兔子总出分，倍数暂时固定
+				double rabbitOutScore = totalRabbitSum*timesRabbit;//兔子总出分，倍数暂时固定
 				dividend = dividend - rabbitOutScore; //发了第二个奖兔子后的彩金池
 				return Prize.RABBIT;
 			} else if(beastWhat == 1){//奖项猴子
-				double monkeyOutScore = getTotalMonkeySum()*timesMonkey;//猴子总出分，倍数暂时固定
+				double monkeyOutScore = totalMonkeySum*timesMonkey;//猴子总出分，倍数暂时固定
 				dividend = dividend - monkeyOutScore; //发了第二个奖猴子后的彩金池
 				return Prize.MONKEY;
 			} else if(beastWhat == 2){//奖项熊猫
-				double pandaOutScore = getTotalPandaSum()*timesPanda;//熊猫总出分，倍数暂时固定
+				double pandaOutScore = totalPandaSum*timesPanda;//熊猫总出分，倍数暂时固定
 				dividend = dividend - pandaOutScore; //发了第二个奖熊猫后的彩金池
 				return Prize.PANDA;
 			} else if(beastWhat == 3){//奖项狮子
-				double lionOutScore = getTotalLionSum()*timesLion;//狮子总出分，倍数暂时固定
+				double lionOutScore = totalLionSum*timesLion;//狮子总出分，倍数暂时固定
 				dividend = dividend - lionOutScore; //发了第二个奖狮子后的彩金池
 				return Prize.LION;
 			} else {
@@ -666,13 +667,13 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 		double a = Math.floor(randomNum.nextInt(2));//随机获取大于等于0到小于2的整数部分,即随机获取0或1
 		int silverOrGold = (int)a;//将double数据类型转换成int
 		if(silverOrGold == 0){//为银鲨概率1/2
-			double silverOutScore = getTotalSilverSum()*24;//银鲨总出分
+			double silverOutScore = totalSilverSum*24;//银鲨总出分
 			dividend = dividend - silverOutScore; //发了银鲨奖的彩金池
 			//记得更新到数据库
 			return Prize.SILVER_SHARK;//出奖银鲨+再转一次
 		} else if(silverOrGold == 1){//为金鲨概率1/2
 			int goldSharkTimes =(int)(Math.floor(randomNum.nextInt(timesMax-23))+24);//随机获取大于等于24到小于100的整数，即最高99倍
-			double goldOutScore = getTotalGoldSum()*goldSharkTimes;//金鲨总出分
+			double goldOutScore = totalGoldSum*goldSharkTimes;//金鲨总出分
 			dividend = dividend - goldOutScore; //发了金鲨奖的彩金池
 			//记得更新到数据库
 			System.out.println("金鲨倍数："+goldSharkTimes);
@@ -706,89 +707,4 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 	//public void setPageModel(PageModel<PanelInfo> pageModel) {
 	//	sharkTest.pageModel = pageModel;
 	//}
-	//getter和setter方法
-	public static double getTotalSwallowSum() {
-		return totalSwallowSum;
-	}
-	public static void setTotalSwallowSum(double totalSwallowSum) {
-		sharkTest.totalSwallowSum = totalSwallowSum;
-	}
-	public static double getTotalPigeonSum() {
-		return totalPigeonSum;
-	}
-	public void setTotalPigeonSum(float totalPigeonSum) {
-		sharkTest.totalPigeonSum = totalPigeonSum;
-	}
-	public static double getTotalPeafowlSum() {
-		return totalPeafowlSum;
-	}
-	public void setTotalPeafowlSum(float totalPeafowlSum) {
-		sharkTest.totalPeafowlSum = totalPeafowlSum;
-	}
-	public static double getTotalEagleSum() {
-		return totalEagleSum;
-	}
-	public void setTotalEagleSum(float totalEagleSum) {
-		sharkTest.totalEagleSum = totalEagleSum;
-	}
-	public static double getTotalLionSum() {
-		return totalLionSum;
-	}
-	public void setTotalLionSum(float totalLionSum) {
-		sharkTest.totalLionSum = totalLionSum;
-	}
-	public static double getTotalPandaSum() {
-		return totalPandaSum;
-	}
-	public void setTotalPandaSum(float totalPandaSum) {
-		sharkTest.totalPandaSum = totalPandaSum;
-	}
-	public static double getTotalMonkeySum() {
-		return totalMonkeySum;
-	}
-	public void setTotalMonkeySum(float totalMonkeySum) {
-		sharkTest.totalMonkeySum = totalMonkeySum;
-	}
-	public static double getTotalRabbitSum() {
-		return totalRabbitSum;
-	}
-	public void setTotalRabbitSum(float totalRabbitSum) {
-		sharkTest.totalRabbitSum = totalRabbitSum;
-	}
-	public static double getTotalBirdSum() {
-		return totalBirdSum;
-	}
-	public void setTotalBirdSum(float totalBirdSum) {
-		sharkTest.totalBirdSum = totalBirdSum;
-	}
-	public static double getTotalSilverSum() {
-		return totalSilverSum;
-	}
-	public void setTotalSilverSum(float totalSilverSum) {
-		sharkTest.totalSilverSum = totalSilverSum;
-	}
-	public double getTotalBombSum() {
-		return totalBombSum;
-	}
-	public void setTotalBombSum(float totalBombSum) {
-		sharkTest.totalBombSum = totalBombSum;
-	}
-	public static double getTotalGoldSum() {
-		return totalGoldSum;
-	}
-	public void setTotalGoldSum(float totalGoldSum) {
-		sharkTest.totalGoldSum = totalGoldSum;
-	}
-	public static double getTotalBeastSum() {
-		return totalBeastSum;
-	}
-	public void setTotalBeastSum(float totalBeastSum) {
-		sharkTest.totalBeastSum = totalBeastSum;
-	}
-	public static double getTotalBetSum() {
-		return totalBetSum;
-	}
-	public static void setTotalBetSum(double totalBetSum) {
-		sharkTest.totalBetSum = totalBetSum;
-	}
 }
