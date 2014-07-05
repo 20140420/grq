@@ -2,11 +2,14 @@ package com.grq.controller.action.shark;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Vector;
 
 import com.grq.controller.action.BaseAction;
+import com.grq.model.PageModel;
 import com.grq.model.customizeenum.Prize;
 import com.grq.model.pojo.shark.PanelInfo;
 import com.grq.model.pojo.shark.PrizeRecord;
@@ -81,6 +84,8 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 	private static List<TimesEntity> timesEntity;
 	private static List<SharkConfig> configEntity;
 	private static List<PanelInfo> betEntity;
+	
+	private static PageModel<PanelInfo> pageModel;// 分页组件
 	
 	//自定义类型变量
 	private static Prize prizeString;//奖项变量，默认正在抽奖
@@ -293,7 +298,8 @@ public class sharkTest extends BaseAction implements ModelDriven<PanelInfo>{
 		orderby.put("createTime", "desc");//设置按创建时间倒序排列
 		String where = "where betCount = ?";//设置查询条件语句
 		Object[] queryParams = {false};//获取未操作过的参数值
-		pageModel = sharkDaoTest.find(where, queryParams, orderby, -1, -1);//执行查询方法
+		pageModel = betDaoTest.find(where, queryParams, orderby, -1, -1);//执行查询方法
+		System.out.println("最新一单飞禽押注："+pageModel.getList().get(0).getBird());
 		List<PanelInfo> allBet = pageModel.getList();//获取所有未操作过的下注条目
 		*/
 		
