@@ -83,38 +83,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	 * @return 游戏主页面
 	 */
 	@Override
-	public String main(){
-		
-		/** 随机获得倍数 */
-		List<Object> oneTimesList = timesHave();
-		System.out.println("随机中的一组倍数列表："+oneTimesList);
-		
-		/** 获取系统配置 */
-		List<Object> lastConfigList = sharkConfigHave();
-		System.out.println("最新配置列表："+lastConfigList);
-		
-		/** 获取上期彩金池 */
-		lastDividend = lastDividendHave();
-		System.out.println("上一期彩金："+lastDividend);
-		
-		/** 统计获取奖项 */
-		prizeString = havePrize();
-		System.out.println("单场押注总额之和为："+totalBetSum);
-		System.out.println("佣金收益为："+commissionProfit);
-		System.out.println("本场中奖奖项为:"+prizeString);
-		
-		ArrayList<Object> beforePrizeList = new ArrayList<Object>();//之前中奖列表
-		for(PrizeRecord prizeRecord: prizeEntity){
-			beforePrizeList.add(prizeRecord.getPrizeName());
-		}
-		System.out.println("历次中奖奖项为:"+beforePrizeList);
-		
-		if(againOrNot == true){//如果是则获得再转一次
-			turnAgain();
-			System.out.println("本奖项有重转。");
-			againOrNot = false;//重置
-		}
-		System.out.println("发奖后彩金："+dividend);		
+	public String main(){	
 		
 		return MAIN;//返回主题页	
 	}
@@ -177,7 +146,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 				//记得重置panel下注
 			}
 			//return MAIN;//返回shark主页面
-			return main();//通过主函数返回shark主页面，可进行统计出结果
+			return toMain();//通过主函数返回shark主页面，可进行统计出结果
 		}
 		return CUSTOMER_LOGIN;//返回登入页面
 	}
@@ -296,6 +265,46 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		this.pageModel = pageModel;
 	}
 /**---------------------------------------------------------------------*/
+	/**
+	 * 本函数代替main()大部分功能，与定时器一起完成与前端的配合
+	 * @return
+	 */
+	public String toMain(){
+		
+		/** 随机获得倍数 */
+		List<Object> oneTimesList = timesHave();
+		System.out.println("随机中的一组倍数列表："+oneTimesList);
+		
+		/** 获取系统配置 */
+		List<Object> lastConfigList = sharkConfigHave();
+		System.out.println("最新配置列表："+lastConfigList);
+		
+		/** 获取上期彩金池 */
+		lastDividend = lastDividendHave();
+		System.out.println("上一期彩金："+lastDividend);
+		
+		/** 统计获取奖项 */
+		prizeString = havePrize();
+		System.out.println("单场押注总额之和为："+totalBetSum);
+		System.out.println("佣金收益为："+commissionProfit);
+		System.out.println("本场中奖奖项为:"+prizeString);
+		
+		ArrayList<Object> beforePrizeList = new ArrayList<Object>();//之前中奖列表
+		for(PrizeRecord prizeRecord: prizeEntity){
+			beforePrizeList.add(prizeRecord.getPrizeName());
+		}
+		System.out.println("历次中奖奖项为:"+beforePrizeList);
+		
+		if(againOrNot == true){//如果是则获得再转一次
+			turnAgain();
+			System.out.println("本奖项有重转。");
+			againOrNot = false;//重置
+		}
+		System.out.println("发奖后彩金："+dividend);	
+		
+		return main();		
+	}
+	
 	
 	
 	/**
