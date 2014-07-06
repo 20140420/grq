@@ -483,7 +483,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		String where = "where betCount = ?";//设置查询条件语句
 		Object[] queryParams = {false};//获取未操作过的参数值
 		pageModel = betDao.find(where, queryParams, orderby, -1, -1);//执行查询方法
-		System.out.println("上一场飞禽押注（非本场）应该是最近一条下单："+pageModel.getList().get(0).getBird());
+		//System.out.println("上一场飞禽押注（非本场）应该是最近一条下单："+pageModel.getList().get(0).getBird());
 		betEntity = pageModel.getList();//获取所有未操作过的下注条目
 		
 		//添加数据测试
