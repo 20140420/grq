@@ -24,8 +24,7 @@ import com.opensymphony.xwork2.ModelDriven;
 @Controller("sharkAction")
 public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	private static final long serialVersionUID = 1L;
-	
-	
+
 		//本类中的区域变量
 		//游戏倍数
 		private static int timesSwallow;
@@ -303,47 +302,27 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		System.out.println("发奖后彩金："+dividend);	
 		
 		return main();		
-	}
-	
-	
+	}	
 	
 	/**
 	 * 获取倍数
 	 * @return
 	 */
 	private static List<Object> timesHave() {
-		//添加数据测试
-		timesEntity=new ArrayList<TimesEntity>();		
-		TimesEntity timesList1 = new TimesEntity();	
-		timesList1.setTimesSwallow(6);
-		timesList1.setTimesPigeon(8);
-		timesList1.setTimesPeafowl(8);
-		timesList1.setTimesEagle(12);
-		timesList1.setTimesLion(12);
-		timesList1.setTimesPanda(8);
-		timesList1.setTimesMonkey(8);
-		timesList1.setTimesRabbit(6);
-		timesEntity.add(timesList1);		
-		TimesEntity timesList2 = new TimesEntity();
-		timesList2.setTimesSwallow(4);
-		timesList2.setTimesPigeon(8);
-		timesList2.setTimesPeafowl(12);
-		timesList2.setTimesEagle(24);
-		timesList2.setTimesLion(24);
-		timesList2.setTimesPanda(12);
-		timesList2.setTimesMonkey(8);
-		timesList2.setTimesRabbit(4);
-		timesEntity.add(timesList2);
-		TimesEntity timesList3 = new TimesEntity();
-		timesList3.setTimesSwallow(6);
-		timesList3.setTimesPigeon(6);
-		timesList3.setTimesPeafowl(8);
-		timesList3.setTimesEagle(24);
-		timesList3.setTimesLion(24);
-		timesList3.setTimesPanda(8);
-		timesList3.setTimesMonkey(6);
-		timesList3.setTimesRabbit(6);
-		timesEntity.add(timesList3);
+		//添加倍数数据（写在pojo中）
+		timesEntity=new ArrayList<TimesEntity>();
+		for(int i = 0; i < 6; i++){			
+			TimesEntity timesList = new TimesEntity();
+			timesList.setTimesSwallow(i);
+			timesList.setTimesPigeon(i);
+			timesList.setTimesPeafowl(i);
+			timesList.setTimesEagle(i);
+			timesList.setTimesLion(i);
+			timesList.setTimesPanda(i);
+			timesList.setTimesMonkey(i);
+			timesList.setTimesRabbit(i);
+			timesEntity.add(timesList);
+		}
 		
 		int timesIndex=(int)(Math.random()*timesEntity.size());//从总共less.size()组倍数中随机一组倍数
 		ArrayList<Object> oneTimesList = new ArrayList<Object>();//之前中奖列表
