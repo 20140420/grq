@@ -31,7 +31,7 @@
             this.context = canvas.getContext('2d');
             window.addEventListener('keydown', function (e) {
                 var code = e.keyCode;
-                if (code > 36 && code < 41) {/*ÕâÀïËÄ¸öÊý×ÖÏàÓ¦ËÄ¸ö·½Ïò*/
+                if (code > 36 && code < 41) {/*è¿™é‡Œå››ä¸ªæ•°å­—ç›¸åº”å››ä¸ªæ–¹å‘*/
                     switch (code) {
                         case 37:
                             if (Game.direction != 'east'){ Game.setDirection('west');
@@ -48,13 +48,13 @@
                         case 39:
                             if (Game.direction != 'west'){ Game.setDirection('east');
 							}else{
-                                Console.log('Error:²»ÄÜµ¹×ß£¡');
+                                Console.log('Error:ä¸èƒ½å€’èµ°ï¼');
                             }
                             break;
                         case 40:
                             if (Game.direction != 'north'){ Game.setDirection('south');
 							}else{
-                                Console.log('Error:²»ÄÜµ¹×ß£¡');
+                                Console.log('Error:ä¸èƒ½å€’èµ°ï¼');
                             }
                             break;
                     }
