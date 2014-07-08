@@ -25,59 +25,56 @@ import com.opensymphony.xwork2.ModelDriven;
 public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	private static final long serialVersionUID = 1L;
 
-		//本类中的区域变量
-		//游戏倍数
-		private static int timesSwallow;
-		private static int timesPigeon;
-		private static int timesPeafowl;
-		private static int timesEagle;
-		private static int timesLion;
-		private static int timesPanda;
-		private static int timesMonkey;
-		private static int timesRabbit;
-		//一场下注总额
-		private static double totalSwallowSum; //统计燕子下注总额之和
-		private static double totalPigeonSum;
-		private static double totalPeafowlSum;
-		private static double totalEagleSum;
-		private static double totalLionSum;
-		private static double totalPandaSum;
-		private static double totalMonkeySum;
-		private static double totalRabbitSum;
-		private static double totalBirdSum;//统计飞禽下注总额之和
-		private static double totalSilverSum;
-		private static double totalBombSum;
-		private static double totalGoldSum;
-		private static double totalBeastSum;//统计走兽下注总额之和
-		private static double totalBetSum;//一场下注总金额
-		//一单下注
-		private static Integer totalBet;//一条下注订单总筹码
-		//游戏配置
-		private static Integer timeCircle;//转圈时间
-		private static double commission_rate; //佣金费率
-		private static int timesMax;//最高倍数
-		private static double commissionProfit;//佣金收益
-		private static double lastDividend;
-		private static double dividend; //彩金池变量需要储存在数据库中
-		private static boolean againOrNot; //是否重转，默认否	
-		private static boolean bombOrNot; //是否存在炸弹，默认否
+	//本类中的区域变量
+	//游戏倍数
+	private static int timesSwallow;
+	private static int timesPigeon;
+	private static int timesPeafowl;
+	private static int timesEagle;
+	private static int timesLion;
+	private static int timesPanda;
+	private static int timesMonkey;
+	private static int timesRabbit;
+	//一场下注总额
+	private static double totalSwallowSum; //统计燕子下注总额之和
+	private static double totalPigeonSum;
+	private static double totalPeafowlSum;
+	private static double totalEagleSum;
+	private static double totalLionSum;
+	private static double totalPandaSum;
+	private static double totalMonkeySum;
+	private static double totalRabbitSum;
+	private static double totalBirdSum;//统计飞禽下注总额之和
+	private static double totalSilverSum;
+	private static double totalBombSum;
+	private static double totalGoldSum;
+	private static double totalBeastSum;//统计走兽下注总额之和
+	private static double totalBetSum;//一场下注总金额
+	//一单下注
+	private static Integer totalBet;//一条下注订单总筹码
+	//游戏配置
+	private static Integer timeCircle;//转圈时间
+	private static double commission_rate; //佣金费率
+	private static int timesMax;//最高倍数
+	private static double commissionProfit;//佣金收益
+	private static double lastDividend;
+	private static double dividend; //彩金池变量需要储存在数据库中
+	private static boolean againOrNot; //是否重转，默认否	
+	private static boolean bombOrNot; //是否存在炸弹，默认否
 
-		private static Random randomNum = new Random();//用于获取随机数
+	private static Random randomNum = new Random();//用于获取随机数
 		
 		
 		
-		// 实体变量
-		private static List<PrizeRecord> prizeEntity;
-		private static List<TimesEntity> timesEntity;
-		private static List<SharkConfig> configEntity;
-		private static List<PanelInfo> betEntity;
+	// 实体变量
+	private static List<PrizeRecord> prizeEntity;
+	private static List<TimesEntity> timesEntity;
+	private static List<SharkConfig> configEntity;
+	private static List<PanelInfo> betEntity;
 		
-		//自定义类型变量
-		private static Prize prizeString;//奖项变量，默认正在抽奖
-	
+	//自定义类型变量
+	private static Prize prizeString;//奖项变量，默认正在抽奖
 
-
-	
 	/**
 	 * 鲨鱼主函数
 	 * @author 泉
@@ -410,6 +407,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		timeCircle = configEntity.get(0).getTimeCircle();
 		commission_rate = configEntity.get(0).getCommissionRate();//获取最新的费率配置
 		timesMax = configEntity.get(0).getTimesMax();//获取最新的最大倍率配置
+		lastConfigList.add(configEntity.get(0).getTimeCircle());
 		lastConfigList.add(configEntity.get(0).getCommissionRate());
 		lastConfigList.add(configEntity.get(0).getTimesMax());
 		return lastConfigList;

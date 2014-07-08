@@ -4,6 +4,7 @@
 <link href="${context_path}/css/manage.css" rel="stylesheet" type="text/css" />
     <div class="content">
 <div class="operateoption">
+<s:push value="sharkOption">
 <form action="#" method="post">
 <table>
     <tr>
@@ -26,33 +27,19 @@
           <td>下注时长：</td>
           <td class="col4"><input type="text" placeholder="30" ></td>
           <td>转盘时长：</td>
-          <td class="col4"><input type="text" placeholder="5" ></td>
+          <td class="col4"><s:textfield name="timeCircle"></s:textfield></td>
         </tr>
         <tr>
           <td>转盘圈数：</td>
           <td class="col4"><input type="text" placeholder="2" ></td>
           <td>展示时长：</td>
           <td class="col4"><input type="text" placeholder="5" ></td>
-          <td>单注额度：</td>
-          <td align="center" class="col4"><select name="select2" size="1" class="" id="select2">
-            <option value="3" selected="selected">10</option>
-            <option value="3">100</option>
-            <option value="2">500</option>
-            <option value="1">1000</option>
-          </select></td>
-        </tr>
-        <tr>
           <td>押注上限：</td>
           <td class="col4"><input type="text" placeholder="5000" ></td>
-          <td>&nbsp;</td>
-          <td class="col4">&nbsp;</td>
-          <td>&nbsp;</td>
-          <td class="col4">&nbsp;</td>
         </tr>
         <tr>
           <th colspan="2" align="left">配置记录</th>
-          <th colspan="3">配置号：<input type="text" name="textfield" id="textfield">
-[搜索]</th>
+          <th colspan="3">配置号：<input type="text" name="textfield" id="textfield">[搜索]</th>
 		  <th>>>详情</th>
         </tr>
         <tr>
@@ -108,5 +95,6 @@
         </tr>
         </table>
 </form>
+</s:push>
 </div>
     <!-- end .content --></div>
