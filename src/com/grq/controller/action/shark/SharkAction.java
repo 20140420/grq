@@ -58,11 +58,12 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		private static double commissionProfit;//佣金收益
 		private static double lastDividend;
 		private static double dividend; //彩金池变量需要储存在数据库中
+		private static boolean againOrNot; //是否重转，默认否	
+		private static boolean bombOrNot; //是否存在炸弹，默认否
 
 		private static Random randomNum = new Random();//用于获取随机数
 		
-		private static boolean againOrNot; //是否重转，默认否	
-		private static boolean bombOrNot; //是否存在炸弹，默认否
+		
 		
 		// 实体变量
 		private static List<PrizeRecord> prizeEntity;
@@ -86,7 +87,35 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		
 		return MAIN;//返回主题页	
 	}
-	
+	/**
+	 * 重置清零下注
+	 */
+	public void betClear(){
+		totalSwallowSum = 0.0; //统计燕子下注总额之和
+		totalPigeonSum = 0.0;
+		totalPeafowlSum = 0.0;
+		totalEagleSum = 0.0;
+		totalLionSum = 0.0;
+		totalPandaSum = 0.0;
+		totalMonkeySum = 0.0;
+		totalRabbitSum = 0.0;
+		totalBirdSum = 0.0;//统计飞禽下注总额之和
+		totalSilverSum = 0.0;
+		totalBombSum = 0.0;
+		totalGoldSum = 0.0;
+		totalBeastSum = 0.0;//统计走兽下注总额之和
+		totalBetSum = 0.0;//一场下注总金额
+		//一单下注
+		totalBet = 0;//一条下注订单总筹码
+		//游戏配置
+		commission_rate =0.0; //佣金费率
+		timesMax = 0;//最高倍数
+		commissionProfit = 0.0;//佣金收益
+		lastDividend = 0.0;
+		dividend = 0.0; //彩金池变量需要储存在数据库中
+		againOrNot = false; //是否重转，默认否	
+		bombOrNot = false; //是否存在炸弹，默认否
+	}
 
 	
 /**-------------------------------------------------------------------*/
@@ -269,6 +298,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	 * @return
 	 */
 	public String toMain(){
+		betClear();//重置清零
 		
 		/** 随机获得倍数 */
 		List<Object> oneTimesList = timesHave();
@@ -436,20 +466,23 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	 * @return
 	 */
 	private Prize havePrize(){
-		double totalPriceSum = countTotalPrice();//获得下注总额之和
-		dividend = lastDividend + totalPriceSum*(1-commission_rate);//筹码注入彩金池
-		commissionProfit = totalPriceSum*commission_rate;//佣金收益
-		System.out.println("发奖前彩金："+dividend);
-		if( dividend > (totalPriceSum*timesMax) ){//如果已有99倍余额
-			return sharkPrize();
-		} else if( dividend > (totalPriceSum*24) ){//如果已有24倍余额
-			return randomPrize();//随机函数
-		} else if( dividend > 0){
-			return dividendUpPrize();//彩金池增加的吃分函数
-		} else {
-			//setPrizeString(attractPrize());//诱惑函数
-			return randomPrize();//随机函数
+		totalBetSum = countTotalPrice();//获得下注总额之和
+		if(totalBetSum != 0){
+			dividend = lastDividend + totalBetSum*(1-commission_rate);//筹码注入彩金池
+			commissionProfit = totalBetSum*commission_rate;//佣金收益
+			System.out.println("发奖前彩金："+dividend);
+			if( dividend > (totalBetSum*timesMax) ){//如果已有99倍余额
+				return sharkPrize();
+			} else if( dividend > (totalBetSum*24) ){//如果已有24倍余额
+				return randomPrize();//随机函数
+			} else if( dividend > 0){
+				return dividendUpPrize();//彩金池增加的吃分函数
+			} else {
+				//return attractPrize();//诱惑函数
+				return randomPrize();//随机函数
+			}
 		}
+		return randomPrize();
 	}
 	/**
 	 * 统计各奖项押注之和，及总押注总额之和
