@@ -1,6 +1,6 @@
 /* 游戏周期流程 */
 $(function(){
-	var time_spend= 3;//计算转盘花费的时间4秒，从而计算转盘速度
+	var time_spend= 4;//计算转盘花费的时间4秒，从而计算转盘速度
 	var time_observe= 6; //观察时长 后期由服务器取得
 	var time_bet= 12;//下注时长 后期由服务器取得
 	var time_display= 3;//展示时长 后期由服务器取得

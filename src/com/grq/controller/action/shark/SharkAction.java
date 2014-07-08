@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 
 import com.grq.controller.action.BaseAction;
 import com.grq.model.PageModel;
-import com.grq.model.customizeenum.OrderState;
 import com.grq.model.customizeenum.Prize;
 import com.grq.model.pojo.shark.PanelInfo;
 import com.grq.model.pojo.shark.PrizeRecord;
@@ -54,6 +53,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		//一单下注
 		private static Integer totalBet;//一条下注订单总筹码
 		//游戏配置
+		private static Integer timeCircle;//转圈时间
 		private static double commission_rate; //佣金费率
 		private static int timesMax;//最高倍数
 		private static double commissionProfit;//佣金收益
@@ -109,6 +109,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		//一单下注
 		totalBet = 0;//一条下注订单总筹码
 		//游戏配置
+		timeCircle = 0;//转盘时间
 		commission_rate =0.0; //佣金费率
 		timesMax = 0;//最高倍数
 		commissionProfit = 0.0;//佣金收益
@@ -310,10 +311,15 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		
 		/** 获取上期彩金池 */
 		lastDividend = lastDividendHave();
-		System.out.println("上一期彩金："+lastDividend);
-		
-		/** 统计获取奖项 */
-		prizeString = havePrize();
+		System.out.println("上一期彩金："+lastDividend);		
+		//延迟3000毫秒后调用出奖函数 
+		try {
+	        Thread.sleep(timeCircle*1000);//括号里面3000代表3000毫秒也3秒该成需要时间
+		} catch (InterruptedException e) {
+	        e.printStackTrace();
+		}
+		System.out.println("延迟时间即转盘时间："+timeCircle*1000);
+		prizeString = havePrize();//统计获取奖项
 		System.out.println("单场押注总额之和为："+totalBetSum);
 		System.out.println("佣金收益为："+commissionProfit);
 		System.out.println("本场中奖奖项为:"+prizeString);
@@ -389,16 +395,19 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		*/
 		//添加数据测试
 		configEntity=new ArrayList<SharkConfig>();		
-		SharkConfig config1 = new SharkConfig();	
+		SharkConfig config1 = new SharkConfig();
+		config1.setTimeCircle(4);
 		config1.setCommissionRate(0.1);
 		config1.setTimesMax(99);
 		configEntity.add(config1);		
 		SharkConfig config2 = new SharkConfig();
+		config2.setTimeCircle(3);
 		config2.setCommissionRate(0.6);
 		config2.setTimesMax(99);
 		configEntity.add(config2);
 		
 		ArrayList<Object> lastConfigList = new ArrayList<Object>();//之前中奖列表
+		timeCircle = configEntity.get(0).getTimeCircle();
 		commission_rate = configEntity.get(0).getCommissionRate();//获取最新的费率配置
 		timesMax = configEntity.get(0).getTimesMax();//获取最新的最大倍率配置
 		lastConfigList.add(configEntity.get(0).getCommissionRate());
