@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 
 import com.grq.controller.action.BaseAction;
 import com.grq.model.PageModel;
+import com.grq.model.customizeenum.OrderState;
 import com.grq.model.customizeenum.Prize;
 import com.grq.model.pojo.shark.PanelInfo;
 import com.grq.model.pojo.shark.PrizeRecord;
@@ -221,7 +222,6 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		//如果whereBuffer为空则查询条件为空，否则以whereBuffer为查询条件
 		String where = whereBuffer.length()>0 ? "where "+whereBuffer.toString() : "";
 		pageModel = betDao.find(where, params.toArray(), orderby, pageNo, pageSize);//执行查询方法
-		System.out.println("最新一单飞禽押注："+pageModel.getList().get(0).getBird());
 		return LIST;//返回后台下注列表
 	}
 	
@@ -489,53 +489,51 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	 * @return float 未操作押注总额之和 totalBetSum
 	 */
 	private double countTotalPrice() {
-		
 		Map<String, String> orderby = new HashMap<String, String>(1);//定义Map集合
 		orderby.put("createTime", "desc");//设置按创建时间倒序排列
 		String where = "where betCount = ?";//设置查询条件语句
 		Object[] queryParams = {false};//获取未操作过的参数值
 		pageModel = betDao.find(where, queryParams, orderby, -1, -1);//执行查询方法
-		//System.out.println("上一场飞禽押注（非本场）应该是最近一条下单："+pageModel.getList().get(0).getBird());
 		betEntity = pageModel.getList();//获取所有未操作过的下注条目
-		
-		//添加数据测试
-		
-		for(PanelInfo panelInfo : betEntity){//遍历所有的下注条目
-			//float single_bet = panelInfo.getSingle_bet();//获取每一条单注额度
-			Integer swallow = panelInfo.getSwallow();
-			Integer pigeon = panelInfo.getPigeon();
-			Integer peafowl = panelInfo.getPeafowl();
-			Integer eagle = panelInfo.getEagle();
-			Integer lion = panelInfo.getLion();
-			Integer panda = panelInfo.getPanda();
-			Integer monkey = panelInfo.getMonkey();
-			Integer rabbit = panelInfo.getRabbit();
-			Integer bird = panelInfo.getBird();
-			Integer silver = panelInfo.getSilver_shark();
-			Integer bomb = panelInfo.getBomb();
-			Integer gold = panelInfo.getGold_shark();
-			Integer beast = panelInfo.getBeast();
-			boolean betCount = panelInfo.getBetCount();//获得条目统计状态
-			if(betCount == false){//如果条目未操作过
-				totalSwallowSum += swallow;
-				totalPigeonSum += pigeon;//在totalPigeonSum不要求为静态等同于setTotalPigeonSum(getTotalPigeonSum() + totalPigeon)
-				totalPeafowlSum += peafowl;
-				totalEagleSum += eagle;
-				totalLionSum += lion;
-				totalPandaSum += panda;
-				totalMonkeySum += monkey;
-				totalRabbitSum += rabbit;
-				totalBirdSum += bird;
-				totalSilverSum += silver;
-				totalBombSum += bomb;
-				totalGoldSum += gold;
-				totalBeastSum += beast;//相加所有条目禽兽的下注总额
-				totalBet = (swallow+pigeon+peafowl+eagle+lion+panda+monkey+rabbit+bird+silver+bomb+gold+beast);//一条订单总下注
-				totalBetSum += totalBet;//相加所有条目的下注总额
-				betCount = true; //设置改变标记为已经统计过
-				//panelData = sharkDaoTest.load(panelData.getPanelBetId());//装载订单对象
-				//panelData.setBetCount(betCount);// 设置操作情况
-				//sharkDaoTest.update(panelData);//更新修改操作状态
+		//添加数据之后
+		if(betEntity != null && betEntity.size() >0){
+			for(PanelInfo panelInfo : betEntity){//遍历所有的下注条目
+				//float single_bet = panelInfo.getSingle_bet();//获取每一条单注额度
+				Integer swallow = panelInfo.getSwallow();
+				Integer pigeon = panelInfo.getPigeon();
+				Integer peafowl = panelInfo.getPeafowl();
+				Integer eagle = panelInfo.getEagle();
+				Integer lion = panelInfo.getLion();
+				Integer panda = panelInfo.getPanda();
+				Integer monkey = panelInfo.getMonkey();
+				Integer rabbit = panelInfo.getRabbit();
+				Integer bird = panelInfo.getBird();
+				Integer silver = panelInfo.getSilver_shark();
+				Integer bomb = panelInfo.getBomb();
+				Integer gold = panelInfo.getGold_shark();
+				Integer beast = panelInfo.getBeast();
+				boolean betCount = panelInfo.getBetCount();//获得条目统计状态
+				if(betCount == false){//如果条目未操作过
+					totalSwallowSum += swallow;
+					totalPigeonSum += pigeon;//在totalPigeonSum不要求为静态等同于setTotalPigeonSum(getTotalPigeonSum() + totalPigeon)
+					totalPeafowlSum += peafowl;
+					totalEagleSum += eagle;
+					totalLionSum += lion;
+					totalPandaSum += panda;
+					totalMonkeySum += monkey;
+					totalRabbitSum += rabbit;
+					totalBirdSum += bird;
+					totalSilverSum += silver;
+					totalBombSum += bomb;
+					totalGoldSum += gold;
+					totalBeastSum += beast;//相加所有条目禽兽的下注总额
+					totalBet = (swallow+pigeon+peafowl+eagle+lion+panda+monkey+rabbit+bird+silver+bomb+gold+beast);//一条订单总下注
+					totalBetSum += totalBet;//相加所有条目的下注总额
+					betCount = true; //设置改变标记为已经统计过
+					panelData = betDao.load(panelInfo.getPanelBetId());//装载下单对象
+					panelData.setBetCount(betCount);// 更改筹码统计状态
+					betDao.update(panelData);//更新修改操作状态
+				}
 			}
 		}
 		return totalBetSum;//返回总下注数目之和
