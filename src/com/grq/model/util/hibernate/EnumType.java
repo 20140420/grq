@@ -80,7 +80,7 @@ public class EnumType<T extends Enum<T>> implements UserType {
 			arg0.setNull(arg2, Types.VARCHAR);
 		} else {
 			// 将枚举转换成为字符串
-			arg0.setString(arg2, ((Enum) arg1).name());
+			arg0.setString(arg2, ((Enum<?>) arg1).name());
 		}
 	}
 	@Override

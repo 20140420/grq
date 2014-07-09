@@ -13,21 +13,21 @@ public class GenericsUtils {
 	 * @return Class
 	 */
 	@SuppressWarnings("unchecked")
-	public static Class getGenericType(Class clazz){
+	public static Class<Object> getGenericType(Class<?> clazz){
 		Type genType = clazz.getGenericSuperclass();//得到泛型父类  
 		Type[] types = ((ParameterizedType) genType).getActualTypeArguments();
 		if (!(types[0] instanceof Class)) {
             return Object.class;   
         } 
-		return (Class) types[0];
+		return (Class<Object>) types[0];
 	}
 	/**
 	 * 获取对象的类名称,可用于获取POJO类数据表名
 	 * @param clazz
 	 * @return 类名称
 	 */
-	@SuppressWarnings("unchecked")
-	public static String getGenericName(Class clazz){
+	//@SuppressWarnings("unchecked")
+	public static String getGenericName(Class<?> clazz){
 		return clazz.getSimpleName();
 	}
 }

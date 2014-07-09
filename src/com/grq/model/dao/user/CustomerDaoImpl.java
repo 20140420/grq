@@ -32,11 +32,10 @@ public class CustomerDaoImpl extends DaoSupport<Customer> implements CustomerDao
 	/**
 	 * 判断是否唯一，是不存在
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
 	public boolean isUnique(String username) {
-		List list = getTemplate().find("from Customer where username = ?", username);
+		List<?> list = getTemplate().find("from Customer where username = ?", username);
 		if(list != null && list.size() > 0){
 			return false;
 		}

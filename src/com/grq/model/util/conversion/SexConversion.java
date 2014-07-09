@@ -8,22 +8,22 @@ import org.apache.struts2.util.StrutsTypeConverter;
 
 import com.grq.model.customizeenum.Sex;
 /**
- * ĞÔ±ğÀàĞÍ×ª»»Æ÷
+ * æ€§åˆ«ç±»å‹è½¬æ¢å™¨
  * @author JiangQuan
  */
 public class SexConversion extends StrutsTypeConverter {
 	
 	/**
-	 * Èç¹ûÊÇ¶ÔÏó£¨Êı×é£¬ÈÕÆÚ£¬¶ÔÏóµÈ¶¼½øÈëÕâ¸ö´¦Àí·½·¨£©
+	 * å¦‚æœæ˜¯å¯¹è±¡ï¼ˆæ•°ç»„ï¼Œæ—¥æœŸï¼Œå¯¹è±¡ç­‰éƒ½è¿›å…¥è¿™ä¸ªå¤„ç†æ–¹æ³•ï¼‰
 	 */
 	//@SuppressWarnings("unchecked")
 	@Override
 	public Object convertFromString(Map arg0, String[] arg1, Class arg2) {
-		//°Ñ´«ÈëµÄÒ»´®×Ö·û´®½âÎö³ÉÒ»¸ö¶ÔÏó£¬È»ºó·µ»Ø¸ø¶ÔÓ¦µÄ×Ö¶Î¡£
+		//æŠŠä¼ å…¥çš„ä¸€ä¸²å­—ç¬¦ä¸²è§£ææˆä¸€ä¸ªå¯¹è±¡ï¼Œç„¶åè¿”å›ç»™å¯¹åº”çš„å­—æ®µã€‚
 		Sex sexs[] = Sex.values();
 		for (Sex sex : sexs) {
 			if(sex.getName().equals(arg1[0])){
-				System.out.println("OK~~¶ÔÏó´¦ÀíÍê³É£¬·µ»Ø¶ÔÏó");
+				System.out.println("OK~~å¯¹è±¡å¤„ç†å®Œæˆï¼Œè¿”å›å¯¹è±¡");
 				return sex;
 			}
 		}
@@ -31,7 +31,7 @@ public class SexConversion extends StrutsTypeConverter {
 	}
 	
 	/**
-	 * Èç¹û±íµ¥name ¶ÔÓ¦µÄ java×Ö¶Î  Ö»ÊÇ×Ö·û´®
+	 * å¦‚æœè¡¨å•name å¯¹åº”çš„ javaå­—æ®µ  åªæ˜¯å­—ç¬¦ä¸²
 	 */
 	//@SuppressWarnings("unchecked")
 	@Override

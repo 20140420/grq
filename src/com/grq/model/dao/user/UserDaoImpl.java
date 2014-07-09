@@ -16,22 +16,21 @@ public class UserDaoImpl extends DaoSupport<User> implements UserDao {
 	@Override
 	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
 	public User login(String username, String password) {
-		if(username != null && password != null){//Èç¹ûÓÃ»§ÃûºÍÃÜÂë²»Îª¿Õ
-			String where = "where username=? and password=?";//ÉèÖÃ²éÑ¯Ìõ¼ş
-			Object[] queryParams = {username,password};//ÉèÖÃ²ÎÊı¶ÔÏóÊı×é
-			List<User> list = find(-1, -1, where, queryParams).getList();//Ö´ĞĞ²éÑ¯·½·¨
-			if(list != null && list.size() > 0){//Èç¹ûlist¼¯ºÏ²»Îª¿Õ
-				return list.get(0);//·µ»ØListÖĞµÄµÚÒ»¸ö´æ´¢¶ÔÏó
+		if(username != null && password != null){//å¦‚æœç”¨æˆ·åå’Œå¯†ç ä¸ä¸ºç©º
+			String where = "where username=? and password=?";//è®¾ç½®æŸ¥è¯¢æ¡ä»¶
+			Object[] queryParams = {username,password};//è®¾ç½®å‚æ•°å¯¹è±¡æ•°ç»„
+			List<User> list = find(-1, -1, where, queryParams).getList();//æ‰§è¡ŒæŸ¥è¯¢æ–¹æ³•
+			if(list != null && list.size() > 0){//å¦‚æœlisté›†åˆä¸ä¸ºç©º
+				return list.get(0);//è¿”å›Listä¸­çš„ç¬¬ä¸€ä¸ªå­˜å‚¨å¯¹è±¡
 			}
 		}
-		return null;//·µ»Ø¿ÕÖµ
+		return null;//è¿”å›ç©ºå€¼
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
 	public boolean isUnique(String username) {
-		List list = getTemplate().find("from User where username = ?", username);
+		List<?> list = getTemplate().find("from User where username = ?", username);
 		if(list != null && list.size() > 0){
 			return false;
 		}

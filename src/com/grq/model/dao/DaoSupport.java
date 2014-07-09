@@ -26,7 +26,7 @@ import com.grq.model.util.GenericsUtils;
 @SuppressWarnings("unchecked")
 public class DaoSupport<T> implements BaseDao<T>{
 	// 泛型的类型
-	protected Class<T> entityClass = GenericsUtils.getGenericType(this.getClass());
+	protected Class<T> entityClass = (Class<T>) GenericsUtils.getGenericType(this.getClass());
 	// Hibernate模板
 	@Autowired
 	protected HibernateTemplate template;
