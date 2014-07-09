@@ -4,7 +4,6 @@
 <link href="${context_path}/css/manage.css" rel="stylesheet" type="text/css" />
     <div class="content">
 <div class="operateoption">
-<s:push value="sharkOption">
 <form action="#" method="post">
 <table>
     <tr>
@@ -95,6 +94,5 @@
         </tr>
         </table>
 </form>
-</s:push>
 </div>
     <!-- end .content --></div>
