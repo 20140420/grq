@@ -61,11 +61,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	private static double dividend; //彩金池变量需要储存在数据库中
 	private static boolean againOrNot; //是否重转，默认否	
 	private static boolean bombOrNot; //是否存在炸弹，默认否
-
-	private static Random randomNum = new Random();//用于获取随机数
-		
-		
-		
+	
 	// 实体变量
 	private static List<PrizeRecord> prizeEntity;
 	private static List<TimesEntity> timesEntity;
@@ -74,6 +70,8 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		
 	//自定义类型变量
 	private static Prize prizeString;//奖项变量，默认正在抽奖
+	
+	private static Random randomNum = new Random();//用于获取随机数
 
 	/**
 	 * 鲨鱼主函数
@@ -86,9 +84,19 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		return MAIN;//返回主题页	
 	}
 	/**
-	 * 重置清零下注
+	 * 重置清零
 	 */
 	public void betClear(){
+		//游戏倍数
+		timesSwallow = 0;
+		timesPigeon = 0;
+		timesPeafowl = 0;
+		timesEagle = 0;
+		timesLion = 0;
+		timesPanda = 0;
+		timesMonkey = 0;
+		timesRabbit = 0;
+		//一场下注总额
 		totalSwallowSum = 0.0; //统计燕子下注总额之和
 		totalPigeonSum = 0.0;
 		totalPeafowlSum = 0.0;
@@ -114,6 +122,13 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		dividend = 0.0; //彩金池变量需要储存在数据库中
 		againOrNot = false; //是否重转，默认否	
 		bombOrNot = false; //是否存在炸弹，默认否
+		// 实体变量
+		prizeEntity = null;
+		timesEntity = null;
+		configEntity = null;
+		betEntity = null;
+		//自定义类型变量
+		prizeString = Prize.RAFFLING;//奖项变量，默认正在抽奖
 	}
 
 	
@@ -296,11 +311,10 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	 * @return
 	 */
 	public String toMain(){
-		betClear();//重置清零
-		
-		/** 随机获得倍数 */
+		System.out.println("---------------开始--------------");		
+		/** 从奖项记录获得新存倍数 */
 		List<Object> oneTimesList = timesHave();
-		System.out.println("随机中的一组倍数列表："+oneTimesList);
+		System.out.println("从奖项记录获得新存倍数列表："+oneTimesList);
 		
 		/** 获取系统配置 */
 		List<Object> lastConfigList = sharkConfigHave();
@@ -334,14 +348,81 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		}
 		System.out.println("发奖后彩金："+dividend);	
 		
+		betClear();//重置清零
+		
+		/** 随机生成一组倍数 */
+		List<Object> newTimesList =timesCreate();
+		System.out.println("为下一场随机生成一组倍数列表："+newTimesList);
+		
 		return main();		
-	}	
-	
+	}
 	/**
-	 * 获取倍数
+	 * 为下一场随机生成一组倍数列表
+	 * @return
+	 */
+	private List<Object> timesCreate() {
+		//添加倍数数据（写在pojo中）
+		timesEntity=new ArrayList<TimesEntity>();
+		for(int i = 0; i < 6; i++){			
+			TimesEntity timesList = new TimesEntity();
+			timesList.setTimesSwallow(i);
+			timesList.setTimesPigeon(i);
+			timesList.setTimesPeafowl(i);
+			timesList.setTimesEagle(i);
+			timesList.setTimesLion(i);
+			timesList.setTimesPanda(i);
+			timesList.setTimesMonkey(i);
+			timesList.setTimesRabbit(i);
+			timesEntity.add(timesList);
+		}		
+		int timesIndex=(int)(Math.random()*timesEntity.size());//从总共timesEntity.size()组倍数中随机一组倍数
+		ArrayList<Object> newTimesList = new ArrayList<Object>();//随机生成一组倍数
+		timesSwallow = timesEntity.get(timesIndex).getTimesSwallow();
+		timesPigeon = timesEntity.get(timesIndex).getTimesPigeon();
+		timesPeafowl = timesEntity.get(timesIndex).getTimesPeafowl();
+		timesEagle = timesEntity.get(timesIndex).getTimesEagle();
+		timesLion = timesEntity.get(timesIndex).getTimesLion();
+		timesPanda = timesEntity.get(timesIndex).getTimesPanda();
+		timesMonkey = timesEntity.get(timesIndex).getTimesMonkey();
+		timesRabbit = timesEntity.get(timesIndex).getTimesRabbit();
+		newTimesList.add(timesSwallow);//注意添加的顺序
+		newTimesList.add(timesPigeon);
+		newTimesList.add(timesPeafowl);
+		newTimesList.add(timesEagle);
+		newTimesList.add(timesLion);
+		newTimesList.add(timesPanda);
+		newTimesList.add(timesMonkey);
+		newTimesList.add(timesRabbit);
+		//接着保存到奖项记录表
+		return newTimesList;
+	}
+	/**
+	 * 从奖项记录获得新存倍数
 	 * @return
 	 */
 	private static List<Object> timesHave() {
+		
+		//从奖项记录获得新存倍数(必须有新存奖项)
+		prizeEntity = prizeRecordHave();
+		ArrayList<Object> oneTimesList = new ArrayList<Object>();
+		timesSwallow = prizeEntity.get(0).getTimesSwallow();
+		timesPigeon = prizeEntity.get(0).getTimesPigeon();
+		timesPeafowl = prizeEntity.get(0).getTimesPeafowl();
+		timesEagle = prizeEntity.get(0).getTimesEagle();
+		timesLion = prizeEntity.get(0).getTimesLion();
+		timesPanda = prizeEntity.get(0).getTimesPanda();
+		timesMonkey = prizeEntity.get(0).getTimesMonkey();
+		timesRabbit = prizeEntity.get(0).getTimesRabbit();
+		oneTimesList.add(timesSwallow);//注意添加的顺序
+		oneTimesList.add(timesPigeon);
+		oneTimesList.add(timesPeafowl);
+		oneTimesList.add(timesEagle);
+		oneTimesList.add(timesLion);
+		oneTimesList.add(timesPanda);
+		oneTimesList.add(timesMonkey);
+		oneTimesList.add(timesRabbit);
+		return oneTimesList;
+		/*
 		//添加倍数数据（写在pojo中）
 		timesEntity=new ArrayList<TimesEntity>();
 		for(int i = 0; i < 6; i++){			
@@ -356,7 +437,6 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 			timesList.setTimesRabbit(i);
 			timesEntity.add(timesList);
 		}
-		
 		int timesIndex=(int)(Math.random()*timesEntity.size());//从总共less.size()组倍数中随机一组倍数
 		ArrayList<Object> oneTimesList = new ArrayList<Object>();//之前中奖列表
 		timesSwallow = timesEntity.get(timesIndex).getTimesSwallow();
@@ -376,7 +456,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		oneTimesList.add(timesEntity.get(timesIndex).getTimesMonkey());
 		oneTimesList.add(timesEntity.get(timesIndex).getTimesRabbit());
 		
-		return oneTimesList;
+		return oneTimesList;*/
 	}
 	/**
 	 * 获取配置
@@ -443,6 +523,14 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		//添加数据测试
 		prizeEntity=new ArrayList<PrizeRecord>();		
 		PrizeRecord prize1 = new PrizeRecord();
+		prize1.setTimesSwallow(4);
+		prize1.setTimesPigeon(8);
+		prize1.setTimesPeafowl(12);
+		prize1.setTimesEagle(24);
+		prize1.setTimesLion(24);
+		prize1.setTimesPanda(12);
+		prize1.setTimesMonkey(8);
+		prize1.setTimesRabbit(4);
 		prize1.setPrizeId("2014");
 		prize1.setCommissionRate(0.10);
 		prize1.setCreateTime(null);	
