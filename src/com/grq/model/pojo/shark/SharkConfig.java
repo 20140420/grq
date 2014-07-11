@@ -18,11 +18,10 @@ public class SharkConfig  implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Integer id;//配置序列号
+	private String id;//配置序列号(手动分配)
     private Date createTime = new Date();// 提交时间即截止时间
     private Double initialDividend;//彩金池初值
     private Double commissionRate;//佣金费率
-    private Integer singlBet;//单注额度调整
     private Integer betLimit;//下注上限
     private Integer timesMax;//最高赔率
     private Integer circleNum;//转盘圈数
@@ -45,7 +44,6 @@ public class SharkConfig  implements java.io.Serializable {
         this.createTime = createTime;
         this.initialDividend = initialDividend;
         this.commissionRate = commissionRate;
-        this.singlBet = singlBet;
         this.betLimit = betLimit;
         this.timesMax = timesMax;
         this.circleNum = circleNum;
@@ -59,11 +57,11 @@ public class SharkConfig  implements java.io.Serializable {
    
     // Property accessors
 
-    public Integer getId() {
+    public String getId() {
         return this.id;
     }
     
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -91,15 +89,7 @@ public class SharkConfig  implements java.io.Serializable {
         this.commissionRate = commissionRate;
     }
 
-    public Integer getSinglBet() {
-        return this.singlBet;
-    }
-    
-    public void setSinglBet(Integer singlBet) {
-        this.singlBet = singlBet;
-    }
-
-    public Integer getBetLimit() {
+	public Integer getBetLimit() {
         return this.betLimit;
     }
     

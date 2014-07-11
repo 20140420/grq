@@ -15,27 +15,35 @@
           </tr>
         <tr>
           <td>佣金比率：</td>
-          <td class="col4"><input type="text" placeholder="10%" ></td>
-          <td>彩金池：</td>
-          <td class="col4"><input type="text" placeholder="1000" ></td>
+          <td class="col4"><input type="text" name="commissionRate" placeholder="0.10" value="0.15"></td>
+          <td>彩金池初值：</td>
+          <td class="col4"><input type="text" name="initialDividend" placeholder="1000" value="887"></td>
           <td>最高倍数：</td>
-          <td class="col4"><input type="text" placeholder="99" ></td>
+          <td class="col4"><input type="text" name="timesMax" placeholder="99" value="90"></td>
           </tr>
         <tr>
           <td>观察时长：</td>
-          <td class="col4"><input type="text" placeholder="5" ></td>
+          <td class="col4"><input type="text" name="timeObserve" placeholder="5" value="6"></td>
           <td>下注时长：</td>
-          <td class="col4"><input type="text" placeholder="30" ></td>
+          <td class="col4"><input type="text" name="timeBet" placeholder="30" value="11"></td>
           <td>转盘时长：</td>
-          <td class="col4"><s:textfield name="timeCircle"></s:textfield></td>
+          <td class="col4"><s:textfield name="timeCircle" value="4"></s:textfield></td>
+        </tr>
+        <tr>
+          <td>展示时长：</td>
+          <td class="col4"><input type="text" name="timeDisplay" placeholder="5" value="3"></td>
+          <td>等待时长：</td>
+          <td class="col4"><input type="text" name="timeWait" placeholder="2" value="2"></td>
+          <td>押注上限：</td>
+          <td class="col4"><input type="text" name="betLimit" placeholder="5000" value="999"></td>
         </tr>
         <tr>
           <td>转盘圈数：</td>
-          <td class="col4"><input type="text" placeholder="2" ></td>
-          <td>展示时长：</td>
-          <td class="col4"><input type="text" placeholder="5" ></td>
-          <td>押注上限：</td>
-          <td class="col4"><input type="text" placeholder="5000" ></td>
+          <td class="col4"><input type="text" name="circleNum" placeholder="2" value="3"></td>
+          <td></td>
+          <td class="col4"></td>
+          <td></td>
+          <td class="col4"></td>
         </tr>
 	</table>
 </s:form>

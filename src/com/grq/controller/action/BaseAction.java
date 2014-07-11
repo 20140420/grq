@@ -53,11 +53,9 @@ SessionAware{
 	@Autowired
 	protected BetDao betDao;
 	@Autowired
-	protected static PrizeRecordDao prizeRecordDao;
+	protected PrizeRecordDao prizeRecordDao;
 	@Autowired
 	protected SharkConfigDao sharkConfigDao;
-	@Autowired
-	protected static BetDao betDaoTest;
 	
 	// Map类型的session
 	protected Map<String, Object> session;
