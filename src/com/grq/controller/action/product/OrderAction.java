@@ -143,7 +143,7 @@ public class OrderAction extends BaseAction implements ModelDriven<Order>{
 		return LIST;//返回后台订单列表
 	}
 	/**
-	 * 查询指定订单
+	 * 查询指定订单（缺失查询指定订单详情页面，即OrderItem没页面显示查看）
 	 */
 	public String select() throws Exception {
 		order = orderDao.load(order.getOrderId());
