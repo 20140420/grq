@@ -4,14 +4,14 @@
 <link href="${context_path}/css/manage.css" rel="stylesheet" type="text/css" />
     <div class="content">
 <div class="operateoption">
-<form action="#" method="post">
+<s:form action="config_save" namespace="/admin/operate" enctype="multipart/form-data" method="post">
 	<table>
     	<tr>
           <td colspan="6" align="left">游戏配置</td>
         </tr>
         <tr>
           <th colspan="5" align="left">配置设置</th>
-          <th>确认修改</th>
+          <th><s:submit type="text" value="提交修改"></s:submit></th>
           </tr>
         <tr>
           <td>佣金比率：</td>
@@ -38,7 +38,7 @@
           <td class="col4"><input type="text" placeholder="5000" ></td>
         </tr>
 	</table>
-</form>
+</s:form>
 	<table>
         <tr>
           <th colspan="2" align="left">配置记录</th>

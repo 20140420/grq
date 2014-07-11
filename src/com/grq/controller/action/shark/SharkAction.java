@@ -276,15 +276,6 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 
 		return "grule";
 	}
-	/**
-	 * 游戏shark的设定
-	 * @return shark设定页面
-	 * @throws Exception
-	 */
-	public String option() throws Exception{
-
-		return "option";
-	}
 	
 	// 键盘panel对象
 	private PanelInfo panelData = new PanelInfo();//一定要先初始化obj对象！

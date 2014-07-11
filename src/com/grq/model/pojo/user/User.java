@@ -2,16 +2,16 @@ package com.grq.model.pojo.user;
 
 import java.io.Serializable;
 /**
- * ¹ÜÀíÔ±
+ * ç®¡ç†å‘˜
  * @author JiangQuan
  */
 public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
-	// ±àºÅ
+	// ç¼–å·
 	private Integer id;
-	// ÓÃ»§Ãû
+	// ç”¨æˆ·å
 	private String username;
-	// ÃÜÂë
+	// å¯†ç 
 	private String password;
 	public Integer getId() {
 		return id;

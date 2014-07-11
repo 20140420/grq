@@ -40,7 +40,7 @@
 		<ul>
 			<li><s:a action="bet_query" namespace="/admin/operate" target="mdetail">下注查询</s:a></li>
 			<li><s:a action="bet_list" namespace="/admin/operate" target="mdetail">所有下注</s:a></li>
-			<li><s:a action="shark_option" namespace="/admin/operate" target="mdetail">游戏设定</s:a></li>
+			<li><s:a action="config_option" namespace="/admin/operate" target="mdetail">游戏设定</s:a></li>
 		</ul>
 		<h3>商品管理</h3>
 		<ul class="hide">

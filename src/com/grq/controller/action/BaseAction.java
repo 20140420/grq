@@ -21,6 +21,7 @@ import com.grq.model.dao.shark.PrizeRecordDao;
 import com.grq.model.dao.shark.BetDao;
 import com.grq.model.dao.shark.SharkConfigDao;
 import com.grq.model.pojo.user.Customer;
+import com.grq.model.pojo.user.User;
 import com.grq.model.pojo.product.OrderItem;
 import com.opensymphony.xwork2.ActionSupport;
 /**
@@ -139,6 +140,18 @@ SessionAware{
 		}
 		return null;
 	}
+	/**
+	 *  获取管理用户id
+	 * 	获取管理用户对象
+	 * @return
+	 */
+	public User getLoginUser(){
+		if(session.get("admin") != null){
+			return (User) session.get("admin");
+		}
+		return null;
+	}
+	
 	/**
 	 * 从session中取出购物车
 	 * @return

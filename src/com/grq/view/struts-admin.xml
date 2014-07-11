@@ -68,7 +68,7 @@
 			<interceptor-ref name="adminDefaultStack"/>
 		</action>
 		<!-- 游戏设定 -->
-		<action name="shark_*" method="{1}" class="sharkAction">
+		<action name="config_*" method="{1}" class="optionAction">
 			<result name="option" >/WEB-INF/pages/manage/admin/shark/option.jsp</result>
 			<interceptor-ref name="adminDefaultStack"/>
 		</action>
