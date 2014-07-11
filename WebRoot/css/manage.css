@@ -266,7 +266,7 @@ form table .col3 input{/*设定小框*/
 	text-align: center;
 }
 form table .col4 input{/*系统显示用户昵称*/
-	width: 130px;
+	width: 98px;
 	border: none;
 	color: #00F;
 	text-align: center;
@@ -276,12 +276,12 @@ form table .col4 textarea{/*文本区域*/
 	text-align: center;
 }
 form table tr .col4 .textarea1 {/*文本区域*/
-	width: 360px;
+	width: 310px;
 	margin-bottom: 0px;
 	border: none;
 }
 form table tr .col4 .textarea2 {/*文本区域*/
-	width: 590px;
+	width: 530px;
 	margin-bottom: 0px;
 	border: none;
 }
@@ -773,7 +773,7 @@ form table .col5 input{/*长文本*/
 	padding-right: 5px;
 	padding-bottom: 0px;
 }
-/*assetgiro.jsp*/
+/*operateoption.jsp*/
 .content .operateoption {
 	height: auto;
 }

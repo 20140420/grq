@@ -5,12 +5,13 @@
     <div class="content">
 <div class="operateoption">
 <form action="#" method="post">
-<table>
-    <tr>
+	<table>
+    	<tr>
           <td colspan="6" align="left">游戏配置</td>
         </tr>
         <tr>
-          <th colspan="6" align="left">配置设置</th>
+          <th colspan="5" align="left">配置设置</th>
+          <th>确认修改</th>
           </tr>
         <tr>
           <td>佣金比率：</td>
@@ -36,10 +37,12 @@
           <td>押注上限：</td>
           <td class="col4"><input type="text" placeholder="5000" ></td>
         </tr>
+	</table>
+</form>
+	<table>
         <tr>
           <th colspan="2" align="left">配置记录</th>
-          <th colspan="3">配置号：<input type="text" name="textfield" id="textfield">[搜索]</th>
-		  <th>>>详情</th>
+          <th colspan="4">配置号：<input type="text" name="textfield" id="textfield">[搜索]</th>
         </tr>
         <tr>
           <td>配置号</td>
@@ -92,7 +95,6 @@
         <tr>
           <td colspan="6" align="right">[首页][上一页][下一页][尾页] [1]/[108] 第[  ]页 [跳转]</td>
         </tr>
-        </table>
-</form>
+	</table>
 </div>
     <!-- end .content --></div>

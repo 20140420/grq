@@ -422,41 +422,6 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		oneTimesList.add(timesMonkey);
 		oneTimesList.add(timesRabbit);
 		return oneTimesList;
-		/*
-		//添加倍数数据（写在pojo中）
-		timesEntity=new ArrayList<TimesEntity>();
-		for(int i = 0; i < 6; i++){			
-			TimesEntity timesList = new TimesEntity();
-			timesList.setTimesSwallow(i);
-			timesList.setTimesPigeon(i);
-			timesList.setTimesPeafowl(i);
-			timesList.setTimesEagle(i);
-			timesList.setTimesLion(i);
-			timesList.setTimesPanda(i);
-			timesList.setTimesMonkey(i);
-			timesList.setTimesRabbit(i);
-			timesEntity.add(timesList);
-		}
-		int timesIndex=(int)(Math.random()*timesEntity.size());//从总共less.size()组倍数中随机一组倍数
-		ArrayList<Object> oneTimesList = new ArrayList<Object>();//之前中奖列表
-		timesSwallow = timesEntity.get(timesIndex).getTimesSwallow();
-		timesPigeon = timesEntity.get(timesIndex).getTimesPigeon();
-		timesPeafowl = timesEntity.get(timesIndex).getTimesPeafowl();
-		timesEagle = timesEntity.get(timesIndex).getTimesEagle();
-		timesLion = timesEntity.get(timesIndex).getTimesLion();
-		timesPanda = timesEntity.get(timesIndex).getTimesPanda();
-		timesMonkey = timesEntity.get(timesIndex).getTimesMonkey();
-		timesRabbit = timesEntity.get(timesIndex).getTimesRabbit();
-		oneTimesList.add(timesEntity.get(timesIndex).getTimesSwallow());//注意添加的顺序
-		oneTimesList.add(timesEntity.get(timesIndex).getTimesPigeon());
-		oneTimesList.add(timesEntity.get(timesIndex).getTimesPeafowl());
-		oneTimesList.add(timesEntity.get(timesIndex).getTimesEagle());
-		oneTimesList.add(timesEntity.get(timesIndex).getTimesLion());
-		oneTimesList.add(timesEntity.get(timesIndex).getTimesPanda());
-		oneTimesList.add(timesEntity.get(timesIndex).getTimesMonkey());
-		oneTimesList.add(timesEntity.get(timesIndex).getTimesRabbit());
-		
-		return oneTimesList;*/
 	}
 	/**
 	 * 获取配置
