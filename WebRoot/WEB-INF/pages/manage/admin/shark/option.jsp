@@ -11,7 +11,7 @@ td {
 </style>
     <div class="content">
 <div class="operateoption">
-
+<s:push value="sharkConfig">
   <s:form action="config_save" namespace="/admin/operate" enctype="multipart/form-data" method="post">
 	<table>
     	<tr>
@@ -23,7 +23,7 @@ td {
           </tr>
         <tr>
           <td>佣金比率：</td>
-          <td class="col4"><s:textfield name="commissionRate"  placeholder="0.10" value="0.15"></s:textfield></td>
+          <td class="col4"><s:textfield name="commissionRate"  placeholder="0.10"></s:textfield></td>
           <td>彩金池初值：</td>
           <td class="col4"><s:textfield name="initialDividend"></s:textfield></td>
           <td>最高倍数：</td>
@@ -55,7 +55,7 @@ td {
         </tr>
 	</table>
   </s:form>
-
+</s:push>
 	<table>
         <tr>
           <th colspan="2" align="left">配置记录</th>

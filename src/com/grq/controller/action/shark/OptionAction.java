@@ -37,6 +37,12 @@ public class OptionAction extends BaseAction implements ModelDriven<SharkConfig>
 	public void setPageModel(PageModel<SharkConfig> pageModel) {
 		this.pageModel = pageModel;
 	}
+	public SharkConfig getSharkConfig() {
+		return sharkConfig;
+	}
+	public void setSharkConfig(SharkConfig sharkConfig) {
+		this.sharkConfig = sharkConfig;
+	}
 /** -------------------------------------------------------------------- */	
 	
 	/**
@@ -45,14 +51,7 @@ public class OptionAction extends BaseAction implements ModelDriven<SharkConfig>
 	 * @throws Exception
 	 */
 	public String option() throws Exception{
-		Map<String, String> orderby = new HashMap<String, String>(1);//创建Map集合
-		orderby.put("createTime", "desc");//设置排序条件及方式
-		pageModel = sharkConfigDao.find(-1, -1, orderby);//执行查询方法
-		System.out.println("最新配置序列号："+pageModel.getList().get(0).getId());
-		if(pageModel.getList().get(0).getId() != null){//存在配置
-			this.sharkConfig = sharkConfigDao.get(pageModel.getList().get(0).getId());//加载对象最新配置序列号
-		}		
-		System.out.println("最新配置对象："+sharkConfig.getId()+"对象周期："+sharkConfig.getTimeCycle());
+		
 		return list();
 	}
 	/**
@@ -85,6 +84,13 @@ public class OptionAction extends BaseAction implements ModelDriven<SharkConfig>
 		if(getLoginUser() != null){//如果用户已登录
 			Map<String, String> orderby = new HashMap<String, String>(1);//创建Map集合
 			orderby.put("createTime", "desc");//设置排序条件及方式
+			//获取最新一条配置
+			pageModel = sharkConfigDao.find(-1, -1, orderby);//执行查询方法
+			if(pageModel.getList().get(0).getId() != null){//存在配置
+				this.sharkConfig = sharkConfigDao.get(pageModel.getList().get(0).getId());//加载对象最新配置序列号
+			}		
+			//System.out.println("最新配置对象："+sharkConfig.getId()+"对象周期："+sharkConfig.getTimeCycle());
+			//获取历史所有配置
 			pageModel = sharkConfigDao.find(pageNo, pageSize, orderby);//执行查询方法
 			//System.out.println("获取配置分页对象："+pageModel.getList().get(0).getCreateTime());
 			return "option";//返回配置列表页面
