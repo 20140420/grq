@@ -418,14 +418,16 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	 * 获取配置
 	 * @return
 	 */
-	private static List<Object> sharkConfigHave() {
-		/*String field =" dividend,prize_name ";//选择字段奖项
+	private List<Object> sharkConfigHave() {
+		/*String field =" id, timeCircle, commissionRate, timesMax ";//选择字段奖项
 		String where = null;
 		Object[] queryParams = null;
 		Map<String, String> orderby = new HashMap<String, String>();//定义Map集合
 		orderby.put("createTime", "desc");//设置排序条件及方式
-		prizelist = prizeRecordDao.getNumResult(field, where, queryParams, orderby, 0, 1);//参数1表示只获取最近一条数据
+		List<SharkConfig> configList = sharkConfigDao.getNumResult(field, where, queryParams, orderby, 0, 1);//参数1表示只获取最近一条数据
+		System.out.println("获取最新的一条配置数据："+configList);
 		*/
+		
 		//添加数据测试
 		configEntity=new ArrayList<SharkConfig>();		
 		SharkConfig config1 = new SharkConfig();
@@ -447,6 +449,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		lastConfigList.add(configEntity.get(0).getCommissionRate());
 		lastConfigList.add(configEntity.get(0).getTimesMax());
 		return lastConfigList;
+		/*return configList;*/
 	}
 	/**
 	 * 获取上场彩金池

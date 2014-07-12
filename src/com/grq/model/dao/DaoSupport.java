@@ -118,7 +118,7 @@ public class DaoSupport<T> implements BaseDao<T>{
 						.append(where == null ? "" : where)//如果where为null就添加空格,反之添加where
 						.append(createOrderBy(orderby))//添加排序条件参数
 						.append(" ")//添加空格
-						.append("limit" + " " + startNo + limitResult)//添加限制条件参数
+						.append("limit" + " " + startNo +", " + limitResult)//添加限制条件参数
 						.toString();//转化为字符串
 				Query query = session.createQuery(hql);//执行查询
 				setQueryParams(query,queryParams);//为参数赋值
