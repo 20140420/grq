@@ -30,6 +30,7 @@ public class SharkConfig  implements java.io.Serializable {
     private Integer timeBet;//下注时间
     private Integer timeDisplay;//展示时间
     private Integer timeWait;//等待时间
+    private Integer timeCycle;//周期时间
 
 
     // Constructors
@@ -40,7 +41,7 @@ public class SharkConfig  implements java.io.Serializable {
 
     
     /** full constructor */
-    public SharkConfig(Date createTime, Double initialDividend, Double commissionRate, Integer singlBet, Integer betLimit, Integer timesMax, Integer circleNum, Integer timeCircle, Integer timeObserve, Integer timeBet, Integer timeDisplay, Integer timeWait) {
+    public SharkConfig(Date createTime, Double initialDividend, Double commissionRate, Integer singlBet, Integer betLimit, Integer timesMax, Integer circleNum, Integer timeCircle, Integer timeObserve, Integer timeBet, Integer timeDisplay, Integer timeWait, Integer timeCycle) {
         this.createTime = createTime;
         this.initialDividend = initialDividend;
         this.commissionRate = commissionRate;
@@ -52,6 +53,7 @@ public class SharkConfig  implements java.io.Serializable {
         this.timeBet = timeBet;
         this.timeDisplay = timeDisplay;
         this.timeWait = timeWait;
+        this.timeCycle = timeCycle;
     }
 
    
@@ -152,6 +154,16 @@ public class SharkConfig  implements java.io.Serializable {
     public void setTimeWait(Integer timeWait) {
         this.timeWait = timeWait;
     }
+
+
+	public Integer getTimeCycle() {
+		return timeCycle;
+	}
+
+
+	public void setTimeCycle(Integer timeCycle) {
+		this.timeCycle = timeCycle;
+	}
    
 
 
