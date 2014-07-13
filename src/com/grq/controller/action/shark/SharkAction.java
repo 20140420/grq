@@ -192,6 +192,11 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		}
 		return CUSTOMER_LOGIN;//返回登入页面
 	}
+	/**
+	 * 用户下注查询页面
+	 * @return
+	 * @throws Exception
+	 */
 	public String uinquirybet() throws Exception{
 
 		return findByCustomer();//返回查询个人下注的方法
@@ -281,6 +286,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	private PanelInfo panelData = new PanelInfo();//一定要先初始化obj对象！
 	private PageModel<PanelInfo> pageModel;// 分页组件
 	private SharkConfig topConfigList;//最新一条配置
+	private PrizeRecord topPrizeList;//最新一条奖项记录
 	/**
 	 * 此方法是Modeldriven接口的方法，要重写
 	 * @return
@@ -366,7 +372,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 			timesList.setTimesMonkey(i);
 			timesList.setTimesRabbit(i);
 			timesEntity.add(timesList);
-		}		
+		}
 		int timesIndex=(int)(Math.random()*timesEntity.size());//从总共timesEntity.size()组倍数中随机一组倍数
 		ArrayList<Object> newTimesList = new ArrayList<Object>();//随机生成一组倍数
 		timesSwallow = timesEntity.get(timesIndex).getTimesSwallow();
@@ -386,34 +392,8 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		newTimesList.add(timesMonkey);
 		newTimesList.add(timesRabbit);
 		//接着保存到奖项记录表
-		return newTimesList;
-	}
-	/**
-	 * 从奖项记录获得新存倍数
-	 * @return
-	 */
-	private static List<Object> timesHave() {
 		
-		//从奖项记录获得新存倍数(必须有新存奖项)
-		prizeEntity = prizeRecordHave();
-		ArrayList<Object> oneTimesList = new ArrayList<Object>();
-		timesSwallow = prizeEntity.get(0).getTimesSwallow();
-		timesPigeon = prizeEntity.get(0).getTimesPigeon();
-		timesPeafowl = prizeEntity.get(0).getTimesPeafowl();
-		timesEagle = prizeEntity.get(0).getTimesEagle();
-		timesLion = prizeEntity.get(0).getTimesLion();
-		timesPanda = prizeEntity.get(0).getTimesPanda();
-		timesMonkey = prizeEntity.get(0).getTimesMonkey();
-		timesRabbit = prizeEntity.get(0).getTimesRabbit();
-		oneTimesList.add(timesSwallow);//注意添加的顺序
-		oneTimesList.add(timesPigeon);
-		oneTimesList.add(timesPeafowl);
-		oneTimesList.add(timesEagle);
-		oneTimesList.add(timesLion);
-		oneTimesList.add(timesPanda);
-		oneTimesList.add(timesMonkey);
-		oneTimesList.add(timesRabbit);
-		return oneTimesList;
+		return newTimesList;
 	}
 	/**
 	 * 获取配置
@@ -504,6 +484,33 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		prizeEntity.add(prize6);
 
 		return prizeEntity;
+	}
+	/**
+	 * 从奖项记录获得新存倍数
+	 * @return
+	 */
+	private static List<Object> timesHave() {
+		
+		//从奖项记录获得新存倍数(必须有新存奖项)
+		prizeEntity = prizeRecordHave();
+		ArrayList<Object> oneTimesList = new ArrayList<Object>();
+		timesSwallow = prizeEntity.get(0).getTimesSwallow();
+		timesPigeon = prizeEntity.get(0).getTimesPigeon();
+		timesPeafowl = prizeEntity.get(0).getTimesPeafowl();
+		timesEagle = prizeEntity.get(0).getTimesEagle();
+		timesLion = prizeEntity.get(0).getTimesLion();
+		timesPanda = prizeEntity.get(0).getTimesPanda();
+		timesMonkey = prizeEntity.get(0).getTimesMonkey();
+		timesRabbit = prizeEntity.get(0).getTimesRabbit();
+		oneTimesList.add(timesSwallow);//注意添加的顺序
+		oneTimesList.add(timesPigeon);
+		oneTimesList.add(timesPeafowl);
+		oneTimesList.add(timesEagle);
+		oneTimesList.add(timesLion);
+		oneTimesList.add(timesPanda);
+		oneTimesList.add(timesMonkey);
+		oneTimesList.add(timesRabbit);
+		return oneTimesList;
 	}
 	/**
 	 * 出奖
