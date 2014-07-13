@@ -53,7 +53,8 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	//一单下注
 	private static Integer totalBet;//一条下注订单总筹码
 	//游戏配置
-	private static Integer timeCircle;//转圈时间
+	private static Integer timeCircle;//转圈时间和延长时间同用变量
+	private static Integer timeCycle;//周期时长
 	private static double commission_rate; //佣金费率
 	private static int timesMax;//最高倍数
 	private static double commissionProfit;//佣金收益
@@ -65,7 +66,6 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	// 实体变量
 	private static List<PrizeRecord> prizeEntity;
 	private static List<TimesEntity> timesEntity;
-	private static List<SharkConfig> configEntity;
 	private static List<PanelInfo> betEntity;
 		
 	//自定义类型变量
@@ -115,6 +115,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		totalBet = 0;//一条下注订单总筹码
 		//游戏配置
 		timeCircle = 0;//转盘时间
+		timeCycle = 0;//周期时长
 		commission_rate =0.0; //佣金费率
 		timesMax = 0;//最高倍数
 		commissionProfit = 0.0;//佣金收益
@@ -125,7 +126,6 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		// 实体变量
 		prizeEntity = null;
 		timesEntity = null;
-		configEntity = null;
 		betEntity = null;
 		//自定义类型变量
 		prizeString = Prize.RAFFLING;//奖项变量，默认正在抽奖
@@ -280,6 +280,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	// 键盘panel对象
 	private PanelInfo panelData = new PanelInfo();//一定要先初始化obj对象！
 	private PageModel<PanelInfo> pageModel;// 分页组件
+	private SharkConfig topConfigList;//最新一条配置
 	/**
 	 * 此方法是Modeldriven接口的方法，要重写
 	 * @return
@@ -419,37 +420,26 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	 * @return
 	 */
 	private List<Object> sharkConfigHave() {
-		/*String field =" id, timeCircle, commissionRate, timesMax ";//选择字段奖项
-		String where = null;
-		Object[] queryParams = null;
+
 		Map<String, String> orderby = new HashMap<String, String>();//定义Map集合
 		orderby.put("createTime", "desc");//设置排序条件及方式
-		List<SharkConfig> configList = sharkConfigDao.getNumResult(field, where, queryParams, orderby, 0, 1);//参数1表示只获取最近一条数据
-		System.out.println("获取最新的一条配置数据："+configList);
-		*/
-		
-		//添加数据测试
-		configEntity=new ArrayList<SharkConfig>();		
-		SharkConfig config1 = new SharkConfig();
-		config1.setTimeCircle(4);
-		config1.setCommissionRate(0.1);
-		config1.setTimesMax(99);
-		configEntity.add(config1);		
-		SharkConfig config2 = new SharkConfig();
-		config2.setTimeCircle(3);
-		config2.setCommissionRate(0.6);
-		config2.setTimesMax(99);
-		configEntity.add(config2);
-		
+		PageModel<SharkConfig> configList = sharkConfigDao.find(-1, -1, orderby);//获取最近一条数据
+		if(configList.getList().get(0).getId() != null){//存在配置
+			topConfigList = sharkConfigDao.get(configList.getList().get(0).getId());//加载对象最新配置序列号
+		}		
 		ArrayList<Object> lastConfigList = new ArrayList<Object>();//之前中奖列表
-		timeCircle = configEntity.get(0).getTimeCircle();
-		commission_rate = configEntity.get(0).getCommissionRate();//获取最新的费率配置
-		timesMax = configEntity.get(0).getTimesMax();//获取最新的最大倍率配置
-		lastConfigList.add(configEntity.get(0).getTimeCircle());
-		lastConfigList.add(configEntity.get(0).getCommissionRate());
-		lastConfigList.add(configEntity.get(0).getTimesMax());
+		timeCircle = topConfigList.getTimeCircle();
+		timeCycle = topConfigList.getTimeCycle();
+		commission_rate = topConfigList.getCommissionRate();//获取最新的费率配置
+		timesMax = topConfigList.getTimesMax();//获取最新的最大倍率配置
+		lastConfigList.add(commission_rate);
+		lastConfigList.add(topConfigList.getInitialDividend());
+		lastConfigList.add(timesMax);
+		lastConfigList.add(timeCycle);
+		lastConfigList.add(topConfigList.getBetLimit());
+		lastConfigList.add(timeCircle);
+		
 		return lastConfigList;
-		/*return configList;*/
 	}
 	/**
 	 * 获取上场彩金池

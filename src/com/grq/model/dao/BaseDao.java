@@ -16,6 +16,7 @@ public interface BaseDao<T> {
 	public T load(Serializable entityId);//加载实体对象
 	public Object uniqueResult(String hql, Object[] queryParams);//使用hql语句操作
 	
+
 	public List<T> getNumResult(String field, String where, Object[] queryParams,
 			Map<String, String> orderby, int startNo, int limitResult);//获取指定对象的指定条数的信息集合
 	
