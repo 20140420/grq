@@ -43,7 +43,7 @@
 		<mapping resource="com/grq/model/pojo/user/User.hbm.xml" />
 		<mapping resource="com/grq/model/pojo/shark/PanelInfo.hbm.xml" />
 		<mapping resource="com/grq/model/pojo/shark/SharkConfig.hbm.xml" />
-		<!-- <mapping resource="com/grq/model/pojo/shark/PrizeRecord.hbm.xml" /> -->
+		<mapping resource="com/grq/model/pojo/shark/PrizeRecord.hbm.xml" />
 
 	</session-factory>
 
