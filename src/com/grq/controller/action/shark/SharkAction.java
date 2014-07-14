@@ -65,8 +65,8 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	
 	// 实体变量
 	private static List<PrizeRecord> prizeEntity;
-	private static List<PanelInfo> betEntity;
 	private static List<TimesEntity> timesEntity;
+	private static List<PanelInfo> betEntity;
 		
 	//自定义类型变量
 	private static Prize prizeString;//奖项变量，默认正在抽奖
@@ -125,6 +125,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		bombOrNot = false; //是否存在炸弹，默认否
 		// 实体变量
 		prizeEntity = null;
+		timesEntity = null;
 		betEntity = null;
 		//自定义类型变量
 		prizeString = Prize.RAFFLING;//奖项变量，默认正在抽奖
@@ -285,9 +286,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	private PanelInfo panelData = new PanelInfo();//一定要先初始化obj对象！
 	private PageModel<PanelInfo> pageModel;// 分页组件
 	private SharkConfig topConfigList;//最新一条配置
-	private PrizeRecord prizeRecord;
-
-	//private PrizeRecord topPrizeList;//最新一条奖项记录
+	private PrizeRecord topPrizeList;//最新一条奖项记录
 	/**
 	 * 此方法是Modeldriven接口的方法，要重写
 	 * @return
@@ -350,10 +349,9 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		betClear();//重置清零
 		
 		/** 随机生成一组倍数 */
-		//RecordAction recordAction = new RecordAction();
-		List<Object> newTimesList = timesCreate();
+		List<Object> newTimesList =timesCreate();
 		System.out.println("为下一场随机生成一组倍数列表："+newTimesList);
-		System.out.println("下一场随机生成燕子倍数："+newTimesList.get(0));
+		
 		return main();		
 	}
 	/**
@@ -376,37 +374,6 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 			timesEntity.add(timesList);
 		}
 		int timesIndex=(int)(Math.random()*timesEntity.size());//从总共timesEntity.size()组倍数中随机一组倍数
-		prizeRecord.setPrizeId(StringUtil.getStringTime());//添加18位数字字符串作为奖项结果期号
-		prizeRecord.setCommissionRate(0.0);
-		prizeRecord.setPrizeName(Prize.RAFFLING);
-		prizeRecord.setDividend(0.0);
-		prizeRecord.setTimesSwallow(timesEntity.get(timesIndex).getTimesSwallow());
-		prizeRecord.setTimesPigeon(timesEntity.get(timesIndex).getTimesPigeon());
-		prizeRecord.setTimesPeafowl(timesEntity.get(timesIndex).getTimesPeafowl());
-		prizeRecord.setTimesEagle(timesEntity.get(timesIndex).getTimesEagle());
-		prizeRecord.setTimesLion(timesEntity.get(timesIndex).getTimesLion());
-		prizeRecord.setTimesPanda(timesEntity.get(timesIndex).getTimesPanda());
-		prizeRecord.setTimesMonkey(timesEntity.get(timesIndex).getTimesMonkey());
-		prizeRecord.setTimesRabbit(timesEntity.get(timesIndex).getTimesRabbit());
-		prizeRecord.setTimesGoldShark(0);
-		prizeRecord.setTotalSwallowSum(0.0);
-		prizeRecord.setTotalPigeonSum(0.0);
-		prizeRecord.setTotalPeafowlSum(0.0);
-		prizeRecord.setTotalEagleSum(0.0);
-		prizeRecord.setTotalLionSum(0.0);
-		prizeRecord.setTotalPandaSum(0.0);
-		prizeRecord.setTotalMonkeySum(0.0);
-		prizeRecord.setTotalRabbitSum(0.0);
-		prizeRecord.setTotalBirdSum(0.0);
-		prizeRecord.setTotalSilverSum(0.0);
-		prizeRecord.setTotalBombSum(0.0);
-		prizeRecord.setTotalGoldSum(0.0);
-		prizeRecord.setTotalBeastSum(0.0);
-		prizeRecord.setTotalBetSum(0.0);
-		System.out.println("奖项记录的兔子："+prizeRecord.getTimesRabbit());
-		System.out.println("奖项记录的费率："+prizeRecord.getCommissionRate());
-		System.out.println("奖项记录的时间："+prizeRecord.getCreateTime());
-		prizeRecordDao.saveOrUpdate(prizeRecord);//保存到对象
 		ArrayList<Object> newTimesList = new ArrayList<Object>();//随机生成一组倍数
 		timesSwallow = timesEntity.get(timesIndex).getTimesSwallow();
 		timesPigeon = timesEntity.get(timesIndex).getTimesPigeon();

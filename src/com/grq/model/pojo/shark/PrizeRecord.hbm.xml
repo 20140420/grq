@@ -10,23 +10,23 @@
             <column name="prize_id" length="30" />
             <generator class="assigned"></generator>
         </id>
-        <property name="createTime" type="java.sql.Timestamp">
-            <column name="createTime" length="19" not-null="true">
+        <property name="createTime">
+            <column name="createTime" length="8" not-null="true">
                 <comment>生成时间</comment>
             </column>
         </property>
         <property name="commissionRate" type="java.lang.Double">
-            <column name="commission_rate" precision="22" scale="0">
+            <column name="commission_rate" precision="22" scale="0" not-null="true">
                 <comment>佣金费率</comment>
             </column>
         </property>
         <property name="prizeName" type="com.grq.model.util.hibernate.PrizeType">
-            <column name="prize_name" length="15">
+            <column name="prize_name" length="15" not-null="true">
                 <comment>中奖的奖项</comment>
             </column>
         </property>
         <property name="dividend" type="java.lang.Double">
-            <column name="dividend" precision="22" scale="0">
+            <column name="dividend" precision="22" scale="0" not-null="true">
                 <comment>剩余彩金池</comment>
             </column>
         </property>
@@ -76,72 +76,72 @@
             </column>
         </property>
         <property name="totalSwallowSum" type="java.lang.Double">
-            <column name="totalSwallowSum" precision="22" scale="0">
+            <column name="totalSwallowSum" precision="22" scale="0" not-null="true">
                 <comment>燕子下注总额之和</comment>
             </column>
         </property>
         <property name="totalPigeonSum" type="java.lang.Double">
-            <column name="totalPigeonSum" precision="22" scale="0">
+            <column name="totalPigeonSum" precision="22" scale="0" not-null="true">
                 <comment>鸽子下注总额之和</comment>
             </column>
         </property>
         <property name="totalPeafowlSum" type="java.lang.Double">
-            <column name="totalPeafowlSum" precision="22" scale="0">
+            <column name="totalPeafowlSum" precision="22" scale="0" not-null="true">
                 <comment>孔雀下注总额之和</comment>
             </column>
         </property>
         <property name="totalEagleSum" type="java.lang.Double">
-            <column name="totalEagleSum" precision="22" scale="0">
+            <column name="totalEagleSum" precision="22" scale="0" not-null="true">
                 <comment>老鹰下注总额之和</comment>
             </column>
         </property>
         <property name="totalLionSum" type="java.lang.Double">
-            <column name="totalLionSum" precision="22" scale="0">
+            <column name="totalLionSum" precision="22" scale="0" not-null="true">
                 <comment>狮子下注总额之和</comment>
             </column>
         </property>
         <property name="totalPandaSum" type="java.lang.Double">
-            <column name="totalPandaSum" precision="22" scale="0">
+            <column name="totalPandaSum" precision="22" scale="0" not-null="true">
                 <comment>熊猫下注总额之和</comment>
             </column>
         </property>
         <property name="totalMonkeySum" type="java.lang.Double">
-            <column name="totalMonkeySum" precision="22" scale="0">
+            <column name="totalMonkeySum" precision="22" scale="0" not-null="true">
                 <comment>猴子下注总额之和</comment>
             </column>
         </property>
         <property name="totalRabbitSum" type="java.lang.Double">
-            <column name="totalRabbitSum" precision="22" scale="0">
+            <column name="totalRabbitSum" precision="22" scale="0" not-null="true">
                 <comment>兔子下注总额之和</comment>
             </column>
         </property>
         <property name="totalBirdSum" type="java.lang.Double">
-            <column name="totalBirdSum" precision="22" scale="0">
+            <column name="totalBirdSum" precision="22" scale="0" not-null="true">
                 <comment>飞禽下注总额之和</comment>
             </column>
         </property>
         <property name="totalSilverSum" type="java.lang.Double">
-            <column name="totalSilverSum" precision="22" scale="0">
+            <column name="totalSilverSum" precision="22" scale="0" not-null="true">
                 <comment>银鲨下注总额之和</comment>
             </column>
         </property>
         <property name="totalBombSum" type="java.lang.Double">
-            <column name="totalBombSum" precision="22" scale="0">
+            <column name="totalBombSum" precision="22" scale="0" not-null="true">
                 <comment>炸弹下注总额之和</comment>
             </column>
         </property>
         <property name="totalGoldSum" type="java.lang.Double">
-            <column name="totalGoldSum" precision="22" scale="0">
+            <column name="totalGoldSum" precision="22" scale="0" not-null="true">
                 <comment>金鲨下注总额之和</comment>
             </column>
         </property>
         <property name="totalBeastSum" type="java.lang.Double">
-            <column name="totalBeastSum" precision="22" scale="0">
+            <column name="totalBeastSum" precision="22" scale="0" not-null="true">
                 <comment>走兽下注总额之和</comment>
             </column>
         </property>
         <property name="totalBetSum" type="java.lang.Double">
-            <column name="totalBetSum" precision="22" scale="0">
+            <column name="totalBetSum" precision="22" scale="0" not-null="true">
                 <comment>一场下注总额</comment>
             </column>
         </property>

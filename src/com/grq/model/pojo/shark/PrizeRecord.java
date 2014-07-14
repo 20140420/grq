@@ -1,7 +1,7 @@
 // default package
 package com.grq.model.pojo.shark;
 
-import java.util.Date;
+import java.util.Timer;
 
 import com.grq.model.customizeenum.Prize;
 
@@ -20,7 +20,7 @@ public class PrizeRecord  implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private String prizeId;//奖项期号(手动分配)
-    private Date createTime =new Date() ;//生成时间
+    private Timer createTime =new Timer() ;//生成时间
     private Double commissionRate;//佣金费率
     private Prize prizeName;//中奖的奖项
     private Double dividend;//剩余彩金池
@@ -57,7 +57,7 @@ public class PrizeRecord  implements java.io.Serializable {
 
     
     /** full constructor */
-    public PrizeRecord(String prizeId, Date createTime, Double commissionRate, Prize prizeName, Double dividend, Integer timesSwallow, Integer timesPigeon, Integer timesPeafowl, Integer timesEagle, Integer timesLion, Integer timesPanda, Integer timesMonkey, Integer timesRabbit, Double totalSwallowSum, Double totalPigeonSum, Double totalPeafowlSum, Double totalEagleSum, Double totalLionSum, Double totalPandaSum, Double totalMonkeySum, Double totalRabbitSum, Double totalBirdSum, Double totalSilverSum, Double totalBombSum, Double totalGoldSum, Double totalBeastSum, Double totalBetSum)  {
+    public PrizeRecord(String prizeId, Timer createTime, Double commissionRate, Prize prizeName, Double dividend, Integer timesSwallow, Integer timesPigeon, Integer timesPeafowl, Integer timesEagle, Integer timesLion, Integer timesPanda, Integer timesMonkey, Integer timesRabbit, Double totalSwallowSum, Double totalPigeonSum, Double totalPeafowlSum, Double totalEagleSum, Double totalLionSum, Double totalPandaSum, Double totalMonkeySum, Double totalRabbitSum, Double totalBirdSum, Double totalSilverSum, Double totalBombSum, Double totalGoldSum, Double totalBeastSum, Double totalBetSum)  {
         this.prizeId = prizeId;
         this.createTime = createTime;
         this.commissionRate = commissionRate;
@@ -97,11 +97,11 @@ public class PrizeRecord  implements java.io.Serializable {
         this.prizeId = prizeId;
     }
 
-    public Date getCreateTime() {
+    public Timer getCreateTime() {
         return this.createTime;
     }
     
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(Timer createTime) {
         this.createTime = createTime;
     }
 
