@@ -83,10 +83,6 @@ public class RecordAction extends BaseAction implements ModelDriven<PrizeRecord>
 		prizeRecord.setTimesPanda(timesEntity.get(timesIndex).getTimesPanda());
 		prizeRecord.setTimesMonkey(timesEntity.get(timesIndex).getTimesMonkey());
 		prizeRecord.setTimesRabbit(timesEntity.get(timesIndex).getTimesRabbit());
-		System.out.println("奖项记录列表："+prizeRecord);
-		System.out.println("奖项记录的兔子："+prizeRecord.getTimesRabbit());
-		System.out.println("奖项记录的费率："+prizeRecord.getCommissionRate());
-		System.out.println("倍数创建时间："+prizeRecord.getCreateTime());
 		ArrayList<Object> newTimesList = new ArrayList<Object>();//临时存储随机生成的倍数
 		newTimesList.add(timesEntity.get(timesIndex).getTimesSwallow());//注意添加的顺序
 		newTimesList.add(timesEntity.get(timesIndex).getTimesPigeon());
@@ -122,16 +118,13 @@ public class RecordAction extends BaseAction implements ModelDriven<PrizeRecord>
 		prizeRecord.setTotalGoldSum(0.0);
 		prizeRecord.setTotalBeastSum(0.0);
 		prizeRecord.setTotalBetSum(0.0);
-		System.out.println("奖项记录列表："+prizeRecord);
-		System.out.println("奖项记录的兔子："+prizeRecord.getTimesRabbit());
-		System.out.println("奖项记录的费率："+prizeRecord.getCommissionRate());
-		System.out.println("倍数创建时间（有错）："+prizeRecord.getCreateTime());
 		//prizeRecordDao.save(prizeRecord);//保存到对象
 		return null;
 	}
 	public String save() {
 		System.out.println("奖项:" + prizeRecord.getPrizeName());
 		System.out.println("费率:" + prizeRecord.getCommissionRate());
+		System.out.println("倍数创建时间："+prizeRecord.getCreateTime());
 		System.out.println("期号前:" + prizeRecord.getPrizeId());
 		prizeRecord.setPrizeId(StringUtil.getStringTime());//添加18位数字字符串作为奖项结果期号
 		System.out.println("期号后:" + prizeRecord.getPrizeId());

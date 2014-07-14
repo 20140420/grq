@@ -59,7 +59,7 @@ public class PrizeRecord  implements java.io.Serializable {
     /** full constructor */
     public PrizeRecord(String prizeId, Date createTime, Double commissionRate, Prize prizeName, Double dividend, Integer timesSwallow, Integer timesPigeon, Integer timesPeafowl, Integer timesEagle, Integer timesLion, Integer timesPanda, Integer timesMonkey, Integer timesRabbit, Double totalSwallowSum, Double totalPigeonSum, Double totalPeafowlSum, Double totalEagleSum, Double totalLionSum, Double totalPandaSum, Double totalMonkeySum, Double totalRabbitSum, Double totalBirdSum, Double totalSilverSum, Double totalBombSum, Double totalGoldSum, Double totalBeastSum, Double totalBetSum)  {
         this.prizeId = prizeId;
-        this.createTime = createTime;
+        this.setCreateTime(createTime);
         this.commissionRate = commissionRate;
         this.prizeName = prizeName;
         this.dividend = dividend;

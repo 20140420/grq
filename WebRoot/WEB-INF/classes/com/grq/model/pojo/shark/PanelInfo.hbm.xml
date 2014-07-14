@@ -15,7 +15,7 @@
                 <comment>所属用户</comment>
             </column>
         </many-to-one>
-        <property name="createTime">
+        <property generated="never" lazy="false" name="createTime">
             <column name="createTime" length="19" not-null="true">
                 <comment>生成时间</comment>
             </column>
