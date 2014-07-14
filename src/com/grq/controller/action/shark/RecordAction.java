@@ -38,6 +38,20 @@ public class RecordAction extends BaseAction implements ModelDriven<PrizeRecord>
 	public void setPageModel(PageModel<PrizeRecord> pageModel) {
 		this.pageModel = pageModel;
 	}
+	
+	/**
+	 * 历史奖项记录页面
+	 * @return
+	 * @throws Exception
+	 */
+	public String grecord() throws Exception{
+
+		return "grecord";
+	}
+	public String addgrecord() throws Exception{
+
+		return "addgrecord";
+	}
 /** -------------------------------------------------------------------- */	
 	/**
 	 * 为下一场随机生成一组倍数列表
@@ -84,7 +98,7 @@ public class RecordAction extends BaseAction implements ModelDriven<PrizeRecord>
 
 		return save();
 	}
-	private String save() {
+	public String save() {
 		System.out.println("保存奖项记录");
 		return null;
 	}
