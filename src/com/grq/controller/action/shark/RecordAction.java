@@ -8,8 +8,10 @@ import org.springframework.stereotype.Controller;
 
 import com.grq.controller.action.BaseAction;
 import com.grq.model.PageModel;
+import com.grq.model.customizeenum.Prize;
 import com.grq.model.pojo.shark.PrizeRecord;
 import com.grq.model.pojo.shark.TimesEntity;
+import com.grq.model.util.StringUtil;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Scope("prototype")
@@ -96,13 +98,8 @@ public class RecordAction extends BaseAction implements ModelDriven<PrizeRecord>
 		newTimesList.add(timesEntity.get(timesIndex).getTimesRabbit());
 		System.out.println("随机生成一组倍数列表："+newTimesList);
 
-		return save();
-	}
-	public String save() {
-		System.out.println("保存奖项记录");
-		return null;
-	}
-	/*
+		return saveTimesToRecord();
+	}	
 	public String saveTimesToRecord(){
 		System.out.println("保存倍数");
 		//接着保存到奖项记录表
@@ -128,10 +125,14 @@ public class RecordAction extends BaseAction implements ModelDriven<PrizeRecord>
 		System.out.println("奖项记录列表："+prizeRecord);
 		System.out.println("奖项记录的兔子："+prizeRecord.getTimesRabbit());
 		System.out.println("奖项记录的费率："+prizeRecord.getCommissionRate());
-		System.out.println("倍数创建时间："+prizeRecord.getCreateTime());
-		prizeRecordDao.save(prizeRecord);//保存到对象
+		System.out.println("倍数创建时间（有错）："+prizeRecord.getCreateTime());
+		//prizeRecordDao.save(prizeRecord);//保存到对象
 		return null;
-	}*/
+	}
+	public String save() {
+		System.out.println("保存奖项记录");
+		return null;
+	}
 	/**
 	 * 保存奖项记录
 	 * @return
