@@ -1,11 +1,15 @@
 package com.grq.controller.action.shark;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.grq.controller.action.BaseAction;
 import com.grq.model.PageModel;
 import com.grq.model.pojo.shark.PrizeRecord;
+import com.grq.model.pojo.shark.TimesEntity;
 import com.opensymphony.xwork2.ModelDriven;
 
 @Scope("prototype")
@@ -17,6 +21,7 @@ public class RecordAction extends BaseAction implements ModelDriven<PrizeRecord>
 	private PageModel<PrizeRecord> pageModel;// 分页组件
 	// 游戏配置对象
 	private PrizeRecord prizeRecord = new PrizeRecord();//一定要先初始化obj对象！
+	private static List<TimesEntity> timesEntity;
 	/**
 	 * 此方法是Modeldriven接口的方法，要重写
 	 * @return
@@ -34,6 +39,40 @@ public class RecordAction extends BaseAction implements ModelDriven<PrizeRecord>
 		this.pageModel = pageModel;
 	}
 /** -------------------------------------------------------------------- */	
+	/**
+	 * 为下一场随机生成一组倍数列表
+	 * @return
+	 */
+	public List<Object> timesCreate() {
+		//添加倍数数据（写在pojo中）
+		timesEntity=new ArrayList<TimesEntity>();
+		for(int i = 0; i < 6; i++){			
+			TimesEntity timesList = new TimesEntity();
+			timesList.setTimesSwallow(i);
+			timesList.setTimesPigeon(i);
+			timesList.setTimesPeafowl(i);
+			timesList.setTimesEagle(i);
+			timesList.setTimesLion(i);
+			timesList.setTimesPanda(i);
+			timesList.setTimesMonkey(i);
+			timesList.setTimesRabbit(i);
+			timesEntity.add(timesList);
+		}
+		int timesIndex=(int)(Math.random()*timesEntity.size());//从总共timesEntity.size()组倍数中随机一组倍数
+		ArrayList<Object> newTimesList = new ArrayList<Object>();//随机生成一组倍数
+		newTimesList.add(timesEntity.get(timesIndex).getTimesSwallow());//注意添加的顺序
+		newTimesList.add(timesEntity.get(timesIndex).getTimesPigeon());
+		newTimesList.add(timesEntity.get(timesIndex).getTimesPeafowl());
+		newTimesList.add(timesEntity.get(timesIndex).getTimesEagle());
+		newTimesList.add(timesEntity.get(timesIndex).getTimesLion());
+		newTimesList.add(timesEntity.get(timesIndex).getTimesPanda());
+		newTimesList.add(timesEntity.get(timesIndex).getTimesMonkey());
+		newTimesList.add(timesEntity.get(timesIndex).getTimesRabbit());
+		//接着保存到奖项记录表
+		
+		System.out.println("随机生成一组倍数列表："+newTimesList);
+		return newTimesList;
+	}
 	
 	/**
 	 * 保存奖项记录

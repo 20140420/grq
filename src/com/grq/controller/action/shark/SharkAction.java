@@ -287,6 +287,8 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	private PageModel<PanelInfo> pageModel;// 分页组件
 	private SharkConfig topConfigList;//最新一条配置
 	private PrizeRecord topPrizeList;//最新一条奖项记录
+
+	private PrizeRecord prizeRecord;
 	/**
 	 * 此方法是Modeldriven接口的方法，要重写
 	 * @return
@@ -349,51 +351,11 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		betClear();//重置清零
 		
 		/** 随机生成一组倍数 */
-		List<Object> newTimesList =timesCreate();
+		RecordAction recordAction = new RecordAction();//调用RecordAction类里的函数
+		List<Object> newTimesList =recordAction.timesCreate();
 		System.out.println("为下一场随机生成一组倍数列表："+newTimesList);
 		
 		return main();		
-	}
-	/**
-	 * 为下一场随机生成一组倍数列表
-	 * @return
-	 */
-	private List<Object> timesCreate() {
-		//添加倍数数据（写在pojo中）
-		timesEntity=new ArrayList<TimesEntity>();
-		for(int i = 0; i < 6; i++){			
-			TimesEntity timesList = new TimesEntity();
-			timesList.setTimesSwallow(i);
-			timesList.setTimesPigeon(i);
-			timesList.setTimesPeafowl(i);
-			timesList.setTimesEagle(i);
-			timesList.setTimesLion(i);
-			timesList.setTimesPanda(i);
-			timesList.setTimesMonkey(i);
-			timesList.setTimesRabbit(i);
-			timesEntity.add(timesList);
-		}
-		int timesIndex=(int)(Math.random()*timesEntity.size());//从总共timesEntity.size()组倍数中随机一组倍数
-		ArrayList<Object> newTimesList = new ArrayList<Object>();//随机生成一组倍数
-		timesSwallow = timesEntity.get(timesIndex).getTimesSwallow();
-		timesPigeon = timesEntity.get(timesIndex).getTimesPigeon();
-		timesPeafowl = timesEntity.get(timesIndex).getTimesPeafowl();
-		timesEagle = timesEntity.get(timesIndex).getTimesEagle();
-		timesLion = timesEntity.get(timesIndex).getTimesLion();
-		timesPanda = timesEntity.get(timesIndex).getTimesPanda();
-		timesMonkey = timesEntity.get(timesIndex).getTimesMonkey();
-		timesRabbit = timesEntity.get(timesIndex).getTimesRabbit();
-		newTimesList.add(timesSwallow);//注意添加的顺序
-		newTimesList.add(timesPigeon);
-		newTimesList.add(timesPeafowl);
-		newTimesList.add(timesEagle);
-		newTimesList.add(timesLion);
-		newTimesList.add(timesPanda);
-		newTimesList.add(timesMonkey);
-		newTimesList.add(timesRabbit);
-		//接着保存到奖项记录表
-		
-		return newTimesList;
 	}
 	/**
 	 * 获取配置
