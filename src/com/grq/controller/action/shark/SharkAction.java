@@ -16,7 +16,6 @@ import com.grq.model.customizeenum.Prize;
 import com.grq.model.pojo.shark.PanelInfo;
 import com.grq.model.pojo.shark.PrizeRecord;
 import com.grq.model.pojo.shark.SharkConfig;
-import com.grq.model.pojo.shark.TimesEntity;
 import com.grq.model.util.StringUtil;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -65,7 +64,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	
 	// 实体变量
 	private static List<PrizeRecord> prizeEntity;
-	private static List<TimesEntity> timesEntity;
+	//private static List<TimesEntity> timesEntity;
 	private static List<PanelInfo> betEntity;
 		
 	//自定义类型变量
@@ -125,7 +124,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		bombOrNot = false; //是否存在炸弹，默认否
 		// 实体变量
 		prizeEntity = null;
-		timesEntity = null;
+		//timesEntity = null;
 		betEntity = null;
 		//自定义类型变量
 		prizeString = Prize.RAFFLING;//奖项变量，默认正在抽奖
@@ -184,6 +183,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 				panelData.setTotalPrice(totalPrice);//把下注总额度
 				panelData.setBetCount(betCount);// 用于判断是否是统计过（默认值为false）
 				panelData.setPrizeItem(Prize.RAFFLING);// 设置奖项状态为正在抽奖
+				System.out.println("下单创建时间："+panelData.getCreateTime());
 				betDao.save(panelData);//保存panel获得数据	
 				//记得重置panel下注
 			}
@@ -286,9 +286,9 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	private PanelInfo panelData = new PanelInfo();//一定要先初始化obj对象！
 	private PageModel<PanelInfo> pageModel;// 分页组件
 	private SharkConfig topConfigList;//最新一条配置
-	private PrizeRecord topPrizeList;//最新一条奖项记录
+	//private PrizeRecord topPrizeList;//最新一条奖项记录
 
-	private PrizeRecord prizeRecord;
+	//private PrizeRecord prizeRecord;
 	/**
 	 * 此方法是Modeldriven接口的方法，要重写
 	 * @return
