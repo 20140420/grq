@@ -83,6 +83,8 @@ public class RecordAction extends BaseAction implements ModelDriven<PrizeRecord>
 		prizeRecord.setTimesPanda(timesEntity.get(timesIndex).getTimesPanda());
 		prizeRecord.setTimesMonkey(timesEntity.get(timesIndex).getTimesMonkey());
 		prizeRecord.setTimesRabbit(timesEntity.get(timesIndex).getTimesRabbit());
+		//prizeRecordDao.saveOrUpdate(prizeRecord);//保存到对象
+		
 		ArrayList<Object> newTimesList = new ArrayList<Object>();//临时存储随机生成的倍数
 		newTimesList.add(timesEntity.get(timesIndex).getTimesSwallow());//注意添加的顺序
 		newTimesList.add(timesEntity.get(timesIndex).getTimesPigeon());
@@ -92,36 +94,35 @@ public class RecordAction extends BaseAction implements ModelDriven<PrizeRecord>
 		newTimesList.add(timesEntity.get(timesIndex).getTimesPanda());
 		newTimesList.add(timesEntity.get(timesIndex).getTimesMonkey());
 		newTimesList.add(timesEntity.get(timesIndex).getTimesRabbit());
-		System.out.println("随机生成一组倍数列表："+newTimesList);
-
-		return saveTimesToRecord();
-	}	
-	public String saveTimesToRecord(){
-		System.out.println("保存倍数");
-		//接着保存到奖项记录表
-		prizeRecord.setPrizeId(StringUtil.getStringTime());//添加18位数字字符串作为奖项结果期号
-		prizeRecord.setCommissionRate(0.0);
-		prizeRecord.setPrizeName(Prize.RAFFLING);
-		prizeRecord.setDividend(0.0);
-		prizeRecord.setTimesGoldShark(0);
-		prizeRecord.setTotalSwallowSum(0.0);
-		prizeRecord.setTotalPigeonSum(0.0);
-		prizeRecord.setTotalPeafowlSum(0.0);
-		prizeRecord.setTotalEagleSum(0.0);
-		prizeRecord.setTotalLionSum(0.0);
-		prizeRecord.setTotalPandaSum(0.0);
-		prizeRecord.setTotalMonkeySum(0.0);
-		prizeRecord.setTotalRabbitSum(0.0);
-		prizeRecord.setTotalBirdSum(0.0);
-		prizeRecord.setTotalSilverSum(0.0);
-		prizeRecord.setTotalBombSum(0.0);
-		prizeRecord.setTotalGoldSum(0.0);
-		prizeRecord.setTotalBeastSum(0.0);
-		prizeRecord.setTotalBetSum(0.0);
-		//prizeRecordDao.save(prizeRecord);//保存到对象
+		System.out.println("查看为下一场随机生成的倍数列表："+newTimesList);
 		return null;
 	}
 	public String save() {
+		System.out.println("添加燕子倍数:" + prizeRecord.getTimesSwallow());
+		//添加倍数数据（写在pojo中）
+		timesEntity=new ArrayList<TimesEntity>();
+		for(int i = 0; i < 6; i++){			
+			TimesEntity timesList = new TimesEntity();
+			timesList.setTimesSwallow(i);
+			timesList.setTimesPigeon(i);
+			timesList.setTimesPeafowl(i);
+			timesList.setTimesEagle(i);
+			timesList.setTimesLion(i);
+			timesList.setTimesPanda(i);
+			timesList.setTimesMonkey(i);
+			timesList.setTimesRabbit(i);
+			timesEntity.add(timesList);
+		}
+		int timesIndex=(int)(Math.random()*timesEntity.size());//从总共timesEntity.size()组倍数中随机一组倍数
+		prizeRecord.setTimesSwallow(timesEntity.get(timesIndex).getTimesSwallow());
+		prizeRecord.setTimesPigeon(timesEntity.get(timesIndex).getTimesPigeon());
+		prizeRecord.setTimesPeafowl(timesEntity.get(timesIndex).getTimesPeafowl());
+		prizeRecord.setTimesEagle(timesEntity.get(timesIndex).getTimesEagle());
+		prizeRecord.setTimesLion(timesEntity.get(timesIndex).getTimesLion());
+		prizeRecord.setTimesPanda(timesEntity.get(timesIndex).getTimesPanda());
+		prizeRecord.setTimesMonkey(timesEntity.get(timesIndex).getTimesMonkey());
+		prizeRecord.setTimesRabbit(timesEntity.get(timesIndex).getTimesRabbit());
+		System.out.println("zidong 燕子倍数:" + prizeRecord.getTimesSwallow());
 		System.out.println("奖项:" + prizeRecord.getPrizeName());
 		System.out.println("费率:" + prizeRecord.getCommissionRate());
 		System.out.println("倍数创建时间："+prizeRecord.getCreateTime());
