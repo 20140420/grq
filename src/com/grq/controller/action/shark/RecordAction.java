@@ -130,7 +130,15 @@ public class RecordAction extends BaseAction implements ModelDriven<PrizeRecord>
 		return null;
 	}
 	public String save() {
-		System.out.println("保存奖项记录");
+		System.out.println("奖项:" + prizeRecord.getPrizeName());
+		System.out.println("费率:" + prizeRecord.getCommissionRate());
+		System.out.println("期号前:" + prizeRecord.getPrizeId());
+		prizeRecord.setPrizeId(StringUtil.getStringTime());//添加18位数字字符串作为奖项结果期号
+		System.out.println("期号后:" + prizeRecord.getPrizeId());
+		prizeRecord.setPrizeName(Prize.RAFFLING);
+		System.out.println("奖项:" + prizeRecord.getPrizeName());
+		prizeRecordDao.saveOrUpdate(prizeRecord);
+		System.out.println("保存奖项记录"+prizeRecord);
 		return null;
 	}
 	/**
