@@ -18,7 +18,7 @@ td input {
 	<div class="header"><%@ include file="/WEB-INF/pages/header.jsp"%></div><!-- end .header -->
 	<div class="content">
 	    <div class="ranking">
-	    <s:form action="record_save" namespace="/shark">
+	    <s:form action="record_timesCreate" namespace="/shark">
 	      <table border="1">
             <tr>
               <th scope="col">期号</th>
