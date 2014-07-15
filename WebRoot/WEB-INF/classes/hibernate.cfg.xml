@@ -21,6 +21,8 @@
 		<property name="myeclipse.connection.profile">grq</property>
 		<!-- 打印SQL语句
 			<property name="hibernate.show_sql">true</property> -->
+		<!-- getHibernateTemplate().save(Object obj)不能保存数据的原因 
+		<property name="connection.autocommit">true </property>-->
 		<!-- 当SessionFactory创建时，会创建/修改表 -->
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		<!-- 为Session指定一个自定义策略 -->
