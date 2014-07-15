@@ -18,7 +18,7 @@ td input {
 	<div class="header"><%@ include file="/WEB-INF/pages/header.jsp"%></div><!-- end .header -->
 	<div class="content">
 	    <div class="ranking">
-	    <s:form action="record_save" namespace="/shark">
+	    <s:form action="record_timesCreate" namespace="/shark">
 	      <table border="1">
             <tr>
               <th scope="col">期号</th>
@@ -32,7 +32,7 @@ td input {
               <th scope="col">老鹰倍数</th>
             </tr>
 	        <tr>
-	          <td><s:textfield name="prizeId" value=""></s:textfield></td>
+	          <!-- <td><s:textfield name="prizeId" value=""></s:textfield></td>
 	          <td><s:textfield name="timesLion" value="24"></s:textfield></td>
 	          <td><s:textfield name="commissionRate" value="0.5"></s:textfield></td>
 	          <td><s:textfield name="prizeName" value="RAFFLING"></s:textfield></td>
@@ -40,7 +40,7 @@ td input {
 	          <td><s:textfield name="timesSwallow" value="4"></s:textfield></td>
 	          <td><s:textfield name="timesPigeon" value="8"></s:textfield></td>
 	          <td><s:textfield name="timesPeafowl" value="12"></s:textfield></td>
-	          <td><s:textfield name="timesEagle" value="24"></s:textfield></td>
+	          <td><s:textfield name="timesEagle" value="24"></s:textfield></td> -->
             </tr>
             <tr>
               <th scope="col">熊猫倍数</th>
@@ -54,7 +54,7 @@ td input {
               <th scope="col">狮子总额</th>
             </tr>
 	        <tr>
-	          <td><s:textfield name="timesPanda" value="12"></s:textfield></td>
+	          <!-- <td><s:textfield name="timesPanda" value="12"></s:textfield></td>
 	          <td><s:textfield name="timesMonkey" value="8"></s:textfield></td>
 	          <td><s:textfield name="timesRabbit" value="4"></s:textfield></td>
 	          <td><s:textfield name="timesGoldShark" value="32"></s:textfield></td>
@@ -62,7 +62,7 @@ td input {
 	          <td><s:textfield name="totalPigeonSum" value="123"></s:textfield></td>
 	          <td><s:textfield name="totalPeafowlSum" value="124"></s:textfield></td>
 	          <td><s:textfield name="totalEagleSum" value="125"></s:textfield></td>
-	          <td><s:textfield name="totalLionSum" value="126"></s:textfield></td>
+	          <td><s:textfield name="totalLionSum" value="126"></s:textfield></td> -->
             </tr>
             <tr>
               <th scope="col">熊猫总额</th>
@@ -76,7 +76,7 @@ td input {
               <th scope="col">单场总额</th>
             </tr>
 	        <tr>
-	          <td><s:textfield name="totalPandaSum" value="112"></s:textfield></td>
+	          <!-- <td><s:textfield name="totalPandaSum" value="112"></s:textfield></td>
 	          <td><s:textfield name="totalMonkeySum" value="113"></s:textfield></td>
 	          <td><s:textfield name="totalRabbitSum" value="114"></s:textfield></td>
 	          <td><s:textfield name="totalBirdSum" value="115"></s:textfield></td>
@@ -84,7 +84,7 @@ td input {
 	          <td><s:textfield name="totalBombSum" value="117"></s:textfield></td>
 	          <td><s:textfield name="totalGoldSum" value="211"></s:textfield></td>
 	          <td><s:textfield name="totalBeastSum" value="212"></s:textfield></td>
-	          <td><s:textfield name="totalBetSum" value="213"></s:textfield></td>
+	          <td><s:textfield name="totalBetSum" value="213"></s:textfield></td> -->
             </tr>
             <tr>
               <td colspan="9" align="center" valign="middle"><s:submit type="text" value="提交记录"></s:submit></td>
