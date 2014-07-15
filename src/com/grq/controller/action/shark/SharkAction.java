@@ -352,8 +352,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		
 		/** 随机生成一组倍数 */
 		RecordAction recordAction = new RecordAction();//调用RecordAction类里的函数
-		//recordAction.timesCreate();//为下一场随机生成一组倍数列表并保存到奖项记录中
-		recordAction.test();
+		recordAction.timesCreate();//为下一场随机生成一组倍数列表并保存到奖项记录中
 		System.out.println("为下一场随机生成一组倍数列表");
 		
 		return main();		
@@ -425,10 +424,10 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		prize1.setTimesRabbit(4);
 		prize1.setPrizeId("2014");
 		prize1.setCommissionRate(0.10);
-		prize1.setCreateTime(null);	
+		prize1.setCreateTime(null);
 		prize1.setPrizeName(Prize.RAFFLING);
 		prize1.setDividend(310.0);
-		prizeEntity.add(prize1);		
+		prizeEntity.add(prize1);
 		PrizeRecord prize2 = new PrizeRecord();
 		prize2.setDividend(320.0);
 		prize2.setPrizeName(Prize.SWALLOW);
@@ -567,8 +566,8 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		double lionOutScore = totalLionSum*timesLion;
 		double pandaOutScore = totalPandaSum*timesPanda;
 		double monkeyOutScore = totalMonkeySum*timesMonkey;
-		double rabbitOutScore = totalRabbitSum*timesRabbit;		
-		ArrayList<Object> totalOutSum = new ArrayList<Object>();//八个奖出分集合		
+		double rabbitOutScore = totalRabbitSum*timesRabbit;
+		ArrayList<Object> totalOutSum = new ArrayList<Object>();//八个奖出分集合	
 		totalOutSum.add(swallowOutScore);//注意顺序不能弄乱
 		totalOutSum.add(pigeonOutScore);
 		totalOutSum.add(peafowlOutScore);
@@ -603,7 +602,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 			} else if((Integer)less.get(index) == 4){
 				dividend= dividend -lionOutScore-beastOutScore;
 				System.out.println("狮子发奖："+totalOutSum.get((Integer) less.get(index)));
-				return Prize.LION; 
+				return Prize.LION;
 			} else if((Integer)less.get(index) == 5){
 				dividend= dividend -pandaOutScore-beastOutScore;
 				System.out.println("熊猫发奖："+totalOutSum.get((Integer) less.get(index)));
@@ -621,7 +620,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 			}
 		} else {
 			System.out.println("需要非正常吃分奖项");
-			int countNum = 20 ;//统计20场			
+			int countNum = 20 ;//统计20场
 			bombOrNot = ifExistBomb(countNum);//查看20场内是否存在地雷
 			if( bombOrNot == true){//如果20场内出现地雷奖项
 				int i = outScoreMin(totalOutSum,birdOutScore,beastOutScore);//获取符合要求最小出分的奖项的索引
@@ -644,7 +643,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 				} else if(i == 4){
 					System.out.println("狮子发奖："+totalOutSum.get(i));
 					dividend= dividend -lionOutScore-beastOutScore;
-					return Prize.LION; 
+					return Prize.LION;
 				} else if(i == 5){
 					System.out.println("熊猫发奖："+totalOutSum.get(i));
 					dividend= dividend -pandaOutScore-beastOutScore;
@@ -764,7 +763,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 				System.out.println("炸弹无人:" + totalBombSum);
 				againOrNot = true; //设置为true再转
 				return Prize.BOMB;
-			}			
+			}
 		} catch  (Exception ex) {
 			System.out.printf("炸弹函数问题。The problem of bomb.");
 		}
@@ -852,15 +851,14 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 			return Prize.GOLD_SHARK;//出奖金鲨+再转一次
 		} else {
 			System.out.print("不应该出现的error");
-		}		
+		}
 		return null;
 	}
 	/**
 	 * 再转函数
 	 */
 	private static void turnAgain() {
-		System.out.println("再转函数");		
+		System.out.println("再转函数");
 	}
-	
 	
 }

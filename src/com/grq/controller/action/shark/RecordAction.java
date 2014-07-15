@@ -95,14 +95,14 @@ public class RecordAction extends BaseAction implements ModelDriven<PrizeRecord>
 		newTimesList.add(timesEntity.get(timesIndex).getTimesMonkey());
 		newTimesList.add(timesEntity.get(timesIndex).getTimesRabbit());
 		System.out.println("查看为下一场随机生成的倍数列表："+newTimesList);
-		return null;
+		return test();
 	}
 	public String test() {
 		System.out.println("TEST");
 		return save();
 	}
 	public String save() {
-		/* */
+		/*
 		//添加倍数数据（写在pojo中）
 		timesEntity=new ArrayList<TimesEntity>();
 		for(int i = 0; i < 6; i++){			
@@ -126,6 +126,7 @@ public class RecordAction extends BaseAction implements ModelDriven<PrizeRecord>
 		prizeRecord.setTimesPanda(timesEntity.get(timesIndex).getTimesPanda());
 		prizeRecord.setTimesMonkey(timesEntity.get(timesIndex).getTimesMonkey());
 		prizeRecord.setTimesRabbit(timesEntity.get(timesIndex).getTimesRabbit());
+		 */
 		System.out.println("zidong 燕子倍数:" + prizeRecord.getTimesSwallow());
 		
 		prizeRecord.setCommissionRate(null);
