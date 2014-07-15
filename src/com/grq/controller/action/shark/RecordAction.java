@@ -62,7 +62,7 @@ public class RecordAction extends BaseAction implements ModelDriven<PrizeRecord>
 	public String timesCreate(){
 		//添加倍数数据（写在pojo中）
 		timesEntity=new ArrayList<TimesEntity>();
-		for(int i = 0; i < 6; i++){			
+		for(int i = 0; i < 6; i++){	
 			TimesEntity timesList = new TimesEntity();
 			timesList.setTimesSwallow(i);
 			timesList.setTimesPigeon(i);
@@ -97,8 +97,12 @@ public class RecordAction extends BaseAction implements ModelDriven<PrizeRecord>
 		System.out.println("查看为下一场随机生成的倍数列表："+newTimesList);
 		return null;
 	}
+	public String test() {
+		System.out.println("TEST");
+		return save();
+	}
 	public String save() {
-		System.out.println("添加燕子倍数:" + prizeRecord.getTimesSwallow());
+		/* */
 		//添加倍数数据（写在pojo中）
 		timesEntity=new ArrayList<TimesEntity>();
 		for(int i = 0; i < 6; i++){			
@@ -123,7 +127,26 @@ public class RecordAction extends BaseAction implements ModelDriven<PrizeRecord>
 		prizeRecord.setTimesMonkey(timesEntity.get(timesIndex).getTimesMonkey());
 		prizeRecord.setTimesRabbit(timesEntity.get(timesIndex).getTimesRabbit());
 		System.out.println("zidong 燕子倍数:" + prizeRecord.getTimesSwallow());
-		System.out.println("奖项:" + prizeRecord.getPrizeName());
+		
+		prizeRecord.setCommissionRate(null);
+		prizeRecord.setDividend(null);
+		prizeRecord.setTimesGoldShark(null);
+		prizeRecord.setTotalSwallowSum(null);
+		prizeRecord.setTotalPigeonSum(null);
+		prizeRecord.setTotalPeafowlSum(null);
+		prizeRecord.setTotalEagleSum(null);
+		prizeRecord.setTotalLionSum(null);
+		prizeRecord.setTotalPandaSum(null);
+		prizeRecord.setTotalMonkeySum(null);
+		prizeRecord.setTotalRabbitSum(null);
+		prizeRecord.setTotalBirdSum(null);
+		prizeRecord.setTotalSilverSum(null);
+		prizeRecord.setTotalBombSum(null);
+		prizeRecord.setTotalGoldSum(null);
+		prizeRecord.setTotalBeastSum(null);
+		prizeRecord.setTotalBetSum(null);
+		
+		
 		System.out.println("费率:" + prizeRecord.getCommissionRate());
 		System.out.println("倍数创建时间："+prizeRecord.getCreateTime());
 		System.out.println("期号前:" + prizeRecord.getPrizeId());

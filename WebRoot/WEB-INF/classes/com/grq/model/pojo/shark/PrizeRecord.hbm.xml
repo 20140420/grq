@@ -21,7 +21,7 @@
             </column>
         </property>
         <property name="prizeName" type="com.grq.model.util.hibernate.PrizeType">
-            <column name="prize_name" length="15">
+            <column name="prize_name" length="15"  not-null="true">
                 <comment>中奖的奖项</comment>
             </column>
         </property>

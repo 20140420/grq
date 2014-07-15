@@ -352,7 +352,8 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		
 		/** 随机生成一组倍数 */
 		RecordAction recordAction = new RecordAction();//调用RecordAction类里的函数
-		recordAction.timesCreate();//为下一场随机生成一组倍数列表并保存到奖项记录中
+		//recordAction.timesCreate();//为下一场随机生成一组倍数列表并保存到奖项记录中
+		recordAction.test();
 		System.out.println("为下一场随机生成一组倍数列表");
 		
 		return main();		
