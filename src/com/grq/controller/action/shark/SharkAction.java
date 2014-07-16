@@ -377,7 +377,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		lastConfigList.add(commission_rate);
 		lastConfigList.add(topConfigList.getInitialDividend());
 		lastConfigList.add(timesMax);
-		lastConfigList.add(timeCycle);
+		lastConfigList.add(timeCycle);//周期
 		lastConfigList.add(topConfigList.getBetLimit());
 		lastConfigList.add(timeCircle);
 		
