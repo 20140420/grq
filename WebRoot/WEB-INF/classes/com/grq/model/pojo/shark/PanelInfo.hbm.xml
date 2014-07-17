@@ -110,5 +110,29 @@
                 <comment>奖项</comment>
             </column>
         </property>
+        <property name="timesSwallow" type="java.lang.Integer">
+            <column name="timesSwallow" not-null="true" />
+        </property>
+        <property name="timesPigeon" type="java.lang.Integer">
+            <column name="timesPigeon" not-null="true" />
+        </property>
+        <property name="timesPeafowl" type="java.lang.Integer">
+            <column name="timesPeafowl" not-null="true" />
+        </property>
+        <property name="timesEagle" type="java.lang.Integer">
+            <column name="timesEagle" not-null="true" />
+        </property>
+        <property name="timesLion" type="java.lang.Integer">
+            <column name="timesLion" not-null="true" />
+        </property>
+        <property name="timesPanda" type="java.lang.Integer">
+            <column name="timesPanda" not-null="true" />
+        </property>
+        <property name="timesMonkey" type="java.lang.Integer">
+            <column name="timesMonkey" not-null="true" />
+        </property>
+        <property name="timesRabbit" type="java.lang.Integer">
+            <column name="timesRabbit" not-null="true" />
+        </property>
     </class>
 </hibernate-mapping>

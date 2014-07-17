@@ -42,7 +42,14 @@ public class PanelInfo  implements java.io.Serializable {
  	private Float totalPrice;// 下注总额度
  	private Prize prizeItem; //奖项
  	private Boolean betCount = false;// 用于判断是否是统计过（默认值为false）
-
+ 	private Integer timesSwallow;
+    private Integer timesPigeon;
+    private Integer timesPeafowl;
+    private Integer timesEagle;
+    private Integer timesLion;
+    private Integer timesPanda;
+    private Integer timesMonkey;
+    private Integer timesRabbit;
 
     // Constructors
 
@@ -52,7 +59,14 @@ public class PanelInfo  implements java.io.Serializable {
 
     
     /** full constructor */
-    public PanelInfo(String panelBetId, Customer customer, Date createTime, Integer swallow, Integer pigeon, Integer peafowl, Integer eagle, Integer lion, Integer panda, Integer monkey, Integer rabbit, Integer bird, Integer silverShark, Integer bomb, Integer goldShark, Integer beast, Integer totalBet, Integer singleBet, Float totalPrice, Prize prizeItem, Boolean betCount) {
+    public PanelInfo(String panelBetId, Customer customer, Date createTime, 
+    		Integer swallow, Integer pigeon, Integer peafowl, Integer eagle, 
+    		Integer lion, Integer panda, Integer monkey, Integer rabbit, 
+    		Integer bird, Integer silverShark, Integer bomb, Integer goldShark, 
+    		Integer beast, Integer totalBet, Integer singleBet, Float totalPrice, 
+    		Prize prizeItem, Boolean betCount, Integer timesSwallow, Integer timesPigeon,
+    		Integer timesPeafowl, Integer timesEagle, Integer timesLion, Integer timesPanda,
+    		Integer timesMonkey, Integer timesRabbit) {
         this.panelBetId = panelBetId;
         this.customer = customer;
         this.setCreateTime(createTime);
@@ -74,6 +88,14 @@ public class PanelInfo  implements java.io.Serializable {
         this.totalPrice = totalPrice;
         this.prizeItem = prizeItem;
         this.betCount = betCount;
+        this.setTimesSwallow(timesSwallow);
+        this.setTimesPigeon(timesPigeon);
+        this.setTimesPeafowl(timesPeafowl);
+        this.setTimesEagle(timesEagle);
+        this.setTimesLion(timesLion);
+        this.setTimesPanda(timesPanda);
+        this.setTimesMonkey(timesMonkey);
+        this.setTimesRabbit(timesRabbit);        
     }
 
    
@@ -258,5 +280,85 @@ public class PanelInfo  implements java.io.Serializable {
 
 	public void setBetCount(Boolean betCount) {
 		this.betCount = betCount;
+	}
+
+
+	public Integer getTimesSwallow() {
+		return timesSwallow;
+	}
+
+
+	public void setTimesSwallow(Integer timesSwallow) {
+		this.timesSwallow = timesSwallow;
+	}
+
+
+	public Integer getTimesPigeon() {
+		return timesPigeon;
+	}
+
+
+	public void setTimesPigeon(Integer timesPigeon) {
+		this.timesPigeon = timesPigeon;
+	}
+
+
+	public Integer getTimesPeafowl() {
+		return timesPeafowl;
+	}
+
+
+	public void setTimesPeafowl(Integer timesPeafowl) {
+		this.timesPeafowl = timesPeafowl;
+	}
+
+
+	public Integer getTimesEagle() {
+		return timesEagle;
+	}
+
+
+	public void setTimesEagle(Integer timesEagle) {
+		this.timesEagle = timesEagle;
+	}
+
+
+	public Integer getTimesLion() {
+		return timesLion;
+	}
+
+
+	public void setTimesLion(Integer timesLion) {
+		this.timesLion = timesLion;
+	}
+
+
+	public Integer getTimesPanda() {
+		return timesPanda;
+	}
+
+
+	public void setTimesPanda(Integer timesPanda) {
+		this.timesPanda = timesPanda;
+	}
+
+
+	public Integer getTimesMonkey() {
+		return timesMonkey;
+	}
+
+
+	public void setTimesMonkey(Integer timesMonkey) {
+		this.timesMonkey = timesMonkey;
+	}
+
+
+	public Integer getTimesRabbit() {
+		return timesRabbit;
+	}
+
+
+	public void setTimesRabbit(Integer timesRabbit) {
+		this.timesRabbit = timesRabbit;
 	}
 }
