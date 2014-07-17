@@ -835,8 +835,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	 */
 	private static Prize sharkPrize() {
 		againOrNot = true; //设置为true，用于再转一次
-		double a = Math.floor(randomNum.nextInt(2));//随机获取大于等于0到小于2的整数部分,即随机获取0或1
-		int silverOrGold = (int)a;//将double数据类型转换成int
+		int silverOrGold = (int) Math.floor(randomNum.nextInt(2));//随机获取大于等于0到小于2的整数部分,即随机获取0或1
 		if(silverOrGold == 0){//为银鲨概率1/2
 			double silverOutScore = totalSilverSum*24;//银鲨总出分
 			dividend = dividend - silverOutScore; //发了银鲨奖的彩金池
