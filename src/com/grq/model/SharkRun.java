@@ -1,10 +1,14 @@
-package com.grq.controller.action.shark;
+package com.grq.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.TimerTask;
+
+import com.grq.model.pojo.shark.TimesEntity;
 
 public class SharkRun extends TimerTask {
 	private static Integer timeBet;//下注时长
-	
+	private static List<TimesEntity> timesEntity;//包含六组倍数的实体
 	
 	/**
 	 *游戏一个运行周期,等同主函数
@@ -41,9 +45,27 @@ public class SharkRun extends TimerTask {
 		makeRecord(); //记录奖项函数		
 		betClear();   //重置清零		
 	}
-
+	/**
+	 * 随机生成一组倍数列表
+	 * @return
+	 */
 	private void makeTimes() {
-		System.out.println("获取倍数函数，倍数随机生成不统一");		
+		System.out.println("获取倍数函数，倍数随机生成不统一");	
+		timesEntity=new ArrayList<TimesEntity>();
+		for(int i = 0; i < 6; i++){	
+			TimesEntity timesList = new TimesEntity();
+			timesList.setTimesSwallow(i);
+			timesList.setTimesPigeon(i);
+			timesList.setTimesPeafowl(i);
+			timesList.setTimesEagle(i);
+			timesList.setTimesLion(i);
+			timesList.setTimesPanda(i);
+			timesList.setTimesMonkey(i);
+			timesList.setTimesRabbit(i);
+			timesEntity.add(timesList);
+		}
+		int timesIndex=(int)(Math.random()*timesEntity.size());//从总共timesEntity.size()组倍数中随机一组倍数
+		
 	}
 
 	private void haveConfig() {
