@@ -16,7 +16,7 @@ import com.opensymphony.xwork2.ModelDriven;
 @Controller("optionAction")
 public class OptionAction extends BaseAction implements ModelDriven<SharkConfig>{
 	private static final long serialVersionUID = 1L;
-
+	
 /** -------------------------------------------------------------------- */
 	private PageModel<SharkConfig> pageModel;// 分页组件
 	// 游戏配置对象

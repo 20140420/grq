@@ -127,7 +127,7 @@ var setAmount = {
                 x--;
             }
         } else {
-            alert("请输入正确的数量!");
+            alert("请输入正确的数量！");
             $(obj).val(0);
             $(obj).focus();
         }

@@ -12,7 +12,7 @@ import com.grq.model.customizeenum.Prize;
 public class PrizeRecord  implements java.io.Serializable {
 
 
-    // Fields
+    // Fields    
 
      /**
 	 * 
