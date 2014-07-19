@@ -77,7 +77,7 @@ public class OptionAction extends BaseAction implements ModelDriven<SharkConfig>
 	}
 	/**
 	 * 查询所有历来配置
-	 * @return String
+	 * @return String 
 	 * @throws Exception
 	 */
 	public String list() throws Exception {

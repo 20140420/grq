@@ -1,7 +1,6 @@
 // JavaScript Document
 /*<![CDATA[*/
         var Game = {};
-
         Game.fps = 30;
         Game.socket = null;
         Game.nextFrame = null;

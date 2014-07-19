@@ -12,7 +12,6 @@ $(function(){
 	clock(time_cycle,time_spend,time_display,time_wait,time_observe,time_bet,"#demo04 .second","#demo04 .second");
 
 });
-
 function clock(time_length,time_spend,time_display,time_wait,time_observe,time_bet,minute_elem,second_elem){
 	var timer = setInterval(function(){
 			if(time_length > (time_observe+ time_bet+ time_display+ time_spend)){//等待
