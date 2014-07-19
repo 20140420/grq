@@ -10,6 +10,7 @@ import java.util.Date;
 
 public class SharkConfig  implements java.io.Serializable {
 
+
     // Fields    
 
      /**
