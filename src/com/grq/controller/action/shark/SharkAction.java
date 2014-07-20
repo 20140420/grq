@@ -717,7 +717,6 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 				}
 				return x;//返回符合要求时最小的奖的索引
 			}
-			
 		}catch (Exception ex) {
 			System.out.printf("通用计算公式", "计算符合要求的值的索引:" + ex.getMessage());
         }

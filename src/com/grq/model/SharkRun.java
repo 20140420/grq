@@ -34,12 +34,12 @@ public class SharkRun extends TimerTask {
 	private static double commissionProfit;//佣金收益
 	private static int timesMax;//最高倍数
 	private static int timesGoldShark;//金鲨倍数
+	private static int timesBomb;//炸弹倍数
 	private static int whatPrize;//什么奖
 	private static int prizeRecordNum;//统计场数,考虑添加到配置函数
 	
 	private static Random randomNum = new Random();//用于获取随机数
 	private static boolean againOrNot; //是否重转，默认否
-	private static boolean isBomb; //是否存在炸弹，默认否
 	
 	private static int timeBet;//观察下注时间	
 	
@@ -73,6 +73,7 @@ public class SharkRun extends TimerTask {
 	private static double outGoldScore;
 	private static double outBirdScore = totalBirdSum*2;//飞禽总出分 ;
 	private static double outBeastScore = totalBeastSum*2;//走兽总出分 ;
+	private static double outBombScore;//炸弹出分
 	
 	@Autowired
 	protected BetDao betDao;
@@ -113,7 +114,11 @@ public class SharkRun extends TimerTask {
 	        e.printStackTrace();
 		}
 		makeRecord(); //记录奖项函数
-		betClear();   //重置清零	
+		
+		if(againOrNot == true){//如果是则获得再转一次
+			turnAgain();
+		}
+		betClear();//重置清零
 	}
 	/**
 	 * 随机生成一组倍数列表
@@ -193,7 +198,7 @@ public class SharkRun extends TimerTask {
 	private Prize havePrize() {
 		System.out.println("出奖函数");
 		countAndSum();//统计并求总押注和、各单项押注和、各单项出分和
-		if(totalBetSum != 0){
+		if(totalBetSum != 0){//有人下注
 			dividend = lastDividend + totalBetSum*(1-commission_rate);//筹码注入彩金池
 			System.out.println("发奖前彩金："+dividend);
 			commissionProfit = totalBetSum*commission_rate;//佣金收益
@@ -204,11 +209,9 @@ public class SharkRun extends TimerTask {
 				return randomPrize();//随机函数
 			} else if( dividend > 0){
 				return dividendUpPrize();//彩金池增加的吃分函数
-			} else {
-				//return attractPrize();//诱惑函数
-				return randomPrize();//随机函数
 			}
 		}
+		//return attractPrize();//诱惑函数
 		return randomPrize();
 	}
 	/**
@@ -253,11 +256,9 @@ public class SharkRun extends TimerTask {
 		} else {
 			System.out.println("需要非正常吃分奖项");
 			prizeRecordNum = 20 ;//统计场数,考虑添加到配置函数
-			isBomb = ifExistBomb(prizeRecordNum);//查看20场内是否存在地雷
-			if( isBomb == true){//如果20场内出现地雷奖项
+			if( ifExistBomb(prizeRecordNum) == true){//如果20场内出现地雷奖项
 				int i = outScoreMin(outItemScore,outBirdScore,outBeastScore);//获取符合要求最小出分的奖项的索引
 				if(i == 0){//第一个奖对应的索引
-					System.out.println("燕子发奖："+outItemScore.get(i));
 					dividend= dividend -outSwallowScore-outBirdScore;
 					return Prize.SWALLOW;
 				} else if(i == 1){
@@ -287,26 +288,96 @@ public class SharkRun extends TimerTask {
 			} else {
 				return prizeBomb();
 			}
-			
 		}
 		return null;
 	}
-
+	/**
+	 * 炸弹函数
+	 * @return
+	 */
 	private Prize prizeBomb() {
+		try{
+			if( totalBombSum > 0 ){//如果有人下注炸弹
+				dividend= dividend -totalBetSum*(1-commission_rate);
+				timesBomb = (int) Math.floor(totalBetSum*(1-commission_rate)/totalBombSum);//求出炸弹倍数
+				outBombScore = totalBombSum*timesBomb;
+				System.out.printf("炸弹出分：" + outBombScore);
+				return Prize.BOMB;
+			} else {
+				againOrNot = true;   //设置为true再转
+				timesBomb = timesMax;//没人押注炸弹，倍数就为设定最高倍数
+				outBombScore = 0 ;   //没人押注炸弹出分为0
+				return Prize.BOMB;
+			}
+		} catch  (Exception ex) {
+			System.out.printf("炸弹函数问题。The problem of bomb.");
+		}
 		return null;
 	}
-
-	private int outScoreMin(ArrayList<Object> outItemScore2,
-			double outBirdScore2, double outBeastScore2) {
-
+	/**
+	 * 获取符合要求最小出分的奖项的索引
+	 * @param outItemScore
+	 * @param outBirdScore
+	 * @param outBeastScore
+	 * @return
+	 */
+	private int outScoreMin(ArrayList<Object> outItemScore,
+			double outBirdScore, double outBeastScore) {
+		try{
+			int x = 0;//预定义集合第一个值为符合要求值,记下索引值
+			double min = Double.parseDouble(outItemScore.get(0).toString()) + outBirdScore;//预定义集合第一个值加和为符合要求值
+			if (outItemScore.size() > 0){//集合多于两个值时
+				for(int i=0 ; i<outItemScore.size() ; i++){
+					double temp = Double.parseDouble(outItemScore.get(i).toString());
+					if( i < (outItemScore.size()/2) ){//飞禽类
+						if ( min > (temp+outBirdScore)){
+							min = (temp+outBirdScore);
+							x = i;
+						}
+					} else {//走兽类
+						if ( min > (temp+outBeastScore)){
+							min = (temp+outBeastScore);
+							x = i;
+						}
+					}
+				}
+				return x;//返回符合要求时最小的奖的索引
+			}
+		}catch (Exception ex) {
+			System.out.printf("通用计算公式", "计算符合要求的值的索引:" + ex.getMessage());
+        }
 		return 0;
 	}
-
+	/**
+	 * 判断num场内是否存在地雷奖项
+	 * @param num
+	 * @return
+	 */
 	private boolean ifExistBomb(int num) {
-
+		prizeRecordEntity = havePrizeRecord();//获取奖项记录实体
+		if(prizeRecordEntity.size() < num ){
+			for(int i=0 ; i < prizeRecordEntity.size() ;i++){//如果奖项记录条数还不到要求数目
+				if(prizeRecordEntity.get(i).getPrizeName() == Prize.BOMB){
+					return true;//如果遍历的第一个就是地雷，后面就不遍历了
+				}
+			}
+		} else {
+			for(int i=0 ; i < num ;i++){
+				if(prizeRecordEntity.get(i).getPrizeName() == Prize.BOMB){
+					return true;//如果遍历的第一个就是地雷，后面19个就不遍历了
+				}
+			}
+		}
 		return false;
 	}
-
+	/**
+	 * 从集合中获取符合条件的值的索引
+	 * @param outItemScore
+	 * @param outBirdScore
+	 * @param outBeastScore
+	 * @param betForPrize
+	 * @return
+	 */
 	private static Vector<Object> lessThan(ArrayList<Object> outItemScore,
 			double outBirdScore, double outBeastScore, double betForPrize) {
 		Vector<Object> v = new Vector<Object>(outItemScore.size());
@@ -320,7 +391,6 @@ public class SharkRun extends TimerTask {
 					v.add(i);
 				}
 			}
-
 		}
 		return v;
 	}
@@ -333,29 +403,29 @@ public class SharkRun extends TimerTask {
 		againOrNot = false; //设置为false不重转
 		whatPrize =(int)(Math.floor(randomNum.nextInt(8)));//随机获取大于等于0到小于8的整数部分,即随机获取0/1/2/3/4/5/6/7
 		if(whatPrize == 0){//为燕子概率1/8
-			dividend = dividend - outSwallowScore; //发了奖燕子后的彩金池
+			dividend = dividend - outSwallowScore - outBirdScore;
 			return Prize.SWALLOW;
 		} else if(whatPrize == 1){//鸽子
-			dividend = dividend - outPigeonScore; //发了第二个奖鸽子后的彩金池
+			dividend = dividend - outPigeonScore - outBirdScore;
 			return Prize.PIGEON;
 		} else if(whatPrize == 2){//奖项孔雀
-			dividend = dividend - outPeafowlScore; //发了第二个奖鸽子后的彩金池
+			dividend = dividend - outPeafowlScore - outBirdScore;
 			return Prize.PEAFOWL;
 		} else if(whatPrize == 3){//奖项老鹰
-			dividend = dividend - outEagleScore; //发了第二个奖鸽子后的彩金池
+			dividend = dividend - outEagleScore - outBirdScore;
 			return Prize.EAGLE;			
 		} else if(whatPrize == 4){//奖项狮子
-			dividend = dividend - outLionScore; //发了第二个奖兔子后的彩金池
-			return Prize.RABBIT;
-		} else if(whatPrize == 5){//奖项熊猫
-			dividend = dividend - outPandaScore; //发了第二个奖猴子后的彩金池
-			return Prize.MONKEY;
-		} else if(whatPrize == 6){//奖项猴子
-			dividend = dividend - outMonkeyScore; //发了第二个奖熊猫后的彩金池
-			return Prize.PANDA;
-		} else if(whatPrize == 7){//奖项兔子
-			dividend = dividend - outRabbitScore; //发了第二个奖狮子后的彩金池
+			dividend = dividend - outLionScore - outBeastScore; 
 			return Prize.LION;
+		} else if(whatPrize == 5){//奖项熊猫
+			dividend = dividend - outPandaScore - outBeastScore; 
+			return Prize.PANDA;
+		} else if(whatPrize == 6){//奖项猴子
+			dividend = dividend - outMonkeyScore - outBeastScore;
+			return Prize.MONKEY;
+		} else if(whatPrize == 7){//奖项兔子
+			dividend = dividend - outRabbitScore - outBeastScore;
+			return Prize.RABBIT;
 		} else {
 			System.out.print("不应该出现的error");
 		}
@@ -458,6 +528,11 @@ public class SharkRun extends TimerTask {
 	
 	private void makeRecord() {
 		System.out.println("记录奖项函数");		
+	}
+	
+	private void turnAgain() {
+		System.out.println("再转函数");
+		againOrNot = false;//再转之后不再转
 	}
 	
 	private void betClear() {
