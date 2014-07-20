@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.TimerTask;
+import java.util.Vector;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -34,9 +35,11 @@ public class SharkRun extends TimerTask {
 	private static int timesMax;//最高倍数
 	private static int timesGoldShark;//金鲨倍数
 	private static int whatPrize;//什么奖
+	private static int prizeRecordNum;//统计场数,考虑添加到配置函数
 	
 	private static Random randomNum = new Random();//用于获取随机数
 	private static boolean againOrNot; //是否重转，默认否
+	private static boolean isBomb; //是否存在炸弹，默认否
 	
 	private static int timeBet;//观察下注时间	
 	
@@ -55,6 +58,7 @@ public class SharkRun extends TimerTask {
 	private static double totalGoldSum;
 	private static double totalBeastSum;//统计走兽下注总额之和
 	private static double totalBetSum;//一场下注总金额
+	private static double betForPrize;//单场用于发奖注额
 	//各奖项出分
 	private static double outSwallowScore;
 	private static double outPigeonScore;
@@ -64,8 +68,11 @@ public class SharkRun extends TimerTask {
 	private static double outPandaScore;
 	private static double outMonkeyScore;
 	private static double outRabbitScore;
+	private static ArrayList<Object> outItemScore = new ArrayList<Object>();//八个奖出分集合
 	private static double outSilverScore;
 	private static double outGoldScore;
+	private static double outBirdScore = totalBirdSum*2;//飞禽总出分 ;
+	private static double outBeastScore = totalBeastSum*2;//走兽总出分 ;
 	
 	@Autowired
 	protected BetDao betDao;
@@ -105,8 +112,8 @@ public class SharkRun extends TimerTask {
 		} catch (InterruptedException e) {
 	        e.printStackTrace();
 		}
-		makeRecord(); //记录奖项函数		
-		betClear();   //重置清零		
+		makeRecord(); //记录奖项函数
+		betClear();   //重置清零	
 	}
 	/**
 	 * 随机生成一组倍数列表
@@ -165,10 +172,10 @@ public class SharkRun extends TimerTask {
 		lastConfigList.add(topConfigList.getInitialDividend());//获取初始彩金池
 		lastConfigList.add(topConfigList.getTimesMax());  //获取最新的最大倍率配置
 		lastConfigList.add(topConfigList.getTimeCycle()); //周期
-		lastConfigList.add(topConfigList.getBetLimit());
+		lastConfigList.add(topConfigList.getBetLimit());  //压筹限制
 		lastConfigList.add(topConfigList.getTimeCircle());//转圈时间,延迟时间
 		System.out.println("最新配置列表："+lastConfigList);
-		System.out.println("最新配置列表："+topConfigList);
+		System.out.println("最新一条配置实体："+topConfigList);
 	}
 	/**
 	 * 获取上场彩金池
@@ -204,9 +211,118 @@ public class SharkRun extends TimerTask {
 		}
 		return randomPrize();
 	}
-	
+	/**
+	 * 吃分函数
+	 * @return
+	 */
 	private Prize dividendUpPrize() {
+		System.out.println("吃分函数：");
+		againOrNot = false; //设置为false不重转
+		betForPrize = totalBetSum*(1-commission_rate);//单场用于发奖注额
+		Vector<Object> less = lessThan(outItemScore,outBirdScore,outBeastScore,betForPrize);//获得能吃分的几个奖项的索引的集合
+		if(less.size() > 0 && less != null){//如果存在能吃分的奖项的索引
+			System.out.println("存在正常吃分奖项");
+			int index=(int)(Math.random()*less.size());//从总共less.size()个能吃分奖中，随机一个能吃分奖的索引的索引，
+			if((Integer)less.get(index) == 0){//第index个吃分奖对应的索引
+				dividend= dividend -outSwallowScore-outBirdScore;
+				return Prize.SWALLOW;
+			} else if((Integer)less.get(index) == 1){
+				dividend= dividend -outPigeonScore-outBirdScore;
+				return Prize.PIGEON;
+			} else if((Integer)less.get(index) == 2){
+				dividend= dividend -outPeafowlScore-outBirdScore;
+				return Prize.PEAFOWL;
+			} else if((Integer)less.get(index) == 3){
+				dividend= dividend -outEagleScore-outBirdScore;
+				return Prize.EAGLE;
+			} else if((Integer)less.get(index) == 4){
+				dividend= dividend -outLionScore-outBeastScore;
+				return Prize.LION;
+			} else if((Integer)less.get(index) == 5){
+				dividend= dividend -outPandaScore-outBeastScore;
+				return Prize.PANDA;
+			}  else if((Integer)less.get(index) == 6){
+				dividend= dividend -outMonkeyScore-outBeastScore;
+				return Prize.MONKEY;
+			}  else if((Integer)less.get(index) == 7){
+				dividend= dividend -outRabbitScore-outBeastScore;
+				return Prize.RABBIT;
+			} else{
+				System.out.print("不应该出现的error");
+			}
+		} else {
+			System.out.println("需要非正常吃分奖项");
+			prizeRecordNum = 20 ;//统计场数,考虑添加到配置函数
+			isBomb = ifExistBomb(prizeRecordNum);//查看20场内是否存在地雷
+			if( isBomb == true){//如果20场内出现地雷奖项
+				int i = outScoreMin(outItemScore,outBirdScore,outBeastScore);//获取符合要求最小出分的奖项的索引
+				if(i == 0){//第一个奖对应的索引
+					System.out.println("燕子发奖："+outItemScore.get(i));
+					dividend= dividend -outSwallowScore-outBirdScore;
+					return Prize.SWALLOW;
+				} else if(i == 1){
+					dividend= dividend -outPigeonScore-outBirdScore;
+					return Prize.PIGEON;
+				} else if(i == 2){
+					dividend= dividend -outPeafowlScore-outBirdScore;
+					return Prize.PEAFOWL;
+				} else if(i == 3){
+					dividend= dividend -outEagleScore-outBirdScore;
+					return Prize.EAGLE;
+				} else if(i == 4){
+					dividend= dividend -outLionScore-outBeastScore;
+					return Prize.LION;
+				} else if(i == 5){
+					dividend= dividend -outPandaScore-outBeastScore;
+					return Prize.PANDA;
+				}  else if(i == 6){
+					dividend= dividend -outMonkeyScore-outBeastScore;
+					return Prize.MONKEY;
+				}  else if(i == 7){
+					dividend= dividend -outRabbitScore-outBeastScore;
+					return Prize.RABBIT;
+				} else{
+					System.out.print("不应该出现的error");
+				}
+			} else {
+				return prizeBomb();
+			}
+			
+		}
 		return null;
+	}
+
+	private Prize prizeBomb() {
+		return null;
+	}
+
+	private int outScoreMin(ArrayList<Object> outItemScore2,
+			double outBirdScore2, double outBeastScore2) {
+
+		return 0;
+	}
+
+	private boolean ifExistBomb(int num) {
+
+		return false;
+	}
+
+	private static Vector<Object> lessThan(ArrayList<Object> outItemScore,
+			double outBirdScore, double outBeastScore, double betForPrize) {
+		Vector<Object> v = new Vector<Object>(outItemScore.size());
+		for(int i=0 ; i<outItemScore.size() ; i++){
+			if( i < (outItemScore.size()/2) ){//飞禽类
+				if ((Double)outItemScore.get(i) < (betForPrize - outBirdScore)){
+					v.add(i);
+				}
+			} else {//走兽类
+				if ((Double)outItemScore.get(i) < (betForPrize - outBeastScore)){
+					v.add(i);
+				}
+			}
+
+		}
+		return v;
 	}
 	/**
 	 * 随机函数
@@ -309,32 +425,32 @@ public class SharkRun extends TimerTask {
 					outRabbitScore += panelInfo.getRabbit()*panelInfo.getTimesRabbit();
 				}				
 			}
-			ArrayList<Object> totalPrizeSum = new ArrayList<Object>();//八个奖出分集合	
-			totalPrizeSum.add(totalSwallowSum);//注意顺序不能弄乱
-			totalPrizeSum.add(totalPigeonSum);
-			totalPrizeSum.add(totalPeafowlSum);
-			totalPrizeSum.add(totalEagleSum);
-			totalPrizeSum.add(totalLionSum);
-			totalPrizeSum.add(totalPandaSum);
-			totalPrizeSum.add(totalMonkeySum);
-			totalPrizeSum.add(totalRabbitSum);
-			totalPrizeSum.add(totalBirdSum);
-			totalPrizeSum.add(totalSilverSum);
-			totalPrizeSum.add(totalBombSum);
-			totalPrizeSum.add(totalGoldSum);
-			totalPrizeSum.add(totalBeastSum);
-			totalPrizeSum.add(totalBetSum);
-			System.out.println("查看单场各项押注："+totalPrizeSum);
-			ArrayList<Object> outPrizeScore = new ArrayList<Object>();//八个奖出分集合	
-			outPrizeScore.add(outSwallowScore);//注意顺序不能弄乱
-			outPrizeScore.add(outPigeonScore);
-			outPrizeScore.add(outPeafowlScore);
-			outPrizeScore.add(outEagleScore);
-			outPrizeScore.add(outLionScore);
-			outPrizeScore.add(outPandaScore);
-			outPrizeScore.add(outMonkeyScore);
-			outPrizeScore.add(outRabbitScore);
-			System.out.println("查看八个奖出分集合outPrizeScore值："+outPrizeScore);
+			ArrayList<Object> totalItemSum = new ArrayList<Object>();//查看单场各项押注
+			totalItemSum.add(totalSwallowSum);//注意顺序不能弄乱
+			totalItemSum.add(totalPigeonSum);
+			totalItemSum.add(totalPeafowlSum);
+			totalItemSum.add(totalEagleSum);
+			totalItemSum.add(totalLionSum);
+			totalItemSum.add(totalPandaSum);
+			totalItemSum.add(totalMonkeySum);
+			totalItemSum.add(totalRabbitSum);
+			totalItemSum.add(totalBirdSum);
+			totalItemSum.add(totalSilverSum);
+			totalItemSum.add(totalBombSum);
+			totalItemSum.add(totalGoldSum);
+			totalItemSum.add(totalBeastSum);
+			totalItemSum.add(totalBetSum);
+			System.out.println("查看单场各项押注："+totalItemSum);
+			outItemScore = new ArrayList<Object>();//八个奖出分集合	
+			outItemScore.add(outSwallowScore);//注意顺序不能弄乱
+			outItemScore.add(outPigeonScore);
+			outItemScore.add(outPeafowlScore);
+			outItemScore.add(outEagleScore);
+			outItemScore.add(outLionScore);
+			outItemScore.add(outPandaScore);
+			outItemScore.add(outMonkeyScore);
+			outItemScore.add(outRabbitScore);
+			System.out.println("查看八个奖出分集合outItemScore值："+outItemScore);
 		} else {
 			System.out.println("无人下注");
 		}		
