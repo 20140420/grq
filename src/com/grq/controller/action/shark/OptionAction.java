@@ -62,7 +62,7 @@ public class OptionAction extends BaseAction implements ModelDriven<SharkConfig>
 	public String save() throws Exception{
 		try{
 			//System.out.print("提交的配置设定");
-			if(getLoginUser() != null){//如果用户已登录
+			if(getLoginUser() != null){//如果管理用户已登录
 				Integer timeCycle =(sharkConfig.getTimeObserve()+sharkConfig.getTimeBet()+sharkConfig.getTimeCircle()+sharkConfig.getTimeDisplay()+sharkConfig.getTimeWait());
 				sharkConfig.setTimeCycle(timeCycle);//添加计算得到的周期时长
 				sharkConfig.setId(StringUtil.getStringTime());//添加18位数字字符串与其他配置属性一起加到数据库中

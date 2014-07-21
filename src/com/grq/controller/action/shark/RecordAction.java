@@ -77,14 +77,7 @@ public class RecordAction extends BaseAction implements ModelDriven<PrizeRecord>
 			timesEntity.add(timesList);
 		}
 		int timesIndex=(int)(Math.random()*timesEntity.size());//从总共timesEntity.size()组倍数中随机一组倍数
-		prizeRecord.setTimesSwallow(timesEntity.get(timesIndex).getTimesSwallow());
-		prizeRecord.setTimesPigeon(timesEntity.get(timesIndex).getTimesPigeon());
-		prizeRecord.setTimesPeafowl(timesEntity.get(timesIndex).getTimesPeafowl());
-		prizeRecord.setTimesEagle(timesEntity.get(timesIndex).getTimesEagle());
-		prizeRecord.setTimesLion(timesEntity.get(timesIndex).getTimesLion());
-		prizeRecord.setTimesPanda(timesEntity.get(timesIndex).getTimesPanda());
-		prizeRecord.setTimesMonkey(timesEntity.get(timesIndex).getTimesMonkey());
-		prizeRecord.setTimesRabbit(timesEntity.get(timesIndex).getTimesRabbit());
+
 		prizeRecord.setPrizeId(StringUtil.getStringTime());//添加18位数字字符串作为奖项结果期号
 		prizeRecord.setPrizeName(Prize.RAFFLING);//预设奖项记录的奖项为正开奖
 		prizeRecord.setCommissionRate(null);//应该从配置获得
@@ -133,7 +126,7 @@ public class RecordAction extends BaseAction implements ModelDriven<PrizeRecord>
 			prizeRecord = prizeRecordDao.get(record.getList().get(0).getPrizeId());//加载对象最新配置序列号
 		}
 		
-		System.out.println("zidong 燕子倍数:" + prizeRecord.getTimesSwallow());
+
 		System.out.println("奖项前:" + prizeRecord.getPrizeName());
 		//prizeRecord.setCommissionRate(0.1);//应该从配置获得
 		prizeRecord.setDividend(null);

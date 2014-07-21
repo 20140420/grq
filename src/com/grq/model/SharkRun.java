@@ -12,14 +12,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.grq.model.customizeenum.Prize;
 import com.grq.model.dao.shark.BetDao;
+import com.grq.model.dao.shark.PrizeRecordDao;
 import com.grq.model.dao.shark.SharkConfigDao;
 import com.grq.model.pojo.shark.PanelInfo;
 import com.grq.model.pojo.shark.PrizeRecord;
 import com.grq.model.pojo.shark.SharkConfig;
 import com.grq.model.pojo.shark.TimesEntity;
+import com.grq.model.util.StringUtil;
 
 public class SharkRun extends TimerTask {
 	private PanelInfo panelData = new PanelInfo();//一定要先初始化obj对象！
+	private PrizeRecord prizeRecord = new PrizeRecord();//一定要先初始化obj对象！
+	private PageModel<PanelInfo> pageModel;// 分页组件
 	
 	private static List<TimesEntity> timesEntity;//包含六组倍数的实体
 	private static List<PrizeRecord> prizeRecordEntity;//奖项记录实体
@@ -32,11 +36,11 @@ public class SharkRun extends TimerTask {
 	private static double dividend; //彩金池变量
 	private static double commission_rate; //佣金费率
 	private static double commissionProfit;//佣金收益
-	private static int timesMax;//最高倍数
-	private static int timesGoldShark;//金鲨倍数
-	private static int timesBomb;//炸弹倍数
+	private static Integer timesMax;//最高倍数
+	private static Integer timesGoldShark;//金鲨倍数
+	private static Integer timesBomb;//炸弹倍数
 	private static int whatPrize;//什么奖
-	private static int prizeRecordNum;//统计场数,考虑添加到配置函数
+	private static Integer prizeRecordNum;//统计场数,考虑添加到配置函数
 	
 	private static Random randomNum = new Random();//用于获取随机数
 	private static boolean againOrNot; //是否重转，默认否
@@ -71,14 +75,16 @@ public class SharkRun extends TimerTask {
 	private static ArrayList<Object> outItemScore = new ArrayList<Object>();//八个奖出分集合
 	private static double outSilverScore;
 	private static double outGoldScore;
-	private static double outBirdScore = totalBirdSum*2;//飞禽总出分 ;
-	private static double outBeastScore = totalBeastSum*2;//走兽总出分 ;
+	private static double outBirdScore;//飞禽总出分 ;
+	private static double outBeastScore;//走兽总出分 ;
 	private static double outBombScore;//炸弹出分
 	
 	@Autowired
 	protected BetDao betDao;
 	@Autowired
 	protected SharkConfigDao sharkConfigDao;
+	@Autowired
+	protected PrizeRecordDao prizeRecordDao;
 	
 	/**
 	 *游戏一个运行周期,等同主函数
@@ -464,8 +470,8 @@ public class SharkRun extends TimerTask {
 		orderby.put("createTime", "desc");//设置按创建时间倒序排列
 		String where = "where betCount = ?";//设置查询条件语句
 		Object[] queryParams = {false};//获取未操作过的参数值
-		PageModel<PanelInfo> panelData = betDao.find(where, queryParams, orderby, -1, -1);//执行查询方法
-		betEntity = panelData.getList();//获取所有未操作过的下注条目
+		pageModel = betDao.find(where, queryParams, orderby, -1, -1);//执行查询方法
+		betEntity = pageModel.getList();//获取所有未操作过的下注条目
 		if(betEntity != null && betEntity.size() >0){
 			for(PanelInfo panelInfo : betEntity){//遍历所有的下注条目
 				boolean betCount = panelInfo.getBetCount();//获得条目统计状态
@@ -493,6 +499,9 @@ public class SharkRun extends TimerTask {
 					outPandaScore += panelInfo.getPanda()*panelInfo.getTimesPanda();
 					outMonkeyScore += panelInfo.getMonkey()*panelInfo.getTimesMonkey();
 					outRabbitScore += panelInfo.getRabbit()*panelInfo.getTimesRabbit();
+					panelData = betDao.load(panelInfo.getPanelBetId());//装载下单对象
+					panelData.setBetCount(true);// 更改筹码统计状态
+					betDao.update(panelData);//更新修改操作状态
 				}				
 			}
 			ArrayList<Object> totalItemSum = new ArrayList<Object>();//查看单场各项押注
@@ -521,13 +530,56 @@ public class SharkRun extends TimerTask {
 			outItemScore.add(outMonkeyScore);
 			outItemScore.add(outRabbitScore);
 			System.out.println("查看八个奖出分集合outItemScore值："+outItemScore);
+			outBirdScore = totalBirdSum*2;//飞禽总出分 ;
+			outBeastScore = totalBeastSum*2;//走兽总出分 ;
 		} else {
 			System.out.println("无人下注");
 		}		
 	}
-	
+	/**
+	 * 保存记录奖项情况到表中
+	 */
 	private void makeRecord() {
-		System.out.println("记录奖项函数");		
+		System.out.println("记录奖项PrizeRecord");
+		try{
+			prizeRecord.setPrizeId(StringUtil.getStringTime());//添加18位数字字符串与其他配置属性一起加到数据库中
+			prizeRecord.setCommissionRate(commission_rate);
+			prizeRecord.setPrizeName(prizeName);//放入开出的奖
+			prizeRecord.setDividend(dividend);
+			prizeRecord.setTimesGoldShark(timesGoldShark);
+			prizeRecord.setTimesBomb(timesBomb);
+			prizeRecord.setTotalSwallowSum(totalSwallowSum);
+			prizeRecord.setTotalPigeonSum(totalPigeonSum);
+			prizeRecord.setTotalPeafowlSum(totalPeafowlSum);
+			prizeRecord.setTotalEagleSum(totalEagleSum);
+			prizeRecord.setTotalLionSum(totalLionSum);
+			prizeRecord.setTotalPandaSum(totalPandaSum);
+			prizeRecord.setTotalMonkeySum(totalMonkeySum);
+			prizeRecord.setTotalRabbitSum(totalRabbitSum);
+			prizeRecord.setTotalBirdSum(totalBirdSum);
+			prizeRecord.setTotalSilverSum(totalSilverSum);
+			prizeRecord.setTotalBombSum(totalBombSum);
+			prizeRecord.setTotalGoldSum(totalGoldSum);
+			prizeRecord.setTotalBeastSum(totalBeastSum);
+			prizeRecord.setTotalBetSum(totalBetSum);
+			prizeRecord.setOutSwallowScore(outSwallowScore);
+			prizeRecord.setOutPigeonScore(outPigeonScore);
+			prizeRecord.setOutPeafowlScore(outPeafowlScore);
+			prizeRecord.setOutEagleScore(outEagleScore);
+			prizeRecord.setOutLionScore(outLionScore);
+			prizeRecord.setOutPandaScore(outPandaScore);
+			prizeRecord.setOutMonkeyScore(outMonkeyScore);
+			prizeRecord.setOutRabbitScore(outRabbitScore);
+			prizeRecord.setOutSilverScore(outSilverScore);
+			prizeRecord.setOutGoldScore(outGoldScore);
+			prizeRecord.setOutBirdScore(outBirdScore);
+			prizeRecord.setOutBeastScore(outBeastScore);
+			prizeRecord.setOutBombScore(outBombScore);
+			System.out.print("记录奖项情况");
+			prizeRecordDao.save(prizeRecord);//保存奖项记录对象
+		} catch(Exception ex){
+			System.out.println("记录奖项时出现问题");
+		}
 	}
 	
 	private void turnAgain() {

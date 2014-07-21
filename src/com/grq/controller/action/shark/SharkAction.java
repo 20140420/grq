@@ -78,7 +78,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	 * @return 游戏主页面
 	 */
 	@Override
-	public String main(){	
+	public String main(){
 		
 		return MAIN;//返回主题页	
 	}
@@ -139,7 +139,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	 */
 	public String save() throws Exception{
 		//System.out.print("panel提交的data");
-		if(getLoginCustomer() != null){//如果用户已登录
+		if(getLoginCustomer() != null){//如果顾客用户已登录
 			//System.out.print("用户登入的");			
 			Integer swallow =panelData.getSwallow();// 燕子
 			Integer pigeon =panelData.getPigeon();// 鸽子
@@ -414,14 +414,6 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		//添加数据测试
 		prizeEntity=new ArrayList<PrizeRecord>();		
 		PrizeRecord prize1 = new PrizeRecord();
-		prize1.setTimesSwallow(4);
-		prize1.setTimesPigeon(8);
-		prize1.setTimesPeafowl(12);
-		prize1.setTimesEagle(24);
-		prize1.setTimesLion(24);
-		prize1.setTimesPanda(12);
-		prize1.setTimesMonkey(8);
-		prize1.setTimesRabbit(4);
 		prize1.setPrizeId("2014");
 		prize1.setCommissionRate(0.10);
 		prize1.setCreateTime(null);
@@ -456,14 +448,6 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		//从奖项记录获得新存倍数(必须有新存奖项)
 		prizeEntity = prizeRecordHave();
 		ArrayList<Object> oneTimesList = new ArrayList<Object>();
-		timesSwallow = prizeEntity.get(0).getTimesSwallow();
-		timesPigeon = prizeEntity.get(0).getTimesPigeon();
-		timesPeafowl = prizeEntity.get(0).getTimesPeafowl();
-		timesEagle = prizeEntity.get(0).getTimesEagle();
-		timesLion = prizeEntity.get(0).getTimesLion();
-		timesPanda = prizeEntity.get(0).getTimesPanda();
-		timesMonkey = prizeEntity.get(0).getTimesMonkey();
-		timesRabbit = prizeEntity.get(0).getTimesRabbit();
 		oneTimesList.add(timesSwallow);//注意添加的顺序
 		oneTimesList.add(timesPigeon);
 		oneTimesList.add(timesPeafowl);

@@ -30,49 +30,14 @@
                 <comment>剩余彩金池</comment>
             </column>
         </property>
-        <property name="timesSwallow" type="java.lang.Integer">
-            <column name="timesSwallow" not-null="true">
-                <comment>燕子倍数</comment>
-            </column>
-        </property>
-        <property name="timesPigeon" type="java.lang.Integer">
-            <column name="timesPigeon" not-null="true">
-                <comment>鸽子倍数</comment>
-            </column>
-        </property>
-        <property name="timesPeafowl" type="java.lang.Integer">
-            <column name="timesPeafowl" not-null="true">
-                <comment>孔雀倍数</comment>
-            </column>
-        </property>
-        <property name="timesEagle" type="java.lang.Integer">
-            <column name="timesEagle" not-null="true">
-                <comment>老鹰倍数</comment>
-            </column>
-        </property>
-        <property name="timesLion" type="java.lang.Integer">
-            <column name="timesLion" not-null="true">
-                <comment>狮子倍数</comment>
-            </column>
-        </property>
-        <property name="timesPanda" type="java.lang.Integer">
-            <column name="timesPanda" not-null="true">
-                <comment>熊猫倍数</comment>
-            </column>
-        </property>
-        <property name="timesMonkey" type="java.lang.Integer">
-            <column name="timesMonkey" not-null="true">
-                <comment>猴子倍数</comment>
-            </column>
-        </property>
-        <property name="timesRabbit" type="java.lang.Integer">
-            <column name="timesRabbit" not-null="true">
-                <comment>兔子倍数</comment>
-            </column>
-        </property>
         <property name="timesGoldShark" type="java.lang.Integer">
             <column name="timesGoldShark">
                 <comment>金鲨倍数</comment>
+            </column>
+        </property>
+        <property name="timesBomb" type="java.lang.Integer">
+            <column name="timesBomb">
+                <comment>炸弹倍数</comment>
             </column>
         </property>
         <property name="totalSwallowSum" type="java.lang.Double">
@@ -143,6 +108,71 @@
         <property name="totalBetSum" type="java.lang.Double">
             <column name="totalBetSum" precision="22" scale="0">
                 <comment>一场下注总额</comment>
+            </column>
+        </property>
+        <property name="outSwallowScore" type="java.lang.Double">
+            <column name="outSwallowScore" precision="22" scale="0">
+                <comment>燕子出分</comment>
+            </column>
+        </property>
+        <property name="outPigeonScore" type="java.lang.Double">
+            <column name="outPigeonScore" precision="22" scale="0">
+                <comment>鸽子出分</comment>
+            </column>
+        </property>
+        <property name="outPeafowlScore" type="java.lang.Double">
+            <column name="outPeafowlScore" precision="22" scale="0">
+                <comment>孔雀出分</comment>
+            </column>
+        </property>
+        <property name="outEagleScore" type="java.lang.Double">
+            <column name="outEagleScore" precision="22" scale="0">
+                <comment>老鹰出分</comment>
+            </column>
+        </property>
+        <property name="outLionScore" type="java.lang.Double">
+            <column name="outLionScore" precision="22" scale="0">
+                <comment>狮子出分</comment>
+            </column>
+        </property>
+        <property name="outPandaScore" type="java.lang.Double">
+            <column name="outPandaScore" precision="22" scale="0">
+                <comment>熊猫出分</comment>
+            </column>
+        </property>
+        <property name="outMonkeyScore" type="java.lang.Double">
+            <column name="outMonkeyScore" precision="22" scale="0">
+                <comment>猴子出分</comment>
+            </column>
+        </property>
+        <property name="outRabbitScore" type="java.lang.Double">
+            <column name="outRabbitScore" precision="22" scale="0">
+                <comment>兔子出分</comment>
+            </column>
+        </property>
+        <property name="outSilverScore" type="java.lang.Double">
+            <column name="outSilverScore" precision="22" scale="0">
+                <comment>银鲨出分</comment>
+            </column>
+        </property>
+        <property name="outGoldScore" type="java.lang.Double">
+            <column name="outGoldScore" precision="22" scale="0">
+                <comment>金鲨出分</comment>
+            </column>
+        </property>
+        <property name="outBirdScore" type="java.lang.Double">
+            <column name="outBirdScore" precision="22" scale="0">
+                <comment>飞禽出分</comment>
+            </column>
+        </property>
+        <property name="outBeastScore" type="java.lang.Double">
+            <column name="outBeastScore" precision="22" scale="0">
+                <comment>走兽出分</comment>
+            </column>
+        </property>
+        <property name="outBombScore" type="java.lang.Double">
+            <column name="outBombScore" precision="22" scale="0">
+                <comment>炸弹出分</comment>
             </column>
         </property>
     </class>
