@@ -12,10 +12,12 @@ import org.springframework.stereotype.Controller;
 
 import com.grq.controller.action.BaseAction;
 import com.grq.model.PageModel;
+import com.grq.model.SharkRun;
 import com.grq.model.customizeenum.Prize;
 import com.grq.model.pojo.shark.PanelInfo;
 import com.grq.model.pojo.shark.PrizeRecord;
 import com.grq.model.pojo.shark.SharkConfig;
+import com.grq.model.pojo.shark.TimesEntity;
 import com.grq.model.util.StringUtil;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -64,7 +66,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	
 	// 实体变量
 	private static List<PrizeRecord> prizeEntity;
-	//private static List<TimesEntity> timesEntity;
+	private static List<TimesEntity> timesEntity;
 	private static List<PanelInfo> betEntity;
 		
 	//自定义类型变量
@@ -140,6 +142,40 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	public String save() throws Exception{
 		//System.out.print("panel提交的data");
 		if(getLoginCustomer() != null){//如果顾客用户已登录
+			timesEntity=new ArrayList<TimesEntity>();
+			for(int i = 0; i < 6; i++){	
+				TimesEntity timesList = new TimesEntity();
+				timesList.setTimesSwallow(i);
+				timesList.setTimesPigeon(i);
+				timesList.setTimesPeafowl(i);
+				timesList.setTimesEagle(i);
+				timesList.setTimesLion(i);
+				timesList.setTimesPanda(i);
+				timesList.setTimesMonkey(i);
+				timesList.setTimesRabbit(i);
+				timesEntity.add(timesList);
+			}
+			int timesIndex=(int)(Math.random()*timesEntity.size());//从总共timesEntity.size()组倍数中随机一组倍数
+			//把随机列表保存到对象实例中
+			panelData.setTimesSwallow(timesEntity.get(timesIndex).getTimesSwallow());
+			panelData.setTimesPigeon(timesEntity.get(timesIndex).getTimesPigeon());
+			panelData.setTimesPeafowl(timesEntity.get(timesIndex).getTimesPeafowl());
+			panelData.setTimesEagle(timesEntity.get(timesIndex).getTimesEagle());
+			panelData.setTimesLion(timesEntity.get(timesIndex).getTimesLion());
+			panelData.setTimesPanda(timesEntity.get(timesIndex).getTimesPanda());
+			panelData.setTimesMonkey(timesEntity.get(timesIndex).getTimesMonkey());
+			panelData.setTimesRabbit(timesEntity.get(timesIndex).getTimesRabbit());
+			//查看随机生成的倍数列表
+			ArrayList<Object> newTimesList = new ArrayList<Object>();//临时存储随机生成的倍数
+			newTimesList.add(timesEntity.get(timesIndex).getTimesSwallow());//注意添加的顺序
+			newTimesList.add(timesEntity.get(timesIndex).getTimesPigeon());
+			newTimesList.add(timesEntity.get(timesIndex).getTimesPeafowl());
+			newTimesList.add(timesEntity.get(timesIndex).getTimesEagle());
+			newTimesList.add(timesEntity.get(timesIndex).getTimesLion());
+			newTimesList.add(timesEntity.get(timesIndex).getTimesPanda());
+			newTimesList.add(timesEntity.get(timesIndex).getTimesMonkey());
+			newTimesList.add(timesEntity.get(timesIndex).getTimesRabbit());
+			System.out.println("查看随机生成的倍数列表："+newTimesList);
 			//System.out.print("用户登入的");			
 			Integer swallow =panelData.getSwallow();// 燕子
 			Integer pigeon =panelData.getPigeon();// 鸽子

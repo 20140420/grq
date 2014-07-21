@@ -4,6 +4,7 @@ import java.util.Timer;
 
 import com.grq.model.SharkRun;
 
+
 public class Shark{ 
 	private static Integer timeDelay;//延迟时长，用于加载游戏
 	private static Integer timeCycle;//周期时长

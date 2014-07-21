@@ -10,6 +10,7 @@ import java.util.Vector;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.grq.controller.action.shark.OptionAction;
 import com.grq.model.customizeenum.Prize;
 import com.grq.model.dao.shark.BetDao;
 import com.grq.model.dao.shark.PrizeRecordDao;
@@ -90,6 +91,15 @@ public class SharkRun extends TimerTask {
 	@Autowired
 	protected PrizeRecordDao prizeRecordDao;
 	
+		//getter和setter方法，放入request中，好在jsp页面中能拿到	
+		public PageModel<SharkConfig> getPageModelConfig() {
+			return pageModelConfig;
+		}
+
+		public void setPageModelConfig(PageModel<SharkConfig> pageModelConfig) {
+			this.pageModelConfig = pageModelConfig;
+		}
+	
 	/**
 	 *游戏一个运行周期,等同主函数
 	 */
@@ -134,7 +144,7 @@ public class SharkRun extends TimerTask {
 	 * 随机生成一组倍数列表
 	 * @return
 	 */
-	private void makeTimes() {
+	public void makeTimes() {
 		timesEntity=new ArrayList<TimesEntity>();
 		for(int i = 0; i < 6; i++){	
 			TimesEntity timesList = new TimesEntity();
@@ -175,10 +185,14 @@ public class SharkRun extends TimerTask {
 	 * @return
 	 */
 	private void haveConfig() {
-		System.out.println("获取配置函数");
+		System.out.println("获取配置函数haveConfig()");
+		/*
 		Map<String, String> orderby = new HashMap<String, String>();//定义Map集合
 		orderby.put("createTime", "desc");//设置排序条件及方式
-		pageModelConfig = sharkConfigDao.find(-1, -1, orderby);//获取最近一条数据
+		pageModelConfig = sharkConfigDao.find(-1, -1, orderby);//获取所有配置记录
+		*/
+		OptionAction optionAction = new OptionAction();//调用OptionAction类里的函数
+		pageModelConfig = optionAction.getPageModelConfig();//获取所有配置记录
 		if(pageModelConfig.getList().get(0).getId() != null){//存在配置
 			topConfigList = sharkConfigDao.get(pageModelConfig.getList().get(0).getId());//加载对象最新配置序列号
 		}
@@ -653,7 +667,7 @@ public class SharkRun extends TimerTask {
 		Map<String, String> orderby = new HashMap<String, String>(1);//定义Map集合
 		orderby.put("createTime", "desc");//设置按创建时间倒序排列
 		pageModelPrizeRecord = prizeRecordDao.find(-1, -1, orderby);//执行查询方法
-		prizeRecordEntity = pageModelPrizeRecord.getList();//获取所有未操作过的下注条目
+		prizeRecordEntity = pageModelPrizeRecord.getList();//获取所有奖项记录条目
 		return prizeRecordEntity;
 	}
 }

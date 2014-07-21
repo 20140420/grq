@@ -96,5 +96,12 @@ public class OptionAction extends BaseAction implements ModelDriven<SharkConfig>
 		}
 		return ADMIN_LOGIN;//返回登入页面
 	}
+	public PageModel<SharkConfig> getPageModelConfig(){
+		System.out.println("获取配置函数getPageModelConfig()");
+		Map<String, String> orderby = new HashMap<String, String>();//定义Map集合
+		orderby.put("createTime", "desc");//设置排序条件及方式
+		PageModel<SharkConfig> pageModelConfig = sharkConfigDao.find(-1, -1, orderby);//获取最近一条数据
+		return pageModelConfig;
+	}
 	
 }
