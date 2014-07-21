@@ -70,5 +70,10 @@
     <comment>周期</comment>
    </column>
   </property>
+  <property generated="never" lazy="false" name="prizeRecordNum" type="java.lang.Integer">
+   <column name="prizeRecordNum" not-null="true">
+    <comment>周期</comment>
+   </column>
+  </property>
  </class>
 </hibernate-mapping>

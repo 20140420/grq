@@ -23,13 +23,19 @@ import com.grq.model.util.StringUtil;
 public class SharkRun extends TimerTask {
 	private PanelInfo panelData = new PanelInfo();//一定要先初始化obj对象！
 	private PrizeRecord prizeRecord = new PrizeRecord();//一定要先初始化obj对象！
+	private static Random randomNum = new Random();//用于获取随机数
+	
 	private PageModel<PanelInfo> pageModel;// 分页组件
+	
+	private static int timeBet;//观察下注时间
+	
+	/** ------------------未重置的变量------------------------- */
+	private static SharkConfig topConfigList;//最新一条配置实体
 	
 	private static List<TimesEntity> timesEntity;//包含六组倍数的实体
 	private static List<PrizeRecord> prizeRecordEntity;//奖项记录实体
 	private static List<PanelInfo> betEntity;//下注单实体
 	
-	private static SharkConfig topConfigList;
 	private static Prize prizeName;//奖项变量，默认正在抽奖
 	
 	private static double lastDividend;//上场奖项彩金池
@@ -39,13 +45,9 @@ public class SharkRun extends TimerTask {
 	private static Integer timesMax;//最高倍数
 	private static Integer timesGoldShark;//金鲨倍数
 	private static Integer timesBomb;//炸弹倍数
-	private static int whatPrize;//什么奖
 	private static Integer prizeRecordNum;//统计场数,考虑添加到配置函数
 	
-	private static Random randomNum = new Random();//用于获取随机数
 	private static boolean againOrNot; //是否重转，默认否
-	
-	private static int timeBet;//观察下注时间	
 	
 	//单场下注和出分情况变量
 	private static double totalSwallowSum; //统计燕子下注总额之和
@@ -77,7 +79,7 @@ public class SharkRun extends TimerTask {
 	private static double outGoldScore;
 	private static double outBirdScore;//飞禽总出分 ;
 	private static double outBeastScore;//走兽总出分 ;
-	private static double outBombScore;//炸弹出分
+	private static double outBombScore;//炸弹出分	
 	
 	@Autowired
 	protected BetDao betDao;
@@ -311,7 +313,7 @@ public class SharkRun extends TimerTask {
 				return Prize.BOMB;
 			} else {
 				againOrNot = true;   //设置为true再转
-				timesBomb = timesMax;//没人押注炸弹，倍数就为设定最高倍数
+				timesBomb = null;//没人押注炸弹，倍数就为空值
 				outBombScore = 0 ;   //没人押注炸弹出分为0
 				return Prize.BOMB;
 			}
@@ -407,7 +409,7 @@ public class SharkRun extends TimerTask {
 	private Prize randomPrize() {
 		System.out.print("随机函数：");
 		againOrNot = false; //设置为false不重转
-		whatPrize =(int)(Math.floor(randomNum.nextInt(8)));//随机获取大于等于0到小于8的整数部分,即随机获取0/1/2/3/4/5/6/7
+		int whatPrize =(int)(Math.floor(randomNum.nextInt(8)));//随机获取大于等于0到小于8的整数部分,即随机获取0/1/2/3/4/5/6/7
 		if(whatPrize == 0){//为燕子概率1/8
 			dividend = dividend - outSwallowScore - outBirdScore;
 			return Prize.SWALLOW;
@@ -586,11 +588,60 @@ public class SharkRun extends TimerTask {
 		System.out.println("再转函数");
 		againOrNot = false;//再转之后不再转
 	}
-	
-	private void betClear() {
-		System.out.println("重置清零函数");		
+	/**
+	 * 重置清零
+	 */
+	private void betClear(){
+		System.out.println("重置清零函数");	
+		//游戏倍数
+		timesGoldShark = null;//金鲨倍数
+		timesBomb = null;//炸弹倍数
+		//一场下注总额
+		totalSwallowSum = 0.0; //统计燕子下注总额之和
+		totalPigeonSum = 0.0;
+		totalPeafowlSum = 0.0;
+		totalEagleSum = 0.0;
+		totalLionSum = 0.0;
+		totalPandaSum = 0.0;
+		totalMonkeySum = 0.0;
+		totalRabbitSum = 0.0;
+		totalBirdSum = 0.0;//统计飞禽下注总额之和
+		totalSilverSum = 0.0;
+		totalBombSum = 0.0;
+		totalGoldSum = 0.0;
+		totalBeastSum = 0.0;//统计走兽下注总额之和
+		totalBetSum = 0.0;//一场下注总金额
+		betForPrize = 0.0;
+		//各奖项出分
+		outSwallowScore = 0.0;
+		outPigeonScore = 0.0;
+		outPeafowlScore = 0.0;
+		outEagleScore = 0.0;
+		outLionScore = 0.0;
+		outPandaScore = 0.0;
+		outMonkeyScore = 0.0;
+		outRabbitScore = 0.0;
+		outItemScore = null;//八个奖出分集合
+		outSilverScore = 0.0;
+		outGoldScore = 0.0;
+		outBirdScore = 0.0;//飞禽总出分 ;
+		outBeastScore = 0.0;//走兽总出分 ;
+		outBombScore = 0.0;//炸弹出分
+		//游戏配置
+		prizeRecordNum = 5;//统计场数,考虑添加到配置函数
+		commission_rate =0.0; //佣金费率
+		timesMax = 0;//最高倍数
+		commissionProfit = 0.0;//佣金收益
+		lastDividend = 0.0;
+		dividend = 0.0; //彩金池变量需要储存在数据库中
+		againOrNot = false; //是否重转，默认否	
+		// 实体变量
+		timesEntity = null;
+		prizeRecordEntity = null;
+		betEntity = null;
+		//自定义类型变量
+		prizeName = Prize.RAFFLING;//奖项变量，默认正在抽奖
 	}
-
 	/**
 	 * 获取奖项记录
 	 * @return

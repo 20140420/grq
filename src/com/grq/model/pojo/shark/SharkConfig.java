@@ -31,6 +31,7 @@ public class SharkConfig  implements java.io.Serializable {
     private Integer timeDisplay;//展示时间
     private Integer timeWait;//等待时间
     private Integer timeCycle;//周期时间
+    private Integer prizeRecordNum;//统计查看奖项记录场数
 
 
     // Constructors
@@ -41,7 +42,7 @@ public class SharkConfig  implements java.io.Serializable {
 
     
     /** full constructor */
-    public SharkConfig(Date createTime, Double initialDividend, Double commissionRate, Integer singlBet, Integer betLimit, Integer timesMax, Integer circleNum, Integer timeCircle, Integer timeObserve, Integer timeBet, Integer timeDisplay, Integer timeWait, Integer timeCycle) {
+    public SharkConfig(Date createTime, Double initialDividend, Double commissionRate, Integer singlBet, Integer betLimit, Integer timesMax, Integer circleNum, Integer timeCircle, Integer timeObserve, Integer timeBet, Integer timeDisplay, Integer timeWait, Integer timeCycle, Integer prizeRecordNum) {
         this.createTime = createTime;
         this.initialDividend = initialDividend;
         this.commissionRate = commissionRate;
@@ -54,6 +55,7 @@ public class SharkConfig  implements java.io.Serializable {
         this.timeDisplay = timeDisplay;
         this.timeWait = timeWait;
         this.timeCycle = timeCycle;
+        this.prizeRecordNum = prizeRecordNum;
     }
 
    
@@ -163,6 +165,16 @@ public class SharkConfig  implements java.io.Serializable {
 
 	public void setTimeCycle(Integer timeCycle) {
 		this.timeCycle = timeCycle;
+	}
+
+
+	public Integer getPrizeRecordNum() {
+		return prizeRecordNum;
+	}
+
+
+	public void setPrizeRecordNum(Integer prizeRecordNum) {
+		this.prizeRecordNum = prizeRecordNum;
 	}
    
 
