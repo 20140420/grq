@@ -263,7 +263,7 @@ public class SharkRun extends TimerTask {
 			}
 		} else {
 			System.out.println("需要非正常吃分奖项");
-			prizeRecordNum = 20 ;//统计场数,考虑添加到配置函数
+			prizeRecordNum = topConfigList.getPrizeRecordNum();//统计场数,考虑添加到配置函数
 			if( ifExistBomb(prizeRecordNum) == true){//如果20场内出现地雷奖项
 				int i = outScoreMin(outItemScore,outBirdScore,outBeastScore);//获取符合要求最小出分的奖项的索引
 				if(i == 0){//第一个奖对应的索引

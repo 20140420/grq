@@ -67,7 +67,6 @@ public class OptionAction extends BaseAction implements ModelDriven<SharkConfig>
 				sharkConfig.setTimeCycle(timeCycle);//添加计算得到的周期时长
 				sharkConfig.setId(StringUtil.getStringTime());//添加18位数字字符串与其他配置属性一起加到数据库中
 				sharkConfigDao.saveOrUpdate(sharkConfig);//保存到对象
-				
 				return list();//返回设定页面
 			}
 		} catch(Exception ex){

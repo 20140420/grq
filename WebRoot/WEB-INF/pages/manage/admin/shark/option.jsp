@@ -48,8 +48,8 @@ td {
         <tr>
           <td>转盘圈数：</td>
           <td class="col4"><s:textfield name="circleNum"></s:textfield></td>
-          <td></td>
-          <td class="col4"></td>
+          <td>查看条数</td>
+          <td class="col4"><s:textfield name="prizeRecordNum"></s:textfield></td>
           <td></td>
           <td class="col4"></td>
         </tr>
