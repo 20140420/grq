@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 
 import com.grq.controller.action.BaseAction;
 import com.grq.model.PageModel;
-import com.grq.model.SharkRun;
 import com.grq.model.customizeenum.Prize;
 import com.grq.model.pojo.shark.PanelInfo;
 import com.grq.model.pojo.shark.PrizeRecord;
@@ -445,8 +444,8 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		Object[] queryParams = null;
 		Map<String, String> orderby = new HashMap<String, String>();//定义Map集合
 		orderby.put("createTime", "desc");//设置排序条件及方式
-		list = prizeRecordDao.getNumResult(field, where, queryParams, orderby, 0, countNum);*/
-		
+		list = prizeRecordDao.getNumResult(field, where, queryParams, orderby, 0, countNum);
+		*/
 		//添加数据测试
 		prizeEntity=new ArrayList<PrizeRecord>();		
 		PrizeRecord prize1 = new PrizeRecord();

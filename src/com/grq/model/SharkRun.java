@@ -10,7 +10,6 @@ import java.util.Vector;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.grq.controller.action.shark.OptionAction;
 import com.grq.model.customizeenum.Prize;
 import com.grq.model.dao.shark.BetDao;
 import com.grq.model.dao.shark.PrizeRecordDao;
@@ -33,11 +32,11 @@ public class SharkRun extends TimerTask {
 	private static int timeBet;//观察下注时间
 	/** ------------------未重置的变量------------------------- */
 	
-	private static SharkConfig topConfigList;//最新一条配置实体
+	private static SharkConfig topConfigList = new SharkConfig();//最新一条配置实体
 	
 	private static List<TimesEntity> timesEntity;//包含六组倍数的实体
-	private static List<PrizeRecord> prizeRecordEntity;//奖项记录实体
-	private static List<PanelInfo> betEntity;//下注单实体
+	private static List<PrizeRecord> prizeRecordEntity = new ArrayList<PrizeRecord>();//奖项记录实体，一定要先初始化
+	private static List<PanelInfo> betEntity = new ArrayList<PanelInfo>();//下注单实体
 	
 	private static Prize prizeName;//奖项变量，默认正在抽奖
 	
@@ -91,14 +90,7 @@ public class SharkRun extends TimerTask {
 	@Autowired
 	protected PrizeRecordDao prizeRecordDao;
 	
-		//getter和setter方法，放入request中，好在jsp页面中能拿到	
-		public PageModel<SharkConfig> getPageModelConfig() {
-			return pageModelConfig;
-		}
 
-		public void setPageModelConfig(PageModel<SharkConfig> pageModelConfig) {
-			this.pageModelConfig = pageModelConfig;
-		}
 	
 	/**
 	 *游戏一个运行周期,等同主函数
@@ -190,19 +182,34 @@ public class SharkRun extends TimerTask {
 		Map<String, String> orderby = new HashMap<String, String>();//定义Map集合
 		orderby.put("createTime", "desc");//设置排序条件及方式
 		pageModelConfig = sharkConfigDao.find(-1, -1, orderby);//获取所有配置记录
-		*/
 		OptionAction optionAction = new OptionAction();//调用OptionAction类里的函数
 		pageModelConfig = optionAction.getPageModelConfig();//获取所有配置记录
 		if(pageModelConfig.getList().get(0).getId() != null){//存在配置
 			topConfigList = sharkConfigDao.get(pageModelConfig.getList().get(0).getId());//加载对象最新配置序列号
 		}
+		*/
+		//添加测试数据
+		topConfigList.setBetLimit(999);		
+		topConfigList.setCircleNum(4);
+		topConfigList.setCommissionRate(0.1);
+		topConfigList.setId(StringUtil.getStringTime());//18位数字字符串作为配置序列号
+		topConfigList.setInitialDividend(1500.0);
+		topConfigList.setPrizeRecordNum(3);//奖项查看数目
+		topConfigList.setTimeBet(6);
+		topConfigList.setTimeCircle(5);
+		topConfigList.setTimeCycle(26);
+		topConfigList.setTimeDisplay(5);
+		topConfigList.setTimeObserve(5);
+		topConfigList.setTimeWait(5);
+		topConfigList.setTimesMax(99);//最高倍数
+		
 		ArrayList<Object> lastConfigList = new ArrayList<Object>();//列表
 		lastConfigList.add(topConfigList.getCommissionRate());//获取最新的费率配置
 		lastConfigList.add(topConfigList.getInitialDividend());//获取初始彩金池
 		lastConfigList.add(topConfigList.getTimesMax());  //获取最新的最大倍率配置
 		lastConfigList.add(topConfigList.getTimeCycle()); //周期
 		lastConfigList.add(topConfigList.getBetLimit());  //压筹限制
-		lastConfigList.add(topConfigList.getTimeCircle());//转圈时间,延迟时间
+		lastConfigList.add(topConfigList.getPrizeRecordNum());//查看几条奖项记录
 		System.out.println("最新配置列表："+lastConfigList);
 		System.out.println("最新一条配置实体："+topConfigList);
 	}
@@ -484,14 +491,10 @@ public class SharkRun extends TimerTask {
 	 */
 	private void countAndSum() {
 		System.out.println("统计并求总押注和、各单项押注和、各单项出分和");
-		Map<String, String> orderby = new HashMap<String, String>(1);//定义Map集合
-		orderby.put("createTime", "desc");//设置按创建时间倒序排列
-		String where = "where betCount = ?";//设置查询条件语句
-		Object[] queryParams = {false};//获取未操作过的参数值
-		pageModelPanelData = betDao.find(where, queryParams, orderby, -1, -1);//执行查询方法
-		betEntity = pageModelPanelData.getList();//获取所有未操作过的下注条目
+		betEntity = haveBet();//获取下注单
 		if(betEntity != null && betEntity.size() >0){
 			for(PanelInfo panelInfo : betEntity){//遍历所有的下注条目
+				System.out.println("遍历下单实体");
 				boolean betCount = panelInfo.getBetCount();//获得条目统计状态
 				if(betCount == false){//如果条目未操作过
 					totalSwallowSum += panelInfo.getSwallow();
@@ -554,6 +557,7 @@ public class SharkRun extends TimerTask {
 			System.out.println("无人下注");
 		}		
 	}
+
 	/**
 	 * 保存记录奖项情况到表中
 	 */
@@ -658,16 +662,97 @@ public class SharkRun extends TimerTask {
 		//自定义类型变量
 		prizeName = Prize.RAFFLING;//奖项变量，默认正在抽奖
 	}
+	private List<PanelInfo> haveBet() {
+		System.out.println("获取下注单函数");
+		/*
+		Map<String, String> orderby = new HashMap<String, String>(1);//定义Map集合
+		orderby.put("createTime", "desc");//设置按创建时间倒序排列
+		String where = "where betCount = ?";//设置查询条件语句
+		Object[] queryParams = {false};//获取未操作过的参数值
+		pageModelPanelData = betDao.find(where, queryParams, orderby, -1, -1);//执行查询方法
+		betEntity = pageModelPanelData.getList();
+		*/
+		PanelInfo betItem1 = new PanelInfo();
+		betItem1.setBeast(1);
+		betItem1.setBetCount(false);
+		betItem1.setBird(1);
+		betItem1.setPanelBetId(StringUtil.createOrderId());// 设置21位的订单号
+		betEntity.add(betItem1);
+		PanelInfo betItem2 = new PanelInfo();
+		betItem2.setBeast(2);
+		betItem2.setBetCount(true);
+		betItem2.setBird(2);
+		betItem2.setPanelBetId(StringUtil.createOrderId());// 设置21位的订单号
+		betEntity.add(betItem2);
+		PanelInfo betItem3 = new PanelInfo();
+		betItem3.setBeast(3);
+		betItem3.setBetCount(false);
+		betItem3.setBird(3);
+		betItem3.setPanelBetId(StringUtil.createOrderId());// 设置21位的订单号
+		betEntity.add(betItem3);
+		
+		return betEntity;
+	}
 	/**
 	 * 获取奖项记录
 	 * @return
 	 */
 	private List<PrizeRecord> havePrizeRecord() {
 		System.out.println("获取奖项记录函数");
+		/* 
 		Map<String, String> orderby = new HashMap<String, String>(1);//定义Map集合
 		orderby.put("createTime", "desc");//设置按创建时间倒序排列
 		pageModelPrizeRecord = prizeRecordDao.find(-1, -1, orderby);//执行查询方法
-		prizeRecordEntity = pageModelPrizeRecord.getList();//获取所有奖项记录条目
+		prizeRecordEntity = pageModelPrizeRecord.getList();
+		*/
+		PrizeRecord prize1 = new PrizeRecord();
+		prize1.setPrizeId(StringUtil.getStringTime());//18位数字字符串作为奖项序号
+		prize1.setCommissionRate(0.10);
+		prize1.setCreateTime(null);
+		prize1.setPrizeName(Prize.RAFFLING);
+		prize1.setDividend(1050.0);
+		prizeRecordEntity.add(prize1);
+		PrizeRecord prize2 = new PrizeRecord();
+		prize2.setDividend(320.0);
+		prize2.setPrizeName(Prize.SWALLOW);
+		prizeRecordEntity.add(prize2);
+		PrizeRecord prize3 = new PrizeRecord();
+		prize3.setPrizeName(Prize.RABBIT);
+		prizeRecordEntity.add(prize3);
+		PrizeRecord prize4 = new PrizeRecord();
+		prize4.setPrizeName(Prize.PEAFOWL);
+		prizeRecordEntity.add(prize4);
+		PrizeRecord prize5 = new PrizeRecord();
+		prize5.setPrizeName(Prize.EAGLE);
+		prizeRecordEntity.add(prize5);
+		PrizeRecord prize6 = new PrizeRecord();
+		prize6.setPrizeName(Prize.PANDA);
+		prizeRecordEntity.add(prize6);
+		
 		return prizeRecordEntity;
+	}
+	//getter和setter方法，放入request中，好在jsp页面中能拿到	
+	public PageModel<SharkConfig> getPageModelConfig() {
+		return pageModelConfig;
+	}
+
+	public void setPageModelConfig(PageModel<SharkConfig> pageModelConfig) {
+		this.pageModelConfig = pageModelConfig;
+	}
+	
+	public PageModel<PanelInfo> getPageModelPanelData() {
+		return pageModelPanelData;
+	}
+
+	public void setPageModelPanelData(PageModel<PanelInfo> pageModelPanelData) {
+		this.pageModelPanelData = pageModelPanelData;
+	}
+
+	public PageModel<PrizeRecord> getPageModelPrizeRecord() {
+		return pageModelPrizeRecord;
+	}
+
+	public void setPageModelPrizeRecord(PageModel<PrizeRecord> pageModelPrizeRecord) {
+		this.pageModelPrizeRecord = pageModelPrizeRecord;
 	}
 }
