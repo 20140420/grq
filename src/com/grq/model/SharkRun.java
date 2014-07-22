@@ -102,7 +102,7 @@ public class SharkRun extends TimerTask {
 	}
 
 	private void process() {
-		makeTimes();          //获取倍数,倍数随机生成不统一		
+		makeTimes();          //获取倍数,倍数随机生成不统一	
 		haveConfig();         //获取配置
 		haveLastDividend();   //获取上期彩金池
 		//观察、下注 
@@ -132,11 +132,12 @@ public class SharkRun extends TimerTask {
 	}
 	/**
 	 * 随机生成一组倍数列表
+	 * @return 
 	 * @return
 	 */
-	public void makeTimes() {
+	public TimesEntity makeTimes() {
 		timesEntity=new ArrayList<TimesEntity>();
-		for(int i = 0; i < 6; i++){	
+		for(int i = 0; i < 6; i++){
 			TimesEntity timesList = new TimesEntity();
 			timesList.setTimesSwallow(i);
 			timesList.setTimesPigeon(i);
@@ -169,6 +170,7 @@ public class SharkRun extends TimerTask {
 		newTimesList.add(timesEntity.get(timesIndex).getTimesMonkey());
 		newTimesList.add(timesEntity.get(timesIndex).getTimesRabbit());
 		System.out.println("查看随机生成的倍数列表："+newTimesList);
+		return timesEntity.get(timesIndex);//返回随机生成的一组倍数
 	}
 	/**
 	 * 获取配置

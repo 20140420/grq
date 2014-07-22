@@ -10,6 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="<%=basePath%>js/payfor.js"></script>
 <link href="<%=basePath%>css/payfor.css" rel="stylesheet" type="text/css" />
 <link href="<%=basePath%>css/game.css" rel="stylesheet" type="text/css" />
+<s:push value="panelData">
 <s:form action="shark_save" name="panelform" namespace="/shark" enctype="multipart/form-data" method="post">
 <!----><div class="gpanel">
   <div class="gpanel_count">
@@ -74,33 +75,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="gpanel_common">
   	<!-- 显示倍数 -->
 	<div class="gpanel_times">
-    	<div class="gpanel_times_swallow"><input type="text" name="times_swallow" value="6"></div>
-        <div class="gpanel_times_pigeon"><input type="text" name="times_pigeon" value="6"></div>
-		<div class="gpanel_times_peafowl"><input type="text" name="times_peafowl" value="8"></div>
-        <div class="gpanel_times_eagle"><input type="text" name="times_eagle" value="24"></div>
-        <div class="gpanel_times_lion"><input type="text" name="times_loin" value="24"></div>
-        <div class="gpanel_times_panda"><input type="text" name="times_panda" value="8"></div>
-        <div class="gpanel_times_monkey"><input type="text" name="times_monkey" value="倍数"></div>
-        <div class="gpanel_times_rabbit"><input type="text" name="times_rabbit" value="63*21"></div>
+    	<div class="gpanel_times_swallow"><s:textfield name="timesSwallow" placeholder="6"></s:textfield></div>
+        <div class="gpanel_times_pigeon"><s:textfield name="timesPigeon"></s:textfield></div>
+		<div class="gpanel_times_peafowl"><s:textfield name="timesPeafowl"></s:textfield></div>
+        <div class="gpanel_times_eagle"><s:textfield name="timesEagle"></s:textfield></div>
+        <div class="gpanel_times_lion"><s:textfield name="timesLion"></s:textfield></div>
+        <div class="gpanel_times_panda"><s:textfield name="timesPanda"></s:textfield></div>
+        <div class="gpanel_times_monkey"><s:textfield name="timesMonkey"></s:textfield></div>
+        <div class="gpanel_times_rabbit"><s:textfield name="timesRabbit"></s:textfield></div>
     </div>
     <!-- 显示押注 -->
     <div class="gpanel_personal">
     	<div class="gpanel_personal_swallow">
-    	<input type="text" name="swallow" value="0" id="qty_item_1" onKeyUp="setAmount.modify('#qty_item_1')" class="text" /></div>
+    	<s:textfield name="swallow" value="0" id="qty_item_1" onKeyUp="setAmount.modify('#qty_item_1')"></s:textfield></div>
         <div class="gpanel_personal_pigeon">
-		<input type="text" name="pigeon" value="0" id="qty_item_2" onKeyUp="setAmount.modify('#qty_item_2')" class="text" /></div>
+		<input type="text" name="pigeon" value="0" id="qty_item_2" onKeyUp="setAmount.modify('#qty_item_2')" /></div>
         <div class="gpanel_personal_peafowl">
-		<input type="text" name="peafowl" value="0" id="qty_item_3" onKeyUp="setAmount.modify('#qty_item_3')" class="text" /></div>
+		<input type="text" name="peafowl" value="0" id="qty_item_3" onKeyUp="setAmount.modify('#qty_item_3')" /></div>
         <div class="gpanel_personal_eagle">
-		<input type="text" name="eagle" value="0" id="qty_item_4" onKeyUp="setAmount.modify('#qty_item_4')" class="text" /></div>
+		<input type="text" name="eagle" value="0" id="qty_item_4" onKeyUp="setAmount.modify('#qty_item_4')" /></div>
         <div class="gpanel_personal_lion">
-        <input type="text" name="lion" value="0" id="qty_item_5" onKeyUp="setAmount.modify('#qty_item_5')" class="text" /></div>
+        <input type="text" name="lion" value="0" id="qty_item_5" onKeyUp="setAmount.modify('#qty_item_5')" /></div>
         <div class="gpanel_personal_panda">
-		<input type="text" name="panda" value="0" id="qty_item_6" onKeyUp="setAmount.modify('#qty_item_6')" class="text" /></div>
+		<input type="text" name="panda" value="0" id="qty_item_6" onKeyUp="setAmount.modify('#qty_item_6')" /></div>
         <div class="gpanel_personal_monkey">
-        <input type="text" name="monkey" value="0" id="qty_item_7" onKeyUp="setAmount.modify('#qty_item_7')" class="text" /></div>
+        <input type="text" name="monkey" value="0" id="qty_item_7" onKeyUp="setAmount.modify('#qty_item_7')" /></div>
         <div class="gpanel_personal_rabbit">
-        <input type="text" name="rabbit" value="0" id="qty_item_8" onKeyUp="setAmount.modify('#qty_item_8')" class="text" /></div>
+        <input type="text" name="rabbit" value="0" id="qty_item_8" onKeyUp="setAmount.modify('#qty_item_8')" /></div>
     </div>
     <!-- 按键 -->
     <div class="gpanel_key_swallow">
@@ -146,3 +147,4 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </div>
 <!----></div>
 </s:form>
+</s:push>
