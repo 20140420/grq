@@ -1,9 +1,7 @@
 package com.grq.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.TimerTask;
 import java.util.Vector;
@@ -35,8 +33,8 @@ public class SharkRun extends TimerTask {
 	private static SharkConfig topConfigList = new SharkConfig();//最新一条配置实体
 	
 	private static List<TimesEntity> timesEntity;//包含六组倍数的实体
-	private static List<PrizeRecord> prizeRecordEntity = new ArrayList<PrizeRecord>();//奖项记录实体，一定要先初始化
-	private static List<PanelInfo> betEntity = new ArrayList<PanelInfo>();//下注单实体
+	private static List<PrizeRecord> prizeRecordEntity;//奖项记录实体，一定要先初始化
+	private static List<PanelInfo> betEntity;//下注单实体
 	
 	private static Prize prizeName;//奖项变量，默认正在抽奖
 	
@@ -212,6 +210,9 @@ public class SharkRun extends TimerTask {
 		lastConfigList.add(topConfigList.getPrizeRecordNum());//查看几条奖项记录
 		System.out.println("最新配置列表："+lastConfigList);
 		System.out.println("最新一条配置实体："+topConfigList);
+		//配置添加到变量中
+		commission_rate = topConfigList.getCommissionRate();
+		timesMax = topConfigList.getTimesMax();
 	}
 	/**
 	 * 获取上场彩金池
@@ -230,6 +231,7 @@ public class SharkRun extends TimerTask {
 		System.out.println("出奖函数");
 		countAndSum();//统计并求总押注和、各单项押注和、各单项出分和
 		if(totalBetSum != 0){//有人下注
+			System.out.println("下注总额："+totalBetSum);
 			dividend = lastDividend + totalBetSum*(1-commission_rate);//筹码注入彩金池
 			System.out.println("发奖前彩金："+dividend);
 			commissionProfit = totalBetSum*commission_rate;//佣金收益
@@ -520,9 +522,9 @@ public class SharkRun extends TimerTask {
 					outPandaScore += panelInfo.getPanda()*panelInfo.getTimesPanda();
 					outMonkeyScore += panelInfo.getMonkey()*panelInfo.getTimesMonkey();
 					outRabbitScore += panelInfo.getRabbit()*panelInfo.getTimesRabbit();
-					panelData = betDao.load(panelInfo.getPanelBetId());//装载下单对象
-					panelData.setBetCount(true);// 更改筹码统计状态
-					betDao.update(panelData);//更新修改操作状态
+					//panelData = betDao.load(panelInfo.getPanelBetId());//装载下单对象
+					//panelData.setBetCount(true);// 更改筹码统计状态
+					//betDao.update(panelData);//更新修改操作状态
 				}				
 			}
 			ArrayList<Object> totalItemSum = new ArrayList<Object>();//查看单场各项押注
@@ -672,12 +674,35 @@ public class SharkRun extends TimerTask {
 		pageModelPanelData = betDao.find(where, queryParams, orderby, -1, -1);//执行查询方法
 		betEntity = pageModelPanelData.getList();
 		*/
+		betEntity = new ArrayList<PanelInfo>();//下注单实体,一定要先初始化
 		PanelInfo betItem1 = new PanelInfo();
-		betItem1.setBeast(1);
-		betItem1.setBetCount(false);
-		betItem1.setBird(1);
 		betItem1.setPanelBetId(StringUtil.createOrderId());// 设置21位的订单号
+		betItem1.setSwallow(1);
+		betItem1.setPigeon(1);
+		betItem1.setPeafowl(1);
+		betItem1.setEagle(1);
+		betItem1.setLion(1);
+		betItem1.setPanda(1);
+		betItem1.setMonkey(1);
+		betItem1.setRabbit(1);
+		betItem1.setBird(1);
+		betItem1.setSilver_shark(1);
+		betItem1.setBomb(1);
+		betItem1.setGold_shark(1);
+		betItem1.setBeast(1);
+		betItem1.setTotalBet(13);
+		betItem1.setPrizeItem(Prize.RAFFLING);
+		betItem1.setBetCount(false);
+		betItem1.setTimesSwallow(6);
+		betItem1.setTimesPigeon(6);
+		betItem1.setTimesPeafowl(8);
+		betItem1.setTimesEagle(24);
+		betItem1.setTimesLion(24);
+		betItem1.setTimesPanda(8);
+		betItem1.setTimesMonkey(6);
+		betItem1.setTimesRabbit(6);
 		betEntity.add(betItem1);
+		/*
 		PanelInfo betItem2 = new PanelInfo();
 		betItem2.setBeast(2);
 		betItem2.setBetCount(true);
@@ -690,7 +715,7 @@ public class SharkRun extends TimerTask {
 		betItem3.setBird(3);
 		betItem3.setPanelBetId(StringUtil.createOrderId());// 设置21位的订单号
 		betEntity.add(betItem3);
-		
+		*/
 		return betEntity;
 	}
 	/**
@@ -705,6 +730,7 @@ public class SharkRun extends TimerTask {
 		pageModelPrizeRecord = prizeRecordDao.find(-1, -1, orderby);//执行查询方法
 		prizeRecordEntity = pageModelPrizeRecord.getList();
 		*/
+		prizeRecordEntity = new ArrayList<PrizeRecord>();//奖项记录实体，一定要先初始一定要先初始化化
 		PrizeRecord prize1 = new PrizeRecord();
 		prize1.setPrizeId(StringUtil.getStringTime());//18位数字字符串作为奖项序号
 		prize1.setCommissionRate(0.10);

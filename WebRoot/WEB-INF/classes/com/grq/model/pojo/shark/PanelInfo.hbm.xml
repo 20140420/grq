@@ -90,16 +90,6 @@
                 <comment>下注总数</comment>
             </column>
         </property>
-        <property name="single_bet" type="java.lang.Integer">
-            <column name="single_bet" not-null="true">
-                <comment>单注额度</comment>
-            </column>
-        </property>
-        <property name="totalPrice" type="java.lang.Float">
-            <column name="totalPrice" precision="12" scale="0" not-null="true">
-                <comment>总额</comment>
-            </column>
-        </property>
         <property name="betCount" type="java.lang.Boolean">
             <column name="betCount" not-null="true">
                 <comment>是否处理过</comment>

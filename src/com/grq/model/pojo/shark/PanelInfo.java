@@ -38,8 +38,6 @@ public class PanelInfo  implements java.io.Serializable {
  	private Integer gold_shark;// 金鲨
  	private Integer beast;// 走兽
  	private Integer totalBet;// 下注总数（非总额）
- 	private Integer single_bet;// 单注额度
- 	private Float totalPrice;// 下注总额度
  	private Prize prizeItem; //奖项
  	private Boolean betCount = false;// 用于判断是否是统计过（默认值为false）
  	private Integer timesSwallow;
@@ -63,9 +61,9 @@ public class PanelInfo  implements java.io.Serializable {
     		Integer swallow, Integer pigeon, Integer peafowl, Integer eagle, 
     		Integer lion, Integer panda, Integer monkey, Integer rabbit, 
     		Integer bird, Integer silverShark, Integer bomb, Integer goldShark, 
-    		Integer beast, Integer totalBet, Integer singleBet, Float totalPrice, 
-    		Prize prizeItem, Boolean betCount, Integer timesSwallow, Integer timesPigeon,
-    		Integer timesPeafowl, Integer timesEagle, Integer timesLion, Integer timesPanda,
+    		Integer beast, Integer totalBet, Prize prizeItem, Boolean betCount,
+    		Integer timesSwallow, Integer timesPigeon, Integer timesPeafowl, 
+    		Integer timesEagle, Integer timesLion, Integer timesPanda,
     		Integer timesMonkey, Integer timesRabbit) {
         this.panelBetId = panelBetId;
         this.customer = customer;
@@ -84,18 +82,16 @@ public class PanelInfo  implements java.io.Serializable {
         this.gold_shark = goldShark;
         this.beast = beast;
         this.totalBet = totalBet;
-        this.single_bet = singleBet;
-        this.totalPrice = totalPrice;
         this.prizeItem = prizeItem;
         this.betCount = betCount;
-        this.setTimesSwallow(timesSwallow);
-        this.setTimesPigeon(timesPigeon);
-        this.setTimesPeafowl(timesPeafowl);
-        this.setTimesEagle(timesEagle);
-        this.setTimesLion(timesLion);
-        this.setTimesPanda(timesPanda);
-        this.setTimesMonkey(timesMonkey);
-        this.setTimesRabbit(timesRabbit);        
+        this.timesSwallow = timesSwallow;
+        this.timesPigeon = timesPigeon;
+        this.timesPeafowl = timesPeafowl;
+        this.timesEagle = timesEagle;
+        this.timesLion = timesLion;
+        this.timesPanda = timesPanda;
+        this.timesMonkey = timesMonkey;
+        this.timesRabbit = timesRabbit;        
     }
 
    
@@ -222,7 +218,6 @@ public class PanelInfo  implements java.io.Serializable {
 		return gold_shark;
 	}
 
-
 	public void setGold_shark(Integer gold_shark) {
 		this.gold_shark = gold_shark;
 	}
@@ -242,27 +237,7 @@ public class PanelInfo  implements java.io.Serializable {
     public void setTotalBet(Integer totalBet) {
         this.totalBet = totalBet;
     }
-
-    public Integer getSingle_bet() {
-		return single_bet;
-	}
-
-
-	public void setSingle_bet(Integer single_bet) {
-		this.single_bet = single_bet;
-	}
-
-    public Float getTotalPrice() {
-        return this.totalPrice;
-    }
     
-    public void setTotalPrice(Float totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-
-
-
 	public Prize getPrizeItem() {
 		return prizeItem;
 	}

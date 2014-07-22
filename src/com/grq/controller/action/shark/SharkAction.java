@@ -193,10 +193,10 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 			totalBet=(swallow+pigeon+peafowl+eagle+lion+panda+monkey+rabbit+bird+silver_shark+bomb+gold_shark+beast);
 			//System.out.print("下注总数："+totalBet);
 			if (totalBet != 0){//如果有下注
-				Integer single_bet=panelData.getSingle_bet(); //单注额度
-				float totalPrice = 0f; // 计算总额的变量
-				totalPrice =single_bet*totalBet;
-				System.out.println("save总额："+totalPrice);
+				//Integer single_bet=panelData.getSingle_bet(); //单注额度
+				//float totalPrice = 0f; // 计算总额的变量
+				//totalPrice =single_bet*totalBet;
+				System.out.println("save总额："+totalBet);
 				Boolean betCount = false;// 用于判断是否是统计过（默认值为false）
 				panelData.setPanelBetId(StringUtil.createOrderId());// 设置21位的订单号
 				panelData.setCustomer(getLoginCustomer());// 设置所属用户	
@@ -214,8 +214,8 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 				panelData.setGold_shark(gold_shark);
 				panelData.setBeast(beast);
 				panelData.setTotalBet(totalBet);//把下注总数加到对象panelData中
-				panelData.setSingle_bet(single_bet);
-				panelData.setTotalPrice(totalPrice);//把下注总额度
+				//panelData.setSingle_bet(single_bet);
+				//panelData.setTotalPrice(totalPrice);//把下注总额度
 				panelData.setBetCount(betCount);// 用于判断是否是统计过（默认值为false）
 				panelData.setPrizeItem(Prize.RAFFLING);// 设置奖项状态为正在抽奖
 				System.out.println("下单创建时间："+panelData.getCreateTime());
