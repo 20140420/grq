@@ -702,7 +702,7 @@ table td,th{
 .gpanel .gpanel_common .gpanel_times {
 	border: 0px solid #000;
 }
-.gpanel .gpanel_common .gpanel_times input {
+.gpanel .gpanel_common .gpanel_times .times_font{
 	height: 21px;
 	width: 63px;
 	border: 0px solid #000;
@@ -720,6 +720,7 @@ table td,th{
 	position: absolute;
 	margin: 2px 0px 0px 22px;
 	padding: 0px;
+	text-align: center;
 }
 .gpanel .gpanel_times_pigeon {
 	height: 21px;
@@ -728,6 +729,7 @@ table td,th{
 	position: absolute;
 	margin: 2px 0px 0px 109px;
 	padding: 0px;
+	text-align: center;
 }
 .gpanel .gpanel_times_peafowl {
 	height: 21px;
@@ -736,6 +738,7 @@ table td,th{
 	position: absolute;
 	margin: 2px 0px 0px 194px;
 	padding: 0px;
+	text-align: center;
 }
 .gpanel .gpanel_times_eagle {
 	height: 21px;
@@ -744,6 +747,7 @@ table td,th{
 	position: absolute;
 	margin: 2px 0px 0px 277px;
 	padding: 0px;
+	text-align: center;
 }
 .gpanel .gpanel_times_lion {
 	height: 21px;
@@ -752,6 +756,7 @@ table td,th{
 	position: absolute;
 	margin: 2px 0px 0px 361px;
 	padding: 0px;
+	text-align: center;
 }
 .gpanel .gpanel_times_panda {
 	height: 21px;
@@ -760,6 +765,7 @@ table td,th{
 	position: absolute;
 	margin: 2px 0px 0px 444px;
 	padding: 0px;
+	text-align: center;
 }
 .gpanel .gpanel_times_monkey {
 	height: 21px;
@@ -768,6 +774,7 @@ table td,th{
 	position: absolute;
 	margin: 2px 0px 0px 528px;
 	padding: 0px;
+	text-align: center;
 }
 .gpanel .gpanel_times_rabbit {
 	height: 21px;
@@ -776,6 +783,7 @@ table td,th{
 	position: absolute;
 	margin: 2px 0px 0px 613px;
 	padding: 0px;
+	text-align: center;
 }
 /* 常按键区个人下注 */
 .gpanel .gpanel_common .gpanel_personal {

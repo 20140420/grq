@@ -93,7 +93,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	public String save() throws Exception{
 		//System.out.print("panel提交的data");
 		if(getLoginCustomer() != null){//如果顾客用户已登录
-			//System.out.print("用户登入的");			
+			//System.out.print("用户登入的");
 			Integer swallow =panelData.getSwallow();// 燕子
 			Integer pigeon =panelData.getPigeon();// 鸽子
 			Integer peafowl =panelData.getPeafowl();// 孔雀

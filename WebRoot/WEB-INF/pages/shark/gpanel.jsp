@@ -75,14 +75,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="gpanel_common">
   	<!-- 显示倍数 -->
 	<div class="gpanel_times">
-    	<div class="gpanel_times_swallow"><s:textfield name="timesSwallow" placeholder="6"></s:textfield></div>
-        <div class="gpanel_times_pigeon"><s:textfield name="timesPigeon"></s:textfield></div>
-		<div class="gpanel_times_peafowl"><s:textfield name="timesPeafowl"></s:textfield></div>
-        <div class="gpanel_times_eagle"><s:textfield name="timesEagle"></s:textfield></div>
-        <div class="gpanel_times_lion"><s:textfield name="timesLion"></s:textfield></div>
-        <div class="gpanel_times_panda"><s:textfield name="timesPanda"></s:textfield></div>
-        <div class="gpanel_times_monkey"><s:textfield name="timesMonkey"></s:textfield></div>
-        <div class="gpanel_times_rabbit"><s:textfield name="timesRabbit"></s:textfield></div>
+    	<div class="gpanel_times_swallow"><span class="times_font"><s:property value="request.timesSwallow"/></span></div>
+        <div class="gpanel_times_pigeon"><span class="times_font"><s:property value="timesPigeon"/></span></div>
+        <div class="gpanel_times_peafowl"><span class="times_font"><s:property value="timesPeafowl" default="8" /></span></div>
+        <div class="gpanel_times_eagle"><span class="times_font"><s:property value="timesEagle" default="24" /></span></div>
+        <div class="gpanel_times_lion"><span class="times_font"><s:property value="timesLion" default="24" /></span></div>
+        <div class="gpanel_times_panda"><span class="times_font"><s:property value="timesPanda" default="8" /></span></div>
+        <div class="gpanel_times_monkey"><span class="times_font"><s:property value="timesMonkey" default="6" /></span></div>
+        <div class="gpanel_times_rabbit"><span class="times_font"><s:property value="timesRabbit" default="6" /></span></div>
     </div>
     <!-- 显示押注 -->
     <div class="gpanel_personal">
