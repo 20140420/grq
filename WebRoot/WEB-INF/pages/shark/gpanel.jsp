@@ -75,7 +75,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="gpanel_common">
   	<!-- 显示倍数 -->
 	<div class="gpanel_times">
-    	<div class="gpanel_times_swallow"><span class="times_font"><s:property value="request.timesSwallow"/></span></div>
+    	<div class="gpanel_times_swallow"><span class="times_font"><s:property value="timesSwallow"/></span></div>
         <div class="gpanel_times_pigeon"><span class="times_font"><s:property value="timesPigeon"/></span></div>
         <div class="gpanel_times_peafowl"><span class="times_font"><s:property value="timesPeafowl" default="8" /></span></div>
         <div class="gpanel_times_eagle"><span class="times_font"><s:property value="timesEagle" default="24" /></span></div>

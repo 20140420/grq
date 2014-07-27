@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-//import java.util.Timer;
 
 
 import org.springframework.context.annotation.Scope;
@@ -28,7 +27,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	private PanelInfo panelData = new PanelInfo();//一定要先初始化obj对象！
 	private PageModel<PanelInfo> pageModel;// 分页组件
 
-	private TimesEntity timesList;
+	private static TimesEntity timesList;//必须是static类型的
 	
 	/**
 	 * 此方法是Modeldriven接口的方法，要重写
@@ -67,22 +66,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		Timer timer=new Timer();//实例化Timer类
 		timer.schedule(new SharkRun(),timeDelay,timeCycle);//从第二次开始每隔周期时长，包括SharkRun()里面的延迟时间，调用SharkRun()一次
 		*/
-		SharkRun sharkRun = new SharkRun();
-		timesList = sharkRun.makeTimes();//获取随机生成的一组倍数
-		//把随机列表保存到对象实例中
-		panelData.setTimesSwallow(timesList.getTimesSwallow());
-		panelData.setTimesPigeon(timesList.getTimesPigeon());
-		panelData.setTimesPeafowl(timesList.getTimesPeafowl());
-		panelData.setTimesEagle(timesList.getTimesEagle());
-		panelData.setTimesLion(timesList.getTimesLion());
-		panelData.setTimesPanda(timesList.getTimesPanda());
-		panelData.setTimesMonkey(timesList.getTimesMonkey());
-		panelData.setTimesRabbit(timesList.getTimesRabbit());
-		System.out.println("随机生成的燕子倍数"+panelData.getTimesSwallow());
-		if(getLoginCustomer() != null){//如果用户已登录
-			System.out.println("用户已登录可以下注");
-		}
-		return MAIN;//返回主题页	
+		return MAIN;//返回主题页
 	}
 /**-------------------------------------------------------------------*/
 	/**
@@ -93,41 +77,26 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	public String save() throws Exception{
 		//System.out.print("panel提交的data");
 		if(getLoginCustomer() != null){//如果顾客用户已登录
-			//System.out.print("用户登入的");
-			Integer swallow =panelData.getSwallow();// 燕子
-			Integer pigeon =panelData.getPigeon();// 鸽子
-			Integer peafowl =panelData.getPeafowl();// 孔雀
-			Integer eagle =panelData.getEagle();// 老鹰
-			Integer lion =panelData.getLion();// 狮子
-			Integer panda =panelData.getPanda();// 熊猫
-			Integer monkey =panelData.getMonkey();// 猴子
-			Integer rabbit =panelData.getRabbit();// 兔子
-			Integer bird =panelData.getBird();// 飞禽
-			Integer silver_shark =panelData.getSilver_shark();// 银鲨
-			Integer bomb =panelData.getBomb();// 炸弹
-			Integer gold_shark =panelData.getGold_shark();// 金鲨
-			Integer beast =panelData.getBeast();// 走兽
-			Integer totalBet =0;// 计算下注总数（非总额）的变量
-			totalBet=(swallow+pigeon+peafowl+eagle+lion+panda+monkey+rabbit+bird+silver_shark+bomb+gold_shark+beast);
-			//System.out.print("下注总数："+totalBet);
+			//把倍数加到对象panelData中
+			panelData.setTimesSwallow(timesList.getTimesSwallow());
+			panelData.setTimesPigeon(timesList.getTimesPigeon());
+			panelData.setTimesPeafowl(timesList.getTimesPeafowl());
+			panelData.setTimesEagle(timesList.getTimesEagle());
+			panelData.setTimesLion(timesList.getTimesLion());
+			panelData.setTimesPanda(timesList.getTimesPanda());
+			panelData.setTimesMonkey(timesList.getTimesMonkey());
+			panelData.setTimesRabbit(timesList.getTimesRabbit());
+			// 计算下注总数（非总额）的变量
+			Integer totalBet=(panelData.getSwallow()+panelData.getPigeon()+panelData.getPeafowl()
+					+panelData.getEagle()+panelData.getLion()+panelData.getPanda()
+					+panelData.getMonkey()+panelData.getRabbit()+panelData.getBird()
+					+panelData.getSilver_shark()+panelData.getBomb()+panelData.getGold_shark()
+					+panelData.getBeast());
 			if (totalBet != 0){//如果有下注
 				System.out.println("save总额："+totalBet);
 				Boolean betCount = false;// 用于判断是否是统计过（默认值为false）
 				panelData.setPanelBetId(StringUtil.createOrderId());// 设置21位的订单号
 				panelData.setCustomer(getLoginCustomer());// 设置所属用户	
-				panelData.setSwallow(swallow);
-				panelData.setPigeon(pigeon);
-				panelData.setPeafowl(peafowl);
-				panelData.setEagle(eagle);
-				panelData.setLion(lion);
-				panelData.setPanda(panda);
-				panelData.setMonkey(monkey);
-				panelData.setRabbit(rabbit);
-				panelData.setBird(bird);
-				panelData.setSilver_shark(silver_shark);
-				panelData.setBomb(bomb);
-				panelData.setGold_shark(gold_shark);
-				panelData.setBeast(beast);
 				panelData.setTotalBet(totalBet);//把下注总数加到对象panelData中
 				panelData.setBetCount(betCount);// 用于判断是否是统计过（默认值为false）
 				panelData.setPrizeItem(Prize.RAFFLING);// 设置奖项状态为正在抽奖
@@ -135,7 +104,6 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 				betDao.save(panelData);//保存panel获得数据	
 				//记得重置panel下注
 			}
-			//return MAIN;//返回shark主页面
 			return main();//通过主函数返回shark主页面，可进行统计出结果
 		}
 		return CUSTOMER_LOGIN;//返回登入页面
@@ -216,7 +184,17 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	 * @throws Exception
 	 */
 	public String gpanel() throws Exception{
-
+		SharkRun sharkRun = new SharkRun();
+		timesList = sharkRun.makeTimes();//获取随机生成的一组倍数
+		//把随机列表保存到对象实例中
+		panelData.setTimesSwallow(timesList.getTimesSwallow());
+		panelData.setTimesPigeon(timesList.getTimesPigeon());
+		panelData.setTimesPeafowl(timesList.getTimesPeafowl());
+		panelData.setTimesEagle(timesList.getTimesEagle());
+		panelData.setTimesLion(timesList.getTimesLion());
+		panelData.setTimesPanda(timesList.getTimesPanda());
+		panelData.setTimesMonkey(timesList.getTimesMonkey());
+		panelData.setTimesRabbit(timesList.getTimesRabbit());
 		return "gpanel";
 	}
 	

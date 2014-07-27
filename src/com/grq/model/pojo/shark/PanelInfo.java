@@ -37,7 +37,7 @@ public class PanelInfo  implements java.io.Serializable {
  	private Integer bomb;// 炸弹
  	private Integer gold_shark;// 金鲨
  	private Integer beast;// 走兽
- 	private Integer totalBet;// 下注总数（非总额）
+ 	private Integer totalBet;// 下注总数
  	private Prize prizeItem; //奖项
  	private Boolean betCount = false;// 用于判断是否是统计过（默认值为false）
  	private Integer timesSwallow;
