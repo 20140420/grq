@@ -1,13 +1,16 @@
 package com.grq.model;
 
 import java.util.ArrayList;
+//import java.util.HashMap;
 import java.util.List;
+//import java.util.Map;
 import java.util.Random;
 import java.util.TimerTask;
 import java.util.Vector;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.grq.controller.action.shark.OptionAction;
 import com.grq.model.customizeenum.Prize;
 import com.grq.model.dao.shark.BetDao;
 import com.grq.model.dao.shark.PrizeRecordDao;
@@ -102,7 +105,7 @@ public class SharkRun extends TimerTask {
 	}
 
 	private void process() {
-		makeTimes();          //获取倍数,倍数随机生成不统一	
+		//makeTimes();          //获取倍数,倍数随机生成不统一	
 		haveConfig();         //获取配置
 		haveLastDividend();   //获取上期彩金池
 		//观察、下注 
@@ -182,14 +185,18 @@ public class SharkRun extends TimerTask {
 		Map<String, String> orderby = new HashMap<String, String>();//定义Map集合
 		orderby.put("createTime", "desc");//设置排序条件及方式
 		pageModelConfig = sharkConfigDao.find(-1, -1, orderby);//获取所有配置记录
-		OptionAction optionAction = new OptionAction();//调用OptionAction类里的函数
-		pageModelConfig = optionAction.getPageModelConfig();//获取所有配置记录
+		
+		System.out.println("获取配置："+pageModelConfig.getList().get(0).getInitialDividend());
+		
 		if(pageModelConfig.getList().get(0).getId() != null){//存在配置
-			topConfigList = sharkConfigDao.get(pageModelConfig.getList().get(0).getId());//加载对象最新配置序列号
-		}
-		*/
+		topConfigList = sharkConfigDao.get(pageModelConfig.getList().get(0).getId());//加载对象最新配置序列号
+		}*/
+		OptionAction optionAction = new OptionAction();//调用OptionAction类里的函数
+		topConfigList = optionAction.topConfigList();
+		System.out.println("获取配置函数初始彩金池："+topConfigList.getInitialDividend());
+		/*
 		//添加测试数据
-		topConfigList.setBetLimit(999);		
+		topConfigList.setBetLimit(999);
 		topConfigList.setCircleNum(4);
 		topConfigList.setCommissionRate(0.1);
 		topConfigList.setId(StringUtil.getStringTime());//18位数字字符串作为配置序列号
@@ -202,7 +209,7 @@ public class SharkRun extends TimerTask {
 		topConfigList.setTimeObserve(5);
 		topConfigList.setTimeWait(5);
 		topConfigList.setTimesMax(99);//最高倍数
-		
+		*/
 		ArrayList<Object> lastConfigList = new ArrayList<Object>();//列表
 		lastConfigList.add(topConfigList.getCommissionRate());//获取最新的费率配置
 		lastConfigList.add(topConfigList.getInitialDividend());//获取初始彩金池
