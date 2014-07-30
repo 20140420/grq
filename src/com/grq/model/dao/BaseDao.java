@@ -1,7 +1,6 @@
 package com.grq.model.dao;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Map;
 
 import com.grq.model.PageModel;
@@ -16,9 +15,7 @@ public interface BaseDao<T> {
 	public T load(Serializable entityId);//加载实体对象
 	public Object uniqueResult(String hql, Object[] queryParams);//使用hql语句操作
 	
-
-	public List<T> getNumResult(String field, String where, Object[] queryParams,
-			Map<String, String> orderby, int startNo, int limitResult);//获取指定对象的指定条数的信息集合
+	//public SharkConfig connSharkConfig();//直接链接数据库配置表并返回最后一条配置对象
 	
 	//分页操作
 	public long getCount();//获取总信息数

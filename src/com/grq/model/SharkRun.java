@@ -1,20 +1,19 @@
 package com.grq.model;
 
 import java.util.ArrayList;
-//import java.util.HashMap;
 import java.util.List;
-//import java.util.Map;
 import java.util.Random;
 import java.util.TimerTask;
 import java.util.Vector;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.grq.controller.action.shark.OptionAction;
 import com.grq.model.customizeenum.Prize;
 import com.grq.model.dao.shark.BetDao;
 import com.grq.model.dao.shark.PrizeRecordDao;
+import com.grq.model.dao.shark.PrizeRecordDaoImpl;
 import com.grq.model.dao.shark.SharkConfigDao;
+import com.grq.model.dao.shark.SharkConfigDaoImpl;
 import com.grq.model.pojo.shark.PanelInfo;
 import com.grq.model.pojo.shark.PrizeRecord;
 import com.grq.model.pojo.shark.SharkConfig;
@@ -26,11 +25,6 @@ public class SharkRun extends TimerTask {
 	private PrizeRecord prizeRecord = new PrizeRecord();//一定要先初始化obj对象！
 	private static Random randomNum = new Random();//用于获取随机数
 	
-	private PageModel<SharkConfig> pageModelConfig;// 分页组件
-	private PageModel<PanelInfo> pageModelPanelData;// 分页组件
-	private PageModel<PrizeRecord> pageModelPrizeRecord;// 分页组件
-	
-	private static int timeBet;//观察下注时间
 	/** ------------------未重置的变量------------------------- */
 	
 	private static SharkConfig topConfigList = new SharkConfig();//最新一条配置实体
@@ -41,6 +35,7 @@ public class SharkRun extends TimerTask {
 	
 	private static Prize prizeName;//奖项变量，默认正在抽奖
 	
+	private static int timeBet;//下注时间
 	private static double lastDividend;//上场奖项彩金池
 	private static double dividend; //彩金池变量
 	private static double commission_rate; //佣金费率
@@ -109,14 +104,13 @@ public class SharkRun extends TimerTask {
 		haveConfig();         //获取配置
 		haveLastDividend();   //获取上期彩金池
 		//观察、下注 
-		timeBet = 5 ;        //观察下注时间
-		System.out.println("观察下注时间5");
+		System.out.println("下注时间"+timeBet);
 		try {
 	        Thread.sleep(timeBet*1000);//括号里面3000代表3000毫秒也3秒该成需要时间
 		} catch (InterruptedException e) {
 	        e.printStackTrace();
 		}
-		System.out.println("结束下注");
+		System.out.println("结束下注,开始出奖");
 		prizeName = havePrize();  //出奖
 		System.out.println("本场中奖奖项为:"+prizeName);
 		//包括转盘、展示
@@ -180,36 +174,9 @@ public class SharkRun extends TimerTask {
 	 * @return
 	 */
 	private void haveConfig() {
-		System.out.println("获取配置函数haveConfig()");
-		/*
-		Map<String, String> orderby = new HashMap<String, String>();//定义Map集合
-		orderby.put("createTime", "desc");//设置排序条件及方式
-		pageModelConfig = sharkConfigDao.find(-1, -1, orderby);//获取所有配置记录
-		
-		System.out.println("获取配置："+pageModelConfig.getList().get(0).getInitialDividend());
-		
-		if(pageModelConfig.getList().get(0).getId() != null){//存在配置
-		topConfigList = sharkConfigDao.get(pageModelConfig.getList().get(0).getId());//加载对象最新配置序列号
-		}*/
-		OptionAction optionAction = new OptionAction();//调用OptionAction类里的函数
-		topConfigList = optionAction.topConfigList();
-		System.out.println("获取配置函数初始彩金池："+topConfigList.getInitialDividend());
-		/*
-		//添加测试数据
-		topConfigList.setBetLimit(999);
-		topConfigList.setCircleNum(4);
-		topConfigList.setCommissionRate(0.1);
-		topConfigList.setId(StringUtil.getStringTime());//18位数字字符串作为配置序列号
-		topConfigList.setInitialDividend(1500.0);
-		topConfigList.setPrizeRecordNum(3);//奖项查看数目
-		topConfigList.setTimeBet(6);
-		topConfigList.setTimeCircle(5);
-		topConfigList.setTimeCycle(26);
-		topConfigList.setTimeDisplay(5);
-		topConfigList.setTimeObserve(5);
-		topConfigList.setTimeWait(5);
-		topConfigList.setTimesMax(99);//最高倍数
-		*/
+		//System.out.println("获取配置函数haveConfig()");
+		topConfigList =SharkConfigDaoImpl.lastSharkConfig();//通过调用配置实现类中的方法获取最后一条配置
+		//System.out.println("通过配置函数初始彩金池："+topConfigList.getInitialDividend());
 		ArrayList<Object> lastConfigList = new ArrayList<Object>();//列表
 		lastConfigList.add(topConfigList.getCommissionRate());//获取最新的费率配置
 		lastConfigList.add(topConfigList.getInitialDividend());//获取初始彩金池
@@ -218,19 +185,22 @@ public class SharkRun extends TimerTask {
 		lastConfigList.add(topConfigList.getBetLimit());  //压筹限制
 		lastConfigList.add(topConfigList.getPrizeRecordNum());//查看几条奖项记录
 		System.out.println("最新配置列表："+lastConfigList);
-		System.out.println("最新一条配置实体："+topConfigList);
 		//配置添加到变量中
 		commission_rate = topConfigList.getCommissionRate();
 		timesMax = topConfigList.getTimesMax();
+		timeBet = topConfigList.getTimeBet();//下注时间
 	}
 	/**
 	 * 获取上场彩金池
 	 * @return
 	 */
 	private void haveLastDividend() {
-		prizeRecordEntity = havePrizeRecord();
-		lastDividend = prizeRecordEntity.get(0).getDividend();//获取上场奖项记录的彩金池记录
-		System.out.println("查看上场彩金池：" + lastDividend);
+		prizeRecordEntity = havePrizeRecord();//奖项记录实体
+		if (prizeRecordEntity != null) {//存在记录
+			int i = prizeRecordEntity.size();
+			lastDividend = prizeRecordEntity.get(i-1).getDividend();//获取最后一场奖项记录的彩金池记录
+		}		
+		System.out.println("获取上期彩金池：" + lastDividend);
 	}
 	/**
 	 * 出奖
@@ -663,6 +633,7 @@ public class SharkRun extends TimerTask {
 		commission_rate =0.0; //佣金费率
 		timesMax = 0;//最高倍数
 		commissionProfit = 0.0;//佣金收益
+		timeBet = 0;//下注时间
 		lastDividend = 0.0;
 		dividend = 0.0; //彩金池变量需要储存在数据库中
 		againOrNot = false; //是否重转，默认否	
@@ -732,62 +703,8 @@ public class SharkRun extends TimerTask {
 	 * @return
 	 */
 	private List<PrizeRecord> havePrizeRecord() {
-		System.out.println("获取奖项记录函数");
-		/* 
-		Map<String, String> orderby = new HashMap<String, String>(1);//定义Map集合
-		orderby.put("createTime", "desc");//设置按创建时间倒序排列
-		pageModelPrizeRecord = prizeRecordDao.find(-1, -1, orderby);//执行查询方法
-		prizeRecordEntity = pageModelPrizeRecord.getList();
-		*/
-		prizeRecordEntity = new ArrayList<PrizeRecord>();//奖项记录实体，一定要先初始一定要先初始化化
-		PrizeRecord prize1 = new PrizeRecord();
-		prize1.setPrizeId(StringUtil.getStringTime());//18位数字字符串作为奖项序号
-		prize1.setCommissionRate(0.10);
-		prize1.setCreateTime(null);
-		prize1.setPrizeName(Prize.RAFFLING);
-		prize1.setDividend(1050.0);
-		prizeRecordEntity.add(prize1);
-		PrizeRecord prize2 = new PrizeRecord();
-		prize2.setDividend(320.0);
-		prize2.setPrizeName(Prize.SWALLOW);
-		prizeRecordEntity.add(prize2);
-		PrizeRecord prize3 = new PrizeRecord();
-		prize3.setPrizeName(Prize.RABBIT);
-		prizeRecordEntity.add(prize3);
-		PrizeRecord prize4 = new PrizeRecord();
-		prize4.setPrizeName(Prize.PEAFOWL);
-		prizeRecordEntity.add(prize4);
-		PrizeRecord prize5 = new PrizeRecord();
-		prize5.setPrizeName(Prize.EAGLE);
-		prizeRecordEntity.add(prize5);
-		PrizeRecord prize6 = new PrizeRecord();
-		prize6.setPrizeName(Prize.PANDA);
-		prizeRecordEntity.add(prize6);
-		
+		//System.out.println("获取奖项记录函数");
+		prizeRecordEntity =PrizeRecordDaoImpl.prizeRecordEntity();//通过调用实现类中的方法获取奖项记录实体
 		return prizeRecordEntity;
-	}
-	//getter和setter方法，放入request中，好在jsp页面中能拿到	
-	public PageModel<SharkConfig> getPageModelConfig() {
-		return pageModelConfig;
-	}
-
-	public void setPageModelConfig(PageModel<SharkConfig> pageModelConfig) {
-		this.pageModelConfig = pageModelConfig;
-	}
-	
-	public PageModel<PanelInfo> getPageModelPanelData() {
-		return pageModelPanelData;
-	}
-
-	public void setPageModelPanelData(PageModel<PanelInfo> pageModelPanelData) {
-		this.pageModelPanelData = pageModelPanelData;
-	}
-
-	public PageModel<PrizeRecord> getPageModelPrizeRecord() {
-		return pageModelPrizeRecord;
-	}
-
-	public void setPageModelPrizeRecord(PageModel<PrizeRecord> pageModelPrizeRecord) {
-		this.pageModelPrizeRecord = pageModelPrizeRecord;
 	}
 }
