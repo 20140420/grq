@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Timer;
+//import java.util.Timer;
 
 
 import org.springframework.context.annotation.Scope;
@@ -51,8 +51,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		this.panelData = panelData;
 	}
 	
-	private static Integer timeDelay;//延迟时长，用于加载游戏
-	private static Integer timeCycle;//周期时长
+	
 	
 	/**
 	 * 鲨鱼主函数
@@ -63,12 +62,16 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	public String main(){
 		boolean isBegin = true;
 		if(isBegin){
+			/*
 			//这里不能放下面代码
+			Integer timeDelay;//延迟时长，用于加载游戏
+			Integer timeCycle;//周期时长
 			timeDelay = 2000;//延迟加载
 			timeCycle = 18000;//预先设置
 			System.out.println("延2加载");
 			Timer timer=new Timer();//实例化Timer类
 			timer.schedule(new SharkRun(),timeDelay,timeCycle);//从第二次开始每隔周期时长，包括SharkRun()里面的延迟时间，调用SharkRun()一次
+			*/
 			return MAIN;//返回主题页
 		} else {
 			System.out.println("还未开始");
