@@ -15,8 +15,6 @@ public interface BaseDao<T> {
 	public T load(Serializable entityId);//加载实体对象
 	public Object uniqueResult(String hql, Object[] queryParams);//使用hql语句操作
 	
-	//public SharkConfig connSharkConfig();//直接链接数据库配置表并返回最后一条配置对象
-	
 	//分页操作
 	public long getCount();//获取总信息数
 	public PageModel<T> find(int pageNo, int maxResult);//普通分页操作

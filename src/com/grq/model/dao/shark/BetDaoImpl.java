@@ -26,20 +26,11 @@ public class BetDaoImpl extends DaoSupport<PanelInfo> implements BetDao {
 	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
 	public static List<PanelInfo> betEntity() {
 		List<PanelInfo> panelInfoList = null;
-		//PanelInfo panelInfo = null;
 		try {
 			SessionFactory sf=new Configuration().configure().buildSessionFactory();
 			Session session=sf.openSession();
 			panelInfoList = session.createQuery("from PanelInfo where betCount = false").list();//查询未出奖的下单记录结果并转化为List对象
 			Transaction tx=session.beginTransaction();
-			/*if (panelInfoList != null) {
-				Iterator<?> it = panelInfoList.iterator();
-				while (it.hasNext()) {
-					panelInfo = (PanelInfo) it.next();
-					System.out.println("ID:" + panelInfo.getPanelBetId() +
-							"  记录奖项："+ panelInfo.getPrizeItem()+"\n");
-				}
-			}*/
 			tx.commit();
 			session.clear();
 		} catch (HibernateException e) {
@@ -48,5 +39,16 @@ public class BetDaoImpl extends DaoSupport<PanelInfo> implements BetDao {
 		}
 		return panelInfoList;
 	}
-
+	/**
+	 * 直接链接数据表更新下注单
+	 * @param arg
+	 */
+	public static void updateBet(Object arg){
+		SessionFactory sf=new Configuration().configure().buildSessionFactory();
+		Session session=sf.openSession();
+		Transaction tx=session.beginTransaction();
+		session.update(arg);
+		tx.commit();
+		session.clear();
+	}
 }

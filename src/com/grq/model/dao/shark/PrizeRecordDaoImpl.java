@@ -26,20 +26,11 @@ public class PrizeRecordDaoImpl extends DaoSupport<PrizeRecord> implements Prize
 	@Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
 	public static List<PrizeRecord> prizeRecordEntity(){
 		List<PrizeRecord> prizeRecordList = null;
-		//PrizeRecord prizeRecord = null;
 		try {
 			SessionFactory sf=new Configuration().configure().buildSessionFactory();
 			Session session=sf.openSession();
 			prizeRecordList = session.createQuery("from PrizeRecord").list();//将查询结果转化为List对象
 			Transaction tx=session.beginTransaction();
-			/*if (prizeRecordList != null) {
-				Iterator<?> it = prizeRecordList.iterator();
-				while (it.hasNext()) {
-					prizeRecord = (PrizeRecord) it.next();
-					System.out.println("ID:" + prizeRecord.getPrizeId() +
-							"  记录奖项："+ prizeRecord.getPrizeName()+"\n");
-				}
-			}*/
 			tx.commit();
 			session.clear();
 		} catch (HibernateException e) {
@@ -47,5 +38,17 @@ public class PrizeRecordDaoImpl extends DaoSupport<PrizeRecord> implements Prize
 			e.printStackTrace();
 		}
 		return prizeRecordList;
+	}
+	/**
+	 * 直接链接数据表保存记录奖项
+	 * @param arg
+	 */
+	public static void savePrizeRecord(Object arg){
+		SessionFactory sf=new Configuration().configure().buildSessionFactory();
+		Session session=sf.openSession();
+		Transaction tx=session.beginTransaction();
+		session.save(arg);
+		tx.commit();
+		session.clear();
 	}
 }

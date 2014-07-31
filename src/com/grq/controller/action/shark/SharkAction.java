@@ -61,14 +61,19 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	 */
 	@Override
 	public String main(){
-		
-		timeDelay = 2000;//延迟加载
-		timeCycle = 18000;//预先设置
-		System.out.println("延2加载");
-		Timer timer=new Timer();//实例化Timer类
-		timer.schedule(new SharkRun(),timeDelay,timeCycle);//从第二次开始每隔周期时长，包括SharkRun()里面的延迟时间，调用SharkRun()一次
-		
-		return MAIN;//返回主题页
+		boolean isBegin = true;
+		if(isBegin){
+			//这里不能放下面代码
+			timeDelay = 2000;//延迟加载
+			timeCycle = 18000;//预先设置
+			System.out.println("延2加载");
+			Timer timer=new Timer();//实例化Timer类
+			timer.schedule(new SharkRun(),timeDelay,timeCycle);//从第二次开始每隔周期时长，包括SharkRun()里面的延迟时间，调用SharkRun()一次
+			return MAIN;//返回主题页
+		} else {
+			System.out.println("还未开始");
+		}
+		return null;
 	}
 /**-------------------------------------------------------------------*/
 	/**
