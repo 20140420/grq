@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.grq.model.customizeenum.Prize;
 import com.grq.model.dao.shark.BetDao;
+import com.grq.model.dao.shark.BetDaoImpl;
 import com.grq.model.dao.shark.PrizeRecordDao;
 import com.grq.model.dao.shark.PrizeRecordDaoImpl;
 import com.grq.model.dao.shark.SharkConfigDao;
@@ -199,8 +200,11 @@ public class SharkRun extends TimerTask {
 		if (prizeRecordEntity != null) {//存在记录
 			int i = prizeRecordEntity.size();
 			lastDividend = prizeRecordEntity.get(i-1).getDividend();//获取最后一场奖项记录的彩金池记录
-		}		
-		System.out.println("获取上期彩金池：" + lastDividend);
+			System.out.println("获取上期彩金池：" + lastDividend);
+		} else {
+			lastDividend = topConfigList.getInitialDividend();
+			System.out.println("无奖项记录，设初始彩金池：" + lastDividend);
+		}
 	}
 	/**
 	 * 出奖
@@ -210,7 +214,6 @@ public class SharkRun extends TimerTask {
 		System.out.println("出奖函数");
 		countAndSum();//统计并求总押注和、各单项押注和、各单项出分和
 		if(totalBetSum != 0){//有人下注
-			System.out.println("下注总额："+totalBetSum);
 			dividend = lastDividend + totalBetSum*(1-commission_rate);//筹码注入彩金池
 			System.out.println("发奖前彩金："+dividend);
 			commissionProfit = totalBetSum*commission_rate;//佣金收益
@@ -411,7 +414,7 @@ public class SharkRun extends TimerTask {
 	 * @return
 	 */
 	private Prize randomPrize() {
-		System.out.print("随机函数：");
+		System.out.println("随机函数：");
 		againOrNot = false; //设置为false不重转
 		int whatPrize =(int)(Math.floor(randomNum.nextInt(8)));//随机获取大于等于0到小于8的整数部分,即随机获取0/1/2/3/4/5/6/7
 		if(whatPrize == 0){//为燕子概率1/8
@@ -475,7 +478,7 @@ public class SharkRun extends TimerTask {
 		betEntity = haveBet();//获取下注单
 		if(betEntity != null && betEntity.size() >0){
 			for(PanelInfo panelInfo : betEntity){//遍历所有的下注条目
-				System.out.println("遍历下单实体");
+				//System.out.println("遍历下单实体");
 				boolean betCount = panelInfo.getBetCount();//获得条目统计状态
 				if(betCount == false){//如果条目未操作过
 					totalSwallowSum += panelInfo.getSwallow();
@@ -544,7 +547,7 @@ public class SharkRun extends TimerTask {
 	 */
 	private void makeRecord() {
 		System.out.println("记录奖项PrizeRecord");
-		try{
+		//try{
 			prizeRecord.setPrizeId(StringUtil.getStringTime());//添加18位数字字符串与其他配置属性一起加到数据库中
 			prizeRecord.setCommissionRate(commission_rate);
 			prizeRecord.setPrizeName(prizeName);//放入开出的奖
@@ -580,9 +583,9 @@ public class SharkRun extends TimerTask {
 			prizeRecord.setOutBombScore(outBombScore);
 			System.out.print("记录奖项情况");
 			prizeRecordDao.save(prizeRecord);//保存奖项记录对象
-		} catch(Exception ex){
-			System.out.println("记录奖项时出现问题");
-		}
+		//} catch(Exception ex){
+		//	System.out.println("记录奖项时出现问题");
+		//}
 	}
 	
 	private void turnAgain() {
@@ -646,56 +649,7 @@ public class SharkRun extends TimerTask {
 	}
 	private List<PanelInfo> haveBet() {
 		System.out.println("获取下注单函数");
-		/*
-		Map<String, String> orderby = new HashMap<String, String>(1);//定义Map集合
-		orderby.put("createTime", "desc");//设置按创建时间倒序排列
-		String where = "where betCount = ?";//设置查询条件语句
-		Object[] queryParams = {false};//获取未操作过的参数值
-		pageModelPanelData = betDao.find(where, queryParams, orderby, -1, -1);//执行查询方法
-		betEntity = pageModelPanelData.getList();
-		*/
-		betEntity = new ArrayList<PanelInfo>();//下注单实体,一定要先初始化
-		PanelInfo betItem1 = new PanelInfo();
-		betItem1.setPanelBetId(StringUtil.createOrderId());// 设置21位的订单号
-		betItem1.setSwallow(1);
-		betItem1.setPigeon(1);
-		betItem1.setPeafowl(1);
-		betItem1.setEagle(1);
-		betItem1.setLion(1);
-		betItem1.setPanda(1);
-		betItem1.setMonkey(1);
-		betItem1.setRabbit(1);
-		betItem1.setBird(1);
-		betItem1.setSilver_shark(1);
-		betItem1.setBomb(1);
-		betItem1.setGold_shark(1);
-		betItem1.setBeast(1);
-		betItem1.setTotalBet(13);
-		betItem1.setPrizeItem(Prize.RAFFLING);
-		betItem1.setBetCount(false);
-		betItem1.setTimesSwallow(6);
-		betItem1.setTimesPigeon(6);
-		betItem1.setTimesPeafowl(8);
-		betItem1.setTimesEagle(24);
-		betItem1.setTimesLion(24);
-		betItem1.setTimesPanda(8);
-		betItem1.setTimesMonkey(6);
-		betItem1.setTimesRabbit(6);
-		betEntity.add(betItem1);
-		/*
-		PanelInfo betItem2 = new PanelInfo();
-		betItem2.setBeast(2);
-		betItem2.setBetCount(true);
-		betItem2.setBird(2);
-		betItem2.setPanelBetId(StringUtil.createOrderId());// 设置21位的订单号
-		betEntity.add(betItem2);
-		PanelInfo betItem3 = new PanelInfo();
-		betItem3.setBeast(3);
-		betItem3.setBetCount(false);
-		betItem3.setBird(3);
-		betItem3.setPanelBetId(StringUtil.createOrderId());// 设置21位的订单号
-		betEntity.add(betItem3);
-		*/
+		betEntity = BetDaoImpl.betEntity();//通过调用实现类中的方法获取下注单实体
 		return betEntity;
 	}
 	/**

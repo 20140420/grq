@@ -1,6 +1,5 @@
 package com.grq.model.dao.shark;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -31,7 +30,6 @@ public class PrizeRecordDaoImpl extends DaoSupport<PrizeRecord> implements Prize
 		try {
 			SessionFactory sf=new Configuration().configure().buildSessionFactory();
 			Session session=sf.openSession();
-			//List<?> list = null;
 			prizeRecordList = session.createQuery("from PrizeRecord").list();//将查询结果转化为List对象
 			Transaction tx=session.beginTransaction();
 			/*if (prizeRecordList != null) {
