@@ -559,7 +559,7 @@ public class SharkRun extends TimerTask {
 	private void makeRecord() {
 		System.out.println("记录奖项函数");
 		try{
-			if(betEntity != null && betEntity.size() >0){
+			if(betEntity != null && betEntity.size() >0){//必须有人下注
 				prizeRecord.setPrizeId(StringUtil.getStringTime());//添加18位数字字符串与其他配置属性一起加到数据库中
 				prizeRecord.setCommissionRate(commission_rate);
 				prizeRecord.setPrizeName(prizeName);//放入开出的奖

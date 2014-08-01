@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Timer;
+//import java.util.Timer;
 
 
 import org.springframework.context.annotation.Scope;
@@ -62,7 +62,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	public String main(){
 		boolean isBegin = true;
 		if(isBegin){
-			/* */
+			/* 
 			//这里不能放下面代码
 			Integer timeDelay;//延迟时长，用于加载游戏
 			Integer timeCycle;//周期时长
@@ -71,7 +71,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 			System.out.println("延2加载");
 			Timer timer=new Timer();//实例化Timer类
 			timer.schedule(new SharkRun(),timeDelay,timeCycle);//从第二次开始每隔周期时长，包括SharkRun()里面的延迟时间，调用SharkRun()一次
-			
+			*/
 			return MAIN;//返回主题页
 		} else {
 			System.out.println("还未开始");
@@ -111,7 +111,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 				panelData.setBetCount(betCount);// 用于判断是否是统计过（默认值为false）
 				panelData.setPrizeItem(Prize.RAFFLING);// 设置奖项状态为正在抽奖
 				System.out.println("下单创建时间："+panelData.getCreateTime());
-				betDao.save(panelData);//保存panel获得数据	
+				betDao.save(panelData);//保存panel获得数据
 				//记得重置panel下注
 			}
 			return main();//通过主函数返回shark主页面，可进行统计出结果
