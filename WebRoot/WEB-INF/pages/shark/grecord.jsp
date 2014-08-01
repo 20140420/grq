@@ -9,90 +9,70 @@
 <script src="js_example_url"></script>-->
 </head>
 <body>
-<div class="container">
+<div class="grecord">
 	<div class="header"><%@ include file="/WEB-INF/pages/header.jsp"%></div><!-- end .header -->
-	<div class="content">
-	    <div class="ranking">
+	<div>
+	    <div>
 	      <table border="1">
             <tr>
-              <th>期号</th>
-              <th scope="col">时间</th>
-              <th scope="col">费率</th>
+              <th scope="col">期号</th>
               <th scope="col">奖项</th>
-              <th scope="col">彩金池</th>
-              <th scope="col">燕子倍数</th>
-              <th scope="col">鸽子倍数</th>
-              <th scope="col">燕子总额</th>
-              <th scope="col">单场总额</th>
+              <th scope="col">燕子</th>
+              <th scope="col">鸽子</th>
+              <th scope="col">孔雀</th>
+              <th scope="col">老鹰</th>
+              <th scope="col">狮子</th>
+              <th scope="col">熊猫</th>
+              <th scope="col">猴子</th>
+              <th scope="col">兔子</th>
+              <th scope="col">飞禽</th>
+              <th scope="col">银鲨</th>
+              <th scope="col">炸弹</th>
+              <th scope="col">金鲨</th>
+              <th scope="col">走兽</th>
             </tr>
+            <s:iterator value="pageModel.list">
 	        <tr>
-	          <th scope="row">1</th>
-	          <td>股如泉887</td>
-	          <td>109</td>
-	          <td>86880</td>
-	          <td>10.02</td>
-	          <td>4.32</td>
-	          <td>12.35</td>
-	          <td>1108</td>
-	          <td>666</td>
+	          <th scope="col"><s:property value="prizeId" /></th>
+	          <td align="center"><s:property value="prizeName" /></td>
+	          <td align="center"><s:property value="totalSwallowSum" /></td>
+	          <td align="center"><s:property value="totalPigeonSum" /></td>
+	          <td align="center"><s:property value="totalPeafowlSum" /></td>
+	          <td align="center"><s:property value="totalEagleSum" /></td>
+	          <td align="center"><s:property value="totalLionSum" /></td>
+	          <td align="center"><s:property value="totalPandaSum" /></td>
+	          <td align="center"><s:property value="totalMonkeySum" /></td>
+	          <td align="center"><s:property value="totalRabbitSum" /></td>
+	          <td align="center"><s:property value="totalBirdSum" /></td>
+	          <td align="center"><s:property value="totalSilverSum" /></td>
+	          <td align="center"><s:property value="totalBombSum" /></td>
+	          <td align="center"><s:property value="totalGoldSum" /></td>
+	          <td align="center"><s:property value="totalBeastSum" /></td>
             </tr>
-             <tr>
-	          <th scope="row">2</th>
-	          <td>长线预测11</td>
-	          <td>723</td>
-	          <td>104242</td>
-	          <td>11.52</td>
-	          <td>6.53</td>
-	          <td>20.12</td>
-	          <td>455</td>
-	          <td>756</td>
-            </tr>
-	        <tr>
-	          <th scope="row">3</th>
-	          <td>&nbsp;</td>
-	          <td>&nbsp;</td>
-	          <td>&nbsp;</td>
-	          <td>&nbsp;</td>
-	          <td>&nbsp;</td>
-	          <td>&nbsp;</td>
-	          <td>&nbsp;</td>
-	          <td>&nbsp;</td>
-            </tr>
-	        <tr>
-	          <th scope="row">4</th>
-	          <td>&nbsp;</td>
-	          <td>&nbsp;</td>
-	          <td>&nbsp;</td>
-	          <td>&nbsp;</td>
-	          <td>&nbsp;</td>
-	          <td>&nbsp;</td>
-	          <td>&nbsp;</td>
-	          <td>&nbsp;</td>
-            </tr>
-	        <tr>
-	          <th scope="row">5</th>
-	          <td>&nbsp;</td>
-	          <td>&nbsp;</td>
-	          <td>&nbsp;</td>
-	          <td>&nbsp;</td>
-	          <td>&nbsp;</td>
-	          <td>&nbsp;</td>
-	          <td>&nbsp;</td>
-	          <td>&nbsp;</td>
-            </tr>
+            </s:iterator>
             <tr>
-              <td colspan="9" align="right" valign="middle">[首页][上一页][下一页][尾页] [1]/[108] 第[  ]页 [跳转]</td>
+              <td colspan="15" align="right" valign="middle">
+				<div id="right_foot01">
+					<s:url action="record_grecord" namespace="/shark" var="first">
+						<s:param name="pageNo" value="1"></s:param>
+					</s:url> 
+					<s:url action="record_grecord" namespace="/shark" var="previous">
+						<s:param name="pageNo" value="pageModel.pageNo-1"></s:param>
+					</s:url> 
+					<s:url action="record_grecord" namespace="/shark" var="last">
+						<s:param name="pageNo" value="pageModel.bottomPageNo"></s:param>
+					</s:url> 
+					<s:url action="record_grecord" namespace="/shark" var="next">
+						<s:param name="pageNo" value="pageModel.pageNo+1"></s:param>
+					</s:url> 
+					<s:include value="/WEB-INF/pages/common/page.jsp"></s:include>
+				</div>
+              </td>
             </tr>
           </table>
-	    </div> <!-- end .ranking -->
-      <!--<div id="sample">
-         ...
-        </div> <!-- #sample END -->
-	</div>
-    <!--<div class="sidebar1">
-        侧边（选择）
-	</div>-->   
-  <div class="footer"><%@ include file="/WEB-INF/pages/footer.jsp"%><!-- end .footer --></div>
+	    </div> <!-- end .grecord -->
+	</div> 
+	<div class="footer"><%@ include file="/WEB-INF/pages/footer.jsp"%><!-- end .footer --></div>
 </div>
 <script>
 // 你的代码

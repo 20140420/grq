@@ -31,7 +31,7 @@ td {
 				<td align="center">炸弹</td>
 				<td align="center">金鲨</td>
 				<td align="center">走兽</td>
-				<td align="center">期号</td>
+				<td align="center">下注单号</td>
 				<td align="center">是否统计</td>
 			</tr>
 		</table>

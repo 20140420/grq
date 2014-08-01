@@ -29,7 +29,6 @@
 		<!-- 游戏奖项记录-->
 		<action name="record_*" method="{1}" class="recordAction">
 			<result name="grecord">/WEB-INF/pages/shark/grecord.jsp</result>
-			<result name="addgrecord">/WEB-INF/pages/shark/addgrecord.jsp</result>
 		</action>
 	</package>
 	

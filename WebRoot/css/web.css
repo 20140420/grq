@@ -2,7 +2,7 @@
 /* CSS Document */
 body {
 	font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
-	background-color: #CCCCCC;
+	background-color: #FFF;
 	margin: 0;
 	padding: 0;
 	color: #000;
@@ -259,6 +259,7 @@ form table td.identification input{
 }
 .container .content .ranking table {
 	margin: 0px auto; 
+	width: 100%;
 }
 .container .content .ranking table td {
 	height: 40px;
@@ -271,6 +272,37 @@ form table td.identification input{
 	border-left-style: none;
 }
 .container .content .ranking table th{
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #999;
+	border-top-style: none;
+	border-right-style: none;
+	border-left-style: none;
+	width: 40px;
+}
+/*grecord.jsp*/
+.grecord {
+	height: auto;
+	width: 1260px;
+	background-color: #FFF;
+	padding: 0px;
+	margin: 0 auto; /* 侧边的自动值与宽度结合使用，可以将布局居中对齐 */
+}
+.grecord table {
+	margin: 0px auto; 
+	width: 100%;
+}
+.grecord table td {
+	height: 40px;
+	width: 100px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #999;
+	border-top-style: none;
+	border-right-style: none;
+	border-left-style: none;
+}
+.grecord table th{
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
 	border-bottom-color: #999;
