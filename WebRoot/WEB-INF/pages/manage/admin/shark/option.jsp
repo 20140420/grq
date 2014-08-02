@@ -2,6 +2,7 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <s:set var="context_path" value="#request.get('javax.servlet.forward.context_path')"></s:set>
 <link href="${context_path}/css/manage.css" rel="stylesheet" type="text/css" />
+<link href="${context_path}/css/style.css" rel="stylesheet" type="text/css" />
 <style>
 <!--
 td {
@@ -15,11 +16,17 @@ td {
   <s:form action="config_save" namespace="/admin/operate" enctype="multipart/form-data" method="post">
 	<table>
     	<tr>
-          <td colspan="6" align="left">游戏配置</td>
+          <td colspan="5" align="left">游戏配置</td>
+          <!-- <td class="col4"><s:textfield name="isBegin" value="ON/OFF"></s:textfield></td> -->
+          <td class="col4">
+			<div><!-- class="switch demo3"> --> 
+				<input type="checkbox">
+				<label><i></i></label>
+			</div>
+		  </td>
         </tr>
         <tr>
-          <th colspan="4" align="left">配置设置</th>
-          <th class="col4"><s:textfield name="isBegin" value="开启Or关闭"></s:textfield></th>
+          <th colspan="5" align="left">配置设置</th>
           <th><s:submit type="text" value="提交修改"></s:submit></th>
           </tr>
         <tr>
@@ -59,8 +66,7 @@ td {
 </s:push>
 	<table>
         <tr>
-          <th colspan="2" align="left">配置记录</th>
-          <th colspan="4"><!-- 配置号：<input type="text" name="textfield" id="textfield">[搜索] --></th>
+          <th colspan="6" align="left">配置记录</th>
         </tr>
         <tr>
           <td align="center">设定日期</td>
