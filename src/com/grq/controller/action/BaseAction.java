@@ -35,7 +35,7 @@ SessionAware{
 	private static final long serialVersionUID = 1L;
 	
 	protected int pageNo = 1;//当前页
-	protected int pageSize = 10;//每页显示多少条
+	protected int pageSize = 5;//每页显示多少条
 	
 	// 注入Dao
 	@Autowired
@@ -61,6 +61,7 @@ SessionAware{
 	protected Map<String, Object> session;
 	
 	public static final String TEST = "test";
+	public static final String PREPARE = "prepare";
 	public static final String INDEX = "index";
 	public static final String MANAGE = "manage";
 	public static final String MAIN = "main";
@@ -85,6 +86,9 @@ SessionAware{
 	}
 	public String test() throws Exception {
 		return TEST;
+	}
+	public String prepare() throws Exception {
+		return PREPARE;
 	}
 	public String index() throws Exception {
 		return INDEX;

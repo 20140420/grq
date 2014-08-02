@@ -35,7 +35,8 @@ public class SharkRun extends TimerTask {
 	private static List<PanelInfo> betEntity;//下注单实体
 	
 	private static Prize prizeName;//奖项变量，默认正在抽奖
-	
+	//配置
+	private static boolean isBegin;//游戏是否开启
 	private static int timeBet;//下注时间
 	private static int timeCircle;//转盘时间
 	private static double lastDividend;//上场奖项彩金池
@@ -95,15 +96,21 @@ public class SharkRun extends TimerTask {
 	 */
 	@Override
 	public void run() {
-		System.out.println("-------------------------------------------");
-		process();      //周期循环流程
-		System.out.println("---------如果没退出周期，还有18-5-3开始第二周期----------");
-		this.cancel();//退出周期调用，结束线程
+		//如果游戏已经开启
+		haveConfig();
+		if(isBegin){//游戏循环开启
+			System.out.println("-------------------------------------------");
+			process();      //周期循环流程
+			System.out.println("---------如果没退出周期，还有18-9-4始第二周期----------");
+		} else{//游戏循环关闭
+			this.cancel();//退出周期调用，结束线程
+			//System.exit(0);//是否正常退出JVM虚拟机所有线程
+		}
 	}
 
 	private void process() {
 		//makeTimes();          //获取倍数,倍数随机生成不统一	
-		haveConfig();         //获取配置
+		//haveConfig();         //获取配置
 		haveLastDividend();   //获取上期彩金池
 		//观察、下注 
 		System.out.println("下注时间"+timeBet);
@@ -177,7 +184,7 @@ public class SharkRun extends TimerTask {
 	 * 获取配置
 	 * @return
 	 */
-	private void haveConfig() {
+	public void haveConfig() {
 		//System.out.println("获取配置函数haveConfig()");
 		topConfigList =SharkConfigDaoImpl.lastSharkConfig();//通过调用配置实现类中的方法获取最后一条配置
 		//System.out.println("通过配置函数初始彩金池："+topConfigList.getInitialDividend());
@@ -188,12 +195,14 @@ public class SharkRun extends TimerTask {
 		lastConfigList.add(topConfigList.getTimeCycle()); //周期
 		lastConfigList.add(topConfigList.getBetLimit());  //压筹限制
 		lastConfigList.add(topConfigList.getPrizeRecordNum());//查看几条奖项记录
+		lastConfigList.add(topConfigList.getIsBegin());//获取游戏开关状态
 		System.out.println("最新配置列表："+lastConfigList);
 		//配置添加到变量中
 		commission_rate = topConfigList.getCommissionRate();
 		timesMax = topConfigList.getTimesMax();
 		timeBet = topConfigList.getTimeBet();//下注时间
 		timeCircle = topConfigList.getTimeCircle();//转盘时间
+		isBegin = topConfigList.getIsBegin();//获取游戏开关状态
 	}
 	/**
 	 * 获取上场彩金池
@@ -639,6 +648,7 @@ public class SharkRun extends TimerTask {
 		outBeastScore = 0.0;//走兽总出分 ;
 		outBombScore = 0.0;//炸弹出分
 		//游戏配置
+		
 		prizeRecordNum = 5;//统计场数,考虑添加到配置函数
 		commission_rate =0.0; //佣金费率
 		timesMax = 0;//最高倍数

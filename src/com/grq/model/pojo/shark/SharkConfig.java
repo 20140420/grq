@@ -20,6 +20,7 @@ public class SharkConfig  implements java.io.Serializable {
 	
 	private String id;//配置序列号(手动分配)
     private Date createTime = new Date();// 提交时间即截止时间
+    private Boolean isBegin;//游戏是否开启
     private Double initialDividend;//彩金池初值
     private Double commissionRate;//佣金费率
     private Integer betLimit;//下注上限
@@ -42,8 +43,9 @@ public class SharkConfig  implements java.io.Serializable {
 
     
     /** full constructor */
-    public SharkConfig(Date createTime, Double initialDividend, Double commissionRate, Integer singlBet, Integer betLimit, Integer timesMax, Integer circleNum, Integer timeCircle, Integer timeObserve, Integer timeBet, Integer timeDisplay, Integer timeWait, Integer timeCycle, Integer prizeRecordNum) {
+    public SharkConfig(Date createTime, Boolean isBegin, Double initialDividend, Double commissionRate, Integer singlBet, Integer betLimit, Integer timesMax, Integer circleNum, Integer timeCircle, Integer timeObserve, Integer timeBet, Integer timeDisplay, Integer timeWait, Integer timeCycle, Integer prizeRecordNum) {
         this.createTime = createTime;
+        this.isBegin = isBegin;
         this.initialDividend = initialDividend;
         this.commissionRate = commissionRate;
         this.betLimit = betLimit;
@@ -77,7 +79,15 @@ public class SharkConfig  implements java.io.Serializable {
         this.createTime = createTime;
     }
 
-    public Double getInitialDividend() {
+    public Boolean getIsBegin() {
+		return isBegin;
+	}
+
+	public void setIsBegin(Boolean isBegin) {
+		this.isBegin = isBegin;
+	}
+
+	public Double getInitialDividend() {
         return this.initialDividend;
     }
     

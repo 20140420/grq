@@ -18,7 +18,8 @@ td {
           <td colspan="6" align="left">游戏配置</td>
         </tr>
         <tr>
-          <th colspan="5" align="left">配置设置</th>
+          <th colspan="4" align="left">配置设置</th>
+          <th class="col4"><s:textfield name="isBegin" value="开启Or关闭"></s:textfield></th>
           <th><s:submit type="text" value="提交修改"></s:submit></th>
           </tr>
         <tr>

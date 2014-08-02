@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-//import java.util.Timer;
 
 
 import org.springframework.context.annotation.Scope;
@@ -14,7 +13,9 @@ import com.grq.controller.action.BaseAction;
 import com.grq.model.PageModel;
 import com.grq.model.SharkRun;
 import com.grq.model.customizeenum.Prize;
+import com.grq.model.dao.shark.SharkConfigDaoImpl;
 import com.grq.model.pojo.shark.PanelInfo;
+import com.grq.model.pojo.shark.SharkConfig;
 import com.grq.model.pojo.shark.TimesEntity;
 import com.grq.model.util.StringUtil;
 import com.opensymphony.xwork2.ModelDriven;
@@ -60,23 +61,15 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	 */
 	@Override
 	public String main(){
-		boolean isBegin = true;
+		SharkConfig topConfigList = SharkConfigDaoImpl.lastSharkConfig();//通过调用配置实现类中的方法获取最后一条配置
+		boolean isBegin = topConfigList.getIsBegin();//获取游戏是否开启
+		System.out.println("游戏是否开启："+isBegin);
 		if(isBegin){
-			/* 
-			//这里不能放下面代码
-			Integer timeDelay;//延迟时长，用于加载游戏
-			Integer timeCycle;//周期时长
-			timeDelay = 2000;//延迟加载
-			timeCycle = 18000;//预先设置
-			System.out.println("延2加载");
-			Timer timer=new Timer();//实例化Timer类
-			timer.schedule(new SharkRun(),timeDelay,timeCycle);//从第二次开始每隔周期时长，包括SharkRun()里面的延迟时间，调用SharkRun()一次
-			*/
 			return MAIN;//返回主题页
 		} else {
 			System.out.println("还未开始");
+			return PREPARE;//返回准备页面
 		}
-		return null;
 	}
 /**-------------------------------------------------------------------*/
 	/**

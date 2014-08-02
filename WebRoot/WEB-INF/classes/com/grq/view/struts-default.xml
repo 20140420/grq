@@ -21,6 +21,8 @@
             <result name="adminLogin">/WEB-INF/pages/admin_login.jsp</result>
             <!-- 管理员后台 -->
             <result name="adminManage">/WEB-INF/pages/manage/admin/manage.jsp</result>
+            <!-- 准备项目 -->
+            <result name="prepare">/WEB-INF/pages/prepare/prepare.jsp</result>
         </global-results>
 		<global-exception-mappings>
 			<exception-mapping result="error" exception="#"></exception-mapping>
