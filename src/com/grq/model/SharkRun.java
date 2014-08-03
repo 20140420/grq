@@ -549,7 +549,7 @@ public class SharkRun extends TimerTask {
 		}		
 	}
 	/**
-	 * 更改个人下注单的统计状态和得奖情况，包括奖项期号
+	 * 更改个人下注单的统计状态和得奖情况
 	 */
 	private void makeBetItem() {
 		for(PanelInfo panelInfo : betEntity){//遍历所有符合条件的下注条目
@@ -557,7 +557,6 @@ public class SharkRun extends TimerTask {
 			if(betCount == false){//如果条目未操作过
 				panelInfo.setBetCount(true);// 更改筹码统计状态
 				panelInfo.setPrizeItem(prizeName);// 更改得奖情况
-				//panelInfo.setPrizeRecord(prizeRecord.getPrizeId());//记录奖项期号
 				System.out.println("更改中奖奖项为:"+prizeName);
 				BetDaoImpl.updateBet(panelInfo);//更新修改操作状态
 			}

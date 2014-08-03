@@ -1,7 +1,7 @@
+// default package
 package com.grq.model.pojo.shark;
 
 import java.util.Date;
-import java.util.Set;
 
 import com.grq.model.customizeenum.Prize;
 
@@ -21,7 +21,6 @@ public class PrizeRecord  implements java.io.Serializable {
 	
 	private String prizeId;//奖项期号(手动分配)
     private Date createTime =new Date() ;//生成时间
-    private Set<PanelInfo> betPanelInfos;// 单场所有下注单，与数据库本表无联系
     private Double commissionRate;//佣金费率
     private Prize prizeName;//中奖的奖项
     private Double dividend;//剩余彩金池
@@ -63,8 +62,7 @@ public class PrizeRecord  implements java.io.Serializable {
     }
     
     /** full constructor */
-    public PrizeRecord(String prizeId, Date createTime,
-    		Set<PanelInfo> betPanelInfos, Double commissionRate, 
+    public PrizeRecord(String prizeId, Date createTime, Double commissionRate, 
     		Prize prizeName, Double dividend, Integer timesGoldShark, 
     		Integer timesBomb, Double totalSwallowSum, Double totalPigeonSum, 
     		Double totalPeafowlSum, Double totalEagleSum, Double totalLionSum, 
@@ -78,7 +76,6 @@ public class PrizeRecord  implements java.io.Serializable {
     		Double outBombScore)  {
         this.prizeId = prizeId;
         this.setCreateTime(createTime);
-        this.betPanelInfos = betPanelInfos;
         this.commissionRate = commissionRate;
         this.prizeName = prizeName;
         this.dividend = dividend;
@@ -131,15 +128,7 @@ public class PrizeRecord  implements java.io.Serializable {
         this.createTime = createTime;
     }
 
-    public Set<PanelInfo> getBetPanelInfos() {
-		return betPanelInfos;
-	}
-
-	public void setBetPanelInfos(Set<PanelInfo> betPanelInfos) {
-		this.betPanelInfos = betPanelInfos;
-	}
-
-	public Double getCommissionRate() {
+    public Double getCommissionRate() {
         return this.commissionRate;
     }
     
