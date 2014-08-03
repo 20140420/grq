@@ -39,7 +39,7 @@ public class Shark{
 	 * 启动shark独立线程函数
 	 */
 	public static void startShark(){
-		System.out.println("未做！启动shark独立线程函数startShark()");
+		System.out.println("未做！为稳定一定要独立进程，启动shark独立线程函数startShark()");
 		//暂时用非独立shark线程
 		sharkP();
 	}
