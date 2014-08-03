@@ -6,14 +6,9 @@ import java.util.Random;
 import java.util.TimerTask;
 import java.util.Vector;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.grq.model.customizeenum.Prize;
-import com.grq.model.dao.shark.BetDao;
 import com.grq.model.dao.shark.BetDaoImpl;
-import com.grq.model.dao.shark.PrizeRecordDao;
 import com.grq.model.dao.shark.PrizeRecordDaoImpl;
-import com.grq.model.dao.shark.SharkConfigDao;
 import com.grq.model.dao.shark.SharkConfigDaoImpl;
 import com.grq.model.pojo.shark.PanelInfo;
 import com.grq.model.pojo.shark.PrizeRecord;
@@ -81,16 +76,7 @@ public class SharkRun extends TimerTask {
 	private static double outBirdScore;//飞禽总出分 ;
 	private static double outBeastScore;//走兽总出分 ;
 	private static double outBombScore;//炸弹出分	
-	
-	@Autowired
-	protected BetDao betDao;
-	@Autowired
-	protected SharkConfigDao sharkConfigDao;
-	@Autowired
-	protected PrizeRecordDao prizeRecordDao;
-	
-
-	
+		
 	/**
 	 *游戏一个运行周期,等同主函数
 	 */

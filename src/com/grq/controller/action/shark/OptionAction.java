@@ -86,6 +86,10 @@ public class OptionAction extends BaseAction implements ModelDriven<SharkConfig>
 			pageModel = sharkConfigDao.find(-1, -1, orderby);//执行查询方法
 			if(pageModel.getList().get(0).getId() != null){//存在配置
 				this.sharkConfig = sharkConfigDao.get(pageModel.getList().get(0).getId());//加载对象最新配置序列号
+				boolean isBegin = sharkConfig.getIsBegin();//获取游戏是否开启
+				if(isBegin){//如果游戏开启
+					Shark.main(null);//通过main函数启动游戏
+				}
 			}
 			System.out.println("最新初始彩金池："+sharkConfig.getInitialDividend());
 			//获取历史所有配置以分页形式保存
