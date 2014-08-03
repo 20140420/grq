@@ -25,8 +25,6 @@ td {
               <tr>
 				<td align="center">下注者</td>
 				<td align="center">下注总数</td>
-				<td align="center">单注额度</td>
-				<td align="center">总金额</td>
 				<td align="center">奖项</td>
 				<td align="center">创建时间</td>
 				<td align="center">燕子</td>
@@ -43,7 +41,6 @@ td {
 				<td align="center">金鲨</td>
 				<td align="center">走兽</td>
 				<td align="center">下注单号</td>
-				<td align="center">是否统计</td>
               </tr>
              </table>
             </td>
@@ -56,8 +53,6 @@ td {
                 <tr>
 						<td align="center"><s:property value="customer.username" /></td>
 						<td align="center"><s:property value="totalBet" /></td>
-						<td align="center"><s:property value="single_bet" /></td>
-						<td align="center"><s:property value="totalPrice" /></td>
 						<td align="center"><s:property value="prizeItem.getName()"/></td>
 						<td align="center"><s:date name="createTime" format="yyyy年MM月d日HH:mm" /></td>
 						<td align="center"><s:property value="swallow" /></td>
@@ -74,7 +69,6 @@ td {
 						<td align="center"><s:property value="gold_shark" /></td>
 						<td align="center"><s:property value="beast" /></td>
 						<td align="center"><s:property value="panelBetId" /></td>
-						<td align="center"><s:property value="betCount" /></td>
                 </tr>
               </table>
              </div>

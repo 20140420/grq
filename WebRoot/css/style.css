@@ -45,7 +45,7 @@ body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";}
 
 /* switch */
 .switch {
-  margin: 50px auto;
+  margin: 5px auto;
   position: relative;
 }
 
@@ -309,7 +309,7 @@ body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";}
 }
 
 .switch.demo3 label i:before {
-	content: "off";
+	content: "on";
 	text-transform: uppercase;
 	font-style: normal;
 	font-weight: bold;
@@ -319,8 +319,8 @@ body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";}
 	font-size: 14px;
 	position: absolute;
 	top: 50%;
-	margin-top: -9px;
-	right: -50%;
+	margin-top: -7px;
+	right: -45%;
 }
 
 .switch.demo3 input:checked ~ label {
@@ -332,8 +332,8 @@ body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";}
 }
 
 .switch.demo3 input:checked ~ label i:before {
-  content: "on";
-  right: 115%;
+  content: "off";
+  right: 105%;
   color: #82a06a;
   text-shadow: 
     0 1px 0 #afcb9b,

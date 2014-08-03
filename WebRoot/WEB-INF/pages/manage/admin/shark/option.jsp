@@ -17,10 +17,9 @@ td {
 	<table>
     	<tr>
           <td colspan="5" align="left">游戏配置</td>
-          <!-- <td class="col4"><s:textfield name="isBegin" value="ON/OFF"></s:textfield></td> -->
           <td class="col4">
-			<div><!-- class="switch demo3"> --> 
-				<input type="checkbox">
+			<div class="switch demo3">
+				<s:checkbox name="isBegin"></s:checkbox>
 				<label><i></i></label>
 			</div>
 		  </td>
@@ -71,19 +70,19 @@ td {
         <tr>
           <td align="center">设定日期</td>
           <td align="center">佣金比率</td>
-          <td align="center">彩金池初值</td>
           <td align="center">最高倍数</td>
           <td align="center">时间周期</td>
           <td align="center">押注上限</td>
+          <td align="center">是否开启</td>
         </tr>
     <s:iterator value="pageModel.list">
         <tr>
           <td align="center"><s:date name="createTime" format="yyyy年MM月d日" /></td>
           <td align="center"><s:property value="commissionRate" /></td>
-          <td align="center"><s:property value="initialDividend" /></td>
           <td align="center"><s:property value="timesMax" /></td>
           <td align="center"><s:property value="timeCycle" /></td>
           <td align="center"><s:property value="betLimit" /></td>
+          <td align="center"><s:property value="isBegin" /></td>
         </tr>
     </s:iterator>
         <tr>
