@@ -1,10 +1,10 @@
 package com.grq.controller.action.shark;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -63,13 +63,18 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 	public String main(){
 		SharkConfig topConfigList = SharkConfigDaoImpl.lastSharkConfig();//通过调用配置实现类中的方法获取最后一条配置
 		boolean isBegin = topConfigList.getIsBegin();//获取游戏是否开启
+		
+		String mainPid = null;
+		mainPid = Shark.getSelfPID();//获取项目主进程PID
+		System.out.println("项目主进程PID："+mainPid);
+		
 		System.out.println("游戏是否开启："+isBegin);
-		if(isBegin){
-			return MAIN;//返回主题页
-		} else {
-			System.out.println("还未开始");
-			return PREPARE;//返回准备页面
+		if(isBegin){//条件一是游戏开启
+			Shark.main(null);//通过Shark的main函数启动游戏
+			return MAIN;//返回游戏主题页
 		}
+		System.out.println("还未开始");
+		return PREPARE;//返回准备页面
 	}
 /**-------------------------------------------------------------------*/
 	/**

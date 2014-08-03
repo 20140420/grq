@@ -45,7 +45,7 @@ public class AdminAction extends BaseAction implements ModelDriven<User>{
 			addFieldError("", "admin用户名或密码不正确！");//返回错误提示信息
 			return ADMIN_LOGIN;//返回管理员后台登录页面
 		}
-		System.out.print("管理员登入成功！OK");
+		System.out.println("管理员登入成功！OK");
 		return ADMIN_MANAGE;//返回管理员后台页面
 	}
 	/**
