@@ -41,7 +41,7 @@ public class Shark{
 	public static void startShark(){
 		System.out.println("未做！启动shark独立线程函数startShark()");
 		//暂时用非独立shark线程
-		//sharkP();
+		sharkP();
 	}
 	public static void sharkP(){
 		//以下非独立shark线程，暂时用
