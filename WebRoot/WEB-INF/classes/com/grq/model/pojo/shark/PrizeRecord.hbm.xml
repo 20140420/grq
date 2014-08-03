@@ -15,6 +15,10 @@
                 <comment>生成时间</comment>
             </column>
         </property>
+        <set name="betPanelInfos" inverse="true" lazy="extra" cascade="all">
+			<key column="prizeId"/>
+			<one-to-many class="PanelInfo"/>
+		</set>
         <property name="commissionRate" type="java.lang.Double">
             <column name="commission_rate" precision="22" scale="0">
                 <comment>佣金费率</comment>

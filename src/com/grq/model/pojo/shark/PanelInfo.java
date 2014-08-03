@@ -24,6 +24,7 @@ public class PanelInfo  implements java.io.Serializable {
 	private String panelBetId;// 键盘下注编号(手动分配)
 	private Customer customer;// 所属用户
     private Date createTime = new Date();// 提交时间即截止时间
+    private PrizeRecord prizeRecord;//所属奖项记录
  	private Integer swallow;// 燕子
  	private Integer pigeon;// 鸽子
  	private Integer peafowl;// 孔雀
@@ -58,6 +59,7 @@ public class PanelInfo  implements java.io.Serializable {
     
     /** full constructor */
     public PanelInfo(String panelBetId, Customer customer, Date createTime, 
+    		PrizeRecord prizeRecord,
     		Integer swallow, Integer pigeon, Integer peafowl, Integer eagle, 
     		Integer lion, Integer panda, Integer monkey, Integer rabbit, 
     		Integer bird, Integer silverShark, Integer bomb, Integer goldShark, 
@@ -68,6 +70,7 @@ public class PanelInfo  implements java.io.Serializable {
         this.panelBetId = panelBetId;
         this.customer = customer;
         this.setCreateTime(createTime);
+        this.prizeRecord = prizeRecord;
         this.swallow = swallow;
         this.pigeon = pigeon;
         this.peafowl = peafowl;
@@ -122,6 +125,16 @@ public class PanelInfo  implements java.io.Serializable {
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+
+
+	public PrizeRecord getPrizeRecord() {
+		return prizeRecord;
+	}
+
+
+	public void setPrizeRecord(PrizeRecord prizeRecord) {
+		this.prizeRecord = prizeRecord;
 	}
 
 

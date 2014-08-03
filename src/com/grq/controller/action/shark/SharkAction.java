@@ -103,6 +103,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 				panelData.setTotalBet(totalBet);//把下注总数加到对象panelData中
 				panelData.setBetCount(betCount);// 用于判断是否是统计过（默认值为false）
 				panelData.setPrizeItem(Prize.RAFFLING);// 设置奖项状态为正在抽奖
+				//panelData.setPrizeRecord();//设置奖项期号
 				System.out.println("下单创建时间："+panelData.getCreateTime());
 				betDao.save(panelData);//保存panel获得数据
 				//记得重置panel下注

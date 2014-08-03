@@ -20,6 +20,12 @@
                 <comment>生成时间</comment>
             </column>
         </property>
+        <!-- 多对一映射下注单 -->
+        <many-to-one name="prizeRecord">
+            <column name="prizeRecordId">
+                <comment>奖项期号</comment>
+            </column>
+        </many-to-one>
         <property name="swallow" type="java.lang.Integer">
             <column name="swallow" not-null="true">
                 <comment>燕子</comment>
