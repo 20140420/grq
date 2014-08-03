@@ -1,6 +1,5 @@
 package com.grq.controller.action.shark;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -70,7 +69,7 @@ public class SharkAction extends BaseAction implements ModelDriven<PanelInfo>{
 		
 		System.out.println("游戏是否开启："+isBegin);
 		if(isBegin){//条件一是游戏开启
-			Shark.main(null);//通过Shark的main函数启动游戏
+			//不能这里添加线程Shark.main(null);//通过Shark的main函数启动游戏
 			return MAIN;//返回游戏主题页
 		}
 		System.out.println("还未开始");
