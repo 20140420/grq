@@ -1,7 +1,12 @@
-<%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
+<%@ page contentType="text/html; charset=utf-8" language="java" 
+import="java.util.*,java.text.*,com.grq.model.pojo.shark.SharkConfig,com.grq.model.dao.shark.SharkConfigDaoImpl" errorPage="" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+
+SharkConfig topConfigList = SharkConfigDaoImpl.lastSharkConfig();//通过调用配置实现类中的方法获取最后一条配置
+Integer int_timeCycle = topConfigList.getTimeCycle();
+System.out.println("周期：" + int_timeCycle);
 %>
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/shark_cycle.js"></script>
@@ -30,6 +35,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  <div class="gdial-display">
 	<div id="canvas-background-color" style="float: left" >
 		<!-- <canvas id="playground" width="537" height="308"></canvas> -->
+		<div>
+		<script>
+			var tCycle = "<%=int_timeCycle%>";
+			alert("周期tCycle=" + tCycle);
+		</script>
+		</div>
 		<div class="colockbox" id="demo04">
 			<span class="second">-</span>
 		</div>
