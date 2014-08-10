@@ -3,10 +3,24 @@
 *{margin:0;padding:0;list-style-type:none;}
 a,img{border:0;}
 body{font:12px/180% Arial, Helvetica, sans-serif,"宋体";}
-/* colockbox */
-.colockbox{width:283px;height:76px;margin:90px 245px;overflow:hidden;/*background:url(../imgsystem/colockbg.png) no-repeat;*/}
+/* colockbox 
+.colockbox{width:283px;height:76px;margin:90px 245px;overflow:hidden;}
 .colockbox span{float:left;display:block;width:58px;height:48px;line-height:48px;font-size:26px;text-align:center;color:#ffffff;margin:0 17px 0 0;}
 .colockbox span.second{margin:0;}
 #demo02{width:208px;background-position:-75px 0;}
 #demo03{width:58px;background-position:-225px 0;}
 #demo04{width:58px;background-position:-225px 0;}
+*/
+/* display box */
+.box_S{width:620px;height:63px;margin:90px 205px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_WIN_PANDA_S_WIN.png) no-repeat;}
+.box{width:1000px;height:200px;margin:30px 165px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_WIN_PANDA_WIN.png) no-repeat;}
+#demos1{width:124px;background-position:0px 0;}
+#demos2{width:124px;background-position:-124px 0;}
+#demos3{width:124px;background-position:-248px 0;}
+#demos4{width:124px;background-position:-372px 0;}
+#demos5{width:124px;background-position:-496px 0;}
+#demo1{width:200px;background-position:0px 0;}
+#demo2{width:200px;background-position:-200px 0;}
+#demo3{width:200px;background-position:-400px 0;}
+#demo4{width:200px;background-position:-600px 0;}
+#demo5{width:200px;background-position:-800px 0;}

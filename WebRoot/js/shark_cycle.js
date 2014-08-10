@@ -8,15 +8,15 @@ $(function(){
 	var time_cycle= (time_spend+time_observe+ time_bet+ time_display+ time_wait);//一个周期时长 后期由服务器取得,展示-等待-观察-下注-转盘
 	//var circle_num= 2;//转盘圈数 后期由服务器取得
 	//var circle_speed= (28*80*circle_num)/time_spend;//计算转盘速度,28个跳格，setInterval()频率80毫秒
-	var int_timeCycle = "<% = timeCycle %>";
-	alert("周期int_timeCycle=" + int_timeCycle);
+	//var int_timeCycle = "<%=int_timeCycle%>";
+	//alert("周期int_timeCycle=" + int_timeCycle);
 
 	clock(time_cycle,time_spend,time_display,time_wait,time_observe,time_bet,"#demo04 .second","#demo04 .second");
 
 });
 
 function clock(time_length,time_spend,time_display,time_wait,time_observe,time_bet,minute_elem,second_elem){
-	var timer = setInterval(function(){
+	setInterval(function(){
 			if(time_length > (time_observe+ time_bet+ time_display+ time_wait)){//转盘
 				time_length -=1;
 				spend=(time_length-(time_observe+ time_bet+ time_display+ time_wait));
@@ -53,4 +53,35 @@ function clock(time_length,time_spend,time_display,time_wait,time_observe,time_b
 	//alert("返回timer："+timer);
 	//alert("去掉本提示就可以无限循环，周期："+time_length);
 	//return time_length;
+}
+//display展示中奖结果
+function changeS (obj,num) 
+{
+	var n = num;
+	//alert("查看n： " + n);
+	setInterval(function(){
+		if( num > 0)
+		{
+			obj.id = "demos"+num;
+			num -= 1;
+			//alert("查看obj.id： " + obj.id);
+		} else {
+			num = n;
+		}		
+	}, 150);
+}
+function change (obj,num) 
+{
+	var n = num;
+	//alert("查看n： " + n);
+	setInterval(function(){
+		if( num > 0)
+		{
+			obj.id = "demo"+num;
+			num -= 1;
+			//alert("查看obj.id： " + obj.id);
+		} else {
+			num = n;
+		}		
+	}, 150);
 }

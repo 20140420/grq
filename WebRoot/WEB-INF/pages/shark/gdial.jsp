@@ -34,15 +34,13 @@ System.out.println("周期：" + int_timeCycle);
  <!-- 中间展示区 -->
  <div class="gdial-display">
 	<div id="canvas-background-color" style="float: left" >
-		<!-- <canvas id="playground" width="537" height="308"></canvas> -->
-		<div>
-		<script>
-			var tCycle = "<%=int_timeCycle%>";
-			alert("周期tCycle=" + tCycle);
-		</script>
-		</div>
+		<!-- <canvas id="playground" width="537" height="308"></canvas>
 		<div class="colockbox" id="demo04">
 			<span class="second">-</span>
+		</div> -->
+		<!-- <div class="box_S" id="demos3" onclick="changeS(this,5);">
+		</div> -->
+		<div class="box" id="demo3" onclick="change(this,5);">
 		</div>
 	</div> 
  </div>
