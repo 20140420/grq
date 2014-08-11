@@ -1,5 +1,8 @@
 <%@ page contentType="text/html; charset=utf-8" language="java" 
-import="java.util.*,java.text.*,com.grq.model.pojo.shark.SharkConfig,com.grq.model.dao.shark.SharkConfigDaoImpl" errorPage="" %>
+import="java.util.*,java.text.*,
+com.grq.model.pojo.shark.SharkConfig,com.grq.model.dao.shark.SharkConfigDaoImpl,
+com.grq.model.pojo.shark.PrizeRecord,com.grq.model.dao.shark.PrizeRecordDaoImpl,
+com.grq.model.customizeenum.Prize" errorPage="" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -7,6 +10,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 SharkConfig topConfigList = SharkConfigDaoImpl.lastSharkConfig();//通过调用配置实现类中的方法获取最后一条配置
 Integer int_timeCycle = topConfigList.getTimeCycle();
 System.out.println("周期：" + int_timeCycle);
+List<PrizeRecord> prizeRecordList = PrizeRecordDaoImpl.prizeRecordEntity();
+Prize prize = prizeRecordList.get(prizeRecordList.size()-1).getPrizeName();
+System.out.println("gdial页面最近一场中奖奖项：" + prize);
 %>
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/shark_cycle.js"></script>
@@ -40,6 +46,14 @@ System.out.println("周期：" + int_timeCycle);
 		</div> -->
 		<!-- <div class="box_S" id="demos3" onclick="changeS(this,5);">
 		</div> -->
+		<div>
+			<script>
+				var tCycle = "<%=int_timeCycle%>";
+				//alert("周期tCycle=" + tCycle);
+				var prize = "<%=prize%>";
+				//alert("奖项prize=" + prize);
+			</script>
+		</div>
 		<div class="box" id="demo3" onclick="change(this,5);">
 		</div>
 	</div> 

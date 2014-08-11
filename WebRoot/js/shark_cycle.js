@@ -1,5 +1,6 @@
 /* 游戏周期流程 */
-$(function(){
+$(function()
+{
 	var time_spend= 4;//计算转盘花费的时间4秒，从而计算转盘速度
 	var time_observe= 6; //观察时长 后期由服务器取得
 	var time_bet= 12;//下注时长 后期由服务器取得
@@ -15,7 +16,8 @@ $(function(){
 
 });
 
-function clock(time_length,time_spend,time_display,time_wait,time_observe,time_bet,minute_elem,second_elem){
+function clock(time_length,time_spend,time_display,time_wait,time_observe,time_bet,minute_elem,second_elem)
+{
 	setInterval(function(){
 			if(time_length > (time_observe+ time_bet+ time_display+ time_wait)){//转盘
 				time_length -=1;
@@ -85,3 +87,18 @@ function change (obj,num)
 		}		
 	}, 150);
 }
+function prizeItem()
+{
+	//alert("查看prize： " + prize);//变量prize在gdial.jsp页面定义
+	changeClass(prize);
+}
+function changeClass(prize)
+{
+	var a=document.getElementById("demo3");
+ 	a.className = 'box_'+prize;
+ 	//alert("查看a.className： " + a.className);
+}
+window.onload=function()
+{
+	prizeItem();
+};
