@@ -23,13 +23,13 @@ body{font:12px/180% Arial, Helvetica, sans-serif,"宋体";}
 .box_GOLD_SHARK{width:1000px;height:200px;margin:30px 165px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_WIN_GOLD_SHARK_WIN.png) no-repeat;}
 .box_BOMB{width:1000px;height:200px;margin:30px 165px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_WIN_BOMB_WIN.png) no-repeat;}
 .box_SILVER_SHARK{width:1000px;height:200px;margin:30px 165px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_WIN_SLIVER_SHARK_WIN.png) no-repeat;}
-#demos1{width:124px;background-position:0px 0;}
-#demos2{width:124px;background-position:-124px 0;}
+#demos5{width:124px;background-position:0px 0;}
+#demos4{width:124px;background-position:-124px 0;}
 #demos3{width:124px;background-position:-248px 0;}
-#demos4{width:124px;background-position:-372px 0;}
-#demos5{width:124px;background-position:-496px 0;}
-#demo1{width:200px;background-position:0px 0;}
-#demo2{width:200px;background-position:-200px 0;}
+#demos2{width:124px;background-position:-372px 0;}
+#demos1{width:124px;background-position:-496px 0;}
+#demo5{width:200px;background-position:0px 0;}
+#demo4{width:200px;background-position:-200px 0;}
 #demo3{width:200px;background-position:-400px 0;}
-#demo4{width:200px;background-position:-600px 0;}
-#demo5{width:200px;background-position:-800px 0;}
+#demo2{width:200px;background-position:-600px 0;}
+#demo1{width:200px;background-position:-800px 0;}

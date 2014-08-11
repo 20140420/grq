@@ -72,8 +72,11 @@ function changeS (obj,num)
 		}		
 	}, 150);
 }
-function change (obj,num) 
+function change () 
 {
+	var num = 5 ;//组成动画的5张图片
+	var obj = document.getElementById("demo3");
+	
 	var n = num;
 	//alert("查看n： " + n);
 	setInterval(function(){
@@ -89,7 +92,8 @@ function change (obj,num)
 }
 function prizeItem()
 {
-	//alert("查看prize： " + prize);//变量prize在gdial.jsp页面定义
+	//var prize = "GOLD_SHARK"; //变量prize在gdial.jsp页面定义
+	//alert("查看prize： " + prize);
 	changeClass(prize);
 }
 function changeClass(prize)
@@ -100,5 +104,6 @@ function changeClass(prize)
 }
 window.onload=function()
 {
-	prizeItem();
+	prizeItem();//奖项
+	change();//奖项动画
 };
