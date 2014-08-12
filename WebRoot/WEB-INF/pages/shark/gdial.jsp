@@ -40,12 +40,7 @@ System.out.println("gdial页面最近一场中奖奖项：" + prize);
  <!-- 中间展示区 -->
  <div class="gdial-display">
 	<div id="canvas-background-color" style="float: left" >
-		<!-- <canvas id="playground" width="537" height="308"></canvas>
-		<div class="colockbox" id="demo04">
-			<span class="second">-</span>
-		</div> -->
-		<!-- <div class="box_S" id="demos3" onclick="changeS(this,5);">
-		</div> -->
+		<!-- <canvas id="playground" width="537" height="308"></canvas> -->
 		<div>
 			<script>
 				var tCycle = "<%=int_timeCycle%>";
@@ -54,8 +49,12 @@ System.out.println("gdial页面最近一场中奖奖项：" + prize);
 				//alert("奖项prize=" + prize);
 			</script>
 		</div>
-		<div class="box" id="demo3" onclick="change(this,5);">
+		<div class="colockbox" id="demo04">
+			<span class="second">-</span>
 		</div>
+		<!-- 奖项动画展示
+		<div class="box" id="demo3">
+		</div> -->
 	</div> 
  </div>
  <div class="gdial-right">

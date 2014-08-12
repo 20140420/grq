@@ -57,21 +57,6 @@ function clock(time_length,time_spend,time_display,time_wait,time_observe,time_b
 	//return time_length;
 }
 //display展示中奖结果
-function changeS (obj,num) 
-{
-	var n = num;
-	//alert("查看n： " + n);
-	setInterval(function(){
-		if( num > 0)
-		{
-			obj.id = "demos"+num;
-			num -= 1;
-			//alert("查看obj.id： " + obj.id);
-		} else {
-			num = n;
-		}		
-	}, 150);
-}
 function change () 
 {
 	var num = 5 ;//组成动画的5张图片

@@ -3,14 +3,12 @@
 *{margin:0;padding:0;list-style-type:none;}
 a,img{border:0;}
 body{font:12px/180% Arial, Helvetica, sans-serif,"宋体";}
-/* colockbox 
+/* colockbox */
 .colockbox{width:283px;height:76px;margin:90px 245px;overflow:hidden;}
 .colockbox span{float:left;display:block;width:58px;height:48px;line-height:48px;font-size:26px;text-align:center;color:#ffffff;margin:0 17px 0 0;}
 .colockbox span.second{margin:0;}
-#demo02{width:208px;background-position:-75px 0;}
-#demo03{width:58px;background-position:-225px 0;}
 #demo04{width:58px;background-position:-225px 0;}
-*/
+
 /* display box */
 .box_SWALLOW{width:1000px;height:200px;margin:30px 165px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_WIN_SWALLOW_WIN.png) no-repeat;}
 .box_PIGEON{width:1000px;height:200px;margin:30px 165px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_WIN_PIGEON_WIN.png) no-repeat;}
