@@ -3,31 +3,42 @@
 *{margin:0;padding:0;list-style-type:none;}
 a,img{border:0;}
 body{font:12px/180% Arial, Helvetica, sans-serif,"宋体";}
+
+.alpha {
+	opacity: .4;		
+}
+
 /* colockbox */
-.colockbox{width:283px;height:76px;margin:90px 245px;overflow:hidden;}
+.colockbox{width:60px;height:50px;margin:0px;overflow:hidden;}
 .colockbox span{float:left;display:block;width:58px;height:48px;line-height:48px;font-size:26px;text-align:center;color:#ffffff;margin:0 17px 0 0;}
 .colockbox span.second{margin:0;}
-#demo04{width:58px;background-position:-225px 0;}
 
-/* display box */
-.box_SWALLOW{width:1000px;height:200px;margin:30px 165px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_WIN_SWALLOW_WIN.png) no-repeat;}
-.box_PIGEON{width:1000px;height:200px;margin:30px 165px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_WIN_PIGEON_WIN.png) no-repeat;}
-.box_PEAFOWL{width:1000px;height:200px;margin:30px 165px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_WIN_PEACOCK_WIN.png) no-repeat;}
-.box_EAGLE{width:1000px;height:200px;margin:30px 165px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_WIN_EAGLE_WIN.png) no-repeat;}
-.box_LION{width:1000px;height:200px;margin:30px 165px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_WIN_LION_WIN.png) no-repeat;}
-.box_PANDA{width:1000px;height:200px;margin:30px 165px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_WIN_PANDA_WIN.png) no-repeat;}
-.box_MONKEY{width:1000px;height:200px;margin:30px 165px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_WIN_MONKEY_WIN.png) no-repeat;}
-.box_RABBIT{width:1000px;height:200px;margin:30px 165px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_WIN_RABBIT_WIN.png) no-repeat;}
-.box_GOLD_SHARK{width:1000px;height:200px;margin:30px 165px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_WIN_GOLD_SHARK_WIN.png) no-repeat;}
-.box_BOMB{width:1000px;height:200px;margin:30px 165px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_WIN_BOMB_WIN.png) no-repeat;}
-.box_SILVER_SHARK{width:1000px;height:200px;margin:30px 165px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_WIN_SLIVER_SHARK_WIN.png) no-repeat;}
-#demos5{width:124px;background-position:0px 0;}
-#demos4{width:124px;background-position:-124px 0;}
-#demos3{width:124px;background-position:-248px 0;}
-#demos2{width:124px;background-position:-372px 0;}
-#demos1{width:124px;background-position:-496px 0;}
+/* prize display box */
+.box_SWALLOW{width:1000px;height:200px;margin:0px 165px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_WIN_SWALLOW_WIN.png) no-repeat;}
+.box_PIGEON{width:1000px;height:200px;margin:0px 165px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_WIN_PIGEON_WIN.png) no-repeat;}
+.box_PEAFOWL{width:1000px;height:200px;margin:0px 165px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_WIN_PEACOCK_WIN.png) no-repeat;}
+.box_EAGLE{width:1000px;height:200px;margin:0px 165px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_WIN_EAGLE_WIN.png) no-repeat;}
+.box_LION{width:1000px;height:200px;margin:0px 165px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_WIN_LION_WIN.png) no-repeat;}
+.box_PANDA{width:1000px;height:200px;margin:0px 165px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_WIN_PANDA_WIN.png) no-repeat;}
+.box_MONKEY{width:1000px;height:200px;margin:0px 165px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_WIN_MONKEY_WIN.png) no-repeat;}
+.box_RABBIT{width:1000px;height:200px;margin:0px 165px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_WIN_RABBIT_WIN.png) no-repeat;}
+.box_GOLD_SHARK{width:1000px;height:200px;margin:0px 165px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_WIN_GOLD_SHARK_WIN.png) no-repeat;}
+.box_BOMB{width:1000px;height:200px;margin:0px 165px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_WIN_BOMB_WIN.png) no-repeat;}
+.box_SILVER_SHARK{width:1000px;height:200px;margin:0px 165px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_WIN_SLIVER_SHARK_WIN.png) no-repeat;}
 #demo5{width:200px;background-position:0px 0;}
 #demo4{width:200px;background-position:-200px 0;}
 #demo3{width:200px;background-position:-400px 0;}
 #demo2{width:200px;background-position:-600px 0;}
 #demo1{width:200px;background-position:-800px 0;}
+
+.box_time{width:160px;height:24px;margin:90px 260px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_TIME_NUMBER_MAIN.png) no-repeat;}
+#time0{width:16px;background-position:0px 0;}
+#time1{width:16px;background-position:-16px 0;}
+#time2{width:16px;background-position:-32px 0;}
+#time3{width:16px;background-position:-48px 0;}
+#time4{width:16px;background-position:-64px 0;}
+#time5{width:16px;background-position:-80px 0;}
+#time6{width:16px;background-position:-96px 0;}
+#time7{width:16px;background-position:-112px 0;}
+#time8{width:16px;background-position:-128px 0;}
+#time9{width:16px;background-position:-144px 0;}

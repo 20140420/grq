@@ -34,6 +34,5 @@
     </div>
   <!-- end .content --></div>
 <!-- end .container --></div>
-<script src="${context_path}/js/shark.js"></script>
 </body>
 </html>

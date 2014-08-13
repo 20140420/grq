@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.management.ManagementFactory;
 import java.rmi.UnexpectedException;
-import java.util.Date;
+//import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -56,7 +56,7 @@ public class TestTimer {
 		boolean isExist = checkPidInProcess(selfPid);
 		System.out.println("线程是否已近存在： " + isExist);
 		while(true) { //无限循环记时
-			System.out.println("秒："+new Date().getSeconds()); 
+			//System.out.println("秒："+new Date().getSeconds()); 
 			Thread.sleep(1000); 
 		} 
 	}
