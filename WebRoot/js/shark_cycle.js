@@ -55,7 +55,7 @@ function clock(time_length,time_spend,time_display,time_wait,time_observe,time_b
 }
 //转盘动画效果
 function dialAnimation(timeCircle){
-	var hor = $(".gdial-top > div");
+	var hor = $(".gdial-top > div");//找到所有div元素，并且这些元素都必须是.gdial-top元素的子元素。
 	var rig = $(".gdial-right > div");
 	var bottom = $(".gdial-bottom > div");
 	var left = $(".gdial-left > div");
@@ -64,7 +64,7 @@ function dialAnimation(timeCircle){
 	
 	var allList = [];
 	
-	var timerDialTime = null;
+	var timerDialTime = null;//用作控制转盘时长
 	timerDialTime = setInterval(function(){//timeCircle时长
 		if(timeCircle > 0){
 			timeCircle -= 1;
@@ -87,9 +87,9 @@ function dialAnimation(timeCircle){
 	$.each(left, function(i, item){
 		allList.push(left[llen - 1 - i]);
 	});
-	
+	//alert("查看数组allList[9]： " + allList[9]);
 	timer = setInterval(function(){
-		if(timeCircle != 0){
+		if(timeCircle != 0){//只有在转盘时间才有转盘效果
 			$(allList[index++]).removeClass("alpha");
 			if (index === allList.length) {
 				index = 0;

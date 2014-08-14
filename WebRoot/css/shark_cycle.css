@@ -42,3 +42,282 @@ body{font:12px/180% Arial, Helvetica, sans-serif,"宋体";}
 #time7{width:16px;background-position:-112px 0;}
 #time8{width:16px;background-position:-128px 0;}
 #time9{width:16px;background-position:-144px 0;}
+/*gdial.jsp*/
+.gdial {
+	height: 434px;
+	width: 693px;
+	margin: 0px 0px 0px 0px;
+	padding: 0px;
+	border: 1px solid #999;
+	overflow: hidden;
+	background-image: url(../imgsystem/gdial.jpg);
+	background-repeat: no-repeat;
+}
+.gdial img {
+	border: 0px dotted #F00;
+	margin: 0px 0px 0px 0px;
+	padding: 0px;
+	position: absolute;
+}
+.gdial .gdial-top {
+	position: absolute;
+	height: 62px;
+	width: 693px;
+	border: 0px solid #FF0;
+	margin: 0px;
+	overflow: hidden;
+}
+.gdial .gdial-top1 {
+	position: absolute;
+	height: 60px;
+	width: 75px;
+	border: 1px solid #CCC;
+	margin: 0px 0px 0px 0px;
+	background-image: url(../imgsystem/silver_shark.png);
+}
+.gdial .gdial-top2 {
+	position: absolute;
+	height: 60px;
+	width: 75px;
+	border: 1px solid #CCC;
+	margin: 0px 0px 0px 77px;
+	background-image: url(../imgsystem/eagle.png);
+}
+.gdial .gdial-top3 {
+	position: absolute;
+	height: 60px;
+	width: 75px;
+	border: 1px solid #CCC;
+	margin: 0px 0px 0px 154px;
+	background-image: url(../imgsystem/eagle.png);
+}
+.gdial .gdial-top4 {
+	position: absolute;
+	height: 60px;
+	width: 75px;
+	border: 1px solid #CCC;
+	margin: 0px 0px 0px 231px;
+	background-image: url(../imgsystem/eagle.png);
+}
+.gdial .gdial-top5 {
+	position: absolute;
+	height: 60px;
+	width: 75px;
+	border: 1px solid #CCC;
+	margin: 0px 0px 0px 308px;
+	background-image: url(../imgsystem/gold_shark.png);
+}
+.gdial .gdial-top6 {
+	position: absolute;
+	height: 60px;
+	width: 75px;
+	border: 1px solid #CCC;
+	margin: 0px 0px 0px 385px;
+	background-image: url(../imgsystem/lion.png);
+}
+.gdial .gdial-top7 {
+	position: absolute;
+	height: 60px;
+	width: 75px;
+	border: 1px solid #CCC;
+	margin: 0px 0px 0px 462px;
+	background-image: url(../imgsystem/lion.png);
+}
+.gdial .gdial-top8 {
+	position: absolute;
+	height: 60px;
+	width: 75px;
+	border: 1px solid #CCC;
+	margin: 0px 0px 0px 539px;
+	background-image: url(../imgsystem/lion.png);
+}
+.gdial .gdial-top9 {
+	position: absolute;
+	height: 60px;
+	width: 75px;
+	border: 1px solid #CCC;
+	margin: 0px 0px 0px 616px;
+	background-image: url(../imgsystem/silver_shark.png);
+}
+.gdial .gdial-left {
+	width: 77px;
+	height: 310px;
+	border: 0px solid #000;
+	margin: 62px 0px 0px 0px;
+	position: absolute;
+}
+.gdial .gdial-left1 {
+	width: 75px;
+	height: 60px;
+	border: 1px solid #CCC;
+	margin: 0px 0px 0px 0px;
+	position: absolute;
+	background-image: url(../imgsystem/peafowl.png);
+}
+.gdial .gdial-left2 {
+	width: 75px;
+	height: 60px;
+	border: 1px solid #CCC;
+	margin: 62px 0px 0px 0px;
+	position: absolute;
+	background-image: url(../imgsystem/peafowl.png);
+}
+.gdial .gdial-left3 {
+	width: 75px;
+	height: 60px;
+	border: 1px solid #CCC;
+	margin: 124px 0px 0px 0px;
+	position: absolute;
+	background-image: url(../imgsystem/gold_shark.png);
+}
+.gdial .gdial-left4 {
+	width: 75px;
+	height: 60px;
+	border: 1px solid #CCC;
+	margin: 186px 0px 0px 0px;
+	position: absolute;
+	background-image: url(../imgsystem/pigeon.png);
+}
+.gdial .gdial-left5 {
+	width: 75px;
+	height: 60px;
+	border: 1px solid #CCC;
+	margin: 248px 0px 0px 0px;
+	position: absolute;
+	background-image: url(../imgsystem/pigeon.png);
+}
+.gdial .gdial-display {/* 中间展示区 */
+	height: 308px;
+	width: 537px;
+	overflow: hidden;
+	position: absolute;
+	margin: 62px 0px 0px 77px;
+	border: 1px solid #666;
+	background-image: url(../imgsystem/fish.jpg);
+}
+.gdial .gdial-right {
+	width: 77px;
+	height: 310px;
+	border: 0px solid #000;
+	margin: 62px 0px 0px 616px;
+	position: absolute;
+}
+.gdial .gdial-right1 {
+	width: 75px;
+	height: 60px;
+	border: 1px solid #CCC;
+	margin: 0px 0px 0px 0px;
+	position: absolute;
+	background-image: url(../imgsystem/panda.png);
+}
+.gdial .gdial-right2 {
+	width: 75px;
+	height: 60px;
+	border: 1px solid #CCC;
+	margin: 62px 0px 0px 0px;
+	position: absolute;
+	background-image: url(../imgsystem/panda.png);
+}
+.gdial .gdial-right3 {
+	width: 75px;
+	height: 60px;
+	border: 1px solid #CCC;
+	margin: 124px 0px 0px 0px;
+	position: absolute;
+	background-image: url(../imgsystem/gold_shark.png);
+}
+.gdial .gdial-right4 {
+	width: 75px;
+	height: 60px;
+	border: 1px solid #CCC;
+	margin: 186px 0px 0px 0px;
+	position: absolute;
+	background-image: url(../imgsystem/monkey.png);
+}
+.gdial .gdial-right5 {
+	width: 75px;
+	height: 60px;
+	border: 1px solid #CCC;
+	margin: 248px 0px 0px 0px;
+	position: absolute;
+	background-image: url(../imgsystem/monkey.png);
+}
+.gdial .gdial-bottom {
+	position: absolute;
+	height: 62px;
+	width: 693px;
+	border: 0px solid #000;
+	margin: 372px 0px 0px 0px;
+}
+.gdial .gdial-bottom1 {
+	position: absolute;
+	height: 60px;
+	width: 75px;
+	border: 1px solid #CCC;
+	margin: 0px 0px 0px 0px;
+	background-image: url(../imgsystem/silver_shark.png);
+}
+.gdial .gdial-bottom2 {
+	position: absolute;
+	height: 60px;
+	width: 75px;
+	border: 1px solid #CCC;
+	margin: 0px 0px 0px 77px;
+	background-image: url(../imgsystem/swallow.png);
+}
+.gdial .gdial-bottom3 {
+	position: absolute;
+	height: 60px;
+	width: 75px;
+	border: 1px solid #CCC;
+	margin: 0px 0px 0px 154px;
+	background-image: url(../imgsystem/swallow.png);
+}
+.gdial .gdial-bottom4 {
+	position: absolute;
+	height: 60px;
+	width: 75px;
+	border: 1px solid #CCC;
+	margin: 0px 0px 0px 231px;
+	background-image: url(../imgsystem/swallow.png);
+}
+.gdial .gdial-bottom5 {
+	position: absolute;
+	height: 60px;
+	width: 75px;
+	border: 1px solid #CCC;
+	margin: 0px 0px 0px 308px;
+	background-image: url(../imgsystem/gold_shark.png);
+}
+.gdial .gdial-bottom6 {
+	position: absolute;
+	height: 60px;
+	width: 75px;
+	border: 1px solid #CCC;
+	margin: 0px 0px 0px 385px;
+	background-image: url(../imgsystem/rabbit.png);
+}
+.gdial .gdial-bottom7 {
+	position: absolute;
+	height: 60px;
+	width: 75px;
+	border: 1px solid #CCC;
+	margin: 0px 0px 0px 462px;
+	background-image: url(../imgsystem/rabbit.png);
+}
+.gdial .gdial-bottom8 {
+	position: absolute;
+	height: 60px;
+	width: 75px;
+	border: 1px solid #CCC;
+	margin: 0px 0px 0px 539px;
+	background-image: url(../imgsystem/rabbit.png);
+}
+.gdial .gdial-bottom9 {
+	position: absolute;
+	height: 60px;
+	width: 75px;
+	border: 1px solid #CCC;
+	margin: 0px 0px 0px 616px;
+	background-image: url(../imgsystem/silver_shark.png);
+}
