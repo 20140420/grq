@@ -1,19 +1,22 @@
 /* 游戏周期流程 */
 $(function()
 {
-	/* 变量在gdial.jsp页面定义 
+	/* 变量在gdial.jsp页面定义
 	var time_observe= 6; //观察时长 后期由服务器取得
 	var time_bet= 12;//下注时长 后期由服务器取得
 	var time_display= 3;//展示时长 后期由服务器取得
 	var time_wait= 2;//等待时长 后期由服务器取得
 	var circle_num= 4;//转盘圈数 后期由服务器取得
-	var time_cycle= 28;//一个周期时长 后期由服务器取得,展示-等待-观察-下注-转盘
+	var time_cycle= 37;//一个周期时长 后期由服务器取得,展示-等待-观察-下注-转盘
 	var prize = "SILVER_SHARK";
-	var stepTime = 40;
-	*/
+	//var prize = "MONKEY";
+	var stepTime = 80;
+	 */
+
 	//var circle_speed= (28*80*circle_num)/time_spend;//计算转盘速度,28个跳格，setInterval()频率80毫秒
 	dial(time_cycle,time_display,time_wait,time_observe,time_bet,
 			circle_num,stepTime,prize,"#demo04 .second");//变量在gdial.jsp页面定义
+	//dialAnimation(circle_num, prize, stepTime);//转盘效果
 });
 function countdown(time_length,second_elem)//倒计时
 {
@@ -25,26 +28,34 @@ function dial(time_length,time_display,time_wait,time_observe,time_bet,
 {
 	//alert("查看个时长： " + time_length + time_spend +time_display+time_wait+time_observe+time_bet);
 	var timer = null;
-	time_circle = dialAnimation(circle_num, prize, stepTime);//转盘效果
+	time_circle = dialAnimation(circle_num, prize, stepTime);//转盘效果需毫秒时长
 	alert("转盘需毫秒时长： " + time_circle);
-	time_spend = Math.floor(time_circle/1000)+2;//给转盘时长
+	time_spend = Math.floor(time_circle/1000)+1;//给转盘时长
 	alert("给转盘时长： " + time_spend);
-	timeL = time_length - time_spend;//转盘之后剩余时间
-	if(timeL < (time_wait+time_observe+time_bet)){
-		alert("转盘花费时间太长，请缩短转盘步长时间或通过增加展示、预设转盘时间来增加周期。");
+	timeL = time_length - (time_observe+ time_bet+ time_wait + time_display);//设置留给转盘的时间
+	alert("设置留给转盘的时间: " + timeL);
+	if(timeL < time_spend){
+		alert("转盘花费时间太长，请缩短转盘步长时间或增加周期时长。");
+	}
+	if((time_observe + time_bet) < 10 ){
+		alert("观察下注时长必须大于10秒");
 	}
 	timer= setInterval(function(){
 		if(time_length > 0){//一个周期
 			countdown(time_length,second_elem);
 			time_length -=1;
-			if(time_length > 9){//最后十秒
-				if(time_length > timeL){//转盘
-					//alert("转盘结束5 ");
-				} else if(time_length > (time_observe+ time_bet+ time_wait)){//展示
-					prizeAnimation(time_display, prize);//奖项动画
-				} else if(time_length > (time_observe+ time_bet)){//等待
-					//alert("等待结束2 ");
-				} else {//观察
+			if(time_length > 9){//最后十秒之前的过程
+				if(time_length > (time_observe+ time_bet)){//观察、下注之前
+					if(time_length > (time_observe+ time_bet+ time_wait)){//观察、下注、等待之前
+						if(time_length > (time_observe+ time_bet+ time_wait + time_display)){//观察、下注、等待、展示之前
+							//alert("转盘结束5 ");
+						} else {//展示
+							prizeAnimation(time_display, prize);//奖项动画
+						}
+					} else {//等待
+						//alert("等待结束2 ");
+					}
+				} else {//观察+下注
 					observePrize();
 				}
 			} else {//最后10秒钟
@@ -68,8 +79,13 @@ function dialAnimation(circleNum, prizeItem, stepLength){
 	var allList = [];
 
 	var stopPos = stopPosition(prizeItem);
-	//("查看stopPos： " + stopPos);
-	var circleSpendTime =  (circleNum*28 + stopPos)*stepLength;//转盘花费时间
+	alert("查看stopPos： " + stopPos);
+	var circleSpendTime = 0;//转盘花费时间
+	if(stopPos != 0){
+		circleSpendTime =  (circleNum*28 + stopPos)*stepLength;//转盘花费时间,注意停靠位置+1
+	}else{
+		circleSpendTime =  (circleNum + 1)*28*stepLength;//转盘花费时间,注意停靠位置+1
+	}
 	$.each(hor, function(i, item){//确定了从左上角开始
 		allList.push(item);
 	});
@@ -269,6 +285,6 @@ function stopPosition(prizeItem)
 			return 25;
 		}
 	} else {
-		return 28;//炸弹奖项
+		return -1;//炸弹奖项
 	}
 }
