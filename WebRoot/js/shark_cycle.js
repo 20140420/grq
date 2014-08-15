@@ -29,11 +29,10 @@ function dial(time_length,time_display,time_wait,time_observe,time_bet,
 	//alert("查看个时长： " + time_length + time_spend +time_display+time_wait+time_observe+time_bet);
 	var timer = null;
 	time_circle = dialAnimation(circle_num, prize, stepTime);//转盘效果需毫秒时长
-	alert("转盘需毫秒时长： " + time_circle);
+	//alert("转盘需毫秒时长： " + time_circle);
 	time_spend = Math.floor(time_circle/1000)+1;//给转盘时长
-	alert("给转盘时长： " + time_spend);
 	timeL = time_length - (time_observe+ time_bet+ time_wait + time_display);//设置留给转盘的时间
-	alert("设置留给转盘的时间: " + timeL);
+	//alert("设置留给转盘的时间: " + timeL + " 给转盘时长： " + time_spend);
 	if(timeL < time_spend){
 		alert("转盘花费时间太长，请缩短转盘步长时间或增加周期时长。");
 	}
@@ -79,7 +78,7 @@ function dialAnimation(circleNum, prizeItem, stepLength){
 	var allList = [];
 
 	var stopPos = stopPosition(prizeItem);
-	alert("查看stopPos： " + stopPos);
+	//alert("查看stopPos： " + stopPos);
 	var circleSpendTime = 0;//转盘花费时间
 	if(stopPos != 0){
 		circleSpendTime =  (circleNum*28 + stopPos)*stepLength;//转盘花费时间,注意停靠位置+1
