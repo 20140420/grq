@@ -41,8 +41,8 @@ td {
           <td class="col4"><s:textfield name="timeObserve"></s:textfield></td>
           <td>下注时长：</td>
           <td class="col4"><s:textfield name="timeBet"></s:textfield></td>
-          <td>转盘时长：</td>
-          <td class="col4"><s:textfield name="timeCircle"></s:textfield></td>
+          <td>步长毫秒：</td>
+          <td class="col4"><s:textfield name="stepTime"></s:textfield></td>
         </tr>
         <tr>
           <td>展示时长：</td>
@@ -57,8 +57,8 @@ td {
           <td class="col4"><s:textfield name="circleNum"></s:textfield></td>
           <td>查看条数</td>
           <td class="col4"><s:textfield name="prizeRecordNum"></s:textfield></td>
-          <td></td>
-          <td class="col4"></td>
+          <td>转盘时长：</td>
+          <td class="col4"><s:textfield name="timeCircle"></s:textfield></td>
         </tr>
 	</table>
   </s:form>

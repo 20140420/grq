@@ -40,6 +40,11 @@
     <comment>最高倍率</comment>
    </column>
   </property>
+  <property generated="never" lazy="false" name="stepTime" type="java.lang.Integer">
+   <column name="step_time" not-null="true">
+    <comment>转盘每步时长（毫秒）</comment>
+   </column>
+  </property>
   <property generated="never" lazy="false" name="circleNum" type="java.lang.Integer">
    <column name="circle_num" not-null="true">
     <comment>转盘圈数</comment>

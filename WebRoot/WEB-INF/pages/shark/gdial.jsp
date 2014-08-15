@@ -8,28 +8,30 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 
 SharkConfig topConfigList = SharkConfigDaoImpl.lastSharkConfig();//通过调用配置实现类中的方法获取最后一条配置
-Integer int_timeSpend = topConfigList.getTimeCircle();
-System.out.println("转盘时间：" + int_timeSpend);
+Integer int_stepTime = topConfigList.getStepTime();
+System.out.println("转盘每步时长：" + int_stepTime);
 Integer int_timeObserve = topConfigList.getTimeObserve();
 Integer int_timeBet = topConfigList.getTimeBet();
 Integer int_timeDisplay = topConfigList.getTimeDisplay();
 Integer int_timeWait = topConfigList.getTimeWait();
 Integer int_timeCycle = topConfigList.getTimeCycle();
 System.out.println("周期：" + int_timeCycle);
+Integer int_circleNum = topConfigList.getCircleNum();//转盘圈数
+System.out.println("转盘圈数：" + int_circleNum);
 List<PrizeRecord> prizeRecordList = PrizeRecordDaoImpl.prizeRecordEntity();
 Prize prize = prizeRecordList.get(prizeRecordList.size()-1).getPrizeName();
 System.out.println("gdial页面最近一场中奖奖项：" + prize);
 %>
 <script>
-	var time_spend= <%=int_timeSpend%>;//计算转盘花费的时间4秒，从而计算转盘速度
 	var time_observe= <%=int_timeObserve%>; //观察时长 后期由服务器取得
 	var time_bet= <%=int_timeBet%>;//下注时长 后期由服务器取得
 	var time_display= <%=int_timeDisplay%>;//展示时长 后期由服务器取得
 	var time_wait= <%=int_timeWait%>;//等待时长 后期由服务器取得
-	var tCycle = "<%=int_timeCycle%>";
-	//alert("周期tCycle=" + tCycle);
+	var time_cycle = <%=int_timeCycle%>;
 	var prize = "<%=prize%>";
 	//alert("奖项prize=" + prize);
+	var stepTime = <%=int_stepTime%>;//用作控制转盘每步时长
+	var circle_num= <%=int_circleNum%>;//转盘圈数
 </script>
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/shark_cycle.js"></script>

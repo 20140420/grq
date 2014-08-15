@@ -26,7 +26,8 @@ public class SharkConfig  implements java.io.Serializable {
     private Integer betLimit;//下注上限
     private Integer timesMax;//最高赔率
     private Integer circleNum;//转盘圈数
-    private Integer timeCircle;//转圈时间
+    private Integer stepTime;//转盘每步时长
+    private Integer timeCircle;//转盘时长
     private Integer timeObserve;//观察时间
     private Integer timeBet;//下注时间
     private Integer timeDisplay;//展示时间
@@ -43,7 +44,7 @@ public class SharkConfig  implements java.io.Serializable {
 
     
     /** full constructor */
-    public SharkConfig(Date createTime, Boolean isBegin, Double initialDividend, Double commissionRate, Integer singlBet, Integer betLimit, Integer timesMax, Integer circleNum, Integer timeCircle, Integer timeObserve, Integer timeBet, Integer timeDisplay, Integer timeWait, Integer timeCycle, Integer prizeRecordNum) {
+    public SharkConfig(Date createTime, Boolean isBegin, Double initialDividend, Double commissionRate, Integer singlBet, Integer betLimit, Integer timesMax, Integer circleNum, Integer stepTime, Integer timeCircle, Integer timeObserve, Integer timeBet, Integer timeDisplay, Integer timeWait, Integer timeCycle, Integer prizeRecordNum) {
         this.createTime = createTime;
         this.isBegin = isBegin;
         this.initialDividend = initialDividend;
@@ -51,7 +52,8 @@ public class SharkConfig  implements java.io.Serializable {
         this.betLimit = betLimit;
         this.timesMax = timesMax;
         this.circleNum = circleNum;
-        this.timeCircle = timeCircle;
+        this.stepTime = stepTime;
+        this.timeCircle =timeCircle;
         this.timeObserve = timeObserve;
         this.timeBet = timeBet;
         this.timeDisplay = timeDisplay;
@@ -127,7 +129,17 @@ public class SharkConfig  implements java.io.Serializable {
         this.circleNum = circleNum;
     }
 
-    public Integer getTimeCircle() {
+    public Integer getStepTime() {
+		return stepTime;
+	}
+
+
+	public void setStepTime(Integer stepTime) {
+		this.stepTime = stepTime;
+	}
+
+
+	public Integer getTimeCircle() {
         return this.timeCircle;
     }
     
