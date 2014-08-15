@@ -15,7 +15,6 @@ Integer int_timeBet = topConfigList.getTimeBet();
 Integer int_timeDisplay = topConfigList.getTimeDisplay();
 Integer int_timeWait = topConfigList.getTimeWait();
 Integer int_timeCycle = topConfigList.getTimeCycle();
-Integer int_circleNum = topConfigList.getCircleNum();
 System.out.println("周期：" + int_timeCycle);
 List<PrizeRecord> prizeRecordList = PrizeRecordDaoImpl.prizeRecordEntity();
 Prize prize = prizeRecordList.get(prizeRecordList.size()-1).getPrizeName();
@@ -27,10 +26,9 @@ System.out.println("gdial页面最近一场中奖奖项：" + prize);
 	var time_bet= <%=int_timeBet%>;//下注时长 后期由服务器取得
 	var time_display= <%=int_timeDisplay%>;//展示时长 后期由服务器取得
 	var time_wait= <%=int_timeWait%>;//等待时长 后期由服务器取得
-	var circle_num= <%=int_circleNum%>;//转的圈数
-	var tCycle = <%=int_timeCycle%>;
+	var tCycle = "<%=int_timeCycle%>";
 	//alert("周期tCycle=" + tCycle);
-	var prize = <%=prize%>; //奖项
+	var prize = "<%=prize%>";
 	//alert("奖项prize=" + prize);
 </script>
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.4.2.min.js"></script>
