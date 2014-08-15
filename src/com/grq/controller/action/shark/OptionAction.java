@@ -62,7 +62,7 @@ public class OptionAction extends BaseAction implements ModelDriven<SharkConfig>
 	public String save() throws Exception{
 		try{
 			if(getLoginUser() != null){//如果管理用户已登录
-				Integer tCircle =28*(sharkConfig.getPrizeRecordNum() + 1)*sharkConfig.getStepTime();
+				Integer tCircle =28*(sharkConfig.getCircleNum() + 1)*sharkConfig.getStepTime();
 				Integer timeCircle = (int) (Math.floor(tCircle/1000) +1);
 				Integer timeCycle =(sharkConfig.getTimeObserve()+sharkConfig.getTimeBet()+timeCircle
 						+sharkConfig.getTimeDisplay()+sharkConfig.getTimeWait());
