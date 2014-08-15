@@ -6,8 +6,8 @@ $(function()
 	var time_bet= 12;//下注时长 后期由服务器取得
 	var time_display= 3;//展示时长 后期由服务器取得
 	var time_wait= 2;//等待时长 后期由服务器取得
-	var circle_num= 2;//转盘圈数 后期由服务器取得
-	var time_cycle= 20;//一个周期时长 后期由服务器取得,展示-等待-观察-下注-转盘
+	var circle_num= 4;//转盘圈数 后期由服务器取得
+	var time_cycle= 28;//一个周期时长 后期由服务器取得,展示-等待-观察-下注-转盘
 	var prize = "MONKEY";
 	var stepTime = 80;
 	*/
