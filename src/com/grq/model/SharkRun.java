@@ -33,7 +33,6 @@ public class SharkRun extends TimerTask {
 	//配置
 	private static boolean isBegin;//游戏是否开启
 	private static int timeBet;//下注时间
-	private static int timeCircle;//转盘时间
 	private static double lastDividend;//上场奖项彩金池
 	private static double dividend; //彩金池变量
 	private static double commission_rate; //佣金费率
@@ -111,12 +110,7 @@ public class SharkRun extends TimerTask {
 		System.out.println("发奖后彩金："+dividend);
 		makeBetItem();//改变下注单状态和奖项
 		//包括转盘、展示
-		System.out.println("转盘时间"+timeCircle);
-		try {
-	        Thread.sleep(timeCircle*1000);
-		} catch (InterruptedException e) {
-	        e.printStackTrace();
-		}
+		System.out.println("后端只需控制下注，即没隔一下注时间就是一场");
 		makeRecord(); //记录奖项函数
 		
 		if(againOrNot == true){//如果是则获得再转一次
@@ -187,7 +181,6 @@ public class SharkRun extends TimerTask {
 		commission_rate = topConfigList.getCommissionRate();
 		timesMax = topConfigList.getTimesMax();
 		timeBet = topConfigList.getTimeBet();//下注时间
-		timeCircle = topConfigList.getTimeCircle();//转盘时间
 		isBegin = topConfigList.getIsBegin();//获取游戏开关状态
 	}
 	/**
@@ -640,7 +633,6 @@ public class SharkRun extends TimerTask {
 		timesMax = 0;//最高倍数
 		commissionProfit = 0.0;//佣金收益
 		timeBet = 0;//下注时间
-		timeCircle = 0;//转盘时间
 		lastDividend = 0.0;
 		dividend = 0.0; //彩金池变量需要储存在数据库中
 		againOrNot = false; //是否重转，默认否	

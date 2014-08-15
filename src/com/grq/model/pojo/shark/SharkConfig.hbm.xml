@@ -50,11 +50,6 @@
     <comment>转盘圈数</comment>
    </column>
   </property>
-  <property generated="never" lazy="false" name="timeCircle" type="java.lang.Integer">
-   <column name="time_circle" not-null="true">
-    <comment>转盘时间</comment>
-   </column>
-  </property>
   <property generated="never" lazy="false" name="timeObserve" type="java.lang.Integer">
    <column name="time_observe" not-null="true">
     <comment>观察时间</comment>

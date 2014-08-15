@@ -49,16 +49,16 @@ td {
           <td class="col4"><s:textfield name="timeDisplay"></s:textfield></td>
           <td>等待时长：</td>
           <td class="col4"><s:textfield name="timeWait"></s:textfield></td>
-          <td>押注上限：</td>
-          <td class="col4"><s:textfield name="betLimit"></s:textfield></td>
+          <td>周期时长：</td>
+          <td class="col4"><s:textfield name="timeCycle"></s:textfield></td>
         </tr>
         <tr>
           <td>转盘圈数：</td>
           <td class="col4"><s:textfield name="circleNum"></s:textfield></td>
           <td>查看条数</td>
           <td class="col4"><s:textfield name="prizeRecordNum"></s:textfield></td>
-          <td>转盘时长：</td>
-          <td class="col4"><s:textfield name="timeCircle"></s:textfield></td>
+          <td>押注上限：</td>
+          <td class="col4"><s:textfield name="betLimit"></s:textfield></td>
         </tr>
 	</table>
   </s:form>
