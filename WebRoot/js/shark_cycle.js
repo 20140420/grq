@@ -11,12 +11,14 @@ $(function()
 	var prize = "SILVER_SHARK";
 	//var prize = "MONKEY";
 	var stepTime = 80;
+	var numPrizeList = <%=list_numPrize%>;//最近num个人开奖记录
 	*/
 
 	//var circle_speed= (28*80*circle_num)/time_spend;//计算转盘速度,28个跳格，setInterval()频率80毫秒
 	dial(time_cycle,time_display,time_wait,time_observe,time_bet,
 			circle_num,stepTime,prize,"#demo04 .second");//变量在gdial.jsp页面定义
 	//dialAnimation(circle_num, prize, stepTime);//转盘效果
+	//alert("最近几个开奖记录： " + numPrizeList);
 });
 function countdown(time_length,second_elem)//倒计时
 {

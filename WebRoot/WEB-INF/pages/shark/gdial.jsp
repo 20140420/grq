@@ -2,7 +2,7 @@
 import="java.util.*,java.text.*,
 com.grq.model.pojo.shark.SharkConfig,com.grq.model.dao.shark.SharkConfigDaoImpl,
 com.grq.model.pojo.shark.PrizeRecord,com.grq.model.dao.shark.PrizeRecordDaoImpl,
-com.grq.model.customizeenum.Prize" errorPage="" %>
+com.grq.model.customizeenum.Prize,com.grq.model.SharkRun" errorPage="" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -19,8 +19,17 @@ System.out.println("周期：" + int_timeCycle);
 Integer int_circleNum = topConfigList.getCircleNum();//转盘圈数
 System.out.println("转盘圈数：" + int_circleNum);
 List<PrizeRecord> prizeRecordList = PrizeRecordDaoImpl.prizeRecordEntity();
-Prize prize = prizeRecordList.get(prizeRecordList.size()-1).getPrizeName();
-System.out.println("gdial页面最近一场中奖奖项：" + prize);
+Prize prizeName = prizeRecordList.get(prizeRecordList.size()-1).getPrizeName();
+System.out.println("最近记录中奖奖项：" + prizeName);
+SharkRun sharkRun = new SharkRun();
+Prize prize = null;//获取用户个人的下注记录的奖项
+if(prize == null){
+//	prize = sharkRun.havePrize();//应该是个人下注记录里的奖项
+	prize = sharkRun.randomPrize();//暂时看看
+}
+System.out.println("个人中奖奖项：" + prize);
+List<Prize> list_numPrize = sharkRun.haveNumPrizeRecord(6);//考虑用一个函数记录havePrize()的几场奖项
+System.out.println("查看最近奖项："+list_numPrize);
 %>
 <script>
 	var time_observe= <%=int_timeObserve%>; //观察时长 后期由服务器取得
@@ -32,6 +41,7 @@ System.out.println("gdial页面最近一场中奖奖项：" + prize);
 	//alert("奖项prize=" + prize);
 	var stepTime = <%=int_stepTime%>;//用作控制转盘每步时长
 	var circle_num= <%=int_circleNum%>;//转盘圈数
+	var numPrizeList = <%=list_numPrize%>;//最近num个人开奖记录
 </script>
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/shark_cycle.js"></script>

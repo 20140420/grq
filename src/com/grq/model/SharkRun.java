@@ -202,7 +202,7 @@ public class SharkRun extends TimerTask {
 	 * 出奖
 	 * @return
 	 */
-	private Prize havePrize() {
+	public Prize havePrize() {
 		System.out.println("出奖函数");
 		countAndSum();//统计并求总押注和、各单项押注和、各单项出分和
 		if(totalBetSum != 0){//有人下注
@@ -405,7 +405,7 @@ public class SharkRun extends TimerTask {
 	 * 随机函数
 	 * @return
 	 */
-	private Prize randomPrize() {
+	public Prize randomPrize() {
 		System.out.println("随机函数：");
 		againOrNot = false; //设置为false不重转
 		int whatPrize =(int)(Math.floor(randomNum.nextInt(8)));//随机获取大于等于0到小于8的整数部分,即随机获取0/1/2/3/4/5/6/7
@@ -667,4 +667,29 @@ public class SharkRun extends TimerTask {
 		System.out.println("再转函数待完善......");
 		againOrNot = false;//再转之后不再转
 	}
+	
+	
+/** -------------------------用于辅助前端展示--------------------------------- */
+	/**
+	 * 输入数量设置参数，返回最近此数量的场所的奖列表
+	 * @param num
+	 * @return
+	 */
+	public List<Prize> haveNumPrizeRecord(int num){
+		List<Prize> numPrizeList = new ArrayList<Prize>();
+		prizeRecordEntity = havePrizeRecord();//获取奖项记录实体
+		int index = prizeRecordEntity.size()-1;
+		if(prizeRecordEntity.size() < num ){
+			for(int i=index ; i>0 ;i--){//如果奖项记录条数还不到要求数目
+				numPrizeList.add(prizeRecordEntity.get(i).getPrizeName());
+			}
+		} else {
+			for(int i=index ; (index - i) < num ;i-- ){
+				numPrizeList.add(prizeRecordEntity.get(i).getPrizeName());
+			}
+		}
+		//System.out.println("查看numPrizeList奖项："+numPrizeList);
+		return numPrizeList;
+	}
+	
 }
