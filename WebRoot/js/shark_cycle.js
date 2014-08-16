@@ -20,7 +20,8 @@ $(function()
 });
 function countdown(time_length,second_elem)//倒计时
 {
-	$(second_elem).text(time_length<10?"0"+time_length:time_length);
+	time = time_length - 1;
+	$(second_elem).text(time<10?"0"+time:time);
 }
 
 function dial(time_length,time_display,time_wait,time_observe,time_bet,
@@ -32,7 +33,8 @@ function dial(time_length,time_display,time_wait,time_observe,time_bet,
 	//alert("转盘需毫秒时长： " + time_circle);
 	time_spend = Math.floor(time_circle/1000)+1;//给转盘时长
 	//alert("给转盘时长： " + time_spend);
-	timeL = time_length - (time_observe+ time_bet+ time_wait + time_display);//设置留给转盘的时间
+	var timeL = time_length - (time_observe+ time_bet+ time_wait + time_display);//设置留给转盘的时间
+	var observeAnd = time_observe+ time_bet - 10;
 	//alert("设置留给转盘的时间: " + timeL);
 	if(timeL < time_spend){
 		alert("转盘花费时间太长，请缩短转盘步长时间或增加周期时长。");
@@ -48,17 +50,29 @@ function dial(time_length,time_display,time_wait,time_observe,time_bet,
 					if(time_length > (time_observe+ time_bet+ time_wait)){//观察、下注、等待之前
 						if(time_length > (time_observe+ time_bet+ time_wait + time_display)){//观察、下注、等待、展示之前
 							//alert("转盘结束5 ");
+							timeL -= 1;
+							if(timeL == 0){//转盘之后开始调用动画展示，这里可以确保不反复调用奖项动画函数
+								prizeAnimation(time_display, prize);//奖项动画
+							}
 						} else {//展示
-							prizeAnimation(time_display, prize);//奖项动画
+							//prizeAnimation(time_display, prize);//奖项动画
 						}
 					} else {//等待
 						//alert("等待结束2 ");
+						time_wait -= 1;
+						if(time_wait == 0){
+							observePrize();
+						}
 					}
 				} else {//观察+下注
-					observePrize();
+					//observePrize();
+					observeAnd -= 1;
+					if(observeAnd == 0){
+						countAnimation(10);
+					}
 				}
 			} else {//最后10秒钟
-				countAnimation(10);
+				//countAnimation(10);
 			}
 			time_length -=1;
 		} else {
@@ -124,22 +138,22 @@ function observePrize()
 	
 }
 //最后十秒倒计时动画
-function countAnimation(time_bet)
+function countAnimation(lastTenSec)
 {
 	//var num = 10 ;//组成动画的一张图片分10部分
 	var obj = document.getElementById("demo1");
 	var timerCountdown = null;
 	timerCountdown = setInterval(function(){
-		if( time_bet > 0)
+		if( lastTenSec == 0)
 		{
-			obj.id = "time"+ (time_bet-1);
-			obj.className = 'box_time';
-			time_bet -= 1;
-			//alert("查看obj.id： " + obj.id);
-		} else {
 			clearInterval(timerCountdown);
 			obj.className = 'box';
-			obj.id = "demo1";
+			obj.id = "demo1";			
+		} else {			
+			obj.id = "time"+ (lastTenSec-1);
+			obj.className = 'box_time';
+			lastTenSec -= 1;
+			//alert("查看obj.id： " + obj.id);
 		}	
 	}, 1000);
 }
@@ -161,17 +175,17 @@ function prizeAnimation (time_display, prize)
 	obj.className = 'box_'+prize;
 	//alert("查看n： " + n);
 	timerDisplay = setInterval(function(){
-		if( num > 0)
-		{
-			obj.id = "demo"+num;
-			num -= 1;
-			//alert("查看obj.id： " + obj.id);
-		} else if(time_display != 0){
-			num = n;
-		} else{
+		if(time_display == 0){//时间一到即停止动画展示
 			clearInterval(timerDisplay);
 			obj.className = 'box';
 			obj.id = "demo1";
+		} else {//展示动画
+			if( num > 0){
+				obj.id = "demo"+num;
+				num -= 1;
+			}else{
+				num = n;
+			}
 		}	
 	}, 150);
 }
