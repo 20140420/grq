@@ -68,22 +68,22 @@ str="["+str.substring(0,str.length()-1)+"]";
 <link href="<%=basePath%>css/game.css" rel="stylesheet" type="text/css" />
 <div class="gdial"><!---->
  <div class="gdial-top">
-	<div class="gdial-top1"><img width="75" height="60" /></div>
-	<div class="gdial-top2"><img width="75" height="60" /></div>
-	<div class="gdial-top3"><img width="75" height="60" /></div>
-	<div class="gdial-top4"><img width="75" height="60" /></div>
-	<div class="gdial-top5"><img width="75" height="60" /></div>
-	<div class="gdial-top6"><img width="75" height="60" /></div>
-	<div class="gdial-top7"><img width="75" height="60" /></div>
-	<div class="gdial-top8"><img width="75" height="60" /></div>
-	<div class="gdial-top9"><img width="75" height="60" /></div>
+	<div class="gdial-animals" id="gdial_SILVER_SHARK" ><img width="75" height="60" /></div>
+	<div class="gdial-animals" id="gdial_EAGLE" ><img width="75" height="60" /></div>
+	<div class="gdial-animals" id="gdial_EAGLE" ><img width="75" height="60" /></div>
+	<div class="gdial-animals" id="gdial_EAGLE" ><img width="75" height="60" /></div>
+	<div class="gdial-animals" id="gdial_GOLD_SHARK" ><img width="75" height="60" /></div>
+	<div class="gdial-animals" id="gdial_LION" ><img width="75" height="60" /></div>
+	<div class="gdial-animals" id="gdial_LION" ><img width="75" height="60" /></div>
+	<div class="gdial-animals" id="gdial_LION" ><img width="75" height="60" /></div>
+	<div class="gdial-animals" id="gdial_SILVER_SHARK" ><img width="75" height="60" /></div>
  </div>
  <div class="gdial-left">
-	<div class="gdial-left1"><img width="75" height="60" /></div>
-	<div class="gdial-left2"><img width="75" height="60" /></div>
-	<div class="gdial-left3"><img width="75" height="60" /></div>
-	<div class="gdial-left4"><img width="75" height="60" /></div>
-	<div class="gdial-left5"><img width="75" height="60" /></div>
+	<div class="gdial-animals" id="gdial_PEAFOWL" ><img width="75" height="60" /></div>
+	<div class="gdial-animals" id="gdial_PEAFOWL" ><img width="75" height="60" /></div>
+	<div class="gdial-animals" id="gdial_GOLD_SHARK" ><img width="75" height="60" /></div>
+	<div class="gdial-animals" id="gdial_PIGEON" ><img width="75" height="60" /></div>
+	<div class="gdial-animals" id="gdial_PIGEON" ><img width="75" height="60" /></div>
  </div>
  <!-- 中间展示区 -->
  <div class="gdial-display">
@@ -99,21 +99,21 @@ str="["+str.substring(0,str.length()-1)+"]";
 	</div> 
  </div>
  <div class="gdial-right">
-	<div class="gdial-right1"><img width="75" height="60" /></div>
-	<div class="gdial-right2"><img width="75" height="60" /></div>
-	<div class="gdial-right3"><img width="75" height="60" /></div>
-	<div class="gdial-right4"><img width="75" height="60" /></div>
-	<div class="gdial-right5"><img width="75" height="60" /></div>
+	<div class="gdial-animals" id="gdial_PANDA" ><img width="75" height="60" /></div>
+	<div class="gdial-animals" id="gdial_PANDA" ><img width="75" height="60" /></div>
+	<div class="gdial-animals" id="gdial_GOLD_SHARK" ><img width="75" height="60" /></div>
+	<div class="gdial-animals" id="gdial_MONKEY" ><img width="75" height="60" /></div>
+	<div class="gdial-animals" id="gdial_MONKEY" ><img width="75" height="60" /></div>
  </div> 
  <div class="gdial-bottom">
-	<div class="gdial-bottom1"><img width="75" height="60" /></div>
-	<div class="gdial-bottom2"><img width="75" height="60" /></div>
-	<div class="gdial-bottom3"><img width="75" height="60" /></div>
-	<div class="gdial-bottom4"><img width="75" height="60" /></div>
-	<div class="gdial-bottom5"><img width="75" height="60" /></div>
-	<div class="gdial-bottom6"><img width="75" height="60" /></div>
-	<div class="gdial-bottom7"><img width="75" height="60" /></div>
-	<div class="gdial-bottom8"><img width="75" height="60" /></div>
-	<div class="gdial-bottom9"><img width="75" height="60" /></div>
+	<div class="gdial-animals" id="gdial_SILVER_SHARK" ><img width="75" height="60" /></div>
+	<div class="gdial-animals" id="gdial_SWALLOW" ><img width="75" height="60" /></div>
+	<div class="gdial-animals" id="gdial_SWALLOW" ><img width="75" height="60" /></div>
+	<div class="gdial-animals" id="gdial_SWALLOW" ><img width="75" height="60" /></div>
+	<div class="gdial-animals" id="gdial_GOLD_SHARK" ><img width="75" height="60" /></div>
+	<div class="gdial-animals" id="gdial_RABBIT" ><img width="75" height="60" /></div>
+	<div class="gdial-animals" id="gdial_RABBIT" ><img width="75" height="60" /></div>
+	<div class="gdial-animals" id="gdial_RABBIT" ><img width="75" height="60" /></div>
+	<div class="gdial-animals" id="gdial_SILVER_SHARK" ><img width="75" height="60" /></div>
  </div>
 </div>
