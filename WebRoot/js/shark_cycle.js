@@ -11,14 +11,14 @@ $(function()
 	var prize = "SILVER_SHARK";
 	//var prize = "MONKEY";
 	var stepTime = 80;
-	var numPrizeList = <%=list_numPrize%>;//最近num个人开奖记录
+	var numPrizeList = numPrizeList[0].prize;//最近num个人开奖记录
 	*/
 
 	//var circle_speed= (28*80*circle_num)/time_spend;//计算转盘速度,28个跳格，setInterval()频率80毫秒
 	dial(time_cycle,time_display,time_wait,time_observe,time_bet,
 			circle_num,stepTime,prize,"#demo04 .second");//变量在gdial.jsp页面定义
 	//dialAnimation(circle_num, prize, stepTime);//转盘效果
-	alert("最近几个开奖记录： " + numPrizeList[0].prize);
+	//alert("最近几个开奖记录： " + numPrizeList[0].prize);
 });
 function countdown(time_length,second_elem)//倒计时
 {
@@ -63,7 +63,7 @@ function dial(time_length,time_display,time_wait,time_observe,time_bet,
 						//alert("等待结束2 ");
 						time_wait -= 1;
 						if(time_wait == 0){
-							observePrize();
+							observePrize(numPrizeList);
 						}
 					}
 				} else {//观察+下注
@@ -83,6 +83,20 @@ function dial(time_length,time_display,time_wait,time_observe,time_bet,
 			//time_length = (time_spend+time_observe+ time_bet+ time_display+ time_wait);
 		}
 	},1000);
+}
+//观察最近几场的出奖奖项
+function observePrize(prizeList)
+{
+	//alert("观察下注 ");
+	var obj = document.getElementById("observe");
+	for(var i=0; i < prizeList.length; i++){
+		var pr = prizeList[i].prize;
+		//创建li标签  
+	    var myLi = document.createElement("li");
+	    obj.appendChild(myLi);
+	    myLi.className = "box_observe";
+	    myLi.id = "observe_" + pr;
+	}
 }
 //转盘动画效果
 function dialAnimation(circleNum, prizeItem, stepLength){
@@ -133,11 +147,6 @@ function dialAnimation(circleNum, prizeItem, stepLength){
 		}
 	}, stepLength);
 	return circleSpendTime;
-}
-//观察最近几场的出奖奖项
-function observePrize()
-{
-	
 }
 //最后十秒倒计时动画
 function countAnimation(lastTenSec)

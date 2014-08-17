@@ -538,7 +538,7 @@ public class SharkRun extends TimerTask {
 			if(betCount == false){//如果条目未操作过
 				panelInfo.setBetCount(true);// 更改筹码统计状态
 				panelInfo.setPrizeItem(prizeName);// 更改得奖情况
-				System.out.println("更改中奖奖项为:"+prizeName);
+				System.out.println("更改个人下单中奖奖项为:"+prizeName);
 				BetDaoImpl.updateBet(panelInfo);//更新修改操作状态
 			}
 		}
@@ -547,7 +547,7 @@ public class SharkRun extends TimerTask {
 	 * 保存记录奖项情况到表中
 	 */
 	private void makeRecord() {
-		System.out.println("记录奖项函数");
+		System.out.println("记录奖项函数******记录");
 		try{
 			if(betEntity != null && betEntity.size() >0){//必须有人下注
 				prizeRecord.setPrizeId(StringUtil.getStringTime());//添加18位数字字符串与其他配置属性一起加到数据库中
@@ -682,7 +682,7 @@ public class SharkRun extends TimerTask {
 		prizeRecordEntity = havePrizeRecord();//获取奖项记录实体
 		int index = prizeRecordEntity.size()-1;
 		if(prizeRecordEntity.size() < num ){
-			for(int i=index ; i>0 ;i--){//如果奖项记录条数还不到要求数目
+			for(int i=index ; i >= 0 ;i--){//如果奖项记录条数还不到要求数目
 				numPrizeList.add(prizeRecordEntity.get(i).getPrizeName());
 			}
 		} else {

@@ -17,6 +17,7 @@ Integer int_timeDisplay = topConfigList.getTimeDisplay();
 Integer int_timeWait = topConfigList.getTimeWait();
 Integer int_timeCycle = topConfigList.getTimeCycle();
 System.out.println("周期：" + int_timeCycle);
+Integer int_prizeRecordNum = topConfigList.getPrizeRecordNum();//查看奖项记录数目
 Integer int_circleNum = topConfigList.getCircleNum();//转盘圈数
 System.out.println("转盘圈数：" + int_circleNum);
 List<PrizeRecord> prizeRecordList = PrizeRecordDaoImpl.prizeRecordEntity();
@@ -30,10 +31,11 @@ if(prize == null){
 }
 System.out.println("个人中奖奖项：" + prize);
 
-List<Prize> list_numPrize = sharkRun.haveNumPrizeRecord(6);//考虑用一个函数记录havePrize()的几场奖项
+List<Prize> list_numPrize = sharkRun.haveNumPrizeRecord(int_prizeRecordNum);//考虑用一个函数记录havePrize()的几场奖项
 System.out.println("查看最近奖项列表："+list_numPrize);
 //System.out.println("查看奖项列表："+list_numPrize.get(0));
-//把list循环成一个json格式的字符串(java中转换成字符串)
+
+//以下代码段把list循环成一个json格式的字符串(java中转换成字符串)
 String str="";
 for(int i=0;i<list_numPrize.size();i++){
 str += ("{prize:'"+list_numPrize.get(i)+"'},");
@@ -54,6 +56,7 @@ str="["+str.substring(0,str.length()-1)+"]";
 	var circle_num= <%=int_circleNum%>;//转盘圈数
 	var str = "<%=str%>";
 	var numPrizeList = strToJson(str);//最近开奖记录列表
+	
 	function strToJson(str){ //js中将字符串转换成json
 		var json = new Function("return " + str)(); 
 		return json;
@@ -90,8 +93,9 @@ str="["+str.substring(0,str.length()-1)+"]";
 			<span class="second">-</span>
 		</div>
 		<!-- 奖项动画展示 -->
-		<div class="box" id="demo1">
-		</div>
+		<div class="box" id="demo1"></div>
+		<!-- 历史奖项展示 -->
+		<div class="observe" id="observe"></div>
 	</div> 
  </div>
  <div class="gdial-right">

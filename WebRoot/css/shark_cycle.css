@@ -9,11 +9,12 @@ body{font:12px/180% Arial, Helvetica, sans-serif,"宋体";}
 }
 
 /* colockbox */
-.colockbox{width:60px;height:50px;margin:0px;overflow:hidden;}
+.colockbox{width:60px;height:50px;margin:48px, 0px;overflow:hidden;}
 .colockbox span{float:left;display:block;width:58px;height:48px;line-height:48px;font-size:26px;text-align:center;color:#ffffff;margin:0 17px 0 0;}
 .colockbox span.second{margin:0;}
 
 /* prize display box */
+.box{width:1000px;height:200px;margin:0px 165px;overflow:hidden;}
 .box_SWALLOW{width:1000px;height:200px;margin:0px 165px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_WIN_SWALLOW_WIN.png) no-repeat;}
 .box_PIGEON{width:1000px;height:200px;margin:0px 165px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_WIN_PIGEON_WIN.png) no-repeat;}
 .box_PEAFOWL{width:1000px;height:200px;margin:0px 165px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_WIN_PEACOCK_WIN.png) no-repeat;}
@@ -31,7 +32,7 @@ body{font:12px/180% Arial, Helvetica, sans-serif,"宋体";}
 #demo2{width:200px;background-position:-600px 0;}
 #demo1{width:200px;background-position:-800px 0;}
 
-.box_time{width:160px;height:24px;margin:90px 260px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_TIME_NUMBER_MAIN.png) no-repeat;}
+.box_time{width:160px;height:24px;margin:88px 260px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_TIME_NUMBER_MAIN.png) no-repeat;}
 #time0{width:16px;background-position:0px 0;}
 #time1{width:16px;background-position:-16px 0;}
 #time2{width:16px;background-position:-32px 0;}
@@ -42,6 +43,19 @@ body{font:12px/180% Arial, Helvetica, sans-serif,"宋体";}
 #time7{width:16px;background-position:-112px 0;}
 #time8{width:16px;background-position:-128px 0;}
 #time9{width:16px;background-position:-144px 0;}
+
+.observe{width:500px;height:50px;margin:0px 18px;overflow:hidden;}
+.box_observe{width:500px;height:50px;margin:0px 0px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_HISTORY_ANIMAL_MAIN.png) no-repeat;}
+#observe_LION{width:50px;background-position:0px 0;margin:0px 0px;float: left;}
+#observe_PANDA{width:50px;background-position:-50px 0;margin:0px 0px;float: left;}
+#observe_MONKEY{width:50px;background-position:-100px 0;margin:0px 0px;float: left;}
+#observe_RABBIT{width:50px;background-position:-150px 0;margin:0px 0px;float: left;}
+#observe_EAGLE{width:50px;background-position:-200px 0;margin:0px 0px;float: left;}
+#observe_PEAFOWL{width:50px;background-position:-250px 0;margin:0px 0px;float: left;}
+#observe_PIGEON{width:50px;background-position:-300px 0;margin:0px 0px;float: left;}
+#observe_SWALLOW{width:50px;background-position:-350px 0;margin:0px 0px;float: left;}
+#observe_SILVER_SHARK{width:50px;background-position:-400px 0;margin:0px 0px;float: left;}
+#observe_GOLD_SHARK{width:50px;background-position:-450px 0;margin:0px 0px;float: left;}
 /*gdial.jsp*/
 .gdial {
 	height: 434px;
