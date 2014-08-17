@@ -18,7 +18,7 @@ $(function()
 	dial(time_cycle,time_display,time_wait,time_observe,time_bet,
 			circle_num,stepTime,prize,"#demo04 .second");//变量在gdial.jsp页面定义
 	//dialAnimation(circle_num, prize, stepTime);//转盘效果
-	//alert("最近几个开奖记录： " + numPrizeList);
+	alert("最近几个开奖记录： " + numPrizeList[0].prize);
 });
 function countdown(time_length,second_elem)//倒计时
 {

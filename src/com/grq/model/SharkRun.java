@@ -162,9 +162,10 @@ public class SharkRun extends TimerTask {
 	}
 	/**
 	 * 获取配置
+	 * @return 
 	 * @return
 	 */
-	public void haveConfig() {
+	public SharkConfig haveConfig() {
 		//System.out.println("获取配置函数haveConfig()");
 		topConfigList =SharkConfigDaoImpl.lastSharkConfig();//通过调用配置实现类中的方法获取最后一条配置
 		//System.out.println("通过配置函数初始彩金池："+topConfigList.getInitialDividend());
@@ -182,6 +183,7 @@ public class SharkRun extends TimerTask {
 		timesMax = topConfigList.getTimesMax();
 		timeBet = topConfigList.getTimeBet();//下注时间
 		isBegin = topConfigList.getIsBegin();//获取游戏开关状态
+		return topConfigList;
 	}
 	/**
 	 * 获取上场彩金池
