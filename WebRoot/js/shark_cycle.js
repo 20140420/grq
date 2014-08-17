@@ -113,7 +113,7 @@ function dialAnimation(circleNum, prizeItem, stepLength){
 	var circleSpendTime = 0;//转盘花费时间
 	if(stopPos != 0){
 		circleSpendTime =  (circleNum*28 + stopPos)*stepLength;//转盘花费时间,注意停靠位置+1
-	}else{
+	}else{//刚好从头到尾
 		circleSpendTime =  (circleNum + 1)*28*stepLength;//转盘花费时间,注意停靠位置+1
 	}
 	$.each(hor, function(i, item){//确定了从左上角开始
