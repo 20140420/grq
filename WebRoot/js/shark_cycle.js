@@ -104,7 +104,6 @@ function dialAnimation(circleNum, prizeItem, stepLength){
 	var rig = $(".gdial-right > div");
 	var bottom = $(".gdial-bottom > div");
 	var left = $(".gdial-left > div");
-	
 	var timer = null, index = 0;
 	var allList = [];
 
@@ -116,6 +115,7 @@ function dialAnimation(circleNum, prizeItem, stepLength){
 	}else{//刚好从头到尾
 		circleSpendTime =  (circleNum + 1)*28*stepLength;//转盘花费时间,注意停靠位置+1
 	}
+	time_dial = Math.floor(circleSpendTime/1000)+1;//给转盘时长
 	$.each(hor, function(i, item){//确定了从左上角开始
 		allList.push(item);
 	});
@@ -130,24 +130,45 @@ function dialAnimation(circleNum, prizeItem, stepLength){
 	$.each(left, function(i, item){
 		allList.push(left[llen - 1 - i]);
 	});
+	var timerDial = null;
+	//alert("转盘内部定时： " + time_dial);
+	timerDial = setInterval(function(){//函数内部计时转盘效果时长
+		if(time_dial > 0){
+			time_dial -= 1;
+		} else {
+			clearInterval(timerDial);
+		}
+	}, 1000);
 	timer = setInterval(function(){
-		if(circleNum > 0){//控制圈数
-			//$(allList[index++]).removeClass("alpha");//移走透明度设置
-			$(allList[index++]).removeAttr("style");//移走背景图片位置
-			if (index === allList.length) {
-				index = 0;//开始下一圈
-				circleNum -= 1;//圈数减一
+		if(time_dial === 0){//转盘内部到时
+			clearInterval(timer);
+			for (var i = 0; i < allList.length; i++) {
+				$(allList[i]).removeAttr("style");//移走所有背景图片样式
+			};
+			index = stopPos;
+			$(allList[index]).css("background-position","-225px 0px");//奖项背景图片
+		} else {
+			if(circleNum > 0){//控制圈数
+				//$(allList[index++]).removeClass("alpha");//移走透明度设置
+				$(allList[index++]).removeAttr("style");//移走背景图片位置
+				if (index === allList.length) {
+					index = 0;//开始下一圈
+					circleNum -= 1;//圈数减一
+				}
+				//$(allList[index]).addClass("alpha");//添加透明度设置
+				$(allList[index]).css("background-position","-75px 0px");//切换背景图片
+			} else{
+				if(index === stopPos){//停靠的奖项位置
+					clearInterval(timer);
+					index = stopPos;
+					$(allList[index]).css("background-position","-225px 0px");//奖项背景图片
+				} else {
+					//$(allList[index++]).removeClass("alpha");//移走透明度设置
+					$(allList[index++]).removeAttr("style");//移走背景图片位置
+					//$(allList[index]).addClass("alpha");//添加透明度设置
+					$(allList[index]).css("background-position","-75px 0px");//切换背景图片
+				}
 			}
-			//$(allList[index]).addClass("alpha");//添加透明度设置
-			$(allList[index]).css("background-position","-75px 0px");//切换背景图片
-		} else{
-			//$(allList[index++]).removeClass("alpha");//移走透明度设置
-			$(allList[index++]).removeAttr("style");//移走背景图片位置
-			if(index === stopPos){//停靠的奖项位置
-				clearInterval(timer);
-			}
-			//$(allList[index]).addClass("alpha");//添加透明度设置
-			$(allList[index]).css("background-position","-75px 0px");//切换背景图片
 		}
 	}, stepLength);
 	return circleSpendTime;
