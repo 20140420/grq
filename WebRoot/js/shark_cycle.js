@@ -132,18 +132,22 @@ function dialAnimation(circleNum, prizeItem, stepLength){
 	});
 	timer = setInterval(function(){
 		if(circleNum > 0){//控制圈数
-			$(allList[index++]).removeClass("alpha");//移走透明度设置
+			//$(allList[index++]).removeClass("alpha");//移走透明度设置
+			$(allList[index++]).removeAttr("style");//移走背景图片位置
 			if (index === allList.length) {
 				index = 0;//开始下一圈
 				circleNum -= 1;//圈数减一
 			}
-			$(allList[index]).addClass("alpha");//添加透明度设置
+			//$(allList[index]).addClass("alpha");//添加透明度设置
+			$(allList[index]).css("background-position","-75px 0px");//切换背景图片
 		} else{
-			$(allList[index++]).removeClass("alpha");//移走透明度设置
+			//$(allList[index++]).removeClass("alpha");//移走透明度设置
+			$(allList[index++]).removeAttr("style");//移走背景图片位置
 			if(index === stopPos){//停靠的奖项位置
 				clearInterval(timer);
 			}
-			$(allList[index]).addClass("alpha");//添加透明度设置
+			//$(allList[index]).addClass("alpha");//添加透明度设置
+			$(allList[index]).css("background-position","-75px 0px");//切换背景图片
 		}
 	}, stepLength);
 	return circleSpendTime;

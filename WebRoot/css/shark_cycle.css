@@ -86,15 +86,29 @@ body{font:12px/180% Arial, Helvetica, sans-serif,"宋体";}
 }
 .gdial .gdial-right {width: 77px;height: 310px;border: 0px solid #000;margin: 62px 0px 0px 616px;position: absolute;}
 .gdial .gdial-bottom {position: absolute;height: 62px;width: 693px;border: 0px solid #000;margin: 372px 0px 0px 0px;}
-.gdial-animals{	width:375px;height:120px;margin:0px 0px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_MAIN_ANIMALS_MAIN.png) no-repeat;
+.gdial-animals{	width:375px;height:60px;margin:0px 0px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_MAIN_ANIMALS_BACK_MAIN.png) no-repeat;
 }
-#gdial_LION{width:75px;height: 60px;background-position:0px 0;margin:0px 0px;float: left;border: 1px solid #CCC;}
-#gdial_PANDA{width:75px;height: 60px;background-position:-75px 0;margin:0px 0px;float: left;border: 1px solid #CCC;}
-#gdial_MONKEY{width:75px;height: 60px;background-position:-150px 0;margin:0px 0px;float: left;border: 1px solid #CCC;}
-#gdial_RABBIT{width:75px;height: 60px;background-position:-225px 0;margin:0px 0px;float: left;border: 1px solid #CCC;}
-#gdial_EAGLE{width:75px;height: 60px;background-position:-300px 0;margin:0px 0px;float: left;border: 1px solid #CCC;}
-#gdial_PEAFOWL{width:75px;height: 60px;background-position:0px -60px;margin:0px 0px;float: left;border: 1px solid #CCC;}
-#gdial_PIGEON{width:75px;height: 60px;background-position:-75px -60px;margin:0px 0px;float: left;border: 1px solid #CCC;}
-#gdial_SWALLOW{width:75px;height: 60px;background-position:-150px -60px;margin:0px 0px;float: left;border: 1px solid #CCC;}
-#gdial_SILVER_SHARK{width:75px;height: 60px;background-position:-225px -60px;margin:0px 0px;float: left;border: 1px solid #CCC;}
-#gdial_GOLD_SHARK{width:75px;height: 60px;background-position:-300px -60px;margin:0px 0px;float: left;border: 1px solid #CCC;}
+#gdial_LION{width:75px;background-position:-300px 0;margin:0px 0px;float: left;border: 1px solid #CCC;}
+#gdial_PANDA{width:75px;background-position:-300px 0;margin:0px 0px;float: left;border: 1px solid #CCC;}
+#gdial_MONKEY{width:75px;background-position:-300px 0;margin:0px 0px;float: left;border: 1px solid #CCC;}
+#gdial_RABBIT{width:75px;background-position:-300px 0;margin:0px 0px;float: left;border: 1px solid #CCC;}
+#gdial_EAGLE{width:75px;background-position:-300px 0;margin:0px 0px;float: left;border: 1px solid #CCC;}
+#gdial_PEAFOWL{width:75px;background-position:-300px 0px;margin:0px 0px;float: left;border: 1px solid #CCC;}
+#gdial_PIGEON{width:75px;background-position:-300px 0px;margin:0px 0px;float: left;border: 1px solid #CCC;}
+#gdial_SWALLOW{width:75px;background-position:-300px 0px;margin:0px 0px;float: left;border: 1px solid #CCC;}
+#gdial_SILVER_SHARK{width:75px;background-position:-300px 0px;margin:0px 0px;float: left;border: 1px solid #CCC;}
+#gdial_GOLD_SHARK{width:75px;background-position:-300px 0px;margin:0px 0px;float: left;border: 1px solid #CCC;}
+/* 
+*/
+.gdial-animals img{	width:375px;height:120px;margin:0px 0px;overflow:hidden;background:url(../imgsystem/NewSharkBattle_MAIN_ANIMALS_MAIN.png) no-repeat;
+}
+#gdial_LION img{width:75px;height: 60px;background-position:0px 0;margin:0px 0px;float: left;border: 1px solid #CCC;}
+#gdial_PANDA img{width:75px;height: 60px;background-position:-75px 0;margin:0px 0px;float: left;border: 1px solid #CCC;}
+#gdial_MONKEY img{width:75px;height: 60px;background-position:-150px 0;margin:0px 0px;float: left;border: 1px solid #CCC;}
+#gdial_RABBIT img{width:75px;height: 60px;background-position:-225px 0;margin:0px 0px;float: left;border: 1px solid #CCC;}
+#gdial_EAGLE img{width:75px;height: 60px;background-position:-300px 0;margin:0px 0px;float: left;border: 1px solid #CCC;}
+#gdial_PEAFOWL img{width:75px;height: 60px;background-position:0px -60px;margin:0px 0px;float: left;border: 1px solid #CCC;}
+#gdial_PIGEON img{width:75px;height: 60px;background-position:-75px -60px;margin:0px 0px;float: left;border: 1px solid #CCC;}
+#gdial_SWALLOW img{width:75px;height: 60px;background-position:-150px -60px;margin:0px 0px;float: left;border: 1px solid #CCC;}
+#gdial_SILVER_SHARK img{width:75px;height: 60px;background-position:-225px -60px;margin:0px 0px;float: left;border: 1px solid #CCC;}
+#gdial_GOLD_SHARK img{width:75px;height: 60px;background-position:-300px -60px;margin:0px 0px;float: left;border: 1px solid #CCC;}
