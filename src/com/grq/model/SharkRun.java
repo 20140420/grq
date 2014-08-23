@@ -32,7 +32,7 @@ public class SharkRun extends TimerTask {
 	private static Prize prizeName;//奖项变量，默认正在抽奖
 	//配置
 	private static boolean isBegin;//游戏是否开启
-	private static int timeBet;//下注时间
+	private static int circleDialTime;//整圈转时间
 	private static double lastDividend;//上场奖项彩金池
 	private static double dividend; //彩金池变量
 	private static double commission_rate; //佣金费率
@@ -98,9 +98,9 @@ public class SharkRun extends TimerTask {
 		//haveConfig();         //获取配置
 		haveLastDividend();   //获取上期彩金池
 		//观察、下注 
-		System.out.println("下注时间"+timeBet);
+		System.out.println("整圈转时间"+circleDialTime);
 		try {
-	        Thread.sleep(timeBet*1000);//括号里面3000代表3000毫秒也3秒该成需要时间
+	        Thread.sleep(circleDialTime);//括号里面3000代表3000毫秒也3秒该成需要时间
 		} catch (InterruptedException e) {
 	        e.printStackTrace();
 		}
@@ -171,17 +171,19 @@ public class SharkRun extends TimerTask {
 		//System.out.println("通过配置函数初始彩金池："+topConfigList.getInitialDividend());
 		ArrayList<Object> lastConfigList = new ArrayList<Object>();//列表
 		lastConfigList.add(topConfigList.getCommissionRate());//获取最新的费率配置
-		lastConfigList.add(topConfigList.getInitialDividend());//获取初始彩金池
+		//lastConfigList.add(topConfigList.getInitialDividend());//获取初始彩金池
 		lastConfigList.add(topConfigList.getTimesMax());  //获取最新的最大倍率配置
 		lastConfigList.add(topConfigList.getTimeCycle()); //周期
+		lastConfigList.add(topConfigList.getCircleNum()); //转盘圈数
+		lastConfigList.add(topConfigList.getStepTime());  //毫秒步长
 		lastConfigList.add(topConfigList.getBetLimit());  //压筹限制
-		lastConfigList.add(topConfigList.getPrizeRecordNum());//查看几条奖项记录
+		//lastConfigList.add(topConfigList.getPrizeRecordNum());//查看几条奖项记录
 		lastConfigList.add(topConfigList.getIsBegin());//获取游戏开关状态
 		System.out.println("最新配置列表："+lastConfigList);
 		//配置添加到变量中
 		commission_rate = topConfigList.getCommissionRate();
 		timesMax = topConfigList.getTimesMax();
-		timeBet = topConfigList.getTimeBet();//下注时间
+		circleDialTime = 28*(topConfigList.getCircleNum())*(topConfigList.getStepTime());//整圈转时间
 		isBegin = topConfigList.getIsBegin();//获取游戏开关状态
 		return topConfigList;
 	}
@@ -634,7 +636,7 @@ public class SharkRun extends TimerTask {
 		commission_rate =0.0; //佣金费率
 		timesMax = 0;//最高倍数
 		commissionProfit = 0.0;//佣金收益
-		timeBet = 0;//下注时间
+		//timeBet = 0;//下注时间
 		lastDividend = 0.0;
 		dividend = 0.0; //彩金池变量需要储存在数据库中
 		againOrNot = false; //是否重转，默认否	

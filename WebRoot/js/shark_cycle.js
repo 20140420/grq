@@ -13,10 +13,10 @@ $(function()
 	var stepTime = 80;
 	var numPrizeList = numPrizeList[0].prize;//最近num个人开奖记录
 	*/
-
+	
 	//var circle_speed= (28*80*circle_num)/time_spend;//计算转盘速度,28个跳格，setInterval()频率80毫秒
 	dial(time_cycle,time_display,time_wait,time_observe,time_bet,
-			circle_num,stepTime,prize,"#demo04 .second");//变量在gdial.jsp页面定义
+			circle_num,stepTime,"#demo04 .second");//变量在gdial.jsp页面定义
 	//dialAnimation(circle_num, prize, stepTime);//转盘效果
 	//alert("最近几个开奖记录： " + numPrizeList[0].prize);
 });
@@ -27,11 +27,11 @@ function countdown(time_length,second_elem)//倒计时
 }
 
 function dial(time_length,time_display,time_wait,time_observe,time_bet,
-		circle_num,stepTime,prize,second_elem)
+		circle_num,stepTime,second_elem)
 {
 	//alert("查看个时长： " + time_length + time_spend +time_display+time_wait+time_observe+time_bet);
 	var timer = null;
-	time_circle = dialAnimation(circle_num, prize, stepTime);//转盘效果需毫秒时长
+	time_circle = dialAnimation(circle_num, stepTime);//转盘效果需毫秒时长
 	//alert("转盘需毫秒时长： " + time_circle);
 	time_spend = Math.floor(time_circle/1000)+1;//给转盘时长
 	//alert("给转盘时长： " + time_spend);
@@ -99,7 +99,7 @@ function observePrize(prizeList)
 	}
 }
 //转盘动画效果
-function dialAnimation(circleNum, prizeItem, stepLength){
+function dialAnimation(circleNum, stepLength){
 	var hor = $(".gdial-top > div");//找到所有div元素，并且这些元素都必须是.gdial-top元素的子元素。
 	var rig = $(".gdial-right > div");
 	var bottom = $(".gdial-bottom > div");
@@ -107,7 +107,7 @@ function dialAnimation(circleNum, prizeItem, stepLength){
 	var timer = null, index = 0;
 	var allList = [];
 
-	var stopPos = stopPosition(prizeItem);
+	var stopPos = stopPosition(prize);//实参prize在JSP页面获取
 	//alert("查看stopPos： " + stopPos);
 	var circleSpendTime = 0;//转盘花费时间
 	if(stopPos != 0){
