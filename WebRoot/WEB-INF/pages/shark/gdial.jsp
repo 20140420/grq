@@ -48,7 +48,7 @@ str="["+str.substring(0,str.length()-1)+"]";
 	//delayGetPrize(circle_num, stepTime);
 	
 	var prize = "<%=sharkRun.randomPrize()%>";
-	alert("奖项prize=" + prize);
+	//alert("奖项prize=" + prize);
 	
 	
 function strToJson(str){ //js中将字符串转换成json
